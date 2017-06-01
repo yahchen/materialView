@@ -22,11 +22,15 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
+        <module name="coreSyncer" />
         <module name="materialView" />
+        <module name="moniterWeb" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="materialView" target="1.5" />
+      <module name="coreSyncer" target="1.8" />
+      <module name="materialView" target="1.8" />
+      <module name="moniterWeb" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
