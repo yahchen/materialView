@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/coreSyncer/coreSyncer.iml" filepath="$PROJECT_DIR$/coreSyncer/coreSyncer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/materialView.iml" filepath="$PROJECT_DIR$/materialView.iml" />
+      <module fileurl="file://$PROJECT_DIR$/moniterWeb/moniterWeb.iml" filepath="$PROJECT_DIR$/moniterWeb/moniterWeb.iml" />
+    </modules>
+  </component>
+</project>
