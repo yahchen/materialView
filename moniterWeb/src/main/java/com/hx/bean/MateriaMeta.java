@@ -50,19 +50,19 @@ public class MateriaMeta {
         this.data_name = data_name;
     }
 
-    public long getRetrieve_start_time() {
+    public Timestamp getRetrieve_start_time() {
         return retrieve_start_time;
     }
 
-    public void setRetrieve_start_time(long retrieve_start_time) {
+    public void setRetrieve_start_time(Timestamp retrieve_start_time) {
         this.retrieve_start_time = retrieve_start_time;
     }
 
-    public long getRetrieve_end_time() {
+    public Timestamp getRetrieve_end_time() {
         return retrieve_end_time;
     }
 
-    public void setRetrieve_end_time(long retrieve_end_time) {
+    public void setRetrieve_end_time(Timestamp retrieve_end_time) {
         this.retrieve_end_time = retrieve_end_time;
     }
 
@@ -74,27 +74,27 @@ public class MateriaMeta {
         this.retrieve_process_time = retrieve_process_time;
     }
 
-    public long getData_time() {
+    public Timestamp getData_time() {
         return data_time;
     }
 
-    public void setData_time(long data_time) {
+    public void setData_time(Timestamp data_time) {
         this.data_time = data_time;
     }
 
-    public long getData_start_time() {
+    public Timestamp getData_start_time() {
         return data_start_time;
     }
 
-    public void setData_start_time(long data_start_time) {
+    public void setData_start_time(Timestamp data_start_time) {
         this.data_start_time = data_start_time;
     }
 
-    public long getData_end_time() {
+    public Timestamp getData_end_time() {
         return data_end_time;
     }
 
-    public void setData_end_time(long data_end_time) {
+    public void setData_end_time(Timestamp data_end_time) {
         this.data_end_time = data_end_time;
     }
 
