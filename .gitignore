@@ -79,3 +79,4 @@ general_status.json.tmp
 *.classpath
 *.project
 *.settings/
+/target/

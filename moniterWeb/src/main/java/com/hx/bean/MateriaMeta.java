@@ -1,5 +1,7 @@
 package com.hx.bean;
 
+import java.sql.Timestamp;
+
 /**
  * Created by wangyaohui on 2017/6/2.
  */
@@ -7,12 +9,12 @@ public class MateriaMeta {
     private long m_id;
     private long data_code;
     private String data_name;
-    private long retrieve_start_time;
-    private long retrieve_end_time;
+    private Timestamp retrieve_start_time;
+    private Timestamp retrieve_end_time;
     private long retrieve_process_time;
-    private long data_time;
-    private long data_start_time;
-    private long data_end_time;
+    private Timestamp data_time;
+    private Timestamp data_start_time;
+    private Timestamp data_end_time;
     private String longitude_latitude_scope;
     private long data_num;
     private int sys_conn_state;
