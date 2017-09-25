@@ -6,6 +6,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 /**
  * Created by wangyaohui on 2017/6/2.
@@ -19,8 +21,7 @@ public class MonitorConfig {
     }
 
     @Bean(name = "postgresJdbcTemplate")
-    public JdbcTemplate postgresJdbcTemplate(@Qualifier("postgresDb")
-                                                     DataSource dsPostgres) {
+    public JdbcTemplate postgresJdbcTemplate(@Qualifier("postgresDb") DataSource dsPostgres) {
         return new JdbcTemplate(dsPostgres);
     }
 }
