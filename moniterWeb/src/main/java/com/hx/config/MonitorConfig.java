@@ -15,7 +15,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @Configuration
 public class MonitorConfig {
     @Bean(name = "postgresDb")
-    @ConfigurationProperties(prefix = "spring.postgresql")
+    @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource postgresDataSource() {
         return  DataSourceBuilder.create().build();
     }

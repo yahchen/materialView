@@ -13,6 +13,8 @@ import org.springframework.util.Assert;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -28,7 +30,7 @@ public class SqlTest {
     @Test
     public void testSql(){
         Assert.notNull(template,"template is null");
-//        List resutl = template.queryForList("select * from public.test2");
-//        Assert.notNull(resutl);
+        List resutl = template.queryForList("select * from public.materia;");
+        Assert.notNull(resutl);
     }
 }

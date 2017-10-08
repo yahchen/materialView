@@ -1,0 +1,202 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+	<!-- VENDOR CSS -->
+	<link rel="stylesheet" th:href="@{assets/vendor/bootstrap/css/bootstrap.min.css}"/>
+	<link rel="stylesheet" th:href="@{assets/vendor/font-awesome/css/font-awesome.min.css}"/>
+	<link rel="stylesheet" th:href="@{assets/vendor/linearicons/style.css}"/>
+	<!-- MAIN CSS -->
+	
+	<!--add-->
+	<link rel="stylesheet" type="text/css" th:href="@{files/style.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{files/style_editor.css}"/>
+		<!--add end-->
+		
+		
+	<link rel="stylesheet" th:href="@{assets/css/main.css}"/>
+	<!-- ICONS -->
+	<link rel="apple-touch-icon" sizes="76x76" th:href="@{img/apple-icon.png}"/>
+	<link rel="icon" type="image/png" sizes="96x96" th:href="@{img/favicon.png}"/>
+	<!-- Javascript -->
+	
+	
+	<script th:src="@{assets/vendor/jquery/jquery.min.js}"></script>
+	<script th:src="@{assets/vendor/bootstrap/js/bootstrap.min.js}"></script>
+	<script th:src="@{assets/vendor/bootstrap/js/bootstrap-hover-dropdown.js}"></script>
+	<script th:src="@{assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js}"></script>
+	<script th:src="@{js/vis-common.js}"></script>
+	
+</head>
+
+<body>
+	<!-- WRAPPER -->
+	<div id="wrapper">
+	
+		<!-- 大图片显示遮挡调试 -->
+		<div class="header">
+			<div class="logo"><a href="#" title="VIS系统"><img src="" alt="VIS Logo"/></a></div>
+		</div>
+		<!-- 大图片显示遮挡调试解决 -->
+	
+		<!-- NAVBAR -->
+		<nav class="navbar navbar-default ">
+	
+			<!--logo icon-->
+			<div class="brand">
+				<a th:href="@{/index}"><img th:src="@{img/logo-dark17.png}" alt="vis Logo" class="img-responsive logo"/></a>
+			</div>
+			<!--end logo icon-->
+			
+			<div class="container-fluid">
+				
+				<!--top button-->
+				<!--
+				<div class="navbar-btn">
+					<button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
+				</div>
+				<form class="navbar-form navbar-left">
+					<div class="input-group">
+						<input type="text" value="" class="form-control" placeholder="Search dashboard...">
+						<span class="input-group-btn"><button type="button" class="btn btn-primary">Go</button></span>
+					</div>
+				</form>
+				-->
+				<!--end top button-->
+				
+				
+				<!--top menu-->
+				<div id="navbar-menu" class="page-title">
+				
+					<ul class="nav navbar-nav navbar-right" >
+						<li class="" >
+							<a th:href="@{/index.vo}"><span>首页</span> </a>
+						</li>
+						<li class="" >
+							<a th:href="@{/about}"><span>关于系统</span> </a>
+						</li>
+						<li class="">
+							<a th:href="@{/data}"><span>全球模式</span> </a>
+						</li>
+						<li class="">
+							<a th:href="@{/data}"><span>区域模式</span> </a>
+						</li>
+						<li class="">
+							<a th:href="@{/data}"> <span>检验模式</span> </a>
+						</li>
+					</ul>
+					
+				
+				</div>
+				<!--end top menu-->
+				
+			</div>
+		</nav>
+		<!-- END NAVBAR -->
+		
+		
+		<div class="clear"></div>
+
+		<div style="'background':url(files/inner_about.jpg) no-repeat center center"  class="banner banner_show">
+			<div class="screen">
+				<div class="title_banner">关于系统</div>
+			</div>
+		</div>
+
+    
+        <div class="nevigation">
+			<div class="screen">
+				<ul>
+					<li><a href="#" class="home">首页</a>
+					</li><li class="sp">&gt;</li>
+					<li>关于系统</li>
+					<div class="clear"></div>
+				</ul>
+				<div class="clear"></div>
+			</div>
+		</div>
+    
+		<div class="container">
+			<div class="inner_main">
+				<span property="dc:title" content="关于系统" class="rdf-meta element-hidden"></span>
+
+				<div class="screen">
+					<h1>关于我们</h1>
+					<div class="about"> 为满足现代气象业务现代化和集约化发展需要，中国气象局数值预报中心业务运行所需的气象数据需要由NWP数据源即气象实时数据库向CIMISS切换，以实现数值预报业务的正常运行，其中包含了气象数据的采集和统计监视。
+
+					<br/>
+					<br/>
+						因此，研发“基于CIMISS的数值模式的资料处理业务系统可视化展示系统”，该系统是基于全国综合气象信息共享系统（CIMISS：China Integrated Meteorological Information Service System）接口采集数据，并对采集的气象数据进行处理、统计监控和展示。
+					<br/>
+					<br/>
+						xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+					<br/>
+					<br/>
+					</div>
+				</div>
+				<div class="bg_about_finance">
+					<div class="screen">
+						<div class="area_finance">
+						<h2>VIS系统的主要职能包括：</h2>
+							<ol>
+								<li>监控；</li>
+								<li>积通量；</li>
+								<li>作为监控系统积极推进业务运行；积极推进业务运行；积极推进业务运行；积极推进业务运行；积极推进业务运行；；</li>
+								<li>积极推进业务运行积极推进业务运行；积极推进业务运行；积极推进业务运行；积极推进业务运行；积极推进业务运行；积极推进业务运行；积极推进业务运行；；</li>
+								<li>代表休息休息积极推进业务运行；积极推进业务运行；积极推进业务运行；积极推进业务运行；积极推进业务运行；。</li>
+
+ 
+							</ol>
+						</div>
+						<div class="clear"></div>
+
+					</div>
+				</div>	
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div class="clear"></div>
+
+        <div id="block-block-1" class="block block-block">
+		
+		
+		
+		<!-- Footer -->
+		<div id="footer">
+			<div class="screen">
+
+				<div class="back_top"><a th:href="@{index.html}" class="cd-top"></a></div>
+
+					<div class="company_info_footer">
+						<div class="Related_Links">
+							<ul>
+							<li>友情连结: </li>
+							<li><a th:href="@{http://www.cma.gov.cn/}" target="_blank">中国气象局</a></li>
+							<li><a th:href="@{http://www.nmc.cn/}" target="_blank">中央气象台</a></li>
+							<li><a th:href="@{http://nwpc.cma.gov.cn/}" target="_blank">中国气象局数值预报中心</a></li>
+							</ul>
+						</div>
+						<div class="clear"></div>
+
+						<div class="company_name"><div class="footer_contact"><a href="#">联络我们</a></div></div>
+						<div class="clear"></div>
+					</div>
+
+					<div class="clear"></div>
+
+					<div class="copy">© 中国气象局数值预报中心版权所有</div>
+
+			</div>
+		</div>
+		<!-- End Footer -->
+
+		
+		</div>
+	</div>
+	<!-- END WRAPPER -->
+</body>
+</html>

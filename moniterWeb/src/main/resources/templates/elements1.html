@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+	<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+	<script type="text/javascript" src="http://api.tianditu.com/api?v=4.0"></script>
+	<style type="text/css">
+		body, html{width: 100%;height: 100%;margin:0;font-family:"微软雅黑";}
+		#mapDiv{height:400px;width:100%;}
+		p { margin-top: 10px;margin-left: 5px;font-size: 14px;}
+	</style>
+	<script>
+		var map, zoom = 14;
+		function onLoad() {
+			//初始化地图对象
+			map = new T.Map("mapDiv");
+			//设置显示地图的中心点和级别
+			map.centerAndZoom(new T.LngLat(116.40969, 39.90940), zoom);
+			$.ajax({
+				type: "post",
+				async: true,
+				url: "/getElements",
+				data: "",
+				dataType: "json",
+				success: function(data) {
+					jsonData = JSON.parse(data);
+					for(var i in jsonData.values){
+						var point = new T.Circle(new T.LngLat(jsonData.value[i][1], jsonData.value[i][2]), 1,{color:"#1493FF",weight:15,opacity:1,fillColor:"#1493FF",fillOpacity:0,lineStyle:"solid"});
+						map.addOverLay(point);    //增加点
+						pointArray[i] = new T.LngLat(jsonData.value[i][1], jsonData.value[i][2]);
+						var infoWin = new T.InfoWindow();
+						var sContent =
+								"<div style='margin:10px 0px 10px 120px;'>" +
+								"lat:\"jsonData.value[i][1]\" <hr/>" +
+								"lon:\"jsonData.value[i][2]\" <hr/>" +
+								"alti:\"jsonData.value[i][3]\" <hr/>"+
+								"station_type:\"jsonData.value[i][4]\" <hr/>"
+								"</div>";
+						infoWin.setContent(sContent);
+						point.addEventListener("click", function () {
+							point.openInfoWindow(infoWin);
+						});// 将标注添加到地图中
+					}
+				}
+			});
+			//让所有点在视野范围内
+			map.setViewport(pointArray);
+			//获取覆盖物位置
+			function attribute(ks,vs){
+				alert("marker的位置是" + vs[1] + "," + vs[2]);
+			}
+		}
+	</script>
+</head>
+
+<body>
+	<!-- WRAPPER -->
+	<div>
+				
+<!-- MAIN -->
+		<div>
+			<!-- MAIN CONTENT -->
+			
+			   <p/>sdjkflsdfsdfsd
+			<!-- END MAIN CONTENT -->
+		</div>
+		<!-- END MAIN -->
+	</div>
+	<!-- END WRAPPER -->
+</body>
+
+</html>

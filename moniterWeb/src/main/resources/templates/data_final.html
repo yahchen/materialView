@@ -1,0 +1,218 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+	<!-- VENDOR CSS -->
+	<link rel="stylesheet" th:href="@{assets/vendor/bootstrap/css/bootstrap.min.css}"/>
+	<link rel="stylesheet" th:href="@{assets/vendor/font-awesome/css/font-awesome.min.css}"/>
+	<link rel="stylesheet" th:href="@{assets/vendor/linearicons/style.css}"/>
+	<!-- MAIN CSS -->
+	<link rel="stylesheet" th:href="@{assets/css/main.css}"/>
+	<!-- ICONS -->
+	<link rel="apple-touch-icon" sizes="76x76" th:href="@{assets/img/apple-icon.png}"/>
+	<link rel="icon" type="image/png" sizes="96x96" th:href="@{assets/img/favicon.png}"/>
+	<!-- Javascript -->
+	<script th:src="@{assets/vendor/jquery/jquery.min.js}"></script>
+	<script th:src="@{assets/vendor/bootstrap/js/bootstrap.min.js}"></script>
+	<script th:src="@{assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js}"></script>
+	<script th:src="@{js/vis-common.js}"></script>
+	<script type="text/javascript">
+	
+	
+		var v00="<li><a data-toggle='collapse'><i class='lnr lnr-home'></i><span>关于我们</span><!--子图标标识--><i class='icon-submenu lnr lnr-chevron-left'></i></a></li><hr/>";
+	
+		var v10="<li><a data-toggle='collapse'><i class='lnr lnr-earth'></i><span>站点资料</span><!--子图标标识--><i class='icon-submenu lnr lnr-chevron-left'></i></a></li><hr/><li><a href='#subPages100' data-toggle='collapse' class='collapsed'><span>中国地面逐小时资料</span><!--子图标标识--><i class='icon-submenu lnr lnr-chevron-left'></i></a><div id='subPages100' class='collapse '><ul class='nav'><li><a href='page-profile.html'><i class='icon-submenu lnr lnr-chart-bars'></i><span>折线图</span></a></li><li><a href='page-login.html'><i class='icon-submenu lnr lnr-list'></i><span>分布图</span></a></li></ul></div></li><li><a href='#subPages101' data-toggle='collapse' class='collapsed'><span>全球地面逐小时资料</span><!--子图标标识--><i class='icon-submenu lnr lnr-chevron-left'></i></a><div id='subPages101' class='collapse '><ul class='nav'><li><a href='page-profile.html'><i class='icon-submenu lnr lnr-chart-bars'></i><span>折线图</span></a></li><li><a href='page-login.html'><i class='icon-submenu lnr lnr-list'></i><span>分布图</span></a></li></ul></div></li>";
+		
+		var v11="<li><a data-toggle='collapse'><i class='lnr lnr-earth'></i><span>站点资料</span><!--子图标标识--><i class='icon-submenu lnr lnr-chevron-left'></i></a></li><hr/><li><a href='#subPages110' data-toggle='collapse' class='collapsed'><span>全球高空定时值资料</span><!--子图标标识--><i class='icon-submenu lnr lnr-chevron-left'></i></a><div id='subPages110' class='collapse '><ul class='nav'><li><a href='page-profile.html'><i class='icon-submenu lnr lnr-chart-bars'></i>折线图</a></li><li><a href='page-login.html'><i class='icon-submenu lnr lnr-list'></i>分布图</a></li></ul></div></li><li><a href='#subPages111' data-toggle='collapse' class='collapsed'><span>全球飞机高空资料</span><!--子图标标识--><i class='icon-submenu lnr lnr-chevron-left'></i></a><div id='subPages111' class='collapse '><ul class='nav'><li><a href='page-profile.html'><i class='icon-submenu lnr lnr-chart-bars'></i>折线图</a></li><li><a href='page-login.html'><i class='icon-submenu lnr lnr-list'></i>分布图</a></li></ul></div></li>";
+		
+		var v12="<li><a data-toggle='collapse'><i class='lnr lnr-earth'></i><span>站点资料</span><!--子图标标识--><i class='icon-submenu lnr lnr-chevron-left'></i></a></li><hr/><li><a href='#subPages120' data-toggle='collapse' class='collapsed'><span>中国地面逐小时资料</span><!--子图标标识--><i class='icon-submenu lnr lnr-chevron-left'></i></a><div id='subPages120' class='collapse '><ul class='nav'><li><a href='page-profile.html'><i class='icon-submenu lnr lnr-chart-bars'></i>折线图</a></li><li><a href='page-login.html'><i class='icon-submenu lnr lnr-list'></i>分布图</a></li></ul></div></li>";
+		
+		var v13="<li><a data-toggle='collapse'><i class='lnr lnr-earth'></i><span>站点资料</span><!--子图标标识--><i class='icon-submenu lnr lnr-chevron-left'></i></a></li><hr/><li><a href='#subPages130' data-toggle='collapse' class='collapsed'><span>台风实况与预报要素资料</span><!--子图标标识--><i class='icon-submenu lnr lnr-chevron-left'></i></a><div id='subPages130' class='collapse '><ul class='nav'><li><a href='page-profile.html'><i class='icon-submenu lnr lnr-chart-bars'></i>折线图</a></li><li><a href='page-login.html'><i class='icon-submenu lnr lnr-list'></i>分布图</a></li></ul></div></li>";
+		
+
+		var v20="<li><a data-toggle='collapse'><i class='lnr lnr-map'></i><span>格点资料</span><!--子图标标识--><i class='icon-submenu lnr lnr-chevron-left'></i></a></li><hr/><li><a href='#subPages200' data-toggle='collapse' class='collapsed'><span>华盛顿海温数值预报产品</span><!--子图标标识--><i class='icon-submenu lnr lnr-chevron-left'></i></a><div id='subPages200' class='collapse '><ul class='nav'><li><a href='page-profile.html'><i class='icon-submenu lnr lnr-chart-bars'></i>折线图</a></li><li><a href='page-login.html'><i class='icon-submenu lnr lnr-dice'></i>矩阵图</a></li></ul></div></li>";
+		
+		var v21="<li><a data-toggle='collapse'><i class='lnr lnr-map'></i><span>格点资料</span><!--子图标标识--><i class='icon-submenu lnr lnr-chevron-left'></i></a></li><hr/><li><a href='#subPages210' data-toggle='collapse' class='collapsed'><span>欧洲中心数值预报产品-低分辨率-全球</span><!--子图标标识--><i class='icon-submenu lnr lnr-chevron-left'></i></a><div id='subPages210' class='collapse '><ul class='nav'><li><a href='page-profile.html'><i class='icon-submenu lnr lnr-chart-bars'></i>折线图</a></li><li><a href='page-login.html'><i class='icon-submenu lnr lnr-dice'></i>矩阵图</a></li></ul></div></li><li><a href='#subPages211' data-toggle='collapse' class='collapsed'><span>德国数值预报产品-全球</span><!--子图标标识--><i class='icon-submenu lnr lnr-chevron-left'></i></a><div id='subPages211' class='collapse '><ul class='nav'><li><a href='page-profile.html'><i class='icon-submenu lnr lnr-chart-bars'></i>折线图</a></li><li><a href='page-login.html'><i class='icon-submenu lnr lnr-dice'></i>矩阵图</a></li></ul></div></li><li><a href='#subPages212' data-toggle='collapse' class='collapsed'><span>日本数值预报产品-低分辨率-北半球</span><!--子图标标识--><i class='icon-submenu lnr lnr-chevron-left'></i></a><div id='subPages212' class='collapse '><ul class='nav'><li><a href='page-profile.html'><i class='icon-submenu lnr lnr-chart-bars'></i>折线图</a></li><li><a href='page-login.html'><i class='icon-submenu lnr lnr-dice'></i>矩阵图</a></li></ul></div></li><li><a href='#subPages213' data-toggle='collapse' class='collapsed'><span>日本数值预报产品-低分辨率-远东区域（中国）</span><!--子图标标识--><i class='icon-submenu lnr lnr-chevron-left'></i></a><div id='subPages213' class='collapse '><ul class='nav'><li><a href='page-profile.html'><i class='icon-submenu lnr lnr-chart-bars'></i>折线图</a></li><li><a href='page-login.html'><i class='icon-submenu lnr lnr-dice'></i>矩阵图</a></li></ul></div></li>";
+		
+		var v30="<li><a data-toggle='collapse'><i class='lnr lnr-book'></i><span>文件资料</span><!--子图标标识--><i class='icon-submenu lnr lnr-chevron-left'></i></a></li><hr/><li><a href='#subPages300' data-toggle='collapse' class='collapsed'><span>质控后标准格式单站多普勒雷达基数据</span><!--子图标标识--><i class='icon-submenu lnr lnr-chevron-left'></i></a><div id='subPages300' class='collapse '><ul class='nav'><li><a href='page-profile.html'><i class='icon-submenu lnr lnr-chart-bars'></i>折线图</a></li></ul></div></li>";
+		
+		var v31="<li><a data-toggle='collapse'><i class='lnr lnr-book'></i><span>文件资料</span><!--子图标标识--><i class='icon-submenu lnr lnr-chevron-left'></i></a></li><hr/><li><a href='#subPages310' data-toggle='collapse' class='collapsed'><span>中国风廓线雷达数据文件-小时平均采样高度上的产品文件</span><!--子图标标识--><i class='icon-submenu lnr lnr-chevron-left'></i></a><div id='subPages310' class='collapse '><ul class='nav'><li><a href='page-profile.html'><i class='icon-submenu lnr lnr-chart-bars'></i>折线图</a></li></ul></div></li>";
+		
+		var v32="<li><a data-toggle='collapse'><i class='lnr lnr-book'></i><span>文件资料</span><!--子图标标识--><i class='icon-submenu lnr lnr-chevron-left'></i></a></li><hr/><li><a href='#subPages320' data-toggle='collapse' class='collapsed'><span>卫星云导风资料R2CWE</span><!--子图标标识--><i class='icon-submenu lnr lnr-chevron-left'></i></a><div id='subPages320' class='collapse '><ul class='nav'><li><a href='page-profile.html'><i class='icon-submenu lnr lnr-chart-bars'></i>折线图</a></li><li><a href='page-login.html'>轨迹图</a></li></ul></div></li><li><a href='#subPages321' data-toggle='collapse' class='collapsed'><span>AIRS卫星资料（RSATE）</span><!--子图标标识--><i class='icon-submenu lnr lnr-chevron-left'></i></a><div id='subPages321' class='collapse '><ul class='nav'><li><a href='page-profile.html'><i class='icon-submenu lnr lnr-chart-bars'></i>折线图</a></li><li><a href='page-login.html'>轨迹图</a></li></ul></div></li><li><a href='#subPages322' data-toggle='collapse' class='collapsed'><span>IASI 卫星资料（RSATE）</span><!--子图标标识--><i class='icon-submenu lnr lnr-chevron-left'></i></a><div id='subPages322' class='collapse '><ul class='nav'><li><a href='page-profile.html'><i class='icon-submenu lnr lnr-chart-bars'></i>折线图</a></li><li><a href='page-login.html'>轨迹图</a></li></ul></div></li><li><a href='#subPages323' data-toggle='collapse' class='collapsed'><span>ATOVS卫星资料（RATVC）</span><!--子图标标识--><i class='icon-submenu lnr lnr-chevron-left'></i></a><div id='subPages323' class='collapse '><ul class='nav'><li><a href='page-profile.html'><i class='icon-submenu lnr lnr-chart-bars'></i>折线图</a></li><li><a href='page-login.html'>轨迹图</a></li></ul></div></li><li><a href='#subPages324' data-toggle='collapse' class='collapsed'><span>NPP卫星资料(RSATE）</span><!--子图标标识--><i class='icon-submenu lnr lnr-chevron-left'></i></a><div id='subPages324' class='collapse '><ul class='nav'><li><a href='page-profile.html'><i class='icon-submenu lnr lnr-chart-bars'></i>折线图</a></li><li><a href='page-login.html'>轨迹图</a></li></ul></div></li><li><a href='#subPages325' data-toggle='collapse' class='collapsed'><span>ASCAT卫星资料（RSATE）</span><!--子图标标识--><i class='icon-submenu lnr lnr-chevron-left'></i></a><div id='subPages325' class='collapse '><ul class='nav'><li><a href='page-profile.html'><i class='icon-submenu lnr lnr-chart-bars'></i>折线图</a></li><li><a href='page-login.html'>轨迹图</a></li></ul></div></li><li><a href='#subPages326' data-toggle='collapse' class='collapsed'><span>FY3卫星资料（RFY3A）</span><!--子图标标识--><i class='icon-submenu lnr lnr-chevron-left'></i></a><div id='subPages326' class='collapse '><ul class='nav'><li><a href='page-profile.html'><i class='icon-submenu lnr lnr-chart-bars'></i>折线图</a></li><li><a href='page-login.html'>轨迹图</a></li></ul></div></li>";
+		
+		var v33="<li><a data-toggle='collapse'><i class='lnr lnr-book'></i><span>文件资料</span><!--子图标标识--><i class='icon-submenu lnr lnr-chevron-left'></i></a></li><hr/><li><a href='#subPages330' data-toggle='collapse' class='collapsed'><span>GPS 水汽资料GPS/PW</span><!--子图标标识--><i class='icon-submenu lnr lnr-chevron-left'></i></a><div id='subPages330' class='collapse '><ul class='nav'><li><a href='page-profile.html'><i class='icon-submenu lnr lnr-chart-bars'></i>折线图</a></li></ul></div></li><li><a href='#subPages331' data-toggle='collapse' class='collapsed'><span>GPS折射率</span><!--子图标标识--><i class='icon-submenu lnr lnr-chevron-left'></i></a><div id='subPages331' class='collapse '><ul class='nav'><li><a href='page-profile.html'><i class='icon-submenu lnr lnr-chart-bars'></i>折线图</a></li></ul></div></li>";
+		
+		function addLi(par){
+		        $("#navId").html("");
+				$("#navId").append(par);
+		}
+	</script>
+</head>
+
+<body>
+	<!-- WRAPPER -->
+	<div id="wrapper">
+		<!-- NAVBAR -->
+		<nav class="navbar navbar-default navbar-fixed-top">
+			
+			<!--logo icon-->
+			<div class="brand">
+				<a th:href="@{/index}"><img th:src="@{img/logo-dark17.png}" alt="Klorofil Logo" class="img-responsive logo"/></a>
+			</div>
+			<!--end logo icon-->
+			
+			<div class="container-fluid">
+				
+				<!--top button-->
+				<!--
+				<div class="navbar-btn">
+					<button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
+				</div>
+				<form class="navbar-form navbar-left">
+					<div class="input-group">
+						<input type="text" value="" class="form-control" placeholder="Search dashboard...">
+						<span class="input-group-btn"><button type="button" class="btn btn-primary">Go</button></span>
+					</div>
+				</form>
+				-->
+				<!--end top button-->
+				
+				<!--top menu-->
+				<div id="navbar-menu">
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+							<a th:href="@{./index.html}"><span>首页</span> </a>
+						</li>
+						<!--<li class="dropdown">
+							<a href="#" onclick="addLi(v00)" class="dropdown-toggle" data-toggle="dropdown">
+							
+							<span>关于我们</span> 
+							<i class="icon-submenu lnr lnr-chevron-down"></i></a>
+							
+						</li>-->
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						
+							<span>站点资料</span> 
+							<i class="icon-submenu lnr lnr-chevron-down"></i></a>
+							<ul class="dropdown-menu">
+								<li><a href="#" onclick="addLi(v10)">地面资料</a></li>
+								<li><a href="#" onclick="addLi(v11)">高空资料</a></li>
+								<li><a href="#" onclick="addLi(v12)">检验用降水资料</a></li>
+								<li><a href="#" onclick="addLi(v13)">台风资料</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						
+							<span>格点资料</span> 
+							<i class="icon-submenu lnr lnr-chevron-down"></i></a>
+							<ul class="dropdown-menu">
+								<li><a href="#" onclick="addLi(v20)"><span>海温资料</span></a></li>
+								<li><a href="#" onclick="addLi(v21)"><span>检验用格点要素场资料</span></a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
+							<span>文件资料</span> 
+							<i class="icon-submenu lnr lnr-chevron-down"></i></a>
+							<ul class="dropdown-menu">
+								<li><a href="#"  onclick="addLi(v30)"><span>雷达资料</span></a></li>
+								<li><a href="#" onclick="addLi(v31)"><span>风廓线资料</span></a></li>
+								<li><a href="#" onclick="addLi(v32)"><span>卫星资料</span></a></li>
+								<li><a href="#" onclick="addLi(v33)"><span>GPS资料</span></a></li>
+							</ul>
+						</li>
+					</ul>
+					
+				</div>
+				<!--end top menu-->
+				
+			</div>
+		</nav>
+		<!-- END NAVBAR -->
+		
+		<!-- LEFT SIDEBAR -->
+		<div id="sidebar-nav" class="sidebar">
+			<div class="sidebar-scroll">
+				<nav>
+					<ul class="nav" id="navId">
+					
+						<li>
+							<a data-toggle="collapse"><i class='lnr lnr-earth'></i>
+							<span>站点资料</span> 
+							<!--子图标标识-->
+							<i class="icon-submenu lnr lnr-chevron-left"></i>
+							</a>
+						</li>
+						<hr/>
+						
+						<li>
+							<a href="#subPages10" data-toggle="collapse" class="collapsed">
+							<span>中国地面逐小时资料</span> 
+							<!--子图标标识-->
+							<i class="icon-submenu lnr lnr-chevron-left"></i>
+							</a>
+							<div id="subPages10" class="collapse ">
+								<ul class="nav">
+									<li><a th:href="@{page-profile.html}" class=""><i class="lnr lnr-chart-bars"></i>折线图</a></li>
+									<li><a th:href="@{page-login.html}" class=""><i class="lnr lnr-list"></i>分布图</a></li>
+								</ul>
+							</div>
+						</li>
+						<li>
+							<a href="#subPages11" data-toggle="collapse" class="collapsed">
+							<span>全球地面逐小时资料</span> 
+							<!--子图标标识-->
+							<i class="icon-submenu lnr lnr-chevron-left"></i>
+							</a>
+							<div id="subPages11" class="collapse ">
+								<ul class="nav">
+									<li><a th:href="@{page-profile.html}" class=""><i class="lnr lnr-chart-bars"></i>折线图</a></li>
+									<li><a th:href="@{page-login.html}" class=""><i class="lnr lnr-list"></i>分布图</a></li>
+								</ul>
+							</div>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+		<!-- END LEFT SIDEBAR -->
+		
+		
+        <!-- MAIN -->
+		<div class="main">
+			<!-- MAIN CONTENT -->
+			<div class="main-content">
+				<div class="container-fluid">
+				<h3 class="page-title">Elements</h3>
+					<div class="panel">
+						<div class="panel-heading">
+							<h3 class="panel-title">Font Awesome</h3>
+						</div>
+						<div class="panel-body">
+							<iframe th:src="@{/elements}" width="100%"  border="0"  style="padding: 0px; width: 100%; height: 1000px;"  frameborder="0"></iframe>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- END MAIN CONTENT -->
+		</div>
+		<!-- END MAIN -->
+		
+		<div class="clearfix"></div>
+		<footer>
+			<div class="container-fluid">
+				<p class="copyright">Copyright &copy; 2017.Company name All rights reserved.</p>
+			</div>
+		</footer>
+	</div>
+	<!-- END WRAPPER -->
+	
+	
+</body>
+</html>

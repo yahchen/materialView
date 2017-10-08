@@ -1,0 +1,31 @@
+﻿@charset "utf-8";
+
+/* CSS Document */
+h1{ font-size:36px; text-transform:uppercase; color:#ea0d25;  padding:45px 0; text-align:center; margin-bottom:0px;  line-height:33px;}
+h2{ font-size:23px; text-transform:uppercase; color:#ea0d25; border-bottom:1px solid #ea0d25; margin-bottom:10px; padding:8px 0px;  line-height:33px;}
+h3{ font-size:24px; text-transform:uppercase; color:#ea0d25; margin-bottom:10px;  line-height:28px;}
+h4{ font-size:21px; text-transform:uppercase; color:#333; margin-bottom:10px; padding-bottom:5px;  line-height:24px; border-bottom:1px dotted #ccc;}
+h5{ font-size:19px; text-transform:uppercase; color:#00309e; margin-bottom:10px; padding-bottom:5px;  line-height:21px; border-bottom:1px dotted #ea0d25;}
+h6{ font-size:15px; text-transform:uppercase; color:#666; margin-bottom:10px; padding-bottom:5px;  line-height:19px; }
+p { }
+
+.left_description h1{ font-size:33px; text-align:left; padding:15px 0 20px 20px; font-weight:normal; margin:25px 0px 0 0; color:#ea0d25}
+.left_description h1 span{ color:#666}
+.R_description h1{ font-size:33px; text-align:left; padding:15px 0 20px 20px; font-weight:normal; margin:25px 0px 0 0; color:#fff}
+.R_description h1 span{ color:#000}
+
+.title{font-size:26px; text-transform:uppercase; color:#ea0d25; margin-bottom:10px;  line-height:26px;}
+.inner_main .photo_Left_30{width:33%; padding:0px; border:3px solid #fff; box-shadow: 0px 0px 3px #eee; float:left; margin:0px 25px 15px 0px;}
+.inner_main .photo_Right_30{width:33%; padding:0px; border:3px solid #fff; box-shadow: 0px 0px 3px #eee; float:right; margin:0px 0px 15px 25px;}
+.inner_main .photo_Left_50{width:50%; padding:2px; border:1px solid #eee; box-shadow: 0px 0px 3px #eee; float:left; margin:0px 15px 15px 0px;}
+.inner_main .photo_Right_50{width:50%; padding:2px; border:1px solid #eee; box-shadow: 0px 0px 3px #eee; float:right; margin:0px 0px 15px 15px;}
+
+.photo_Left_30 img, .photo_Right_30 img, .photo_Left_50 img, .photo_Right_50 img{width:100%;}
+
+
+.table_Blue{ width:100%; background:#d1ecff; border:1px solid #0068b3; font-size:12px;}
+.table_Blue tr{background:#fff; }
+.table_Blue .bg_Blue td, .table_Blue .bg_Blue{background:#0068b3; color:#fff; padding-bottom:8px}
+.table_Blue .bg_Blue2 td {background:#f5f8ff; color:#333; padding-bottom:8px }
+
+
