@@ -1,28 +1,25 @@
 package com.hx.bean;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- * Created by yahchen on 2017/10/8.
+ * Created by yahchen on 2017/10/22.
  */
 public class Elements {
-    private List<String> keys = new ArrayList<>();
-    private List<List<String>> values = new ArrayList<>();
+    private int elementSize;
+    private Map<String,Object> elements = new HashMap<>();
 
-    public List<String> getKeys() {
-        return keys;
+    public Map<String, Object> getElements() {
+        return elements;
     }
 
-    public void addKey(String key) {
-        this.keys.add(key);
+    public void setElements(Map<String, Object> elements) {
+        this.elements = elements;
     }
 
-    public List<List<String>> getValues() {
-        return values;
-    }
-
-    public void addValue(List<String> value) {
-        this.values.add(value);
+    public void putAttri(String k,Object v){
+        this.elements.put(k,v);
+        elementSize++;
     }
 }
