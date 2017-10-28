@@ -25,7 +25,7 @@
 	<script th:src="@{assets/vendor/bootstrap/js/bootstrap.min.js}"></script>
 	<script th:src="@{assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js}"></script>
 	<script th:src="@{js/vis-common.js}"></script>
-	<script th:src="@{js/data_final.js}"></script>
+	<script th:src="@{js/gm_data.js}"></script>
 </head>
 
 <body onload="onLoad()">
@@ -36,7 +36,7 @@
 			
 			<!--logo icon-->
 			<div class="brand">
-				<a th:href="@{/index}"><img th:src="@{img/logo-dark17.png}" alt="Klorofil Logo" class="img-responsive logo"/></a>
+				<a href="index.html"><img th:src="@{/img/logo-dark-gm-bak3.png}" alt="Klorofil Logo" class="img-responsive logo"/></a>
 			</div>
 			<!--end logo icon-->
 			
@@ -55,7 +55,7 @@
 				</form>
 				-->
 				<!--end top button-->
-				
+
 				<!--top menu-->
 				<div id="navbar-menu">
 					<ul class="nav navbar-nav navbar-right">
@@ -75,7 +75,9 @@
 								<span>站点资料</span>
 								<i class="icon-submenu lnr lnr-chevron-down"></i></a>
 							<ul class="dropdown-menu">
-								<li><a href="#" id="v10">地面资料</a></li>
+								<li><a href="#" class="tl_type" id="v10">地面资料</a></li>
+								<li><a href="#" class="tl_type" id="v11">高空资料</a></li>
+								<li><a href="#" class="tl_type" id="v12">其他资料</a></li>
 							</ul>
 						</li>
 						<li class="dropdown">
@@ -84,8 +86,15 @@
 								<span>格点资料</span>
 								<i class="icon-submenu lnr lnr-chevron-down"></i></a>
 							<ul class="dropdown-menu">
-								<li><a href="#" id="v20"><span>欧洲中心格点场资料</span></a></li>
-								<li><a href="#" id="v21"><span>日本格点场降水资料</span></a></li>
+								<li><a href="#" class="tl_type" id="v20">海温资料</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								<span>文件资料</span>
+								<i class="icon-submenu lnr lnr-chevron-down"></i></a>
+							<ul class="dropdown-menu">
+								<li><a href="#" class="tl_type" id="v30">卫星资料</a></li>
 							</ul>
 						</li>
 						<li class="dropdown">
@@ -97,34 +106,34 @@
 							</ul>-->
 						</li>
 					</ul>
-					
+
 				</div>
 				<!--end top menu-->
-				
+
 			</div>
 		</nav>
 		<!-- END NAVBAR -->
-		
+
 		<!-- LEFT SIDEBAR -->
 		<div id="sidebar-nav" class="sidebar">
 			<div class="sidebar-scroll">
 				<nav>
 					<ul class="nav" id="navId">
-					
+
 						<li>
 							<a data-toggle="collapse"><i ></i>
-							<span>站点资料</span> 
-							<!--子图标标识-->
-							<i class="icon-submenu lnr lnr-chevron-left"></i>
+								<span>站点资料</span>
+								<!--子图标标识-->
+								<i class="icon-submenu lnr lnr-chevron-left"></i>
 							</a>
 						</li>
 						<hr/>
-						
+
 						<li>
 							<a href="#subPages10" data-toggle="collapse" class="collapsed">
-							<span>中国地面逐小时资料</span> 
-							<!--子图标标识-->
-							<i class="icon-submenu lnr lnr-chevron-left"></i>
+								<span>中国地面逐小时资料</span>
+								<!--子图标标识-->
+								<i class="icon-submenu lnr lnr-chevron-left"></i>
 							</a>
 							<div id="subPages10" class="collapse ">
 								<ul class="nav">
@@ -135,9 +144,9 @@
 						</li>
 						<li>
 							<a href="#subPages11" data-toggle="collapse" class="collapsed">
-							<span>全球地面逐小时资料</span> 
-							<!--子图标标识-->
-							<i class="icon-submenu lnr lnr-chevron-left"></i>
+								<span>全球地面逐小时资料</span>
+								<!--子图标标识-->
+								<i class="icon-submenu lnr lnr-chevron-left"></i>
 							</a>
 							<div id="subPages11" class="collapse ">
 								<ul class="nav">
@@ -151,14 +160,14 @@
 			</div>
 		</div>
 		<!-- END LEFT SIDEBAR -->
-		
-		
-        <!-- MAIN -->
+
+
+		<!-- MAIN -->
 		<div class="main">
 			<!-- MAIN CONTENT -->
 			<div class="main-content">
 				<div class="container-fluid">
-				<h3 class="page-title">Elements</h3>
+					<h3 class="page-title">Elements</h3>
 					<div class="panel">
 						<div class="panel-heading">
 						</div>
@@ -168,7 +177,7 @@
 						</div>
 						<div class="panel-body">
 							<div id="grid" width="100%"  border="0"  style="padding: 0px; width: 100%; height: 400px;">
-							lkjslkdjfflskdjf
+								lkjslkdjfflskdjf
 							</div>
 						</div>
 					</div>
@@ -179,7 +188,7 @@
 		<!-- END MAIN -->
 	</div>
 	<!-- END WRAPPER -->
-	
-	
+
+
 </body>
 </html>

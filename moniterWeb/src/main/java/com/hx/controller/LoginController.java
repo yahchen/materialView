@@ -15,10 +15,11 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class LoginController {
     @RequestMapping("/index")//对应url
-    public String login(HttpServletRequest request){//参数可以选择性添加，不加也无所谓。如果添加后，框架会帮助自动注入。
+    public String login(HttpServletRequest request,ModelAndView mv){//参数可以选择性添加，不加也无所谓。如果添加后，框架会帮助自动注入。
         // todo add mode kv
         Object usr = request.getParameter("usr");
         Object pwd = request.getParameter("pwd");
+        mv.addObject("data",new Object());
         if(null == usr && null == pwd)
             return "login";//对应templates里的login.html
         else

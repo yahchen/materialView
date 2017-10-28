@@ -1,10 +1,14 @@
 package com.hx.bean;
 
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
+
 import java.sql.Timestamp;
 
 /**
  * Created by wangyaohui on 2017/6/2.
  */
+@Service
 public class MateriaMeta {
     private long m_id;
     private long data_code;

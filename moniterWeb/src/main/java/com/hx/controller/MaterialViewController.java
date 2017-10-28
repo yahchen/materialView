@@ -3,6 +3,8 @@ package com.hx.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * Created by yahchen on 2017/10/8.
  */
@@ -20,10 +22,23 @@ public class MaterialViewController {
         return "about-sys";
     }
 
-    @RequestMapping("/data")//对应url
-    public String data(){//参数可以选择性添加，不加也无所谓。如果添加后，框架会帮助自动注入。
+    @RequestMapping("/gm_data")//对应url
+    public String gm_data(HttpServletRequest request){//参数可以选择性添加，不加也无所谓。如果添加后，框架会帮助自动注入。
         // todo add mode kv
-        return "data_final";
+        request.getParameterValues("user");
+        return "GMdata";
+    }
+
+    @RequestMapping("/rm_data")//对应url
+    public String rm_data(){//参数可以选择性添加，不加也无所谓。如果添加后，框架会帮助自动注入。
+        // todo add mode kv
+        return "RMdata";
+    }
+
+    @RequestMapping("/tm_data")//对应url
+    public String tm_data(){//参数可以选择性添加，不加也无所谓。如果添加后，框架会帮助自动注入。
+        // todo add mode kv
+        return "TMdata";
     }
 
     @RequestMapping("/elements")//对应url
@@ -31,4 +46,6 @@ public class MaterialViewController {
         // todo add mode kv
         return "elements1";
     }
+
+
 }
