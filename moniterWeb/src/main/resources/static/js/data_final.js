@@ -27,6 +27,7 @@ $(function(){
         var pn = event.target.getAttribute("id");
         $("#navId").html("");
         $("#navId").append(eval(pn));
+        $("#navId").append(eval(pn));
     });
 
     $('a.bin_map').click(function (event) {
