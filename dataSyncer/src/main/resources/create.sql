@@ -1,7 +1,7 @@
 CREATE TABLE public.materia
 (
     m_id bigint NOT NULL,
-    data_code bigint,
+    data_code VARCHAR(50),
     data_name VARCHAR(50),
     retrieve_start_time timestamp,
     retrieve_end_time timestamp,

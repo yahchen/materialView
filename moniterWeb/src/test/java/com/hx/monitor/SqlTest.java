@@ -25,6 +25,7 @@ public class SqlTest {
     public void testSql(){
         Assert.notNull(template,"template is null");
         List resutl = template.queryForList("select * from public.materia;");
+        resutl.forEach(e-> System.out.println("hahah:" + e.toString()));
         Assert.notNull(resutl);
     }
 }
