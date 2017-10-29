@@ -9,11 +9,6 @@ import org.springframework.util.Assert;
 public class CoreSyncerApplication {
 
 	public static void main(String[] args) {
-		String s = "{true} and {false}";
-
-		SpelExpressionParser parser = new SpelExpressionParser();
-		boolean result = parser.parseExpression(s).getValue(boolean.class);
-		System.out.println(result+"-----------------");
-		//SpringApplication.run(CoreSyncerApplication.class, args);
+		SpringApplication.run(CoreSyncerApplication.class, args);
 	}
 }
