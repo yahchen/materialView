@@ -16,9 +16,10 @@ $(function(){
         var pn = event.target.getAttribute("id");
         $("#navId").html("");
         $("#navId").append(eval(pn));
+        $('a.bin_map').click(binMapListener);
     });
 
-    $('a.bin_map').click(function (event) {
+    function binMapListener() {
         var zoom = 4;
         //初始化地图对象
         $("#customMap").html("");
@@ -43,7 +44,7 @@ $(function(){
                         SizeType: TDT_POINT_SIZE_SMALL
                     })
                     var infoWin = new T.InfoWindow();
-                    var sContent = "";
+                    var sContent = "<li> </li>";
                     infoWin.setContent(sContent);
                     point.addEventListener("click", function () {
                         point.openInfoWindow(infoWin);
@@ -53,6 +54,6 @@ $(function(){
                 $('mapDiv').html("");
             }
         });
-    });
-
+    };
+    $('a.bin_map').click(binMapListener);
 });

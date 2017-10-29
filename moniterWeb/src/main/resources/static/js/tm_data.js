@@ -12,9 +12,10 @@ $(function(){
         var pn = event.target.getAttribute("id");
         $("#navId").html("");
         $("#navId").append(eval(pn));
+        $('a.bin_map').click(binMapListener);
     });
 
-    $('a.bin_map').click(function (event) {
+    function binMapListener() {
         var zoom = 4;
         //初始化地图对象
         $("#customMap").html("");
@@ -49,6 +50,6 @@ $(function(){
                 $('mapDiv').html("");
             }
         });
-    });
-
+    };
+    $('a.bin_map').click(binMapListener);
 });
