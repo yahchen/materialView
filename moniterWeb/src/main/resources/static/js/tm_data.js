@@ -52,4 +52,8 @@ $(function(){
         });
     };
     $('a.bin_map').click(binMapListener);
+    $('select.bin_map').click(function (event) {
+        var selectVal = event.target;
+        var idVal = event.target.getAttribute("id");
+    });
 });

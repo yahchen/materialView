@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.Assert;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 /**
  * Created by yahchen on 2017/10/29.
@@ -36,7 +37,7 @@ public class SqlTest {
         entity.setData_time(ts);
         entity.setFcstLevel("sds");
         entity.setFile_path("sdsd");
-        entity.setG_d_id(2);
+        entity.setG_d_id(3);
         entity.setGridfile_state("");
         entity.setGridfileNumMax(121);
         entity.setLongitude_latitude_scope("");
@@ -51,6 +52,12 @@ public class SqlTest {
         entity.setSys_conn_state("sd");
         boolean resutl = gridDataHeadService.saveOne(entity);
         Assert.isTrue(resutl);
+    }
+
+    @Test
+    public void query(){
+        List<GridDataHeadDo> ress = gridDataHeadService.findAll();
+        Assert.isNull(!ress.isEmpty());
     }
 }
 

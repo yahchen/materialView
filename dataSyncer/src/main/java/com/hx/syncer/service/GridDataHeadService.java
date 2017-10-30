@@ -5,6 +5,8 @@ import com.hx.syncer.dao.GridDataHeadDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by yahchen on 2017/10/29.
  */
@@ -28,5 +30,10 @@ public class GridDataHeadService implements DaoServiceImpl<GridDataHeadDo>{
             return true;
         }
         return false;
+    }
+
+    @Override
+    public List<GridDataHeadDo> findAll() {
+        return gridDataHeadDao.findAll();
     }
 }

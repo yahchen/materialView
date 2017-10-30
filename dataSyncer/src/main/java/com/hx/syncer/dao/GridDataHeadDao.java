@@ -2,6 +2,7 @@ package com.hx.syncer.dao;
 
 import com.hx.syncer.bean.GridDataHeadDo;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,8 +10,10 @@ import java.util.List;
 /**
  * Created by yahchen on 2017/10/29.
  */
-@Service
+@Repository
 public interface GridDataHeadDao extends JpaRepository<GridDataHeadDo,Long> {
+
+    GridDataHeadDo getOne(long var1);
 
     List<GridDataHeadDo> findAll();
 
@@ -19,5 +22,5 @@ public interface GridDataHeadDao extends JpaRepository<GridDataHeadDo,Long> {
 
     <S extends GridDataHeadDo> S save(S entity);
 
-    void delete(String id);
+    void deleteInBatch(Iterable<GridDataHeadDo> iterable);
 }
