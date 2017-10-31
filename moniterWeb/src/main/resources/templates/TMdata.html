@@ -38,7 +38,7 @@
 		pre{font-family:'微软雅黑'}
 		.box{width:970px; padding:10px 20px; background-color:#fff; margin:10px auto;}
 		.box a{padding-right:20px;}
-		.startAndEndTime,.startTime,.startTime2{margin:25px 0;}
+		.binMapChoice{margin:25px 0;}
 		h3{margin:10px 0;}
 		.layinput{height: 22px;line-height: 22px;width: 150px;margin: 0;}
 	</style>
@@ -176,7 +176,7 @@
 				<div class="container-fluid">
 					<div class="panel">
 						<div class="panel-heading">
-							<div class="startAndEndTime">
+							<div class="binMapChoice" hidden="hidden">
 								<ul class="nav navbar-nav navbar-left">
 									<li class="" >
 									<strong>日期:</strong> <input class="inline laydate-icon" placeholder="请输入日期" id="start" style="width:200px; margin-right:10px;"/>
@@ -184,19 +184,14 @@
 									<li>
 									<strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;资料类别:&nbsp;</strong>
 									<select class="" id="dataType" name="dataType" onclick="">
-										<option value="1">Volvo</option>
-										<option value="2">Saab</option>
-										<option value="3">Opel</option>
-										<option value="4">Audi</option>
+										<option value="0">GM_RSURF_GL</option>
 									</select>
 									</li>
 								<li>
-								    <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;质控类别:&nbsp;</strong>
+								    <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;要素类别:&nbsp;</strong>
 									<select class="" id="qualiteType">
-										<option value="1">Volvo</option>
-										<option value="2">Saab</option>
-										<option value="3">Opel</option>
-										<option value="4">Audi</option>
+										<option value="0">气压</option>
+										<option value="1">测站高度</option>
 									</select>
 								</li>
 								</ul>

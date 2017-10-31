@@ -15,11 +15,11 @@ $(function(){
     $('a.tl_type').click(function (event) {
         var pn = event.target.getAttribute("id");
         $("#navId").html("");
-        $("#navId").append(eval(pn));
         $('a.bin_map').click(binMapListener);
     });
 
     function binMapListener() {
+        $("#navId").append(eval(pn));
         var zoom = 4;
         //初始化地图对象
         $("#customMap").html("");
