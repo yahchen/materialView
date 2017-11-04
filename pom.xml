@@ -28,11 +28,6 @@
         </repository>
 
         <repository>
-            <id>uk</id>
-            <url>http://uk.maven.org/maven2/</url>
-        </repository>
-
-        <repository>
             <id>CN</id>
             <url>http://maven.oschina.net/content/groups/public/</url>
         </repository>
