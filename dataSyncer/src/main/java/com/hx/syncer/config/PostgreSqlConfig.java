@@ -1,4 +1,4 @@
-package com.hx.syncer.config.postgresqlConfig;
+package com.hx.syncer.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

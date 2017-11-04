@@ -35,30 +35,6 @@ public class ObtainElementsController {
 
         long time = Long.valueOf(StringUtils.isEmpty(request.getParameter("startTime"))?System.currentTimeMillis()+"":request.getParameter("startTime"));
         Timestamp st = new Timestamp(time);
-
-
-
-
-        Map<String,Object> elements = new HashMap<>();
-        //测试开发阶段可以手动set字段做测试-----start
-        List<String> sidList = new ArrayList<>();
-        elements.put("Station_Id_d",sidList);
-        List<String> latList = new ArrayList<>();
-        elements.put("Lat",latList);
-        List<String> lonList = new ArrayList<>();
-        elements.put("Lon",lonList);
-        List<String> altiList = new ArrayList<>();
-        elements.put("Alti",altiList);
-        List<String> stList = new ArrayList<>();
-        elements.put("Station_type",stList);
-
-
-        sidList.add("999999.00");
-        latList.add("42.01");
-        lonList.add("120.12");
-        altiList.add("900");
-        stList.add("1");
-        //ceshi-----------------------end
         String table = convertDataType2Table(dataType);
         if(StringUtils.isEmpty(table))
             return null;
