@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+	<link rel="stylesheet" type="text/css" href="js/calendar/css/style.css"/>
+	<link rel="stylesheet" th:href="@{assets/css/style2.css}"/>
+	<script type="text/javascript" src="assets/js/jquery-1.7.2.min.js"></script>
+
+	<script type="text/javascript" src="js/calendar/laydate.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>
+
+	<style type="text/css">
+*{margin:0;padding:0;list-style:none;}
+html{background-color:#E3E3E3; font-size:14px; color:#000; font-family:'微软雅黑'}
+h2{line-height:30px; font-size:20px;}
+a,a:hover{ text-decoration:none;}
+pre{font-family:'微软雅黑'}
+.box{width:970px; padding:10px 20px; background-color:#fff; margin:10px auto;}
+.box a{padding-right:20px;}
+.startAndEndTime,.startTime,.startTime2{margin:25px 0;}
+h3{margin:10px 0;}
+.layinput{height: 22px;line-height: 22px;width: 150px;margin: 0;}
+</style>
+
+</head>
+
+<body>
+<!--<div class="box">-->
+	<ul class="select">
+
+		<div class="startTime2">
+			<ul class="inline">
+				<strong>开始时间（年月日）：</strong> <input placeholder="请输入日期" class="laydate-icon" id="start2"/>
+				<span id="message" style="color: red;font-size: 125;"></span>
+			</ul>
+		</div>
+	</ul>
+
+	<!--   选择项目      -->
+	<ul class="select">
+		<li class="select-list">
+			<dl id="selectParent">
+				<dt>格点：</dt>
+				<dd id="ec00" class="select-ee selected"><a href="#">欧洲中心格点场资料</a></dd>
+				<dd id="japan00" class="select-jj "><a href="#">日本格点场降水资料</a></dd>
+			</dl>
+		</li>
+		<li class="select-list">
+			<dl id="selectChildren1" >
+				<dt>要素：</dt>
+				<dd  id="wendu01" class="selected"><a href="#">温度</a></dd>
+				<dd id="gaodu01" ><a href="#">位势高度</a></dd>
+				<dd id="ufeng01"><a href="#">U风</a></dd>
+				<dd id="vfeng01"><a href="#">V风</a></dd>
+			</dl>
+
+			<dl id="selectChildren2" hidden="hidden">
+				<dt>要素：</dt>
+				<dd id="jiangshui02" class="select-jjj selected"><a href="#">降水</a></dd>
+				<dd id="wendu02"><a href="#" >温度</a></dd>
+				<dd id="gaodu02"><a href="#">位势高度</a></dd>
+				<dd id="ufeng02"><a href="#">U风</a></dd>
+				<dd id="vfeng02"><a href="#">V风</a></dd>
+			</dl>
+
+		</li>
+
+	</ul>
+
+	<div id="page_data" >
+
+	</div>
+<!--</div>-->
+
+<script type="text/javascript">
+!function(){
+	laydate.skin('molv');//切换皮肤，请查看skins下面皮肤库
+	laydate({elem: '#start2'});//绑定元素
+}();
+
+
+//日期范围限制
+var start = {
+    elem: '#start',
+    format: 'YYYY-MM-DD',
+    //min: laydate.now(), //设定最小日期为当前日期
+	min: '1900-01-01', //设定最小日期为当前日期
+    max: '2099-00-01', //最大日期
+    istime: true,
+    istoday: false,
+    choose: function(datas){
+         end.min = datas; //开始日选好后，重置结束日的最小日期
+         end.start = datas //将结束日的初始值设定为开始日
+    }
+};
+
+var end = {
+    elem: '#end',
+    format: 'YYYY-MM-DD',
+	min: '1900-01-01', //设定最小日期为当前日期
+    max: '2099-01-01',
+    istime: true,
+    istoday: false,
+    choose: function(datas){
+        start.max = datas; //结束日选好后，充值开始日的最大日期
+    }
+};
+laydate(start);
+laydate(end);
+</script>
+</body>
+</html>

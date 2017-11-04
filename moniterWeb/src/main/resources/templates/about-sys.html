@@ -80,13 +80,13 @@
 							<a th:href="@{/about}"><span>关于系统</span> </a>
 						</li>
 						<li class="">
-							<a th:href="@{/data}"><span>全球模式</span> </a>
+							<a th:href="@{/gm_data}"><span>全球模式</span> </a>
 						</li>
 						<li class="">
-							<a th:href="@{/data}"><span>区域模式</span> </a>
+							<a th:href="@{/rm_data}"><span>区域模式</span> </a>
 						</li>
 						<li class="">
-							<a th:href="@{/data}"> <span>检验模式</span> </a>
+							<a th:href="@{/tm_data}"> <span>检验模式</span> </a>
 						</li>
 					</ul>
 					
@@ -101,71 +101,74 @@
 		
 		<div class="clear"></div>
 
-		<div style="'background':url(files/inner_about.jpg) no-repeat center center"  class="banner banner_show">
-			<div class="screen">
-				<div class="title_banner">关于系统</div>
-			</div>
-		</div>
+		<!--<div  style="'background':url(th:src='@{files/inner_about.jpg}') no-repeat center center"  class=" background banner banner_show">-->
+		<div class=" background banner banner_show">
+			<!--<<img th:src="@{files/inner_about.jpg}" class="banner banner_show"/>
+			div style="'background':th:src='@{files/inner_about.jpg}' no-repeat center center"  class="banner banner_show">-->
+                <div class="screen">
+                    <div class="title_banner">关于系统</div>
+                </div>
+            </div>
 
-    
-        <div class="nevigation">
-			<div class="screen">
-				<ul>
-					<li><a href="#" class="home">首页</a>
-					</li><li class="sp">&gt;</li>
-					<li>关于系统</li>
-					<div class="clear"></div>
-				</ul>
-				<div class="clear"></div>
-			</div>
-		</div>
-    
-		<div class="container">
-			<div class="inner_main">
-				<span property="dc:title" content="关于系统" class="rdf-meta element-hidden"></span>
 
-				<div class="screen">
-					<h1>关于我们</h1>
-					<div class="about"> 为满足现代气象业务现代化和集约化发展需要，中国气象局数值预报中心业务运行所需的气象数据需要由NWP数据源即气象实时数据库向CIMISS切换，以实现数值预报业务的正常运行，其中包含了气象数据的采集和统计监视。
+            <div class="nevigation">
+                <div class="screen">
+                    <ul>
+                        <li><a href="#" class="home">首页</a>
+                        </li><li class="sp">&gt;</li>
+                        <li>关于系统</li>
+                        <div class="clear"></div>
+                    </ul>
+                    <div class="clear"></div>
+                </div>
+            </div>
 
-					<br/>
-					<br/>
-						因此，研发“基于CIMISS的数值模式的资料处理业务系统可视化展示系统”，该系统是基于全国综合气象信息共享系统（CIMISS：China Integrated Meteorological Information Service System）接口采集数据，并对采集的气象数据进行处理、统计监控和展示。
-					<br/>
-					<br/>
-						xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-					<br/>
-					<br/>
-					</div>
-				</div>
-				<div class="bg_about_finance">
-					<div class="screen">
-						<div class="area_finance">
-						<h2>VIS系统的主要职能包括：</h2>
-							<ol>
-								<li>监控；</li>
-								<li>积通量；</li>
-								<li>作为监控系统积极推进业务运行；积极推进业务运行；积极推进业务运行；积极推进业务运行；积极推进业务运行；；</li>
-								<li>积极推进业务运行积极推进业务运行；积极推进业务运行；积极推进业务运行；积极推进业务运行；积极推进业务运行；积极推进业务运行；积极推进业务运行；；</li>
-								<li>代表休息休息积极推进业务运行；积极推进业务运行；积极推进业务运行；积极推进业务运行；积极推进业务运行；。</li>
+            <div class="container">
+                <div class="inner_main">
+                    <span property="dc:title" content="关于系统" class="rdf-meta element-hidden"></span>
 
- 
-							</ol>
-						</div>
-						<div class="clear"></div>
+                    <div class="screen">
+                        <h1>关于我们</h1>
+                        <div class="about"> 为满足现代气象业务现代化和集约化发展需要，中国气象局数值预报中心业务运行所需的气象数据需要由NWP数据源即气象实时数据库向CIMISS切换，以实现数值预报业务的正常运行，其中包含了气象数据的采集和统计监视。
 
-					</div>
-				</div>	
-				<div class="clear"></div>
-			</div>
-		</div>
-		<div class="clear"></div>
+                        <br/>
+                        <br/>
+                            因此，研发“基于CIMISS的数值模式的资料处理业务系统可视化展示系统”，该系统是基于全国综合气象信息共享系统（CIMISS：China Integrated Meteorological Information Service System）接口采集数据，并对采集的气象数据进行处理、统计监控和展示。
+                        <br/>
+                        <br/>
+                            xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                        <br/>
+                        <br/>
+                        </div>
+                    </div>
+                    <div class="bg_about_finance">
+                        <div class="screen">
+                            <div class="area_finance">
+                            <h2>VIS系统的主要职能包括：</h2>
+                                <ol>
+                                    <li>监控；</li>
+                                    <li>积通量；</li>
+                                    <li>作为监控系统积极推进业务运行；积极推进业务运行；积极推进业务运行；积极推进业务运行；积极推进业务运行；；</li>
+                                    <li>积极推进业务运行积极推进业务运行；积极推进业务运行；积极推进业务运行；积极推进业务运行；积极推进业务运行；积极推进业务运行；积极推进业务运行；；</li>
+                                    <li>代表休息休息积极推进业务运行；积极推进业务运行；积极推进业务运行；积极推进业务运行；积极推进业务运行；。</li>
 
-        <div id="block-block-1" class="block block-block">
-		
-		
-		
-		<!-- Footer -->
+
+                                </ol>
+                            </div>
+                            <div class="clear"></div>
+
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+            <div class="clear"></div>
+
+            <div id="block-block-1" class="block block-block">
+
+
+
+            <!-- Footer -->
 		<div id="footer">
 			<div class="screen">
 

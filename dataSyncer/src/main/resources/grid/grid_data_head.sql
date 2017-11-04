@@ -19,7 +19,7 @@ CREATE TABLE public.grid_data_head
     gridfile_state character varying(256),
     longitude_latitude_scope character varying(30) COLLATE pg_catalog."default",
     sys_conn_state character varying(10) COLLATE pg_catalog."default",
-    data_num bigint,
+    data_num character varying(30),
     return_abnormal_info character varying(256) COLLATE pg_catalog."default",
     user_id character varying(30) COLLATE pg_catalog."default",
     system_name character varying(30) COLLATE pg_catalog."default",

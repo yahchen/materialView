@@ -13,8 +13,8 @@
 	<!-- MAIN CSS -->
 	<link rel="stylesheet" th:href="@{assets/css/main.css}"/>
 	<!-- ICONS -->
-	<link rel="apple-touch-icon" sizes="76x76" th:href="@{assets/img/apple-icon.png}"/>
-	<link rel="icon" type="image/png" sizes="96x96" th:href="@{assets/img/favicon.png}"/>
+	<link rel="apple-touch-icon" sizes="76x76" th:href="@{img/apple-icon.png}"/>
+	<link rel="icon" type="image/png" sizes="96x96" th:href="@{img/favicon.png}"/>
 
 	<style type="text/css">body,html{width:100%;height:100%;margin:0;font-family:"Microsoft YaHei"}#customMap{width:100%;height:400px}input,b,p{margin-left:5px;font-size:14px}</style>
 
@@ -26,9 +26,10 @@
 	<script th:src="@{assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js}"></script>
 	<script th:src="@{js/vis-common.js}"></script>
 	<script th:src="@{js/tm_data.js}"></script>
+
 </head>
 
-<body onload="onLoad()">
+<body>
 	<!-- WRAPPER -->
 	<div id="wrapper">
 		<!-- NAVBAR -->
@@ -36,7 +37,7 @@
 			
 			<!--logo icon-->
 			<div class="brand">
-				<a href="index.html"><img th:src="@{/img/logo-dark-tm-bak.png}" alt="Klorofil Logo" class="img-responsive logo"/></a>
+				<a href="index.html"><img th:src="@{/img/logo-dark-tm-bak.png}" alt="VIS Logo" class="img-responsive logo"/></a>
 			</div>
 			<!--end logo icon-->
 			
@@ -112,7 +113,7 @@
 					<ul class="nav" id="navId">
 
 						<li>
-							<a data-toggle="collapse"><i ></i>
+							<a data-toggle="collapse"><i class='lnr lnr-earth'></i>
 								<span>站点资料</span>
 								<!--子图标标识-->
 								<i class="icon-submenu lnr lnr-chevron-left"></i>
@@ -121,12 +122,12 @@
 						<hr/>
 
 						<li>
-							<a href="#subPages10" data-toggle="collapse" class="collapsed">
-								<span>中国地面逐小时资料</span>
+							<a href="#subPages100" data-toggle="collapse" class="collapsed">
+								<span>地面1小时观测资料</span>
 								<!--子图标标识-->
 								<i class="icon-submenu lnr lnr-chevron-left"></i>
 							</a>
-							<div id="subPages10" class="collapse ">
+							<div id="subPages100" class="collapse ">
 								<ul class="nav">
 									<li><a th:href="@{page-profile.html}" class=""><i class="lnr lnr-chart-bars"></i>折线图</a></li>
 									<li><a href="#" class="bin_map" id="1"><i class="lnr lnr-list"></i>分布图</a></li>
@@ -134,27 +135,83 @@
 							</div>
 						</li>
 						<li>
-							<a href="#subPages11" data-toggle="collapse" class="collapsed">
-								<span>全球地面逐小时资料</span>
+							<a href="#subPages101" data-toggle="collapse" class="collapsed">
+								<span>地面1小时降水资料</span>
 								<!--子图标标识-->
 								<i class="icon-submenu lnr lnr-chevron-left"></i>
 							</a>
-							<div id="subPages11" class="collapse ">
+							<div id="subPages101" class="collapse ">
 								<ul class="nav">
 									<li><a th:href="@{page-profile.html}" class=""><i class="lnr lnr-chart-bars"></i>折线图</a></li>
 									<li><a href="#" class="bin_map" id="2"><i class="lnr lnr-list"></i>分布图</a></li>
 								</ul>
 							</div>
 						</li>
+
+						<li>
+							<a href="#subPages102" data-toggle="collapse" class="collapsed">
+								<span>地面3小时降水资料</span>
+								<!--子图标标识-->
+								<i class="icon-submenu lnr lnr-chevron-left"></i>
+							</a>
+							<div id="subPages102" class="collapse ">
+								<ul class="nav">
+									<li><a th:href="@{page-profile.html}" class=""><i class="lnr lnr-chart-bars"></i>折线图</a></li>
+									<li><a href="#" class="bin_map" id="3"><i class="lnr lnr-list"></i>分布图</a></li>
+								</ul>
+							</div>
+						</li>
+
+						<li>
+							<a href="#subPages103" data-toggle="collapse" class="collapsed">
+								<span>地面6小时降水资料</span>
+								<!--子图标标识-->
+								<i class="icon-submenu lnr lnr-chevron-left"></i>
+							</a>
+							<div id="subPages103" class="collapse ">
+								<ul class="nav">
+									<li><a th:href="@{page-profile.html}" class=""><i class="lnr lnr-chart-bars"></i>折线图</a></li>
+									<li><a href="#" class="bin_map" id="4"><i class="lnr lnr-list"></i>分布图</a></li>
+								</ul>
+							</div>
+						</li>
+
+						<li>
+							<a href="#subPages104" data-toggle="collapse" class="collapsed">
+								<span>地面12小时降水资料</span>
+								<!--子图标标识-->
+								<i class="icon-submenu lnr lnr-chevron-left"></i>
+							</a>
+							<div id="subPages104" class="collapse ">
+								<ul class="nav">
+									<li><a th:href="@{page-profile.html}" class=""><i class="lnr lnr-chart-bars"></i>折线图</a></li>
+									<li><a href="#" class="bin_map" id="5"><i class="lnr lnr-list"></i>分布图</a></li>
+								</ul>
+							</div>
+						</li>
+
+						<li>
+							<a href="#subPages105" data-toggle="collapse" class="collapsed">
+								<span>地面24小时降水资料</span>
+								<!--子图标标识-->
+								<i class="icon-submenu lnr lnr-chevron-left"></i>
+							</a>
+							<div id="subPages105" class="collapse ">
+								<ul class="nav">
+									<li><a th:href="@{page-profile.html}" class=""><i class="lnr lnr-chart-bars"></i>折线图</a></li>
+									<li><a href="#" class="bin_map" id="6"><i class="lnr lnr-list"></i>分布图</a></li>
+								</ul>
+							</div>
+						</li>
+
 					</ul>
 				</nav>
 			</div>
 		</div>
 		<!-- END LEFT SIDEBAR -->
 
-
 		<!-- MAIN -->
-		<div class="main">
+		<div class="main" id="main">
 			<!-- MAIN CONTENT -->
 			<div class="main-content">
 				<div class="container-fluid">
