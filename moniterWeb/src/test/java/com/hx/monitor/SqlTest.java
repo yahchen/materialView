@@ -2,6 +2,7 @@ package com.hx.monitor;
 
 import com.hx.bean.GridDataHead;
 import com.hx.dao.GridMatrixDao;
+import com.hx.dao.SiteChartDao;
 import com.hx.service.GridMatrixService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,6 +38,13 @@ public class SqlTest {
     @Qualifier("gridMatrixServiceImpl")
     private GridMatrixService gridMatrixService;
 
+    @Autowired
+    @Qualifier("siteChartDaoImpl")
+    private SiteChartDao siteChartDao;
+
+    @Autowired
+    @Qualifier("siteChartServiceImpl")
+    private SiteChartDao siteChartService;
     @Test
     public void testSql(){
         Assert.notNull(template,"template is null");
@@ -60,5 +68,12 @@ public class SqlTest {
         List<Map<String, Object>> gridDataHead = gridMatrixDao.findMatrixByTimeElement(startTime,endTime,"GRID_ECMWF_U");
         Map<String, Object> gridDataHeads =  gridDataHead.get(0);
         System.out.println(gridDataHeads.get("data_code"));
+    }
+    @Test
+    public void testSiteChartDao(){
+        String startTime ="2017-10-01 00:00:00";
+        String endTime =("2017-10-20 23:59:59");
+        List resutl = siteChartService.findSiteChartByTimeElement(startTime,endTime,"GM_RSURF_GL");
+        System.out.println(resutl.size());
     }
 }

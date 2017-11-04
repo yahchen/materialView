@@ -21,7 +21,7 @@ import java.util.*;
  * Created by yahchen on 2017/10/8.
  */
 @Controller
-public class GridMaterialViewController {
+public class GridMatrixController {
 
     @Autowired
     @Qualifier("gridMatrixServiceImpl")
