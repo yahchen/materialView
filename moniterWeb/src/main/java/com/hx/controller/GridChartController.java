@@ -1,6 +1,6 @@
 package com.hx.controller;
 
-import com.hx.service.SiteChartService;
+import com.hx.service.GridChartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -16,20 +16,20 @@ import java.util.*;
  * Created by hp on 2017/10/31.
  */
 @Controller
-public class SiteChartController {
+public class GridChartController {
 
     @Autowired
-    @Qualifier("siteChartServiceImpl")
-    private SiteChartService siteChartService;
+    @Qualifier("gridChartServiceImpl")
+    private GridChartService gridChartService;
 
-    @RequestMapping("/site_chart_view")//对应url
-    public String siteChartView(){//参数可以选择性添加，不加也无所谓。如果添加后，框架会帮助自动注入。
-        return "site/site_chart";
+    @RequestMapping("/grid_chart_view")//对应url
+    public String gridChartView(){//参数可以选择性添加，不加也无所谓。如果添加后，框架会帮助自动注入。
+        return "grid/grid_chart";
     }
 
-    @RequestMapping("/findSiteChartByTimeElement")//对应url
+    @RequestMapping("/findGridChartByTimeElement")//对应url
     @ResponseBody
-    public Map<String,Object> findSiteChartByTimeElement(HttpServletRequest request){//参数可以选择性添加，不加也无所谓。如果添加后，框架会帮助自动注入。
+    public Map<String,Object> findGridChartByTimeElement(HttpServletRequest request){//参数可以选择性添加，不加也无所谓。如果添加后，框架会帮助自动注入。
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String startTime=request.getParameter("startTime");
         String endTime=request.getParameter("endTime");
@@ -47,7 +47,7 @@ public class SiteChartController {
             endTime=sdf.format(new Date());
             startTime=sdf.format(cal.getTime())+" 00:00:00";
             }
-    List<Map<String, Object>> siteDataList=siteChartService.findSiteChartByTimeElement(startTime,endTime,queryElment);
+    List<Map<String, Object>> gridDataList=gridChartService.findGridChartByTimeElement(startTime,endTime,queryElment);
         DateFormat sdf1 = new SimpleDateFormat("yyyy年MM月dd日");
         DateFormat sdf2 = new SimpleDateFormat("yyyy年MM月dd日 HH时");
         String strMessage=startTime.substring(0,10) + "～" + endTime.substring(0,10);
@@ -57,12 +57,12 @@ public class SiteChartController {
         List  jsonDay=new ArrayList();
         List jsonNum=new ArrayList<>();
         List jsonProcessTime=new ArrayList<>();
-        if(siteDataList.size()>0){
-            for( Map<String, Object> map:siteDataList){
+        if(gridDataList.size()>0){
+            for( Map<String, Object> map:gridDataList){
 
                 jsonTime.add(sdf1.format(map.get("data_time")));//资料时间点 年月日
                 jsonTime1.add(sdf2.format(map.get("data_time")));//资料时间  年月日 时
-                jsonNum.add(map.get("data_num"));//站点数
+                jsonNum.add(getFileNum((String)map.get("data_num")));//站点数
                 jsonProcessTime.add(map.get("retrieve_process_time"));//每类资料检索耗时
             }
             strMessage+="折线图如下：";
@@ -72,9 +72,20 @@ public class SiteChartController {
 
         jsonMap.put("jsonTime", jsonTime);//X轴数据
         jsonMap.put("jsonTime1", jsonTime1);//点的提示数据
-        jsonMap.put("jsonNum", jsonNum);//站点数
+        jsonMap.put("jsonNum", jsonNum);//文件数
         jsonMap.put("jsonProcessTime",jsonProcessTime);//检索耗时
         jsonMap.put("jsonMessage",strMessage);//span提示信息
         return jsonMap;
+    }
+
+    private int getFileNum(String dataNum){//计算格点文件数据
+        int fileNum=0;
+        if(dataNum!=null&&!"".equals(dataNum)){
+            String [] strArray=dataNum.split(",");
+            for(int i=0;i<strArray.length;i++){
+                fileNum+=Integer.parseInt(strArray[i]);
+            }
+        }
+        return fileNum;
     }
 }

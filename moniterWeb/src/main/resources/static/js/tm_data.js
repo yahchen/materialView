@@ -12,106 +12,106 @@ $(function(){
 
    toSiteChartDM1GC=function (){
           $("#main").empty();
-          $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>站点资料>地面资料>地面1小时观察资料>折线图</h3><div class='panel'><iframe id='iframe' src='/site_chart_view?data_logo=TM_RSURF_1h'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 550px;'  frameborder='0'></iframe></div></div></div>");
+          $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>站点资料>地面资料>地面1小时观察资料>折线图</h3><div class='panel'><iframe id='iframe' src='/site_chart_view?data_logo=TM_RSURF_1h'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 800px;'  frameborder='0'></iframe></div></div></div>");
     }
     toSiteChartDM1JS=function (){
            $("#main").empty();
-           $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>站点资料>地面资料>地面1小时降水资料>折线图</h3><div class='panel'><iframe id='iframe' src='/site_chart_view?data_logo=TM_RSURF_PRE_1h'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 550px;'  frameborder='0'></iframe></div></div></div>");
+           $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>站点资料>地面资料>地面1小时降水资料>折线图</h3><div class='panel'><iframe id='iframe' src='/site_chart_view?data_logo=TM_RSURF_PRE_1h'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 800px;'  frameborder='0'></iframe></div></div></div>");
      }
     toSiteChartDM3JS=function (){
            $("#main").empty();
-           $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>站点资料>地面资料>地面3小时降水资料>折线图</h3><div class='panel'><iframe id='iframe' src='/site_chart_view?data_logo=TM_RSURF_PRE_3h'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 550px;'  frameborder='0'></iframe></div></div></div>");
+           $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>站点资料>地面资料>地面3小时降水资料>折线图</h3><div class='panel'><iframe id='iframe' src='/site_chart_view?data_logo=TM_RSURF_PRE_3h'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 800px;'  frameborder='0'></iframe></div></div></div>");
      }
      toSiteChartDM6JS=function (){
            $("#main").empty();
-           $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>站点资料>地面资料>地面6小时降水资料>折线图</h3><div class='panel'><iframe id='iframe' src='/site_chart_view?data_logo=TM_RSURF_PRE_6h'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 550px;'  frameborder='0'></iframe></div></div></div>");
+           $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>站点资料>地面资料>地面6小时降水资料>折线图</h3><div class='panel'><iframe id='iframe' src='/site_chart_view?data_logo=TM_RSURF_PRE_6h'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 800px;'  frameborder='0'></iframe></div></div></div>");
      }
     toSiteChartDM12JS=function (){
            $("#main").empty();
-           $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>站点资料>地面资料>地面12小时降水资料>折线图</h3><div class='panel'><iframe id='iframe' src='/site_chart_view?data_logo=TM_RSURF_PRE_12h'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 550px;'  frameborder='0'></iframe></div></div></div>");
+           $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>站点资料>地面资料>地面12小时降水资料>折线图</h3><div class='panel'><iframe id='iframe' src='/site_chart_view?data_logo=TM_RSURF_PRE_12h'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 800px;'  frameborder='0'></iframe></div></div></div>");
      }
      toSiteChartDM24JS=function (){
            $("#main").empty();
-           $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>站点资料>地面资料>地面24小时降水资料>折线图</h3><div class='panel'><iframe id='iframe' src='/site_chart_view?data_logo=TM_RSURF_PRE_24h'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 550px;'  frameborder='0'></iframe></div></div></div>");
+           $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>站点资料>地面资料>地面24小时降水资料>折线图</h3><div class='panel'><iframe id='iframe' src='/site_chart_view?data_logo=TM_RSURF_PRE_24h'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 800px;'  frameborder='0'></iframe></div></div></div>");
      }
 
    toGridMatrixWendu01=function (){
           $("#main").empty();
-          $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>格点资料>欧洲中心格点场资料>欧洲中心数值预报产品-低分辨率-全球-温度>矩阵图</h3><div class='panel'><iframe id='iframe' src='/grid_matrix_view?data_logo=TM_GRID_ECMWF_T'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 550px;'  frameborder='0'></iframe></div></div></div>");
+          $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>格点资料>欧洲中心格点场资料>欧洲中心数值预报产品-低分辨率-全球-温度>矩阵图</h3><div class='panel'><iframe id='iframe' src='/grid_matrix_view?data_logo=TM_GRID_ECMWF_T'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 600px;'  frameborder='0'></iframe></div></div></div>");
     }
     toGridChartWendu01=function (){
           $("#main").empty();
-          $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>格点资料>欧洲中心格点场资料>欧洲中心数值预报产品-低分辨率-全球-温度>折线图</h3><div class='panel'><iframe id='iframe' src='/site_chart_view?data_logo=TM_GRID_ECMWF_T'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 550px;'  frameborder='0'></iframe></div></div></div>");
+          $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>格点资料>欧洲中心格点场资料>欧洲中心数值预报产品-低分辨率-全球-温度>折线图</h3><div class='panel'><iframe id='iframe' src='/grid_chart_view?data_logo=TM_GRID_ECMWF_T'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 800px;'  frameborder='0'></iframe></div></div></div>");
     }
 
     toGridMatrixGaodu01=function (){
           $("#main").empty();
-          $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>格点资料>欧洲中心格点场资料>欧洲中心数值预报产品-低分辨率-全球-位势高度>矩阵图</h3><div class='panel'><iframe id='iframe' src='/grid_matrix_view?data_logo=TM_GRID_ECMWF_H'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 550px;'  frameborder='0'></iframe></div></div></div>");
+          $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>格点资料>欧洲中心格点场资料>欧洲中心数值预报产品-低分辨率-全球-位势高度>矩阵图</h3><div class='panel'><iframe id='iframe' src='/grid_matrix_view?data_logo=TM_GRID_ECMWF_H'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 600px;'  frameborder='0'></iframe></div></div></div>");
      }
      toGridChartGaodu01=function (){
                $("#main").empty();
-               $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>格点资料>欧洲中心格点场资料>欧洲中心数值预报产品-低分辨率-全球-位势高度>折线图</h3><div class='panel'><iframe id='iframe' src='/site_chart_view?data_logo=TM_GRID_ECMWF_H'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 550px;'  frameborder='0'></iframe></div></div></div>");
+               $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>格点资料>欧洲中心格点场资料>欧洲中心数值预报产品-低分辨率-全球-位势高度>折线图</h3><div class='panel'><iframe id='iframe' src='/grid_chart_view?data_logo=TM_GRID_ECMWF_H'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 800px;'  frameborder='0'></iframe></div></div></div>");
           }
      toGridMatrixUfeng01=function (){
           $("#main").empty();
-          $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>格点资料>欧洲中心格点场资料>欧洲中心数值预报产品-低分辨率-全球-u风>矩阵图</h3><div class='panel'><iframe id='iframe' src='/grid_matrix_view?data_logo=TM_GRID_ECMWF_U'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 550px;'  frameborder='0'></iframe></div></div></div>");
+          $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>格点资料>欧洲中心格点场资料>欧洲中心数值预报产品-低分辨率-全球-u风>矩阵图</h3><div class='panel'><iframe id='iframe' src='/grid_matrix_view?data_logo=TM_GRID_ECMWF_U'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 600px;'  frameborder='0'></iframe></div></div></div>");
      }
      toGridChartUfeng01=function (){
                $("#main").empty();
-               $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>格点资料>欧洲中心格点场资料>欧洲中心数值预报产品-低分辨率-全球-u风>折线图</h3><div class='panel'><iframe id='iframe' src='/site_chart_view?data_logo=TM_GRID_ECMWF_U'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 550px;'  frameborder='0'></iframe></div></div></div>");
+               $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>格点资料>欧洲中心格点场资料>欧洲中心数值预报产品-低分辨率-全球-u风>折线图</h3><div class='panel'><iframe id='iframe' src='/grid_chart_view?data_logo=TM_GRID_ECMWF_U'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 800px;'  frameborder='0'></iframe></div></div></div>");
           }
 
     toGridMatrixVfeng01 = function(){
           $("#main").empty();
-          $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>格点资料>欧洲中心格点场资料>欧洲中心数值预报产品-低分辨率-全球-v风>矩阵图</h3><div class='panel'><iframe id='iframe' src='/grid_matrix_view?data_logo=TM_GRID_ECMWF_V'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 550px;'  frameborder='0'></iframe></div></div></div>");
+          $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>格点资料>欧洲中心格点场资料>欧洲中心数值预报产品-低分辨率-全球-v风>矩阵图</h3><div class='panel'><iframe id='iframe' src='/grid_matrix_view?data_logo=TM_GRID_ECMWF_V'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 600px;'  frameborder='0'></iframe></div></div></div>");
     }
     toGridChartVfeng01 = function(){
               $("#main").empty();
-              $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>格点资料>欧洲中心格点场资料>欧洲中心数值预报产品-低分辨率-全球-v风>折线图</h3><div class='panel'><iframe id='iframe' src='/site_chart_view?data_logo=TM_GRID_ECMWF_V'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 550px;'  frameborder='0'></iframe></div></div></div>");
+              $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>格点资料>欧洲中心格点场资料>欧洲中心数值预报产品-低分辨率-全球-v风>折线图</h3><div class='panel'><iframe id='iframe' src='/grid_chart_view?data_logo=TM_GRID_ECMWF_V'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 800px;'  frameborder='0'></iframe></div></div></div>");
      }
 
    toGridMatrixJS02=function (){
           $("#main").empty();
-          $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>格点资料>日本中心格点场资料>日本数值预报产品-低分辨率-远东区域（中国）降水>矩阵图</h3><div class='panel'><iframe id='iframe' src='/grid_matrix_view?data_logo=TM_GRID_JAPAN_PRE'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 550px;'  frameborder='0'></iframe></div></div></div>");
+          $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>格点资料>日本中心格点场资料>日本数值预报产品-低分辨率-远东区域（中国）降水>矩阵图</h3><div class='panel'><iframe id='iframe' src='/grid_matrix_view?data_logo=TM_GRID_JAPAN_PRE'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 600px;'  frameborder='0'></iframe></div></div></div>");
     }
     toGridChartJS02=function (){
               $("#main").empty();
-              $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>格点资料>日本中心格点场资料>日本数值预报产品-低分辨率-远东区域（中国）降水>折线图</h3><div class='panel'><iframe id='iframe' src='/site_chart_view?data_logo=TM_GRID_JAPAN_PRE'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 550px;'  frameborder='0'></iframe></div></div></div>");
+              $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>格点资料>日本中心格点场资料>日本数值预报产品-低分辨率-远东区域（中国）降水>折线图</h3><div class='panel'><iframe id='iframe' src='/grid_chart_view?data_logo=TM_GRID_JAPAN_PRE'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 800px;'  frameborder='0'></iframe></div></div></div>");
     }
 
     toGridMatrixWendu02=function (){
           $("#main").empty();
-          $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>格点资料>日本中心格点场资料>日本数值预报产品-低分辨率-北半球-温度>矩阵图</h3><div class='panel'><iframe id='iframe' src='/grid_matrix_view?data_logo=TM_GRID_JAPAN_T'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 550px;'  frameborder='0'></iframe></div></div></div>");
+          $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>格点资料>日本中心格点场资料>日本数值预报产品-低分辨率-北半球-温度>矩阵图</h3><div class='panel'><iframe id='iframe' src='/grid_matrix_view?data_logo=TM_GRID_JAPAN_T'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 600px;'  frameborder='0'></iframe></div></div></div>");
      }
      toGridChartWendu02=function (){
                $("#main").empty();
-               $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>格点资料>日本中心格点场资料>日本数值预报产品-低分辨率-北半球-温度>折线图</h3><div class='panel'><iframe id='iframe' src='/site_chart_view?data_logo=TM_GRID_JAPAN_T'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 550px;'  frameborder='0'></iframe></div></div></div>");
+               $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>格点资料>日本中心格点场资料>日本数值预报产品-低分辨率-北半球-温度>折线图</h3><div class='panel'><iframe id='iframe' src='/grid_chart_view?data_logo=TM_GRID_JAPAN_T'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 800px;'  frameborder='0'></iframe></div></div></div>");
       }
     toGridMatrixGaodu02=function (){
           $("#main").empty();
-          $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>格点资料>日本中心格点场资料>日本中心数值预报产品-低分辨率-全球-位势高度>矩阵图</h3><div class='panel'><iframe id='iframe' src='/grid_matrix_view?data_logo=TM_GRID_JAPAN_H'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 550px;'  frameborder='0'></iframe></div></div></div>");
+          $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>格点资料>日本中心格点场资料>日本中心数值预报产品-低分辨率-全球-位势高度>矩阵图</h3><div class='panel'><iframe id='iframe' src='/grid_matrix_view?data_logo=TM_GRID_JAPAN_H'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 600px;'  frameborder='0'></iframe></div></div></div>");
      }
      toGridChartGaodu02=function (){
                $("#main").empty();
-               $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>格点资料>日本中心格点场资料>日本中心数值预报产品-低分辨率-全球-位势高度>折线图</h3><div class='panel'><iframe id='iframe' src='/site_chart_view?data_logo=TM_GRID_JAPAN_H'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 550px;'  frameborder='0'></iframe></div></div></div>");
+               $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>格点资料>日本中心格点场资料>日本中心数值预报产品-低分辨率-全球-位势高度>折线图</h3><div class='panel'><iframe id='iframe' src='/grid_chart_view?data_logo=TM_GRID_JAPAN_H'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 800px;'  frameborder='0'></iframe></div></div></div>");
           }
 
      toGridMatrixUfeng02=function (){
           $("#main").empty();
-          $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>格点资料>日本中心格点场资料>日本数值预报产品-低分辨率-北半球-u风>矩阵图</h3><div class='panel'><iframe id='iframe' src='/grid_matrix_view?data_logo=TM_GRID_JAPAN_U'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 550px;'  frameborder='0'></iframe></div></div></div>");
+          $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>格点资料>日本中心格点场资料>日本数值预报产品-低分辨率-北半球-u风>矩阵图</h3><div class='panel'><iframe id='iframe' src='/grid_matrix_view?data_logo=TM_GRID_JAPAN_U'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 600px;'  frameborder='0'></iframe></div></div></div>");
      }
      toGridChartUfeng02=function (){
                $("#main").empty();
-               $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>格点资料>日本中心格点场资料>日本数值预报产品-低分辨率-北半球-u风>折线图</h3><div class='panel'><iframe id='iframe' src='/site_chart_view?data_logo=TM_GRID_JAPAN_U'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 550px;'  frameborder='0'></iframe></div></div></div>");
+               $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>格点资料>日本中心格点场资料>日本数值预报产品-低分辨率-北半球-u风>折线图</h3><div class='panel'><iframe id='iframe' src='/grid_chart_view?data_logo=TM_GRID_JAPAN_U'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 800px;'  frameborder='0'></iframe></div></div></div>");
           }
 
     toGridMatrixVfeng02 = function(){
           $("#main").empty();
-          $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>格点资料>日本中心格点场资料>日本数值预报产品-低分辨率-北半球-v风>矩阵图</h3><div class='panel'><iframe id='iframe' src='/grid_matrix_view?data_logo=TM_GRID_JAPAN_V'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 550px;'  frameborder='0'></iframe></div></div></div>");
+          $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>格点资料>日本中心格点场资料>日本数值预报产品-低分辨率-北半球-v风>矩阵图</h3><div class='panel'><iframe id='iframe' src='/grid_matrix_view?data_logo=TM_GRID_JAPAN_V'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 600px;'  frameborder='0'></iframe></div></div></div>");
     }
     toGridChartVfeng02 = function(){
           $("#main").empty();
-          $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>格点资料>日本中心格点场资料>日本数值预报产品-低分辨率-北半球-v风>折线图</h3><div class='panel'><iframe id='iframe' src='/site_chart_view?data_logo=TM_GRID_JAPAN_V'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 550px;'  frameborder='0'></iframe></div></div></div>");
+          $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>格点资料>日本中心格点场资料>日本数值预报产品-低分辨率-北半球-v风>折线图</h3><div class='panel'><iframe id='iframe' src='/grid_chart_view?data_logo=TM_GRID_JAPAN_V'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 800px;'  frameborder='0'></iframe></div></div></div>");
     }
 
     $('a.tl_type').click(function (event) {

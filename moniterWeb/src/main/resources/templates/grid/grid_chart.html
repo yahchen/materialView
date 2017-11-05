@@ -48,7 +48,7 @@
 		</div>
     <div>
 	<!-- MAIN CONTENT -->
-	<div id="main1" style="height:400px"></div>
+	<div id="main1" style="height:500px"></div>
 	<!-- END MAIN CONTENT -->
 </div>
     </div>
@@ -71,7 +71,7 @@
 		 	type:"GET",
 		 	dataType:"json",
 		 	cache:false,
-		 	url:"/findSiteChartByTimeElement",
+		 	url:"/findGridChartByTimeElement",
 		 	data:queryCond,
 		 	beforeSend:function(){
 		 		$("#message").html("正在查询数据，请稍后...");
@@ -82,18 +82,26 @@
 		 		//alert(json.jsonDay);
 		 	// 基于准备好的dom，初始化echarts图表
 				var myChart = echarts.init(document.getElementById('main1'));
+
 				option = {
-					    title : {//标题组件
-					        //text: '观测到的站点数目（个）',//主标题
-					        subtext: '观测到的站点数目（个）'//子标题
-					    },
+					    title : [{//标题组件
+					        left:'center',
+					        text: '检索到的格点文件数目折线图',//主标题
+					        subtext: '检索到的文件数目（个）'//子标题
+					    },{
+                             top: '55%',
+                             left: 'center',
+                             text: '检索响应时间折线图',
+                             subtext: '检索响应时间（s）'//子标题
+                         }],
 
 					    tooltip : {//提示框组件
 					        trigger: 'axis'   //触发类型，默认数据触发，可选为：’item’ | ‘axis’ ，提示框显示类型   item表示该条线的值，axis表示不同曲线中，在同一x值时候的所有y值
 					    },
 
 					    legend: {//图例逐渐
-					        data:['站点个数']
+					        data:['格点文件个数','响应时间'],
+					         left:'left'
 					    },
 
 					    toolbox: {// 右上角显示的工具条
@@ -111,23 +119,33 @@
 					        {
 					            type : 'category',
 					            boundaryGap : false,
-					            data : json.jsonTime,
-					            axisLabel:{
-					            	interval:0,
-					            	rotate:-30,
-					            }
-					        }
+					            data : json.jsonTime1
+
+					        },{
+					            type : 'category',
+					            boundaryGap : false,
+                                data: json.jsonTime1,
+                                gridIndex: 1
+                              }
 					    ],
 					    yAxis : [//直角坐标系 grid 中的 y 轴  纵轴的值根据实际值自动变化的
 					        {
 					            axisLabel : {
 					                formatter: '{value} 个'
 					            }
-					        }
+					        },{
+                                  formatter: '{value} 秒',
+                                 gridIndex: 1
+                              }
 					    ],
+					    grid: [{
+                                 bottom: '60%'
+                              }, {
+                                 top: '60%'
+                               }],
 					    series : [// 系列列表
 					        {
-					            name:'站点个数',
+					            name:'格点文件个数',
 					            type:'line',
 					            data:json.jsonNum,
 					            markPoint : {//标记点  标记两个点
@@ -137,6 +155,19 @@
 					                ]
 					            },
 					        }
+					        , {
+                            name:'响应时间',
+                             type: 'line',
+                             data: json.jsonProcessTime,
+                              markPoint : {//标记点  标记两个点
+					                data : [
+					                    {type : 'max', name: '最大值'},
+					                    {type : 'min', name: '最小值'}
+					                ]
+					            },
+                             xAxisIndex: 1,
+                             yAxisIndex: 1
+                         }
 					    ]
 					};
 				// 为echarts对象加载数据
@@ -163,30 +194,37 @@
 		 	type:"GET",
 		 	dataType:"json",
 		 	cache:false,
-		 	url:"/findSiteChartByTimeElement",
+		 	url:"/findGridChartByTimeElement",
 		 	data:queryCond,
 		 	beforeSend:function(){
 		 		$("#message").html("正在查询数据，请稍后...");
 		 		return true;
 		 	},
 		 	success:function(json){
-		 		//alert(json.jsonTime);
+		 		//alert(json.jsonTime1);
 		 		//alert(json.jsonDay);
 		 	// 基于准备好的dom，初始化echarts图表
 				var myChart = echarts.init(document.getElementById('main1'));
 
 				option = {
-					    title : {//标题组件
-					        //text: '观测到的站点数目（个）',//主标题
-					        subtext: '观测到的站点数目（个）'//子标题
-					    },
+					    title : [{//标题组件
+					        left:'center',
+					        text: '检索到的格点文件数目折线图',//主标题
+					        subtext: '检索到的文件数目（个）'//子标题
+					    },{
+                             top: '55%',
+                             left: 'center',
+                             text: '检索响应时间折线图',
+                             subtext: '检索响应时间（s）'//子标题
+                         }],
 
 					    tooltip : {//提示框组件
 					        trigger: 'axis'   //触发类型，默认数据触发，可选为：’item’ | ‘axis’ ，提示框显示类型   item表示该条线的值，axis表示不同曲线中，在同一x值时候的所有y值
 					    },
 
 					    legend: {//图例逐渐
-					        data:['站点个数']
+					        data:['格点文件个数','响应时间'],
+					         left:'left'
 					    },
 
 					    toolbox: {// 右上角显示的工具条
@@ -199,31 +237,38 @@
 					            saveAsImage : {show: true}
 					        }
 					    },
-
 					    calculable : true,//是否启用拖拽重计算特性，默认关闭，
-
 					    xAxis : [//直角坐标系 grid 中的 x 轴
 					        {
 					            type : 'category',
 					            boundaryGap : false,
-					            data : json.jsonTime,
-					            axisLabel:{
-					            	interval:0,
-					            	rotate:-30,
-					            }
-					        }
-					    ],
+					            data : json.jsonTime1
 
+					        },{
+					            type : 'category',
+					            boundaryGap : false,
+                                data: json.jsonTime1,
+                                gridIndex: 1
+                              }
+					    ],
 					    yAxis : [//直角坐标系 grid 中的 y 轴  纵轴的值根据实际值自动变化的
 					        {
 					            axisLabel : {
 					                formatter: '{value} 个'
 					            }
-					        }
+					        },{
+                                  formatter: '{value} 秒',
+                                 gridIndex: 1
+                              }
 					    ],
+					    grid: [{
+                                 bottom: '60%'
+                              }, {
+                                 top: '60%'
+                               }],
 					    series : [// 系列列表
 					        {
-					            name:'站点个数',
+					            name:'格点文件个数',
 					            type:'line',
 					            data:json.jsonNum,
 					            markPoint : {//标记点  标记两个点
@@ -232,8 +277,20 @@
 					                    {type : 'min', name: '最小值'}
 					                ]
 					            },
-
 					        }
+					        , {
+                            name:'响应时间',
+                             type: 'line',
+                             data: json.jsonProcessTime,
+                              markPoint : {//标记点  标记两个点
+					                data : [
+					                    {type : 'max', name: '最大值'},
+					                    {type : 'min', name: '最小值'}
+					                ]
+					            },
+                             xAxisIndex: 1,
+                             yAxisIndex: 1
+                         }
 					    ]
 					};
 				// 为echarts对象加载数据

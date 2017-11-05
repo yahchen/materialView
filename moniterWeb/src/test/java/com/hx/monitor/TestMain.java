@@ -8,7 +8,10 @@ import org.thymeleaf.util.StringUtils;
 public class TestMain {
 
     public static void main(String [] args){
-        System.out.println(SexEnum.getSexEnumByCode("M"));
+        //System.out.println(SexEnum.getSexEnumByCode("M"));
+
+        String s="1987年08月32日 33时";
+        System.out.println(s.substring(0,11));
     }
 }
 
