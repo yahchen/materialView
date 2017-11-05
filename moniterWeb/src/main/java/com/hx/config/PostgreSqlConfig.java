@@ -8,6 +8,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import javax.sql.DataSource;
 
@@ -38,5 +39,15 @@ public class PostgreSqlConfig {
     @Bean(name = "postgresJdbcTemplate")
     public JdbcTemplate postgresJdbcTemplate(@Qualifier("postgresDb") DataSource dsPostgres) {
         return new JdbcTemplate(dsPostgres);
+    }
+
+    /**
+     *
+     * @param dsPostgres
+     * @return
+     */
+    @Bean(name = "namedJdbcTemplate")
+    public NamedParameterJdbcTemplate postgresNamedJdbcTemplate(@Qualifier("postgresDb") DataSource dsPostgres) {
+        return new NamedParameterJdbcTemplate(dsPostgres);
     }
 }

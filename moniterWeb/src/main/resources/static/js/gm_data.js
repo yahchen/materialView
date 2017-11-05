@@ -15,6 +15,7 @@ $(function(){
     $('a.tl_type').click(function (event) {
         var pn = event.target.getAttribute("id");
         $("#navId").html("");
+        $("#navId").append(eval(pn));
         $('a.bin_map').click(binMapListener);
     });
 

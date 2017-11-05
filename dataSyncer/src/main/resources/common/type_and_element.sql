@@ -10,8 +10,7 @@ CREATE TABLE public.type_and_element_mapping
     element_type_comment character varying(255) COLLATE pg_catalog."default",
     quality_code character varying(200) COLLATE pg_catalog."default",
     quality_code_comment character varying(255) COLLATE pg_catalog."default",
-    id bigint NOT NULL,
-    CONSTRAINT type_and_element_mapping_pkey PRIMARY KEY (id)
+    id bigint NOT NULL
 )
 WITH (
     OIDS = FALSE

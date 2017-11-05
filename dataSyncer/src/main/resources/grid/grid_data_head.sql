@@ -27,8 +27,7 @@ CREATE TABLE public.grid_data_head
     site_type integer,
     elements character varying(30),
     validTime character varying(256),
-    fcstLevel character varying(30),
-    CONSTRAINT grid_data_head_pkey PRIMARY KEY (g_d_id)
+    fcstLevel character varying(30)
 )
 WITH (
     OIDS = FALSE

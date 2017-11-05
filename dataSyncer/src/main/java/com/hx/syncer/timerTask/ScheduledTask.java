@@ -13,6 +13,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * Created by yahchen on 2017/11/4.
@@ -28,13 +29,14 @@ public class ScheduledTask {
 
     //第一次延迟10秒执行，当执行完后1小时再执行
     @Scheduled(initialDelay = 5000, fixedDelay = 3600000)
-    public void inbound() {
+    public void syncGmSurfGl() {
         try {
             //遍历文件夹下面的文件
             List<Path> result = new LinkedList<Path>();
-            Files.walkFileTree(Paths.get(inBoundFilePath),new SiteDataFileVistor(result));
+            Pattern p = Pattern.compile("surf*gl");//test 阶段romove gm
+            Files.walkFileTree(Paths.get(inBoundFilePath),new SiteDataFileVistor(result,p));
             for(Path path:result){
-                siteDataTaskPool.run(path);
+                siteDataTaskPool.asyncGmSiteSurfGlData(path);
             }
         } catch (IOException e) {
             e.printStackTrace();

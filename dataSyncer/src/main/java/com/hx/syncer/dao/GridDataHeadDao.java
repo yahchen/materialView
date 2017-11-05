@@ -10,17 +10,5 @@ import java.util.List;
 /**
  * Created by yahchen on 2017/10/29.
  */
-@Repository
-public interface GridDataHeadDao extends JpaRepository<GridDataHeadDo,Long> {
-
-    GridDataHeadDo getOne(long var1);
-
-    List<GridDataHeadDo> findAll();
-
-    @Override
-    <S extends GridDataHeadDo> List<S> save(Iterable<S> iterable);
-
-    <S extends GridDataHeadDo> S save(S entity);
-
-    void deleteInBatch(Iterable<GridDataHeadDo> iterable);
+public interface GridDataHeadDao extends CustomRepository<GridDataHeadDo,Long> {
 }
