@@ -9,6 +9,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
@@ -16,8 +17,9 @@ import javax.sql.DataSource;
 /**
  * Created by wangyaohui on 2017/6/2.
  */
-@EnableJpaRepositories(basePackages = "com.hx.syncer.dao")
+@EnableJpaRepositories(basePackages = "com.hx.syncer.dao",repositoryFactoryBeanClass = com.hx.syncer.service.CustomRepositoryFactoryBean.class)
 @EntityScan(basePackages = "com.hx.syncer.bean")
+@EnableSpringDataWebSupport
 @Configuration
 public class PostgreSqlConfig {
 

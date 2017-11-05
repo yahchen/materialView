@@ -16,8 +16,7 @@ CREATE TABLE public.tm_site_surf_1h
     pre_1h double precision,
     tem_max double precision,
     tem_min double precision,
-    s_d_id bigint,
-    CONSTRAINT tm_site_surf_1h_pkey PRIMARY KEY (s_d_id)
+    s_d_id bigint
 )
 WITH (
     OIDS = FALSE

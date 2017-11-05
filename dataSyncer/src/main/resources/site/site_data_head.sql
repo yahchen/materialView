@@ -22,8 +22,7 @@ CREATE TABLE public.site_data_head
     system_name character varying(30) COLLATE pg_catalog."default",
     data_type integer,
     site_type integer,
-    return_abnormal_info character varying(60) COLLATE pg_catalog."default",
-    CONSTRAINT site_data_head_pkey PRIMARY KEY (s_d_id)
+    return_abnormal_info character varying(60) COLLATE pg_catalog."default"
 )
 WITH (
     OIDS = FALSE

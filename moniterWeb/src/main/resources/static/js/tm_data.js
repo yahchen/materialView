@@ -13,10 +13,10 @@ $(function(){
         var pn = event.target.getAttribute("id");
         $("#navId").html("");
         $("#navId").append(eval(pn));
-        if(event.target.getText() != '分布图')
-            $('.binMapChoice').hide();
-        $('a.bin_map').click(binMapListener);
-        $('a.bin_map').click(pullSelectVal());
+        // if(event.target.getText() != '分布图')
+        //     $('.binMapChoice').hide();
+        $('span.bin_map').click(binMapListener);
+        //$('a.bin_map').click(pullSelectVal());
     });
 
    toGridMatrixWendu01=function (){
