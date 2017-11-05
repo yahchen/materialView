@@ -1,7 +1,6 @@
 package com.hx.syncer.fileHandler;
 
 import com.hx.syncer.bean.SiteDataHeadDo;
-import com.hx.syncer.dao.CustomRepository;
 import com.hx.syncer.service.GridDataHeadService;
 import com.hx.syncer.service.SiteDataHeadService;
 import com.hx.syncer.util.PropertiesReflectUtil;
@@ -25,8 +24,6 @@ public class SiteDataTaskPool{
     private GridDataHeadService gridDataHeadService;
     @Autowired
     private SiteDataHeadService siteDataHeadService;
-    @Autowired
-    private CustomRepository customRepository;
     @Autowired
     private PropertiesReflectUtil propertiesReflectUtil;
 

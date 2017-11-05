@@ -9,22 +9,26 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.orm.jpa.JpaVendorAdapter;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by wangyaohui on 2017/6/2.
  */
-@EnableJpaRepositories(basePackages = "com.hx.syncer.dao",repositoryFactoryBeanClass = com.hx.syncer.service.CustomRepositoryFactoryBean.class)
+@EnableJpaRepositories("com.hx.syncer.dao")
 @EntityScan(basePackages = "com.hx.syncer.bean")
-@EnableSpringDataWebSupport
 @Configuration
 public class PostgreSqlConfig {
-
-    @Autowired
-    private ApplicationContext applicationContext;
 
     /**
      * 数据库配置，读取applicatioin.properties中前缀为spring.datasource的配置

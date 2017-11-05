@@ -13,11 +13,11 @@ import java.util.List;
 @Service
 public class GridDataHeadService implements DaoServiceImpl<GridDataHeadDo>{
     @Autowired
-    private GridDataHeadDao gridDataHeadDao;
+    private GridDataHeadDao GridDataHeadDao;
     @Override
     public boolean save(Iterable<GridDataHeadDo> entities) {
         if(null != entities && entities.iterator().hasNext()){
-            gridDataHeadDao.save(entities);
+            GridDataHeadDao.save(entities);
             return true;
         }
         return false;
@@ -26,7 +26,7 @@ public class GridDataHeadService implements DaoServiceImpl<GridDataHeadDo>{
     @Override
     public boolean saveOne(GridDataHeadDo entity) {
         if(null != entity){
-            gridDataHeadDao.save(entity);
+            GridDataHeadDao.save(entity);
             return true;
         }
         return false;
@@ -34,6 +34,6 @@ public class GridDataHeadService implements DaoServiceImpl<GridDataHeadDo>{
 
     @Override
     public List<GridDataHeadDo> findAll() {
-        return gridDataHeadDao.findAll();
+        return GridDataHeadDao.findAll();
     }
 }

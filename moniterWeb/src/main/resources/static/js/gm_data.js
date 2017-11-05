@@ -16,11 +16,16 @@ $(function(){
         var pn = event.target.getAttribute("id");
         $("#navId").html("");
         $("#navId").append(eval(pn));
+        if(event.target.getText() != '分布图')
+            $('.binMapChoice').hide();
         $('a.bin_map').click(binMapListener);
+        $('a.bin_map').click(pullSelectVal());
     });
 
     function binMapListener() {
-        $("#navId").append(eval(pn));
+        var dataType = $("#dataType").val();
+        var qualiteType = $("#qualiteType").val();
+        $('.binMapChoice').show();
         var zoom = 4;
         //初始化地图对象
         $("#customMap").html("");
@@ -32,7 +37,10 @@ $(function(){
             type: "post",
             async: true,
             url: "/getElements",
-            data: "",
+            data: {
+                dataType:dataType,
+                qualiteType:qualiteType
+            },
             dataType: "json",
             success: function(data) {
                 var pointArray = new Array();

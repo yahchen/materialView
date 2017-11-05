@@ -164,6 +164,29 @@
 					<h3 class="page-title">Elements</h3>
 					<div class="panel">
 						<div class="panel-heading">
+							<div class="binMapChoice" hidden="hidden">
+								<ul class="nav navbar-nav navbar-left">
+									<li class="" >
+										<strong>日期:</strong> <input class="inline laydate-icon" placeholder="请输入日期" id="start" style="width:200px; margin-right:10px;"/>
+									</li>
+									<li>
+										<strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;资料类别:&nbsp;</strong>
+										<select class="" id="dataType" name="dataType" onclick="">
+											<option value="0">无</option>
+											<option value="RM_RSURF_GL">RM_RSURF_GL</option>
+											<option value="RM_RSURF_CH">RM_RSURF_CH</option>
+											<option value="RM_RTEMP_GL">RM_RTEMP_GL</option>
+										</select>
+									</li>
+									<li>
+										<strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;要素类别:&nbsp;</strong>
+										<select class="" id="qualiteType" disabled="true">
+											<option value="0">无</option>
+										</select>
+									</li>
+								</ul>
+							</div>
+
 						</div>
 						<div class="panel-body">
 							<div id="customMap" width="100%"  border="0"  style="padding: 0px; width: 100%; height: 600px;">

@@ -21,9 +21,30 @@ $(function(){
         var pn = event.target.getAttribute("id");
         $("#navId").html("");
         $("#navId").append(eval(pn));
+        if(event.target.getText() != '分布图')
+            $('.binMapChoice').hide();
         $('a.bin_map').click(binMapListener);
     });
+    $('#dataType').click(pullSelectVal())
+    function pullSelectVal() {
+        var dataType = $("#dataType").val();
+        // $.ajax({
+        //     type: "post",
+        //     async: true,
+        //     url: "/getQualiteTypes",
+        //     data: {
+        //         dataType:dataType,
+        //     },
+        //     dataType: "json",
+        //     success: function(data) {
+        //
+        //     }
+        // });
+    }
     function binMapListener() {
+        var dataType = $("#dataType").val();
+        var qualiteType = $("#qualiteType").val();
+        $('.binMapChoice').show();
         var zoom = 4;
         //初始化地图对象
         $("#customMap").html("");
@@ -35,7 +56,10 @@ $(function(){
             type: "post",
             async: true,
             url: "/getElements",
-            data: "",
+            data: {
+                dataType:dataType,
+                qualiteType:qualiteType
+            },
             dataType: "json",
             success: function(data) {
                 var pointArray = new Array();

@@ -1,6 +1,7 @@
 package com.hx.syncer;
 
 import com.hx.syncer.bean.GridDataHeadDo;
+import com.hx.syncer.dao.GridDataHeadDao;
 import com.hx.syncer.service.GridDataHeadService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,11 +20,11 @@ import java.util.List;
 @SpringBootTest
 public class SqlTest {
     @Autowired
-    private GridDataHeadService gridDataHeadService;
+    private GridDataHeadDao gridDataHeadDao;
 
     @Test
     public void testSql(){
-        Assert.notNull(gridDataHeadService,"template is null");
+        Assert.notNull(gridDataHeadDao,"template is null");
         GridDataHeadDo entity = new GridDataHeadDo();
         Timestamp ts = new Timestamp(System.currentTimeMillis());
         entity.setData_code("232332");
@@ -50,14 +51,14 @@ public class SqlTest {
         entity.setSystem_name("sdds");
         entity.setSite_type(2);
         entity.setSys_conn_state("sd");
-        boolean resutl = gridDataHeadService.saveOne(entity);
-        Assert.isTrue(resutl);
+        Object resutl = gridDataHeadDao.save(entity);
+        Assert.notNull(resutl);
     }
 
     @Test
     public void query(){
-        List<GridDataHeadDo> ress = gridDataHeadService.findAll();
-        Assert.isNull(!ress.isEmpty());
+        List<GridDataHeadDo> ress = gridDataHeadDao.findAll();
+        Assert.notNull(ress);
     }
 }
 

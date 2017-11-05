@@ -10,13 +10,7 @@ import java.util.List;
 /**
  * Created by yahchen on 2017/11/4.
  */
-public interface SiteDataHeadDao extends CustomRepository<SiteDataHeadDo,Long> {
+@Repository
+public interface SiteDataHeadDao extends BaseRepository<SiteDataHeadDo,Long>{
 
-    SiteDataHeadDo getOne(long var1);
-
-    List<SiteDataHeadDo> findAll();
-
-    <S extends SiteDataHeadDo> List<S> save(Iterable<S> iterable);
-
-    <S extends SiteDataHeadDo> S save(S entity);
 }

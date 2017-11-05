@@ -16,6 +16,11 @@ public class MaterialViewController {
         return "index";
     }
 
+    @RequestMapping("/index")//对应url
+    public String index(){//参数可以选择性添加，不加也无所谓。如果添加后，框架会帮助自动注入。
+        return "index";
+    }
+
     @RequestMapping("/about")//对应url
     public String about(){//参数可以选择性添加，不加也无所谓。如果添加后，框架会帮助自动注入。
         // todo add mode kv
@@ -40,13 +45,4 @@ public class MaterialViewController {
         // todo add mode kv
         return "TMdata";
     }
-
-    @RequestMapping("/elements")//对应url
-    public String elements(){//参数可以选择性添加，不加也无所谓。如果添加后，框架会帮助自动注入。
-        // todo add mode kv
-        return "elements1";
-    }
-
-
-
 }

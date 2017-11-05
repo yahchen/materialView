@@ -1,8 +1,6 @@
 package com.hx.syncer.service;
 
-import com.hx.syncer.bean.GridDataHeadDo;
 import com.hx.syncer.bean.SiteDataHeadDo;
-import com.hx.syncer.dao.GridDataHeadDao;
 import com.hx.syncer.dao.SiteDataHeadDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
