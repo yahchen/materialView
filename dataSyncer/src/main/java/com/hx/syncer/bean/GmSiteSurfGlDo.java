@@ -1,37 +1,83 @@
 package com.hx.syncer.bean;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 /**
  * Created by yahchen on 2017/10/31.
  */
+@Entity
+@Table(name = "gm_site_surf_gl")
 public class GmSiteSurfGlDo {
+    @Column(name = "station_id_d",nullable=false)
     private float station_id_d;
+    @Column(name = "lat",nullable=false)
     private float lat ;
+    @Column(name = "lon",nullable=false)
     private float lon ;
+    @Column(name = "alti",nullable=false)
     private float alti ;
+    @Column(name = "station_type",nullable=false)
     private float station_type ;
+    @Column(name = "day",nullable=false)
     private float day ;
+    @Column(name = "hour",nullable=false)
     private float hour ;
+    @Column(name = "min",nullable=false)
     private float min ;
+    @Column(name = "prs_sea",nullable=false)
     private float prs_sea ;
+    @Column(name = "tem",nullable=false)
     private float tem ;
+    @Column(name = "prs",nullable=false)
     private float prs ;
+    @Column(name = "dpt",nullable=false)
     private float dpt ;
+    @Column(name = "win_d",nullable=false)
     private float win_d ;
+    @Column(name = "win_s",nullable=false)
     private float win_s ;
+    @Column(name = "pre_1h",nullable=false)
     private float pre_1h ;
+    @Column(name = "pre_6h",nullable=false)
     private float pre_6h ;
+    @Column(name = "pre_24h",nullable=false)
     private float pre_24h ;
+    @Column(name = "q_prs",nullable=false)
     private float q_prs ;
+    @Column(name = "q_prs_sea",nullable=false)
     private float q_prs_sea ;
+    @Column(name = "q_win_d",nullable=false)
     private float q_win_d ;
+    @Column(name = "q_win_s",nullable=false)
     private float q_win_s ;
+    @Column(name = "q_tem",nullable=false)
     private float q_tem ;
+    @Column(name = "q_dpt",nullable=false)
     private float q_dpt ;
+    @Column(name = "q_pre_1h",nullable=false)
     private float q_pre_1h ;
+    @Column(name = "q_pre_6h",nullable=false)
     private float q_pre_6h ;
+    @Column(name = "q_pre_24h",nullable=false)
     private float q_pre_24h ;
+    @Column(name = "station_id_c",nullable=false)
     private float station_id_c ;
+    @Column(name = "s_d_id",nullable=false)
     private long s_d_id;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    @javax.persistence.Id
+    @Column(name="id", unique=true, nullable=false, insertable=true, updatable=false, precision=20, scale=0)
+    private long id;
 
     public float getStation_id_d() {
         return station_id_d;

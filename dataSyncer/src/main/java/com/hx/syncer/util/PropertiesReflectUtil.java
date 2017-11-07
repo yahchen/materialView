@@ -14,27 +14,31 @@ import java.sql.Timestamp;
 public class PropertiesReflectUtil {
 
     public void autowiredProperty(Object o,Class cls,String k,String v){
+        if(StringUtils.isEmpty(k) || StringUtils.isEmpty(v))
+            return;
         Method[] ms = cls.getMethods();
         try {
             for(Method m:ms){
                 String mName = m.getName().toLowerCase();
                 if(mName.startsWith("set") && mName.endsWith(k.toLowerCase())){
                     String type = m.getParameterTypes()[0].getSimpleName();
-                    if(type.equals("long")){
+                    if(type.equals("float")){
+                        float vf = StringUtils.isEmpty(v)?0f:Float.valueOf(v);
+                        m.invoke(o, vf);
+                    }
+                    else if(type.equals("long")){
                         long vl = StringUtils.isEmpty(v)?0L:Long.valueOf(v);
                         m.invoke(o, vl);
                     }else if(type.equals("int")){
                         int vi = StringUtils.isEmpty(v)?0:Integer.valueOf(v);
                         m.invoke(o, vi);
-                    }else if(type.equals("double")){
-                        double vd = StringUtils.isEmpty(v)?0:Double.valueOf(v);
-                        m.invoke(o, vd);
                     }else if(type.equals("Timestamp")){
                         Timestamp vd = StringUtils.isEmpty(v)?new Timestamp(System.currentTimeMillis()): Timestamp.valueOf(v);
                         m.invoke(o, vd);
                     }else {
                         m.invoke(o, v);
                     }
+                    return;
                 }
             }
         }catch (Exception e){

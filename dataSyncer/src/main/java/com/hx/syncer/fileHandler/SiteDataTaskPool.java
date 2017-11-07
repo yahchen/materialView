@@ -1,19 +1,26 @@
 package com.hx.syncer.fileHandler;
 
+import com.hx.syncer.bean.GmSiteSurfGlDo;
 import com.hx.syncer.bean.SiteDataHeadDo;
+import com.hx.syncer.dao.GmSiteSurfGlDao;
 import com.hx.syncer.service.GridDataHeadService;
 import com.hx.syncer.service.SiteDataHeadService;
 import com.hx.syncer.util.PropertiesReflectUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.io.BufferedReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.regex.Pattern;
 
 /**
  * Created by yahchen on 2017/11/4.
@@ -21,39 +28,67 @@ import java.util.List;
 @Service
 public class SiteDataTaskPool{
     @Autowired
-    private GridDataHeadService gridDataHeadService;
-    @Autowired
     private SiteDataHeadService siteDataHeadService;
+    @Autowired
+    private GmSiteSurfGlDao gmSiteSurfGlDao;
     @Autowired
     private PropertiesReflectUtil propertiesReflectUtil;
 
+    private AtomicLong atomId = new AtomicLong(1);
+    private AtomicLong atomSid = new AtomicLong(100);
+
+
     @Async
     public void asyncGmSiteSurfGlData(Path path) {
-        List<String> proNames = new ArrayList<>();
         try {
             SiteDataHeadDo siteDataHeadDo = new SiteDataHeadDo();
+            List<GmSiteSurfGlDo> gmSiteSurfGlDoList = new ArrayList<>();
+            GmSiteSurfGlDo gmSiteSurfGlDo = null;
+            Pattern pattern = Pattern.compile("\\{|\\}");
+            List<String> attrList = new ArrayList<>();
+            atomSid.incrementAndGet();
             BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8);
             String str = null;
             int i = 0;
             while ((str = reader.readLine()) != null) {
                 String[] kv = str.split(":");
-                System.out.println("---------------------"+kv[0]);
-//                if(null == kv || 2 != kv.length)
-//                    continue;
-//                if(str.contains("element")){
-//
-//                }else{
-//                    propertiesReflectUtil.autowiredProperty(siteDataHeadDo,siteDataHeadDo.getClass(),kv[0],kv[1]);
-//                }
-
-
-
-
-
-
+                if(str.trim().equals("") || 2 != kv.length || pattern.matcher(str).find())
+                    continue;
+                if(kv[0].contains("elements_value")){
+                    String[] rows = kv[1].replace("\"","").trim().split(";");
+                    for(String row:rows){
+                        asyncSaveSiteSurfData(row,attrList);
+                    }
+                    continue;
+                }
+                if(kv[0].contains("element")){
+                    String[] attrs = kv[1].replace("\"","").trim().split(",");
+                    for(int j = 0;j<attrs.length;j++){
+                        attrList.add(attrs[j]);
+                    }
+                }else {
+                    String name = kv[0].replace("\"","").trim();
+                    String value = kv[1].replace("\"","").trim();
+                    propertiesReflectUtil.autowiredProperty(siteDataHeadDo,siteDataHeadDo.getClass(),name,value);
+                }
             }
+            reader.close();
+            siteDataHeadDo.setS_d_id(atomSid.get());
+            siteDataHeadService.saveOne(siteDataHeadDo);
         }catch (Exception e){
             System.out.println(e);
         }
+    }
+
+    @Async
+    public void asyncSaveSiteSurfData(String row,List<String> attrList){
+        String[] vs = row.split(",");
+        GmSiteSurfGlDo gmSiteSurfGlDo = new GmSiteSurfGlDo();
+        for(int k=0;k<vs.length;k++){
+            propertiesReflectUtil.autowiredProperty(gmSiteSurfGlDo,gmSiteSurfGlDo.getClass(),attrList.get(k),vs[k]);
+        }
+        gmSiteSurfGlDo.setId(atomId.incrementAndGet());
+        gmSiteSurfGlDo.setS_d_id(atomSid.get());
+        gmSiteSurfGlDao.save(gmSiteSurfGlDo);
     }
 }

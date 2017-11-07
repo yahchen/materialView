@@ -4,6 +4,7 @@ import com.hx.syncer.fileHandler.SiteDataFileVistor;
 import com.hx.syncer.fileHandler.SiteDataTaskPool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Scope;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +34,7 @@ public class ScheduledTask {
         try {
             //遍历文件夹下面的文件
             List<Path> result = new LinkedList<Path>();
-            Pattern p = Pattern.compile("surf*gl");//test 阶段romove gm
+            Pattern p = Pattern.compile("surf_gl*");//test 阶段romove gm
             Files.walkFileTree(Paths.get(inBoundFilePath),new SiteDataFileVistor(result,p));
             for(Path path:result){
                 siteDataTaskPool.asyncGmSiteSurfGlData(path);

@@ -20,8 +20,8 @@ public class SiteDataFileVistor extends SimpleFileVisitor<Path> {
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs){
-        String fileName = file.getFileName().toString();
-        if(fileName.endsWith(".json") && pattern.matcher(fileName.toLowerCase()).find()){
+        String fileName = file.getFileName().toString().toLowerCase();
+        if(fileName.endsWith(".json") && pattern.matcher(fileName).find()){
             result.add(file);
         }
         return FileVisitResult.CONTINUE;
