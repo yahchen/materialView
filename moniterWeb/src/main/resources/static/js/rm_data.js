@@ -28,18 +28,22 @@ $(function(){
     $('#dataType').click(pullSelectVal())
     function pullSelectVal() {
         var dataType = $("#dataType").val();
-        // $.ajax({
-        //     type: "post",
-        //     async: true,
-        //     url: "/getQualiteTypes",
-        //     data: {
-        //         dataType:dataType,
-        //     },
-        //     dataType: "json",
-        //     success: function(data) {
-        //
-        //     }
-        // });
+        $.ajax({
+            type: "post",
+            async: true,
+            url: "/getQualiteTypes",
+            data: {
+                dataType:dataType,
+            },
+            dataType: "json",
+            success: function(data) {
+                var options = "";
+                for(i in data){
+                    options += "<option>" + data[i] + "</option>"
+                }
+                $("#qualiteType").append(options);
+            }
+        });
     }
     function binMapListener() {
         var dataType = $("#dataType").val();

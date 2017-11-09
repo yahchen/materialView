@@ -42,6 +42,13 @@ public class ObtainElementsController {
         return binMapDataService.queryBinMapData(table,st,qualiteType);
     }
 
+    @RequestMapping("/getQualiteTypes")
+    @ResponseBody
+    public List<String> getQualiteTypes(HttpServletRequest request){
+        String dataType = request.getParameter("dataType");
+        return binMapDataService.queryBinQualiteTypeData("",dataType);
+    }
+
     private String convertDataType2Table(String dataType) {
         if(!StringUtils.isEmpty(dataType)){
             if("0".equals(dataType))
