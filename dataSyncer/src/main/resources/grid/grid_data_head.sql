@@ -11,7 +11,7 @@ CREATE TABLE public.grid_data_head
     retrieve_start_time timestamp without time zone,
     retrieve_end_time timestamp without time zone,
     retrieve_process_time double precision,
-    data_time timestamp without time zone,
+    data_time character varying(120) COLLATE pg_catalog."default",
     file_path character varying(150) COLLATE pg_catalog."default",
     data_start_time timestamp without time zone,
     data_end_time timestamp without time zone,
@@ -19,7 +19,11 @@ CREATE TABLE public.grid_data_head
     gridfile_state character varying(256),
     longitude_latitude_scope character varying(30) COLLATE pg_catalog."default",
     sys_conn_state character varying(10) COLLATE pg_catalog."default",
+<<<<<<< HEAD
     data_num character varying(30),
+=======
+    data_num character varying(120) COLLATE pg_catalog."default",
+>>>>>>> wyh_dev
     return_abnormal_info character varying(256) COLLATE pg_catalog."default",
     user_id character varying(30) COLLATE pg_catalog."default",
     system_name character varying(30) COLLATE pg_catalog."default",
@@ -27,8 +31,7 @@ CREATE TABLE public.grid_data_head
     site_type integer,
     elements character varying(30),
     validTime character varying(256),
-    fcstLevel character varying(30),
-    CONSTRAINT grid_data_head_pkey PRIMARY KEY (g_d_id)
+    fcstLevel character varying(30)
 )
 WITH (
     OIDS = FALSE

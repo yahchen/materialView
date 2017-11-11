@@ -36,7 +36,7 @@
 			
 			<!--logo icon-->
 			<div class="brand">
-				<a href="index.html"><img th:src="@{/img/logo-dark-gm-bak3.png}" alt="Klorofil Logo" class="img-responsive logo"/></a>
+				<a href="index.html"><img th:src="@{/img/logo-dark-gm-bak3.png}" alt="VIS Logo" class="img-responsive logo"/></a>
 			</div>
 			<!--end logo icon-->
 			
@@ -121,7 +121,7 @@
 					<ul class="nav" id="navId">
 
 						<li>
-							<a data-toggle="collapse"><i ></i>
+							<a data-toggle="collapse"><i class='lnr lnr-earth'></i>
 								<span>站点资料</span>
 								<!--子图标标识-->
 								<i class="icon-submenu lnr lnr-chevron-left"></i>
@@ -130,12 +130,12 @@
 						<hr/>
 
 						<li>
-							<a href="#subPages10" data-toggle="collapse" class="collapsed">
-								<span>中国地面逐小时资料</span>
+							<a href="#subPages100" data-toggle="collapse" class="collapsed">
+								<span>地面常规观测（含船舶、浮标）资料</span>
 								<!--子图标标识-->
 								<i class="icon-submenu lnr lnr-chevron-left"></i>
 							</a>
-							<div id="subPages10" class="collapse ">
+							<div id="subPages100" class="collapse ">
 								<ul class="nav">
 									<li><a th:href="@{page-profile.html}" class=""><i class="lnr lnr-chart-bars"></i>折线图</a></li>
 									<li><a href="#" class="bin_map" id="1"><i class="lnr lnr-list"></i>分布图</a></li>
@@ -143,12 +143,12 @@
 							</div>
 						</li>
 						<li>
-							<a href="#subPages11" data-toggle="collapse" class="collapsed">
-								<span>全球地面逐小时资料</span>
+							<a href="#subPages101" data-toggle="collapse" class="collapsed">
+								<span>国内自动站地面气象资料</span>
 								<!--子图标标识-->
 								<i class="icon-submenu lnr lnr-chevron-left"></i>
 							</a>
-							<div id="subPages11" class="collapse ">
+							<div id="subPages101" class="collapse ">
 								<ul class="nav">
 									<li><a th:href="@{page-profile.html}" class=""><i class="lnr lnr-chart-bars"></i>折线图</a></li>
 									<li><a href="#" class="bin_map" id="2"><i class="lnr lnr-list"></i>分布图</a></li>
@@ -170,6 +170,28 @@
 					<h3 class="page-title">Elements</h3>
 					<div class="panel">
 						<div class="panel-heading">
+							<div class="binMapChoice" hidden="hidden">
+								<ul class="nav navbar-nav navbar-left">
+									<li class="" >
+										<strong>日期:</strong> <input class="inline laydate-icon" placeholder="请输入日期" id="start" style="width:200px; margin-right:10px;"/>
+									</li>
+									<li>
+										<strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;资料类别:&nbsp;</strong>
+										<select class="" id="dataType" name="dataType" onclick="">
+											<option value="0">无</option>
+											<option value="GM_RSURF_GL">GM_RSURF_GL</option>
+											<option value="GM_RSURF_CH">GM_RSURF_CH</option>
+											<option value="GM_RTEMP_GL">GM_RTEMP_GL</option>
+										</select>
+									</li>
+									<li>
+										<strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;要素类别:&nbsp;</strong>
+										<select class="" id="qualiteType" disabled="true">
+											<option value="0">无</option>
+										</select>
+									</li>
+								</ul>
+							</div>
 						</div>
 						<div class="panel-body">
 							<div id="customMap" width="100%"  border="0"  style="padding: 0px; width: 100%; height: 600px;">
@@ -177,7 +199,6 @@
 						</div>
 						<div class="panel-body">
 							<div id="grid" width="100%"  border="0"  style="padding: 0px; width: 100%; height: 400px;">
-								lkjslkdjfflskdjf
 							</div>
 						</div>
 					</div>

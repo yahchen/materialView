@@ -11,19 +11,18 @@ CREATE TABLE public.site_data_head
     retrieve_start_time timestamp without time zone,
     retrieve_end_time timestamp without time zone,
     retrieve_process_time double precision,
-    data_time timestamp without time zone,
+    data_time character varying(120) COLLATE pg_catalog."default",
     file_path character varying(150) COLLATE pg_catalog."default",
     data_start_time timestamp without time zone,
     data_end_time timestamp without time zone,
     longitude_latitude_scope character varying(30) COLLATE pg_catalog."default",
     sys_conn_state character varying(10) COLLATE pg_catalog."default",
-    data_num bigint,
+    data_num character varying(10) COLLATE pg_catalog."default",
     user_id character varying(30) COLLATE pg_catalog."default",
     system_name character varying(30) COLLATE pg_catalog."default",
     data_type integer,
     site_type integer,
-    return_abnormal_info character varying(60) COLLATE pg_catalog."default",
-    CONSTRAINT site_data_head_pkey PRIMARY KEY (s_d_id)
+    return_abnormal_info character varying(60) COLLATE pg_catalog."default"
 )
 WITH (
     OIDS = FALSE

@@ -26,7 +26,22 @@
 	<script th:src="@{assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js}"></script>
 	<script th:src="@{js/vis-common.js}"></script>
 	<script th:src="@{js/tm_data.js}"></script>
+	<script th:src="@{js/laydate.js}"></script>
 
+	<script type="text/javascript" src="js/laydate.js"></script>
+
+	<style type="text/css">
+		*{margin:0;padding:0;list-style:none;}
+		html{background-color:#E3E3E3; font-size:14px; color:#000; font-family:'微软雅黑'}
+		h2{line-height:30px; font-size:20px;}
+		a,a:hover{ text-decoration:none;}
+		pre{font-family:'微软雅黑'}
+		.box{width:970px; padding:10px 20px; background-color:#fff; margin:10px auto;}
+		.box a{padding-right:20px;}
+		.binMapChoice{margin:25px 0;}
+		h3{margin:10px 0;}
+		.layinput{height: 22px;line-height: 22px;width: 150px;margin: 0;}
+	</style>
 </head>
 
 <body>
@@ -37,7 +52,7 @@
 			
 			<!--logo icon-->
 			<div class="brand">
-				<a href="index.html"><img th:src="@{/img/logo-dark-tm-bak.png}" alt="Klorofil Logo" class="img-responsive logo"/></a>
+				<a href="index.html"><img th:src="@{/img/logo-dark-tm-bak.png}" alt="VIS Logo" class="img-responsive logo"/></a>
 			</div>
 			<!--end logo icon-->
 			
@@ -92,7 +107,7 @@
 					<ul class="nav" id="navId">
 
 						<li>
-							<a data-toggle="collapse"><i ></i>
+							<a data-toggle="collapse"><i class='lnr lnr-earth'></i>
 								<span>站点资料</span>
 								<!--子图标标识-->
 								<i class="icon-submenu lnr lnr-chevron-left"></i>
@@ -101,12 +116,12 @@
 						<hr/>
 
 						<li>
-							<a href="#subPages10" data-toggle="collapse" class="collapsed">
-								<span>中国地面逐小时资料</span>
+							<a href="#subPages100" data-toggle="collapse" class="collapsed">
+								<span>地面1小时观测资料</span>
 								<!--子图标标识-->
 								<i class="icon-submenu lnr lnr-chevron-left"></i>
 							</a>
-							<div id="subPages10" class="collapse ">
+							<div id="subPages100" class="collapse ">
 								<ul class="nav">
 									<li><a th:href="@{page-profile.html}" class=""><i class="lnr lnr-chart-bars"></i>折线图</a></li>
 									<li><a href="#" class="bin_map" id="1"><i class="lnr lnr-list"></i>分布图</a></li>
@@ -114,33 +129,109 @@
 							</div>
 						</li>
 						<li>
-							<a href="#subPages11" data-toggle="collapse" class="collapsed">
-								<span>全球地面逐小时资料</span>
+							<a href="#subPages101" data-toggle="collapse" class="collapsed">
+								<span>地面1小时降水资料</span>
 								<!--子图标标识-->
 								<i class="icon-submenu lnr lnr-chevron-left"></i>
 							</a>
-							<div id="subPages11" class="collapse ">
+							<div id="subPages101" class="collapse ">
 								<ul class="nav">
 									<li><a th:href="@{page-profile.html}" class=""><i class="lnr lnr-chart-bars"></i>折线图</a></li>
 									<li><a href="#" class="bin_map" id="2"><i class="lnr lnr-list"></i>分布图</a></li>
 								</ul>
 							</div>
 						</li>
+
+						<li>
+							<a href="#subPages102" data-toggle="collapse" class="collapsed">
+								<span>地面3小时降水资料</span>
+								<!--子图标标识-->
+								<i class="icon-submenu lnr lnr-chevron-left"></i>
+							</a>
+							<div id="subPages102" class="collapse ">
+								<ul class="nav">
+									<li><a th:href="@{page-profile.html}" class=""><i class="lnr lnr-chart-bars"></i>折线图</a></li>
+									<li><a href="#" class="bin_map" id="3"><i class="lnr lnr-list"></i>分布图</a></li>
+								</ul>
+							</div>
+						</li>
+
+						<li>
+							<a href="#subPages103" data-toggle="collapse" class="collapsed">
+								<span>地面6小时降水资料</span>
+								<!--子图标标识-->
+								<i class="icon-submenu lnr lnr-chevron-left"></i>
+							</a>
+							<div id="subPages103" class="collapse ">
+								<ul class="nav">
+									<li><a th:href="@{page-profile.html}" class=""><i class="lnr lnr-chart-bars"></i>折线图</a></li>
+									<li><a href="#" class="bin_map" id="4"><i class="lnr lnr-list"></i>分布图</a></li>
+								</ul>
+							</div>
+						</li>
+
+						<li>
+							<a href="#subPages104" data-toggle="collapse" class="collapsed">
+								<span>地面12小时降水资料</span>
+								<!--子图标标识-->
+								<i class="icon-submenu lnr lnr-chevron-left"></i>
+							</a>
+							<div id="subPages104" class="collapse ">
+								<ul class="nav">
+									<li><a th:href="@{page-profile.html}" class=""><i class="lnr lnr-chart-bars"></i>折线图</a></li>
+									<li><a href="#" class="bin_map" id="5"><i class="lnr lnr-list"></i>分布图</a></li>
+								</ul>
+							</div>
+						</li>
+
+						<li>
+							<a href="#subPages105" data-toggle="collapse" class="collapsed">
+								<span>地面24小时降水资料</span>
+								<!--子图标标识-->
+								<i class="icon-submenu lnr lnr-chevron-left"></i>
+							</a>
+							<div id="subPages105" class="collapse ">
+								<ul class="nav">
+									<li><a th:href="@{page-profile.html}" class=""><i class="lnr lnr-chart-bars"></i>折线图</a></li>
+									<li><a href="#" class="bin_map" id="6"><i class="lnr lnr-list"></i>分布图</a></li>
+								</ul>
+							</div>
+						</li>
+
 					</ul>
 				</nav>
 			</div>
 		</div>
 		<!-- END LEFT SIDEBAR -->
 
-
 		<!-- MAIN -->
 		<div class="main" id="main">
 			<!-- MAIN CONTENT -->
 			<div class="main-content">
 				<div class="container-fluid">
-					<h3 class="page-title">Elements</h3>
 					<div class="panel">
 						<div class="panel-heading">
+							<div class="binMapChoice" hidden="hidden">
+								<ul class="nav navbar-nav navbar-left">
+									<li class="" >
+									<strong>日期:</strong> <input class="inline laydate-icon" placeholder="请输入日期" id="start" style="width:200px; margin-right:10px;"/>
+									</li>
+									<li>
+									<strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;资料类别:&nbsp;</strong>
+									<select class="" id="dataType" name="dataType" onclick="">
+										<option value="0">GM_RSURF_GL</option>
+									</select>
+									</li>
+								<li>
+								    <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;要素类别:&nbsp;</strong>
+									<select class="" id="qualiteType">
+										<option value="0">气压</option>
+										<option value="1">测站高度</option>
+									</select>
+								</li>
+								</ul>
+							</div>
+
 						</div>
 						<div class="panel-body">
 							<div id="customMap" width="100%"  border="0"  style="padding: 0px; width: 100%; height: 600px;">
@@ -160,6 +251,29 @@
 	</div>
 	<!-- END WRAPPER -->
 
+	<script type="text/javascript">
+        !function(){
+            laydate.skin('/skins/molv');//切换皮肤，请查看skins下面皮肤库
+            laydate({elem: '#start2'});//绑定元素
+        }();
+
+
+        //日期范围限制
+        var start = {
+            elem: '#start',
+            format: 'YYYY-MM-DD',
+            //min: laydate.now(), //设定最小日期为当前日期
+            min: '1900-01-01', //设定最小日期为当前日期
+            max: '2099-00-01', //最大日期
+            istime: true,
+            istoday: false,
+            choose: function(datas){
+                end.min = datas; //开始日选好后，重置结束日的最小日期
+                end.start = datas //将结束日的初始值设定为开始日
+            }
+        };
+        laydate(start);
+	</script>
 
 </body>
 </html>

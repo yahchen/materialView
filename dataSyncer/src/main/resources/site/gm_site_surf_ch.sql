@@ -31,7 +31,8 @@ CREATE TABLE public.gm_site_surf_ch
     q_pre_24h double precision,
     station_id_c double precision,
     s_d_id bigint,
-    CONSTRAINT gm_site_surf_ch_pkey PRIMARY KEY (station_id_d)
+    id bigint not null,
+    CONSTRAINT gm_site_surf_ch_pkey PRIMARY KEY (id)
 )
 WITH (
     OIDS = FALSE

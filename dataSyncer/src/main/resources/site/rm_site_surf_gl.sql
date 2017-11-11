@@ -14,13 +14,13 @@ CREATE TABLE public.rm_site_surf_gl
     min double precision,
     prs_sea double precision,
     tem double precision,
-    prs double precision,
     dpt double precision,
     win_d double precision,
     win_s double precision,
     pre_1h double precision,
     pre_6h double precision,
     pre_24h double precision,
+    prs double precision,
     q_prs double precision,
     q_prs_sea double precision,
     q_win_d double precision,
@@ -31,8 +31,9 @@ CREATE TABLE public.rm_site_surf_gl
     q_pre_6h double precision,
     q_pre_24h double precision,
     station_id_c double precision,
-    s_d_id bigint,
-    CONSTRAINT rm_site_surf_gl_pkey PRIMARY KEY (station_id_d)
+    s_d_id bigint not null,
+    id bigint not null,
+    CONSTRAINT rm_site_surf_gl_pkey PRIMARY KEY (id)
 )
 WITH (
     OIDS = FALSE

@@ -12,6 +12,7 @@ public class TestMain {
 
         String s="1987年08月32日 33时";
         System.out.println(s.substring(0,11));
+        System.out.println(SexEnum.getSexEnumByCode("M"));
     }
 }
 

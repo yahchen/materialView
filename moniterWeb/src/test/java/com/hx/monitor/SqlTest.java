@@ -3,6 +3,7 @@ package com.hx.monitor;
 import com.hx.bean.GridDataHead;
 import com.hx.dao.GridMatrixDao;
 import com.hx.dao.SiteChartDao;
+import com.hx.dao.PostgreSqlDao;
 import com.hx.service.GridMatrixService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -45,6 +46,9 @@ public class SqlTest {
     @Autowired
     @Qualifier("siteChartServiceImpl")
     private SiteChartDao siteChartService;
+    @Autowired
+    private PostgreSqlDao postgreSqlDao;
+
     @Test
     public void testSql(){
         Assert.notNull(template,"template is null");
@@ -59,6 +63,11 @@ public class SqlTest {
         System.out.println(resutl.size());
     }
 
+    @Test
+    public void testGm(){
+        List<Map<String,Object>> res = postgreSqlDao.queryBinMapData("gm_site_surf_gl",null,"");
+        assert res == null;
+    }
     @Test
     public void testGridDataDaoImpl() throws ParseException {
 

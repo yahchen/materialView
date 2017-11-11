@@ -29,8 +29,9 @@ CREATE TABLE public.rm_site_temp_gl
     q_win_s double precision,
     q_lat_dev double precision,
     q_lon_dev double precision,
-    s_d_id bigint,
-    CONSTRAINT rm_site_temp_gl_pkey PRIMARY KEY (station_id_d)
+    s_d_id bigint not null,
+    id bigint not null,
+    CONSTRAINT rm_site_temp_gl_pkey PRIMARY KEY (id)
 )
 WITH (
     OIDS = FALSE
