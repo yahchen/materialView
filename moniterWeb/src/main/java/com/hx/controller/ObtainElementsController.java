@@ -44,9 +44,9 @@ public class ObtainElementsController {
 
     @RequestMapping("/getQualiteTypes")
     @ResponseBody
-    public List<String> getQualiteTypes(HttpServletRequest request){
+    public List<Map<String,Object>> getQualiteTypes(HttpServletRequest request){
         String dataType = request.getParameter("dataType");
-        return binMapDataService.queryBinQualiteTypeData("",dataType);
+        return binMapDataService.queryBinQualiteTypeData("type_and_element_mapping",dataType);
     }
 
     private String convertDataType2Table(String dataType) {

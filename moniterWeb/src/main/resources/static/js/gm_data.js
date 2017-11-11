@@ -21,10 +21,40 @@ $(function(){
         $('a.bin_map').click(binMapListener);
         $('a.bin_map').click(pullSelectVal());
     });
-
+    $('#dataType').change(function() {
+        var dataType = $("#dataType option:selected").val();
+        if(dataType == "无")
+            return;
+        $.ajax({
+            type: "post",
+            async: true,
+            url: "/getQualiteTypes",
+            data: {
+                dataType:dataType,
+            },
+            dataType: "json",
+            success: function(data) {
+                var options = "<option value=''>无</option>";
+                for(i in data){
+                    var qc = data[i].quality_code_comment
+                    if(qc == "")
+                        qc = data[i].quality_code
+                    if(qc == "")
+                        continue
+                    options += "<option value=" +  data[i].quality_code + ">" + qc + "</option>"
+                }
+                $("#qualiteType").html("");
+                $("#qualiteType").attr("disabled",false);
+                $("#qualiteType").append(options);
+                $("#qualiteType").change(binMapListener);
+            }
+        });
+    });
     function binMapListener() {
-        var dataType = $("#dataType").val();
-        var qualiteType = $("#qualiteType").val();
+        var dataType = $("#dataType option:selected").val();
+        var qualiteType = $("#qualiteType option:selected").val();
+        if(qualiteType == undefined || qualiteType == "")
+            return
         $('.binMapChoice').show();
         var zoom = 4;
         //初始化地图对象
@@ -44,22 +74,30 @@ $(function(){
             dataType: "json",
             success: function(data) {
                 var pointArray = new Array();
-                for (var i in data.Lat){
-                    var point = new T.Circle(new T.LngLat(data.Lon[i],data.Lat[i]), 1,{color:"#1493FF",weight:15,opacity:1,fillColor:"#1493FF",fillOpacity:0,lineStyle:"solid"});
+                var dotColor = "#00FF66";
+                var gray = "#999999";
+                for (var ki in data){
+                    var binMap = data[ki];
+                    if(binMap['station_id_d']==999999 || binMap['station_id_d']==999998)
+                        dotColor = gray;
+                    var point = new T.Circle(new T.LngLat(binMap['lon'],binMap['lat']), 1,{color:dotColor,weight:15,opacity:1,fillColor:dotColor,fillOpacity:0,lineStyle:"solid"});
                     map.addOverLay(point);    //增加点
-                    pointArray[i] = new T.LngLat(data.Lon[i],data.Lat[i]);
-                    _CloudCollection = new T.CloudMarkerCollection(pointArray, {
-                        color: '#1493FF',
-                        SizeType: TDT_POINT_SIZE_SMALL
-                    })
-                    var infoWin = new T.InfoWindow();
-                    var sContent = "<li> </li>";
-                    infoWin.setContent(sContent);
-                    point.addEventListener("click", function () {
-                        point.openInfoWindow(infoWin);
+                    var sContent = "<div>"
+                        + "<ul>"
+                        + "<li>" + "<span>tem:</span>" + binMap['tem'] + "</li>"
+                        + "<li>" + "<span>prs:</span>" + binMap['prs'] + "</li>"
+                        + "<li>" + "<span>dpt:</span>" + binMap['dpt'] + "</li>"
+                        + "<li>" + "<span>pre_1h:</span>" + binMap['pre_1h'] + "</li>"
+                        + "<li>" + "<span>tem_max:</span>" + binMap['tem_max'] + "</li>"
+                        + "<li>" + "<span>tem_min:</span>" + binMap['tem_min'] + "</li>"
+                        +"</ul>"
+                        + "</div>";
+                    point.addEventListener("click", function (e) {
+                        var point = e.lnglat;
+                        var infoWin = new T.InfoWindow(sContent,{offset:new T.Point(0,-30)}); // 创建信息窗口对象
+                        map.openInfoWindow(infoWin,point); //开启信息窗口
                     });// 将标注添加到地图中
                 }
-                map.addOverLay(_CloudCollection);
                 $('mapDiv').html("");
             }
         });

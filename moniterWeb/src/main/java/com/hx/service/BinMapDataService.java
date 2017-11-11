@@ -20,8 +20,7 @@ public class BinMapDataService {
         return postgreSqlDao.queryBinMapData(table,startTime,qualiteType);
     }
 
-    public List<String> queryBinQualiteTypeData(String table, String dataType){
-        List<Map<String,Object>> res = postgreSqlDao.queryBinQualiteTypeData(table,dataType);
-        return null;
+    public List<Map<String,Object>> queryBinQualiteTypeData(String table, String dataType){
+        return postgreSqlDao.queryBinQualiteTypeData(table,dataType);
     }
 }
