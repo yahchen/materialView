@@ -11,7 +11,7 @@ CREATE TABLE public.site_data_head
     retrieve_start_time timestamp without time zone,
     retrieve_end_time timestamp without time zone,
     retrieve_process_time double precision,
-    data_time character varying(120) COLLATE pg_catalog."default",
+    data_time timestamp without time zone,
     file_path character varying(150) COLLATE pg_catalog."default",
     data_start_time timestamp without time zone,
     data_end_time timestamp without time zone,
@@ -19,7 +19,7 @@ CREATE TABLE public.site_data_head
     sys_conn_state character varying(10) COLLATE pg_catalog."default",
     data_num character varying(10) COLLATE pg_catalog."default",
     user_id character varying(30) COLLATE pg_catalog."default",
-    system_name character varying(30) COLLATE pg_catalog."default",
+    system_name character varying(120) COLLATE pg_catalog."default",
     data_type integer,
     site_type integer,
     return_abnormal_info character varying(60) COLLATE pg_catalog."default"

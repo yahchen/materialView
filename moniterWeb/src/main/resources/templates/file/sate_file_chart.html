@@ -1,0 +1,281 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+	<link rel="stylesheet" type="text/css" href="js/calendar/css/style.css"/>
+	<link rel="stylesheet" th:href="@{assets/css/style2.css}"/>
+	<script type="text/javascript" src="assets/js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="js/file_chart.js"></script>
+	<script type="text/javascript" src="js/calendar/laydate.js"></script>
+	<script type="text/javascript" src="echarts/echarts.js"></script>
+</head>
+
+<body>
+<!-- WRAPPER -->
+<div>
+	<!-- MAIN -->
+	<div class="panel-heading" >
+		<h3 class="panel-title" id="h3Text">折线图</h3>
+	</div>
+
+	<ul class="select">
+
+		<li class="select-list">
+
+			<dl id="selectChildren1">
+				<div class="startAndEndTime">
+					<ul class="inline">
+						<strong>开始时间：</strong> <input class="inline laydate-icon" placeholder="请输入日期" id="start" style="width:200px; margin-right:10px;"></input>
+						<strong>结束时间：</strong> <input class="inline laydate-icon" placeholder="请输入日期" id="end" style="width:200px;"></input>
+					</ul>
+				</div>
+			</dl>
+		<li class="select-list">
+			<dl id="selectChildren100">
+				<td><strong>卫星名：</strong>
+					<select id="sateItems"  style="height:21px;">
+						<option value="0">请选择卫星</option>
+					</select>
+				</td>&nbsp;&nbsp;
+				<button style="width:68px;height:21px" onclick="onSelect()" >查询</button>
+				&nbsp;&nbsp;
+				<td>
+					<span id="message" style="color:red;"></span>
+				</td>
+			</dl>
+	     </li>
+		</li>
+	</ul>
+	<!-- MAIN CONTENT -->
+	<div id="main1" style="height:500px"></div>
+	<!-- END MAIN CONTENT -->
+<!-- END MAIN -->
+</div>
+<!-- END WRAPPER -->
+
+<script type="text/javascript">
+
+	function onDate1(){
+        //alert(getQueryString("data_logo"));
+		  var queryCond = {
+			 	"startTime":$( "#start" ).val(),
+				"endTime":$( "#end" ).val(),
+				 "dataLogo":getQueryString("data_logo")
+			};
+
+		$.ajax({
+		 	type:"GET",
+		 	dataType:"json",
+		 	cache:false,
+		 	url:"/findSateFileSelectdByTimeElement",
+		 	data:queryCond,
+		 	beforeSend:function(){
+		 		$("#message").html("正在查询数据，请稍后...");
+		 		return true;
+		 	},
+		 	success:function(json){
+		 		//alert(json.sateFileSelectDataList);
+		 		//alert(json.jsonMessage);
+				if(json.jsonMessage==""||json.jsonMessage==null){
+                    $("#sateItems").empty();
+                    $("#sateItems").append("<option >请选择卫星</option>");
+                    $.each(json.sateFileSelectDataList,function(index,obj) {
+						//alert(obj.sate_name);
+						$("#sateItems").append("<option value="+obj.sate_name+">"+obj.sate_name+"</option>");
+                    });
+				}
+				$("#message").html(json.jsonMessage);
+		 	},
+		 	error:function(){
+		 		$("#message").html("查询数据失败，请重试！");
+		 	}
+		 });
+	}
+
+    function onSelect(){
+	    if($( "#start").val()==""||$( "#start").val()==null){
+            $( "#start").focus();
+            $("#message").html("请选择开始时间！");
+		}else if($( "#end").val()==""||$( "#end").val()==null){
+            $( "#end").focus();
+            $("#message").html("请选择结束时间！");
+		}else if($("#sateItems").val()=="请选择卫星"||$("#sateItems").val()==null) {
+            $("#sateItems").focus();
+            $("#message").html("请选择卫星名！");
+        }else {
+            //alert(getQueryString("data_logo"));
+            var queryCond = {
+                "startTime": $("#start").val(),
+                "endTime": $("#end").val(),
+                "dataLogo": getQueryString("data_logo"),
+                "sateName": $("#sateItems").val()
+            };
+
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                cache: false,
+                url: "/findSateFileChartByTimeElement",
+                data: queryCond,
+                beforeSend: function () {
+                    $("#message").html("正在查询数据，请稍后...");
+                    return true;
+                },
+                success: function (json) {
+                    //alert(json.jsonTime1);
+                    //alert(json.jsonDay);
+                    // 基于准备好的dom，初始化echarts图表
+                    var myChart = echarts.init(document.getElementById('main1'));
+
+                    option = {
+                        title: [{//标题组件
+                            left: 'left',
+                            text: '检索到的卫星文件数目折线图',//主标题
+                            subtext: '检索到的卫星文件数目（个）'//子标题
+                        }, {
+                            top: '55%',
+                            left: 'left',
+                            text: '检索响应时间折线图',
+                            subtext: '检索响应时间（s）'//子标题
+                        }],
+
+                        tooltip: {//提示框组件
+                            trigger: 'axis'   //触发类型，默认数据触发，可选为：’item’ | ‘axis’ ，提示框显示类型   item表示该条线的值，axis表示不同曲线中，在同一x值时候的所有y值
+                        },
+
+                        legend: {//图例逐渐
+                            data: ['卫星文件个数', '响应时间'],
+                            left: 'center'
+                        },
+
+                        toolbox: {// 右上角显示的工具条
+                            show: true,
+                            feature: {
+                                mark: {show: true},
+                                dataView: {show: true, readOnly: false},
+                                magicType: {show: true, type: ['line', 'bar']},
+                                restore: {show: true},
+                                saveAsImage: {show: true}
+                            }
+                        },
+                        calculable: true,//是否启用拖拽重计算特性，默认关闭，
+                        xAxis: [//直角坐标系 grid 中的 x 轴
+                            {
+                                type: 'category',
+                                boundaryGap: false,
+                                data: json.jsonTime1
+
+                            }, {
+                                type: 'category',
+                                boundaryGap: false,
+                                data: json.jsonTime1,
+                                gridIndex: 1
+                            }
+                        ],
+                        yAxis: [//直角坐标系 grid 中的 y 轴  纵轴的值根据实际值自动变化的
+                            {
+                                axisLabel: {
+                                    formatter: '{value} 个'
+                                }
+                            }, {
+                                formatter: '{value} 秒',
+                                gridIndex: 1
+                            }
+                        ],
+                        grid: [{
+                            bottom: '60%'
+                        }, {
+                            top: '60%'
+                        }],
+                        series: [// 系列列表
+                            {
+                                name: '卫星文件个数',
+                                type: 'line',
+                                data: json.jsonNum,
+                                markPoint: {//标记点  标记两个点
+                                    data: [
+                                        {type: 'max', name: '最大值'},
+                                        {type: 'min', name: '最小值'}
+                                    ]
+                                },
+                            }
+                            , {
+                                name: '响应时间',
+                                type: 'line',
+                                data: json.jsonProcessTime,
+                                markPoint: {//标记点  标记两个点
+                                    data: [
+                                        {type: 'max', name: '最大值'},
+                                        {type: 'min', name: '最小值'}
+                                    ]
+                                },
+                                xAxisIndex: 1,
+                                yAxisIndex: 1
+                            }
+                        ]
+                    };
+                    // 为echarts对象加载数据
+                    myChart.setOption(option);
+                    $("#message").html(json.jsonMessage);
+                },
+                error: function () {
+                    $("#message").html("查询数据失败，请重试！");
+                }
+            });
+        }
+    }
+</script>
+
+<script type="text/javascript">
+!function(){
+	laydate.skin('molv');//切换皮肤，请查看skins下面皮肤库
+	//laydate({elem: '#start2'});//绑定元素
+}();
+
+
+//日期范围限制
+var start = {
+    elem: '#start',
+    format: 'YYYY-MM-DD',
+    //min: laydate.now(), //设定最小日期为当前日期
+	min: '1900-01-01', //设定最小日期为当前日期
+    max: '2099-00-01', //最大日期
+    istime: true,
+    istoday: false,
+    choose: function(datas){
+         end.min = datas; //开始日选好后，重置结束日的最小日期
+         end.start = datas; //将结束日的初始值设定为开始日
+		if($( "#end" ).val()==""){
+             $("#message").html("请选择结束时间！");
+		}else{
+            onDate1();
+		}
+    }
+};
+
+var end = {
+    elem: '#end',
+    format: 'YYYY-MM-DD',
+	min: '1900-01-01', //设定最小日期为当前日期
+    max: '2099-01-01',
+    istime: true,
+    istoday: false,
+    choose: function(datas){
+        start.max = datas; //结束日选好后，充值开始日的最大日期
+        if($( "#start" ).val()==""){
+            $("#message").html("请选择开始时间！");
+        }else{
+            onDate1();
+        }
+    }
+};
+laydate(start);
+laydate(end);
+</script>
+
+</body>
+</html>

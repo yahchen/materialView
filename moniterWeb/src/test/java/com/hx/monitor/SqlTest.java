@@ -1,10 +1,11 @@
 package com.hx.monitor;
 
-import com.hx.bean.GridDataHead;
 import com.hx.dao.GridMatrixDao;
+import com.hx.dao.FileChartDao;
 import com.hx.dao.SiteChartDao;
 import com.hx.dao.PostgreSqlDao;
 import com.hx.service.GridMatrixService;
+import com.hx.service.SiteChartService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +15,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.Assert;
 
-import java.sql.Timestamp;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -45,9 +43,13 @@ public class SqlTest {
 
     @Autowired
     @Qualifier("siteChartServiceImpl")
-    private SiteChartDao siteChartService;
+    private SiteChartService siteChartService;
     @Autowired
     private PostgreSqlDao postgreSqlDao;
+
+    @Autowired
+    @Qualifier("fileChartDaoImpl")
+    private FileChartDao fileChartDao;
 
     @Test
     public void testSql(){
@@ -83,6 +85,22 @@ public class SqlTest {
         String startTime ="2017-10-01 00:00:00";
         String endTime =("2017-10-20 23:59:59");
         List resutl = siteChartService.findSiteChartByTimeElement(startTime,endTime,"GM_RSURF_GL");
+        System.out.println(resutl.size());
+    }
+
+    @Test
+    public void testFindSateFileSelectdByTimeElement(){
+        String startTime ="2017-11-01 00:00:00";
+        String endTime =("2017-11-20 23:59:59");
+        List resutl = fileChartDao.findSateFileSelectdByTimeElement(startTime,endTime,"GM_RATVC_ATOVS");
+        System.out.println(resutl.size());
+    }
+
+    @Test
+    public void testFindSateFileChartByTimeElement(){
+        String startTime ="2017-11-01 00:00:00";
+        String endTime =("2017-11-20 23:59:59");
+        List resutl = fileChartDao.findSateFileChartByTimeElement(startTime,endTime,"GM_RATVC_ATOVS","N15-AMSUA-BAWX");
         System.out.println(resutl.size());
     }
 }
