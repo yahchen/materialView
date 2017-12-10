@@ -42,11 +42,9 @@ public class GridMaterialViewController {
 
         String queryTime=request.getParameter("queryTime");
         String queryElment=request.getParameter("queryElment");
-        if(queryTime==null||"".equals(queryTime)){
-            queryTime=dateSubN(1);
-        }
-        //String sTime = queryTime.substring(0, 4)+"-"+queryTime.substring(5, 7)+"-"+queryTime.substring(8, 10)+" 00:00:00";
-        //String eTime= queryTime.substring(0, 4)+"-"+queryTime.substring(5, 7)+"-"+queryTime.substring(8, 10)+" 23:59:59";
+        //if(queryTime==null||"".equals(queryTime)){
+         //   queryTime=dateSubN(1);
+        //}
         String sTime = queryTime + " 00:00:00";
         String eTime= queryTime + " 23:59:59";
         //startTime endTime两者全不为空，则按时间查，否则有一个为空，则按时区查

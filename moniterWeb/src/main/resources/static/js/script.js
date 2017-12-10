@@ -1,8 +1,9 @@
 $(document).ready(function(){
 
-	var data_logo=getQueryString("data_logo")
-    onLoadDdSelected(data_logo);
-    onShowGridMatrix(data_logo);
+	var data_logo=getQueryString("data_logo");//上一页传递过来的值
+    getYesDay();//初始化时，默认设置昨天日期
+    onLoadDdSelected(data_logo);//选中效果
+    onShowGridMatrix(data_logo);//矩阵图
 
 	$("#selectParent dd").click(function () {
 		$(this).addClass("selected").siblings().removeClass("selected");          // 该行多个中，只能选一个， 欧洲中心、日本格点、EC 
@@ -144,4 +145,12 @@ onLoadDdSelected=function(aParam){
        $("#selectChildren2").show();
        $("#vfeng02").addClass("selected").siblings().removeClass("selected");
       }
+}
+getYesDay=function () {
+    var nowdate = new Date();
+    var y = nowdate.getFullYear();
+    var m = nowdate.getMonth()+1;
+    var d = nowdate.getDate()-1;
+    var formatnowdate = y+'-'+m+'-'+d;
+    $("#start2").val(formatnowdate);
 }

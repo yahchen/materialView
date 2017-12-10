@@ -9,9 +9,8 @@
 	<link rel="stylesheet" type="text/css" href="js/calendar/css/style.css"/>
 	<link rel="stylesheet" th:href="@{assets/css/style2.css}"/>
 	<script type="text/javascript" src="assets/js/jquery-1.7.2.min.js"></script>
-	<script type="text/javascript" src="js/site_chart.js"></script>
+	<script type="text/javascript" src="js/common_chart.js"></script>
 	<script type="text/javascript" src="js/calendar/laydate.js"></script>
-	<script type="text/javascript" src="js/script.js"></script>
 	<script type="text/javascript" src="echarts/echarts.js"></script>
 </head>
 
@@ -47,243 +46,150 @@
 
 	$(document).ready(function(){
 
-		 var queryCond = {
-			 	"startTime":$( "#start" ).val(),
-				"endTime":$( "#end" ).val(),
-				"strZone" :$( "#provSelect" ).val(),
-				 "dataLogo":getQueryString("data_logo")
-			};
-
-		$.ajax({
-		 	type:"GET",
-		 	dataType:"json",
-		 	cache:false,
-		 	url:"/findGridChartByTimeElement",
-		 	data:queryCond,
-		 	beforeSend:function(){
-		 		$("#message").html("正在查询数据，请稍后...");
-		 		return true;
-		 	},
-		 	success:function(json){
-		 		//alert(json.jsonTime);
-		 		//alert(json.jsonDay);
-		 	// 基于准备好的dom，初始化echarts图表
-				var myChart = echarts.init(document.getElementById('main1'));
-
-				option = {
-					    title : [{//标题组件
-					        left:'left',
-					        text: '检索到的格点文件数目折线图',//主标题
-					        subtext: '检索到的文件数目（个）'//子标题
-					    },{
-                             top: '55%',
-                             left: 'left',
-                             text: '检索响应时间折线图',
-                             subtext: '检索响应时间（s）'//子标题
-                         }],
-
-					    tooltip : {//提示框组件
-					        trigger: 'axis'   //触发类型，默认数据触发，可选为：’item’ | ‘axis’ ，提示框显示类型   item表示该条线的值，axis表示不同曲线中，在同一x值时候的所有y值
-					    },
-
-					    legend: {//图例逐渐
-					        data:['格点文件个数','响应时间'],
-					         left:'center'
-					    },
-
-					    toolbox: {// 右上角显示的工具条
-					        show : true,
-					        feature : {
-					            mark : {show: true},
-					            dataView : {show: true, readOnly: false},
-					            magicType : {show: true, type: ['line', 'bar']},
-					            restore : {show: true},
-					            saveAsImage : {show: true}
-					        }
-					    },
-					    calculable : true,//是否启用拖拽重计算特性，默认关闭，
-					    xAxis : [//直角坐标系 grid 中的 x 轴
-					        {
-					            type : 'category',
-					            boundaryGap : false,
-					            data : json.jsonTime1
-
-					        },{
-					            type : 'category',
-					            boundaryGap : false,
-                                data: json.jsonTime1,
-                                gridIndex: 1
-                              }
-					    ],
-					    yAxis : [//直角坐标系 grid 中的 y 轴  纵轴的值根据实际值自动变化的
-					        {
-					            axisLabel : {
-					                formatter: '{value} 个'
-					            }
-					        },{
-                                  formatter: '{value} 秒',
-                                 gridIndex: 1
-                              }
-					    ],
-					    grid: [{
-                                 bottom: '60%'
-                              }, {
-                                 top: '60%'
-                               }],
-					    series : [// 系列列表
-					        {
-					            name:'格点文件个数',
-					            type:'line',
-					            data:json.jsonNum,
-					            markPoint : {//标记点  标记两个点
-					                data : [
-					                    {type : 'max', name: '最大值'},
-					                    {type : 'min', name: '最小值'}
-					                ]
-					            },
-					        }
-					        , {
-                            name:'响应时间',
-                             type: 'line',
-                             data: json.jsonProcessTime,
-                              markPoint : {//标记点  标记两个点
-					                data : [
-					                    {type : 'max', name: '最大值'},
-					                    {type : 'min', name: '最小值'}
-					                ]
-					            },
-                             xAxisIndex: 1,
-                             yAxisIndex: 1
-                         }
-					    ]
-					};
-				// 为echarts对象加载数据
-				myChart.setOption(option);
-                $("#message").html(json.jsonMessage);
-		 	},
-		 	error:function(){
-		 		$("#message").html("查询数据失败，请重试！");
-		 	}
-		 });
+        $("#provSelect").on('change',function () {//注册统计时区的选择事件
+            $("#start").val("");
+            $("#end").val("");
+            $("#message").html("");
+        });
+        //初始化日期
+        initDate();
+         //页面加载事件
+        selectChartData();
 	});
 
-	onSelect=function(){
-		  var queryCond = {
-			 	"startTime":$( "#start" ).val(),
-				"endTime":$( "#end" ).val(),
-				"strZone" :$( "#provSelect" ).val(),
-			    "dataLogo":getQueryString("data_logo")
-			};
+onSelect=function() {//点击查询按钮   逻辑判断一定要和实际图分开，不然会有问题。很懵
+	var a=$("#start").val() == "" || $("#start").val() == null;//有值为 false  无值为true
+	var b=$("#end").val() == "" || $("#end").val() == null;//空1  有值为 false  无值为true
+	var c=$("#provSelect").val() == "0";//0无值为true  有值为false  与日期的不一样
+	//alert(a);alert(b);alert(c);
+   if (!c) {
+        selectChartData();
+    } else if (a ) {
+       $("#message").html("请选择开始时间！");
+    } else if(b) {
+       $("#message").html("请选择结束时间！");
+    }else{
+       //alert(444);
+       selectChartData();
+   }
 
-		$.ajax({
-		 	type:"GET",
-		 	dataType:"json",
-		 	cache:false,
-		 	url:"/findGridChartByTimeElement",
-		 	data:queryCond,
-		 	beforeSend:function(){
-		 		$("#message").html("正在查询数据，请稍后...");
-		 		return true;
-		 	},
-		 	success:function(json){
-		 	// 基于准备好的dom，初始化echarts图表
-				var myChart = echarts.init(document.getElementById('main1'));
-				option = {
-					    title : [{//标题组件
-					        left:'center',
-					        text: '检索到的格点文件数目折线图',//主标题
-					        subtext: '检索到的文件数目（个）'//子标题
-					    },{
-                             top: '55%',
-                             left: 'center',
-                             text: '检索响应时间折线图',
-                             subtext: '检索响应时间（s）'//子标题
-                         }],
+}
+selectChartData=function () {
+    var queryCond = {
+        "startTime":$( "#start" ).val(),
+        "endTime":$( "#end" ).val(),
+        "strZone" :$( "#provSelect" ).val(),
+        "dataLogo":getQueryString("data_logo")
+    };
+    $.ajax({
+        type:"GET",
+        dataType:"json",
+        cache:false,
+        url:"/findGridChartByTimeElement",
+        data:queryCond,
+        beforeSend:function(){
+            $("#message").html("正在查询数据，请稍后...");
+            return true;
+        },
+        success:function(json){
+            // 基于准备好的dom，初始化echarts图表
+            var myChart = echarts.init(document.getElementById('main1'));
+            option = {
+                title : [{//标题组件
+                    left:'left',
+                    text: '检索到的格点文件数目折线图',//主标题
+                    subtext: '检索到的文件数目（个）'//子标题
+                },{
+                    top: '55%',
+                    left: 'left',
+                    text: '检索响应时间折线图',
+                    subtext: '检索响应时间（s）'//子标题
+                }],
 
-					    tooltip : {//提示框组件
-					        trigger: 'axis'   //触发类型，默认数据触发，可选为：’item’ | ‘axis’ ，提示框显示类型   item表示该条线的值，axis表示不同曲线中，在同一x值时候的所有y值
-					    },
+                tooltip : {//提示框组件
+                    trigger: 'axis'   //触发类型，默认数据触发，可选为：’item’ | ‘axis’ ，提示框显示类型   item表示该条线的值，axis表示不同曲线中，在同一x值时候的所有y值
+                },
 
-					    legend: {//图例逐渐
-					        data:['格点文件个数','响应时间'],
-					         left:'left'
-					    },
+                legend: {//图例逐渐
+                    data:['格点文件个数','响应时间'],
+                    left:'center'
+                },
 
-					    toolbox: {// 右上角显示的工具条
-					        show : true,
-					        feature : {
-					            mark : {show: true},
-					            dataView : {show: true, readOnly: false},
-					            magicType : {show: true, type: ['line', 'bar']},
-					            restore : {show: true},
-					            saveAsImage : {show: true}
-					        }
-					    },
-					    calculable : true,//是否启用拖拽重计算特性，默认关闭，
-					    xAxis : [//直角坐标系 grid 中的 x 轴
-					        {
-					            type : 'category',
-					            boundaryGap : false,
-					            data : json.jsonTime1
+                toolbox: {// 右上角显示的工具条
+                    show : true,
+                    feature : {
+                        mark : {show: true},
+                        dataView : {show: true, readOnly: false},
+                        magicType : {show: true, type: ['line', 'bar']},
+                        restore : {show: true},
+                        saveAsImage : {show: true}
+                    }
+                },
+                calculable : true,//是否启用拖拽重计算特性，默认关闭，
+                xAxis : [//直角坐标系 grid 中的 x 轴
+                    {
+                        type : 'category',
+                        boundaryGap : false,
+                        data : json.jsonTime1
 
-					        },{
-					            type : 'category',
-					            boundaryGap : false,
-                                data: json.jsonTime1,
-                                gridIndex: 1
-                              }
-					    ],
-					    yAxis : [//直角坐标系 grid 中的 y 轴  纵轴的值根据实际值自动变化的
-					        {
-					            axisLabel : {
-					                formatter: '{value} 个'
-					            }
-					        },{
-                                  formatter: '{value} 秒',
-                                 gridIndex: 1
-                              }
-					    ],
-					    grid: [{
-                                 bottom: '60%'
-                              }, {
-                                 top: '60%'
-                               }],
-					    series : [// 系列列表
-					        {
-					            name:'格点文件个数',
-					            type:'line',
-					            data:json.jsonNum,
-					            markPoint : {//标记点  标记两个点
-					                data : [
-					                    {type : 'max', name: '最大值'},
-					                    {type : 'min', name: '最小值'}
-					                ]
-					            },
-					        }
-					        , {
-                            name:'响应时间',
-                             type: 'line',
-                             data: json.jsonProcessTime,
-                              markPoint : {//标记点  标记两个点
-					                data : [
-					                    {type : 'max', name: '最大值'},
-					                    {type : 'min', name: '最小值'}
-					                ]
-					            },
-                             xAxisIndex: 1,
-                             yAxisIndex: 1
-                         }
-					    ]
-					};
-				// 为echarts对象加载数据
-				myChart.setOption(option);
-				$("#message").html(json.jsonMessage);
-		 	},
-		 	error:function(){
-		 		$("#message").html("分页查询数据失败，请重试！");
-		 	}
-		 });
-	}
+                    },{
+                        type : 'category',
+                        boundaryGap : false,
+                        data: json.jsonTime1,
+                        gridIndex: 1
+                    }
+                ],
+                yAxis : [//直角坐标系 grid 中的 y 轴  纵轴的值根据实际值自动变化的
+                    {
+                        axisLabel : {
+                            formatter: '{value} 个'
+                        }
+                    },{
+                        formatter: '{value} 秒',
+                        gridIndex: 1
+                    }
+                ],
+                grid: [{
+                    bottom: '60%'
+                }, {
+                    top: '60%'
+                }],
+                series : [// 系列列表
+                    {
+                        name:'格点文件个数',
+                        type:'line',
+                        data:json.jsonNum,
+                        markPoint : {//标记点  标记两个点
+                            data : [
+                                {type : 'max', name: '最大值'},
+                                {type : 'min', name: '最小值'}
+                            ]
+                        },
+                    }
+                    , {
+                        name:'响应时间',
+                        type: 'line',
+                        data: json.jsonProcessTime,
+                        markPoint : {//标记点  标记两个点
+                            data : [
+                                {type : 'max', name: '最大值'},
+                                {type : 'min', name: '最小值'}
+                            ]
+                        },
+                        xAxisIndex: 1,
+                        yAxisIndex: 1
+                    }
+                ]
+            };
+            // 为echarts对象加载数据
+            myChart.setOption(option);
+            $("#message").html(json.jsonMessage);
+        },
+        error:function(){
+            $("#message").html("分页查询数据失败，请重试！");
+        }
+    });
+}
 </script>
 
 <script type="text/javascript">
@@ -308,7 +214,10 @@ var start = {
         if($( "#end" ).val()==""||$( "#end" ).val()==null){
             $("#message").html("请选择结束时间！");
             $( "#end" ).focus();
-        }
+        }else{
+            $("#message").html("");
+		}
+        $("#provSelect").val(0);
     }
 };
 
@@ -324,7 +233,10 @@ var end = {
         if($( "#start" ).val()==""||$( "#start").val()==null){
             $("#message").html("请选择开始时间！");
             $( "#start").focus();
-        }
+        }else{
+            $("#message").html("");
+		}
+        $("#provSelect").val(0);
     }
 };
 laydate(start);

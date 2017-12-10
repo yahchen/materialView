@@ -98,6 +98,13 @@ public class FileChartController {
         String endTime=request.getParameter("endTime");
         String queryElment=request.getParameter("dataLogo");
 
+        if(("".equals(startTime)||null==startTime)||("".equals(endTime)||null==endTime)){//点击查询按钮不会出现这种情况，唯一这种情况是点击菜单按钮，初始化
+            Calendar cal=Calendar.getInstance();
+            cal.add(Calendar.MONTH,-1);
+            endTime=sdf.format(new Date());
+            startTime=sdf.format(cal.getTime())+" 00:00:00";
+        }
+
         List<Map<String, Object>> fileDataList= fileChartService.findFileChartByTimeElement(startTime,endTime,queryElment);
         DateFormat sdf1 = new SimpleDateFormat("yyyy年MM月dd日");//提示的格式
         DateFormat sdf2 = new SimpleDateFormat("yyyy年MM月dd日 HH时");//x轴显示的样式
@@ -126,6 +133,7 @@ public class FileChartController {
         jsonMap.put("jsonNum", jsonNum);//站点数
         jsonMap.put("jsonProcessTime",jsonProcessTime);//检索耗时
         jsonMap.put("jsonMessage",strMessage);//span提示信息
+        jsonMap.put("jsonTotal",fileDataList.size());
         return jsonMap;
     }
 }
