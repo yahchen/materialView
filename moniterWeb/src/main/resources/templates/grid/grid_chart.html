@@ -18,42 +18,29 @@
 <body>
 <!-- WRAPPER -->
 <div>
-	<!-- MAIN -->
+	<!-- MAIN --><br/>
 	<div class="panel-heading" >
-		<h3 class="panel-title" id="h3Text">折线图</h3>
-	</div>
-	<ul class="select">
-	<div class="startAndEndTime">
-		<ul class="inline">
-			<strong>开始时间：</strong> <input class="inline laydate-icon" placeholder="请输入日期" id="start" style="width:200px; margin-right:10px;"></input>  <strong>结束时间：</strong> <input class="inline laydate-icon" placeholder="请输入日期" id="end" style="width:200px;"></input>
-		</ul>
-	</div>
-	</ul>
-	<div class="panel-body">
-		<div>
-			<tr>
-				<td>统计时区：</td>
-				<td><select id="provSelect"  style="height:21px;">
-					<option value="0">--请选择--</option>
-					<option value="1">近一周</option>
-					<option value="2">近两周</option>
-					<option value="3">近三周</option>
-					<option value="4">近一个月</option>
-				</select></td>
-				<td>
-					<button style="width:68px;height:21px" onclick="onSelect()" >查询</button>&nbsp;&nbsp;
-					<span id="message" style="color:red;"></span>
-				</td>
-			</tr>
-		</div>
-    <div>
+		<h3 class="panel-title" id="h3Text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;折线图</h3>
+	</div><br/>
+	<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<strong>开始时间：</strong> <input class="inline laydate-icon" placeholder="请输入日期" id="start" style="width:100px; margin-right:10px;"></input>&nbsp;
+		<strong>结束时间：</strong> <input class="inline laydate-icon" placeholder="请输入日期" id="end" style="width:100px;"></input>&nbsp;
+		<strong>统计时区：</strong>
+		<select id="provSelect"  style="height:21px;">
+			<option value="0">--请选择--</option>
+			<option value="1">近一周</option>
+			<option value="2">近两周</option>
+			<option value="3">近三周</option>
+			<option value="4">近一个月</option>
+		</select>&nbsp;
+		<button style="width:68px;height:21px" onclick="onSelect()" >查询</button>&nbsp;
+		<span id="message" style="color:red;"></span>
+	</div><br/>
 	<!-- MAIN CONTENT -->
 	<div id="main1" style="height:500px"></div>
 	<!-- END MAIN CONTENT -->
 </div>
-    </div>
 <!-- END MAIN -->
-</div>
 <!-- END WRAPPER -->
 
 <script type="text/javascript">
@@ -181,13 +168,11 @@
 	});
 
 	onSelect=function(){
-
-        //alert(getQueryString("data_logo"));
 		  var queryCond = {
 			 	"startTime":$( "#start" ).val(),
 				"endTime":$( "#end" ).val(),
 				"strZone" :$( "#provSelect" ).val(),
-				 "dataLogo":getQueryString("data_logo")
+			    "dataLogo":getQueryString("data_logo")
 			};
 
 		$.ajax({
@@ -201,11 +186,8 @@
 		 		return true;
 		 	},
 		 	success:function(json){
-		 		//alert(json.jsonTime1);
-		 		//alert(json.jsonDay);
 		 	// 基于准备好的dom，初始化echarts图表
 				var myChart = echarts.init(document.getElementById('main1'));
-
 				option = {
 					    title : [{//标题组件
 					        left:'center',
@@ -322,7 +304,11 @@ var start = {
     istoday: false,
     choose: function(datas){
          end.min = datas; //开始日选好后，重置结束日的最小日期
-         end.start = datas //将结束日的初始值设定为开始日
+         end.start = datas; //将结束日的初始值设定为开始日
+        if($( "#end" ).val()==""||$( "#end" ).val()==null){
+            $("#message").html("请选择结束时间！");
+            $( "#end" ).focus();
+        }
     }
 };
 
@@ -335,6 +321,10 @@ var end = {
     istoday: false,
     choose: function(datas){
         start.max = datas; //结束日选好后，充值开始日的最大日期
+        if($( "#start" ).val()==""||$( "#start").val()==null){
+            $("#message").html("请选择开始时间！");
+            $( "#start").focus();
+        }
     }
 };
 laydate(start);

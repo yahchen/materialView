@@ -1,7 +1,7 @@
 CREATE TABLE "public"."file_data_head" (
 "s_d_id" int8 NOT NULL,
 "data_logo" varchar(40) NOT NULL,
-"dada_name" varchar(60),
+"data_name" varchar(60),
 "data_code" varchar(60),
 "retrieve_start_time" timestamp(6),
 "retrieve_end_time" timestamp(6),
@@ -15,7 +15,7 @@ CREATE TABLE "public"."file_data_head" (
 "user_id" varchar(30),
 "system_name" varchar(120),
 "data_type" int4,
-"site_type" int4,
+"mode_type" int4,
 "return_abnormal_info" varchar(60),
 "data_time" timestamp(6)
 )

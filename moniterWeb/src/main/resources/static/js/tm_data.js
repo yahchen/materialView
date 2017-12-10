@@ -113,7 +113,12 @@ $(function(){
         $("#main").empty();
         $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>格点资料>日本中心格点场资料>日本数值预报产品-低分辨率-北半球-v风>折线图</h3><div class='panel'><iframe id='iframe' src='/grid_chart_view?data_logo=TM_GRID_JAPAN_V'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 800px;'  frameborder='0'></iframe></div></div></div>");
     }
+    //行为记录
+    toBehaviorRecord=function () {
+        $("#main").empty();
+        $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>用户日志>行为记录</h3><div class='panel'><iframe id='iframe' src='/behavior_record_view?mode_type=3' width='100%'  border='0'  style='padding: 0px; width: 100%; height: 800px;'  frameborder='0'></iframe></div></div></div>");
 
+    }
     $('a.tl_type').click(function (event) {
         var pn = event.target.getAttribute("id");
         $("#navId").html("");

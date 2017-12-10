@@ -17,32 +17,18 @@
 <body>
 <!-- WRAPPER -->
 <div>
-	<!-- MAIN -->
+	<!-- MAIN --><br/>
 	<div class="panel-heading" >
-		<h3 class="panel-title" id="h3Text">折线图</h3>
+		<h3 class="panel-title" id="h3Text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;折线图</h3>
+	</div><br/>
+	<div>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<strong>开始时间：</strong> <input class="inline laydate-icon" placeholder="请输入日期" id="start" style="width:100px; margin-right:10px;"></input>&nbsp;
+	<strong>结束时间：</strong> <input class="inline laydate-icon" placeholder="请输入日期" id="end" style="width:100px;"></input>&nbsp;
+	<button style="width:68px;height:21px" onclick="onSelect()" >查询</button>&nbsp;
+	<span id="message" style="color:red;"></span>
 	</div>
-
-	<ul class="select">
-
-		<li class="select-list">
-
-			<dl id="selectChildren1">
-				<div class="startAndEndTime">
-					<ul class="inline">
-						<strong>开始时间：</strong> <input class="inline laydate-icon" placeholder="请输入日期" id="start" style="width:200px; margin-right:10px;"></input>
-						<strong>结束时间：</strong> <input class="inline laydate-icon" placeholder="请输入日期" id="end" style="width:200px;"></input>
-						&nbsp;&nbsp;
-						<button style="width:68px;height:21px" onclick="onSelect()" >查询</button>
-					</ul>
-					<ul class="inline">
-						<td>
-							<span id="message" style="color:red;"></span>
-						</td>
-					</ul>
-				</div>
-			</dl>
-		</li>
-	</ul>
+	<br/><br/>
 	<!-- MAIN CONTENT -->
 	<div id="main1" style="height:500px"></div>
 	<!-- END MAIN CONTENT -->
@@ -203,6 +189,10 @@ var start = {
     choose: function(datas){
          end.min = datas; //开始日选好后，重置结束日的最小日期
          end.start = datas; //将结束日的初始值设定为开始日
+        if($( "#end" ).val()==""||$( "#end" ).val()==null){
+            $("#message").html("请选择结束时间！");
+            $( "#end" ).focus();
+        }
     }
 };
 
@@ -215,6 +205,10 @@ var end = {
     istoday: false,
     choose: function(datas){
         start.max = datas; //结束日选好后，充值开始日的最大日期
+        if($( "#start" ).val()==""||$( "#start").val()==null){
+            $("#message").html("请选择开始时间！");
+            $( "#start").focus();
+        }
     }
 };
 laydate(start);

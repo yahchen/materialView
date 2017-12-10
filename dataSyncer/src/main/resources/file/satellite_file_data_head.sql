@@ -2,7 +2,7 @@ CREATE TABLE public.satellite_file_data_head
 (
     s_f_id bigint NOT NULL,
     data_logo character varying(40) COLLATE pg_catalog."default" NOT NULL,
-    dada_name character varying(60) COLLATE pg_catalog."default",
+    data_name character varying(60) COLLATE pg_catalog."default",
     data_code character varying(60) COLLATE pg_catalog."default",
     retrieve_start_time timestamp without time zone,
     retrieve_end_time timestamp without time zone,
@@ -19,7 +19,7 @@ CREATE TABLE public.satellite_file_data_head
     user_id character varying(30) COLLATE pg_catalog."default",
     system_name character varying(120) COLLATE pg_catalog."default",
     data_type integer,
-    site_type integer,
+    mode_type integer,
     sate_name character varying(64) COLLATE pg_catalog."default",
     sate_file_num character varying(10) COLLATE pg_catalog."default"
 )

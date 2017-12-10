@@ -1,0 +1,378 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+	<link rel="stylesheet" type="text/css" href="js/calendar/css/style.css"/>
+	<link rel="stylesheet" th:href="@{assets/css/style2.css}"/>
+	<link href="css/style1.css" rel="stylesheet" type="text/css" />
+	<link href="css/table.css" rel="stylesheet" type="text/css" />
+	<link href="pagination/pagination.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="assets/js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="js/calendar/laydate.js"></script>
+	<script type="text/javascript" src="js/site_chart.js"></script>
+	<script type="text/javascript" src="pagination/jquery.pagination.js"></script>
+	<script type="text/javascript">
+        $(document).ready(function(){
+            $("#materialType").on('change',function(){//注册资料类型的change事件
+                //alert($(this).val());
+                if($( "#materialType" ).val()=='4'){//卫星资料与其他资料不一样
+                    $("#materialName1").text("探测器名称");
+                    $("#satelliteName1").show();
+                    $("#satelliteName").show();
+
+				}else{
+                    $("#materialName1").text("资料名称");
+                    $("#satelliteName1").hide();
+                    $("#satelliteName").hide();
+                    $('#satelliteName option').not(":first").remove();
+				}
+                    findMaterialName();
+            });
+
+            $("#materialName").on('change',function(){//注册资料类型的change事件
+                if($( "#materialType" ).val()=='4'){//卫星资料与其他资料不一样
+                    findSatelliteName();
+                }
+
+            });
+            findMaterialName();
+            displayData(0);
+
+        });
+
+        function pageCallback(pageNo) {
+            displayData(pageNo);
+        }
+
+        function displayData(pageNo) {
+            var sizePerPage=10;//每页文件数
+            var queryCond = {
+                "pageNo":(pageNo + 1),
+				"modeType":getQueryString("mode_type"),
+                "startTime":$( "#start" ).val(),
+                "endTime":$( "#end" ).val(),
+                "materialType" :$( "#materialType" ).val(),
+                "materialName":$( "#materialName" ).val(),
+                "sateName":$( "#satelliteName" ).val(),
+                "timeConsumeIndex" :$( "#timeConsume" ).val(),
+                "timeConsume":$( "#timeConsume" ).find("option:selected").text(),
+                "succFail":$( "#succFail" ).val(),
+				"pageSize":sizePerPage
+            };
+            $.ajax({
+                type: "GET",
+                dataType:"json",
+                url:'/findRecordsByPage',
+                data:queryCond,
+                cache: false,
+                beforeSend: function() {
+                    $("#message").html("正在加载数据,请稍后...");
+                    return true;
+                },
+                success:function(json) {
+                    $("#message").html("");
+                    $("#pageNo1").html(parseInt(pageNo)+1)
+                    $("#totalPages").html(parseInt((json.total -1)/sizePerPage+1));
+                    $("#totalRecords").html(json.total);
+                    if($( "#materialType" ).val()=="4"){
+                        $("#table_data").empty();
+                        $("#table_data").append("<thead><tr><td>序号</td><td>资料时间</td><td>探测器名称</td><td>探测器编码</td><td>系统名称</td><td>卫星名称</td><td>卫星个数</td><td>耗时</td><td>成功/失败</td></tr></thead>");
+                        if (json.total == 0) {
+                            $("#message").html("没有符合条件的数据");
+                        }else {
+                            var htmlString = "";
+
+                            $.each(json.data, function(i, n) {
+                                htmlString+="<tr>";
+                                htmlString+="<td>" + (i+1) + "</td>";
+                                htmlString+="<td>" + n.data_time + "</td>";
+                                //htmlString+="<td>" + n.user_id + "</td>";
+                                htmlString+="<td>" + n.data_name + "</td>";
+                                htmlString+="<td>" + n.data_code + "</td>";
+                                htmlString+="<td>" + n.system_name + "</td>";
+                                htmlString+="<td>" + n.sate_name + "</td>";
+                                htmlString+="<td>" + n.sate_file_num + "</td>";
+                                htmlString+="<td>" + n.retrieve_process_time + "</td>";
+                                htmlString+="<td>" +  n.return_abnormal_info + "</td>";
+                                htmlString+="</tr>";
+                            });
+                            $("#table_data").append(htmlString);
+                        }
+                    }else {
+                        $("#table_data").empty();
+                        $("#table_data").append("<thead><tr><td>序号</td><td>资料时间</td><td>资料名称</td><td>资料编码</td><td>系统名称</td><td>资料个数</td><td>耗时</td><td>经纬度范围</td><td>成功/失败</td></tr></thead>")
+                        if (json.total == 0) {
+                            $("#message").html("没有符合条件的数据");
+                        }else {
+                            var htmlString = "";
+
+                            $.each(json.data, function(i, n) {
+                                htmlString+="<tr>";
+                                htmlString+="<td>" + (i+1) + "</td>";
+                                htmlString+="<td>" + n.data_time + "</td>";
+                                //htmlString+="<td>" + n.user_id + "</td>";
+                                htmlString+="<td>" + n.data_name + "</td>";
+                                htmlString+="<td>" + n.data_code + "</td>";
+                                htmlString+="<td>" + n.system_name + "</td>";
+                                htmlString+="<td>" + n.data_num + "</td>";
+                                htmlString+="<td>" + n.retrieve_process_time + "</td>";
+                                htmlString+="<td>" + n.longitude_latitude_scope + "</td>";
+                                htmlString+="<td>" +  n.return_abnormal_info + "</td>";
+                                htmlString+="</tr>";
+                            });
+                            $("#table_data").append(htmlString);
+                        }
+                    }
+
+                    $("#pagination").pagination(json.total, {
+                        callback: pageCallback,
+                        prev_text: '上一页',
+                        next_text: '下一页',
+                        items_per_page:sizePerPage,
+                        num_display_entries:10,
+                        current_page:pageNo,
+                        num_edge_entries:1,
+                        maxentries: json.total,
+                        link_to:'javascript:void(0)'
+                    });
+                },
+                error: function() {
+                    $("#message").html("分页查询数据失败");
+                }
+            });
+
+            $("#goPage").keydown(function(event) {
+                if (event.keyCode == 13) { //回车
+                    displayData(parseInt(this.value)-1);
+                    event.keyCode = 0; //清空回车事件
+                }
+            });
+        }
+function findMaterialName() {//资料或探测器下拉框选项
+
+    var queryCond = {
+        "modeType":getQueryString("mode_type"),
+        "startTime":$( "#start" ).val(),
+        "endTime":$( "#end" ).val(),
+        "materialType" :$( "#materialType" ).val(),
+        "timeConsumeIndex" :$( "#timeConsume" ).val(),
+        "timeConsume":$( "#timeConsume" ).find("option:selected").text(),
+        "succFail":$( "#succFail" ).val()
+    };
+    $.ajax({
+        type: "GET",
+        dataType:"json",
+        url:'/findMaterialName',
+        data:queryCond,
+        cache: false,
+        beforeSend: function() {
+            $("#message").html("正在加载资料名称,请稍后...");
+            return true;
+        },
+        success:function(json) {
+            $('#materialName option').not(":first").remove();
+            var optionString = "";
+            $.each(json.list, function(i, n) {
+                optionString+="<option value="+n.data_logo+">"+n.data_name+"</option>";
+            });
+            if($.trim(optionString)!==""){
+                $("#materialName").append(optionString);
+            }
+            $("#message").html("");
+        },
+        error: function() {
+            $("#message").html("加载资料名称失败");
+        }
+});
+        }
+
+        function findSatelliteName() {//卫星下拉框选项
+
+            var queryCond = {
+                "modeType":getQueryString("mode_type"),
+                "startTime":$( "#start" ).val(),
+                "endTime":$( "#end" ).val(),
+                "materialType" :$( "#materialType" ).val(),
+                "materialName" :$( "#materialName" ).val(),
+                "timeConsumeIndex" :$( "#timeConsume" ).val(),
+                "timeConsume":$( "#timeConsume" ).find("option:selected").text(),
+                "succFail":$( "#succFail" ).val()
+            };
+            $.ajax({
+                type: "GET",
+                dataType:"json",
+                url:'/findSatelliteName',
+                data:queryCond,
+                cache: false,
+                beforeSend: function() {
+                    $("#message").html("正在加载卫星名称,请稍后...");
+                    return true;
+                },
+                success:function(json) {
+                    $('#satelliteName option').not(":first").remove();
+                    var optionString = "";
+                    $.each(json.list, function(i, n) {
+                        optionString+="<option value="+n.sate_name+">"+n.sate_name+"</option>";
+                    });
+                    if($.trim(optionString)!==""){
+                        $("#satelliteName").append(optionString);
+                    }
+                    $("#message").html("");
+                },
+                error: function() {
+                    $("#message").html("加载卫星名称失败！");
+                }
+            });
+        }
+	</script>
+</head>
+
+<body>
+<!-- WRAPPER -->
+<div>
+	<!-- MAIN -->
+	<br/>
+	<div class="panel-heading" >
+		<h3 class="panel-title" id="h3Text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户行为记录</h3>
+	</div><br/>
+
+	<div>
+		<ul>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<strong>开始时间：</strong> <input class="inline laydate-icon" placeholder="请输入日期" id="start" style="width:100px; margin-right:10px;"></input>
+			<strong>结束时间：</strong> <input class="inline laydate-icon" placeholder="请输入日期" id="end" style="width:100px;"></input>
+			&nbsp;
+			<strong>资料类型：</strong>
+			<select id="materialType"  style="height:21px;">
+				<option value="1">站点资料</option>
+				<option value="2">格点资料</option>
+				<option value="3">文件资料</option>
+				<option value="4">卫星资料</option>
+			</select>
+			&nbsp;
+			<strong id="materialName1">资料名称：</strong>
+			<select id="materialName"  style="height:21px;">
+				<option value="0" style="text-align: center">--请选择--</option>
+			</select>
+			&nbsp;
+
+		</ul><br/>
+		<ul>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<!--<strong>用户：</strong>
+			<select id="userName"  style="height:21px;">
+				<option value="0">请选择资料类型</option>
+                <option value="1">请选择资料类型</option>
+			</select>
+			&nbsp;&nbsp;-->
+			<strong id="satelliteName1" hidden="hidden">卫星名称：</strong>
+			<select id="satelliteName"  style="height:21px;" hidden="hidden">
+				<option value="0"  style="text-align: center">--请选择--</option>
+			</select>&nbsp;
+			<strong>耗时：</strong>
+			<select id="timeConsume"  style="height:21px;">
+				<option value="0">全部</option>
+				<option value="1">&lt;=1s</option>
+				<option value="2">1-2s</option>
+				<option value="3">2-5s</option>
+				<option value="4">&gt;5s</option>
+			</select>
+			&nbsp;
+			<strong>成功/失败：</strong>
+			<select id="succFail"  style="height:21px;">
+				<option value="0">全部</option>
+				<option value="1">成功</option>
+				<option value="-1">失败</option>
+			</select>&nbsp;
+			<button style="width:68px;height:21px" onclick="pageCallback(0)" >查询</button>&nbsp;&nbsp;
+			<td>
+				<span id="message" style="color:red;"></span>
+			</td>
+		</ul>
+	</div>
+    <br/>
+	<!-- MAIN CONTENT -->
+	<div id="main1" style="height:500px">
+	<table  border="0" cellpadding="0" cellspacing="0" class="table_border">
+		<tr>
+			<td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td align="center">
+						<table border="0" cellpadding="0" cellspacing="0" id="table_data" class="box_num_table">
+							<thead>
+							<tr>
+								<td>序号</td>
+								<td>资料时间</td>
+								<td>用户</td>
+								<td>资料名称</td>
+								<td>资料编码</td>
+
+								<td>资料个数</td>
+								<td>耗时</td>
+								<td>经纬度范围</td>
+								<td>成功/失败</td>
+							</tr>
+							</thead>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td align="center">
+						第<span id="pageNo1" style="color: red;"></span>页&nbsp;
+						共<span id="totalPages" style="color: red;"></span>页	&nbsp;
+						共:<span id="totalRecords" style="color: red;"></span>条 &nbsp;
+						<div id="pagination"  style="display: inline" class="pagination"></div>
+					</td>
+				</tr>
+			</table></td>
+		</tr>
+	</table>
+	</div>
+	<!-- END MAIN CONTENT -->
+<!-- END MAIN -->
+</div>
+<!-- END WRAPPER -->
+
+<script type="text/javascript">
+!function(){
+	laydate.skin('molv');//切换皮肤，请查看skins下面皮肤库
+	//laydate({elem: '#start2'});//绑定元素
+}();
+
+
+//日期范围限制
+var start = {
+    elem: '#start',
+    format: 'YYYY-MM-DD',
+    //min: laydate.now(), //设定最小日期为当前日期
+	min: '1900-01-01', //设定最小日期为当前日期
+    max: '2099-00-01', //最大日期
+    istime: true,
+    istoday: false,
+    choose: function(datas){
+         end.min = datas; //开始日选好后，重置结束日的最小日期
+         end.start = datas; //将结束日的初始值设定为开始日
+    }
+};
+
+var end = {
+    elem: '#end',
+    format: 'YYYY-MM-DD',
+	min: '1900-01-01', //设定最小日期为当前日期
+    max: '2099-01-01',
+    istime: true,
+    istoday: false,
+    choose: function(datas){
+        start.max = datas; //结束日选好后，充值开始日的最大日期
+    }
+};
+laydate(start);
+laydate(end);
+</script>
+
+</body>
+</html>

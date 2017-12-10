@@ -1,9 +1,7 @@
 package com.hx.monitor;
 
-import com.hx.dao.GridMatrixDao;
-import com.hx.dao.FileChartDao;
-import com.hx.dao.SiteChartDao;
-import com.hx.dao.PostgreSqlDao;
+import com.hx.bean.BehaviorRecordParam;
+import com.hx.dao.*;
 import com.hx.service.GridMatrixService;
 import com.hx.service.SiteChartService;
 import org.junit.Test;
@@ -51,6 +49,9 @@ public class SqlTest {
     @Qualifier("fileChartDaoImpl")
     private FileChartDao fileChartDao;
 
+    @Autowired
+    @Qualifier("behaviorRecordDaoImpl")
+    private BehaviorRecordDao behaviorRecordDao;
     @Test
     public void testSql(){
         Assert.notNull(template,"template is null");
@@ -102,5 +103,19 @@ public class SqlTest {
         String endTime =("2017-11-20 23:59:59");
         List resutl = fileChartDao.findSateFileChartByTimeElement(startTime,endTime,"GM_RATVC_ATOVS","N15-AMSUA-BAWX");
         System.out.println(resutl.size());
+    }
+
+    @Test
+    public void testBehaviorRecord(){
+        String startTime ="2017-10-01 00:00:00";
+        String endTime =("2017-11-20 23:59:59");
+        BehaviorRecordParam behaviorRecordParam=new BehaviorRecordParam();
+        behaviorRecordParam.setStartTime(startTime);
+        behaviorRecordParam.setEndTime(endTime);
+        behaviorRecordParam.setMaterialType("3");
+        behaviorRecordParam.setPageNo(1);
+        behaviorRecordParam.setPageSize(5);
+        Map map = behaviorRecordDao.findRecordsByPage(behaviorRecordParam);
+        System.out.println(map.get("total"));
     }
 }
