@@ -194,7 +194,7 @@ html.fullscreen-bg #wrapper {
     background-color: #f8f8f8; }
   .navbar-default .brand {
     float: left;
-    padding: 26px 109px;                 /* 原始为 upadding: 26px 49px;   */
+    padding: 26px 20px;                  /* 原始为 padding: 26px 49px;   */
     background-color: #fff; } 
   @media screen and (max-width: 1024px) {
     .navbar-default .brand {
@@ -297,7 +297,7 @@ html.fullscreen-bg #wrapper {
 @media screen and (min-width: 768px) {
   .navbar-nav.navbar-right {
     margin-right: 0; 
-	padding: 0px 150px;         
+	padding: 10px 120px;               /* 原始为 padding: 0px 150px;       */
 	} }
 
 @media screen and (max-width: 767px) {

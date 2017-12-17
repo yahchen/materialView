@@ -10,6 +10,8 @@ $(function(){
 
     var v22 = "<div class='main-content'><div class='container-fluid'><h3 class='page-title'>格点资料>检验用格点要素场资料>格点资料>矩阵图</h3><div class='panel'><iframe src='/grid_material_view' width='100%'  border='0'  style='padding: 0px; width: 100%; height: 550px;'  frameborder='0'></iframe></div></div></div>";
 
+    var v30 = "<li><a data-toggle='collapse'><i class='lnr lnr-layers'></i><span>用户日志</span><!--子图标标识--><i class='icon-submenu lnr lnr-chevron-left'></i></a></li><hr/>";
+
 
 
     toSiteChartDM1GC=function (){

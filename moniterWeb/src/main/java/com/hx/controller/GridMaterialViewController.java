@@ -27,13 +27,12 @@ public class GridMaterialViewController {
 
     @RequestMapping("/grid_matrix_view")//对应url
     public String gridMaterialView(){//参数可以选择性添加，不加也无所谓。如果添加后，框架会帮助自动注入。
-        // todo add mode kv
-        //String data_logo=request.getParameter("data_logo");
-       // mv.setViewName("grid/grid_matrix");
-        //mv.addObject("data_logo",data_logo);
         return "grid/grid_matrix";
     }
-
+    @RequestMapping("/grid_matrix_gm_view")//对应url
+    public String gridMateriaGMlView(){//参数可以选择性添加，不加也无所谓。如果添加后，框架会帮助自动注入。
+        return "grid/grid_matrix_gm";
+    }
     @RequestMapping("/findMatrixByTimeElement")//对应url
     @ResponseBody
     public Map<String,Object> findMatrixByTimeElement(HttpServletRequest request,ModelAndView mv){//参数可以选择性添加，不加也无所谓。如果添加后，框架会帮助自动注入。
