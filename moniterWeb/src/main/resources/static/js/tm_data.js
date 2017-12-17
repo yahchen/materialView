@@ -10,6 +10,8 @@ $(function(){
 
     var v22 = "<div class='main-content'><div class='container-fluid'><h3 class='page-title'>格点资料>检验用格点要素场资料>格点资料>矩阵图</h3><div class='panel'><iframe src='/grid_material_view' width='100%'  border='0'  style='padding: 0px; width: 100%; height: 550px;'  frameborder='0'></iframe></div></div></div>";
 
+
+
     toSiteChartDM1GC=function (){
         $("#main").empty();
         $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>站点资料>地面资料>地面1小时观察资料>折线图</h3><div class='panel'><iframe id='iframe' src='/site_chart_view?data_logo=TM_RSURF_1h'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 800px;'  frameborder='0'></iframe></div></div></div>");

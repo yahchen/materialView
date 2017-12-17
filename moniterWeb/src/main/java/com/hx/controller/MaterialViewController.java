@@ -45,4 +45,7 @@ public class MaterialViewController {
         // todo add mode kv
         return "TMdata";
     }
+
+    //index页面的一些跳转页面方法
+
 }

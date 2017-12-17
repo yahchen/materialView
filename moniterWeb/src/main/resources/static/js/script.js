@@ -1,5 +1,5 @@
 $(document).ready(function(){
-
+    //$('.tooltip').tooltipster();
 	var data_logo=getQueryString("data_logo");//上一页传递过来的值
     getYesDay();//初始化时，默认设置昨天日期
     onLoadDdSelected(data_logo);//选中效果
@@ -11,17 +11,21 @@ $(document).ready(function(){
 		if ($(this).hasClass("select-ee")) {                                      // 如果该dd中 选择的是（包含）“select-ee”
 			$("#selectChildren1").show();
 			$("#selectChildren2").hide();
-
+            $("#wendu01").addClass("selected").siblings().removeClass("selected");
 		}else if($(this).hasClass("select-jj")){                               // 如果该dd中 选择的是（包含）“select-jj
 			$("#selectChildren1").hide();
 			$("#selectChildren2").show();
-
+            $("#jiangshui02").addClass("selected").siblings().removeClass("selected");
 		}
+        getDDSelectedValue();
 	});
 	
 	$("#selectChildren1 dd").click(function () {
 		$(this).addClass("selected").siblings().removeClass("selected");
-		var text = $(this).find("a").text();  // 找到当前点击的dt下的a标签并获取其内容
+        if($(this).attr("value")!=null){
+            onShowGridMatrix($(this).attr("value"));
+        }
+		/**var text = $(this).find("a").text();  // 找到当前点击的dt下的a标签并获取其内容
 		var varText="TM_GRID_ECMWF_T";
 		if(text=="位势高度"){
             varText="TM_GRID_ECMWF_H";
@@ -30,14 +34,16 @@ $(document).ready(function(){
 		}else if(text=="V风"){
 		    varText="TM_GRID_ECMWF_V";
 		}
-        onShowGridMatrix(varText);
+        onShowGridMatrix(varText);**/
 	});
-	
-	
+
 	$("#selectChildren2 dd").click(function () {
 		$(this).addClass("selected").siblings().removeClass("selected");
-		var text = $(this).find("a").text();  // 找到当前点击的dt下的a标签并获取其内容
-        var varText="TM_GRID_JAPAN_PRE";
+        if($(this).attr("value")!=null){
+            onShowGridMatrix($(this).attr("value"));
+		}
+	/**var text = $(this).find("a").text();  // 找到当前点击的dt下的a标签并获取其内容
+       var varText="TM_GRID_JAPAN_PRE";
         if(text=="温度"){
            varText="TM_GRID_JAPAN_T";
         }else if(text=="位势高度"){
@@ -46,13 +52,9 @@ $(document).ready(function(){
             varText="TM_GRID_JAPAN_U";
         }else if(text=="V风"){
             varText="TM_GRID_JAPAN_V";
-        }
-		onShowGridMatrix(varText);
+        }**/
 	});
-
 });
-
-
 
 getQueryString = function(name) {//读取上一个页面src的值
     var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
@@ -88,7 +90,6 @@ onShowGridMatrix=function(aPara){//显示矩阵图
 			 			var s="<tr height='50'>";
 
 			 		   $.each(obj, function(key, value){
-			 			   //alert(value);
 			 			   var labelStr="<span  style='display:block;font-size:20px;text-align:center'>"+value+"</span>";
 			 			   if(value.fileState==-1){
 			 				  labelStr="<label  class='tooltip'  id='Id12' title='"+value.fileInfo+"' style= 'display:block;width:25px;height:45px;background-color: #EE1111;margin-right:'><span class='tooltip'  id='id19' style='font-size:40px;'>&times;</span></label>";
@@ -146,11 +147,19 @@ onLoadDdSelected=function(aParam){
        $("#vfeng02").addClass("selected").siblings().removeClass("selected");
       }
 }
-getYesDay=function () {
+getYesDay=function () {//页面加载时，设置默认时间
     var nowdate = new Date();
     var y = nowdate.getFullYear();
     var m = nowdate.getMonth()+1;
     var d = nowdate.getDate()-1;
     var formatnowdate = y+'-'+m+'-'+d;
     $("#start2").val(formatnowdate);
+}
+
+getDDSelectedValue=function () {
+    $("dd.selected:visible").each(function () {
+        if($(this).attr("value")!=null){//不为空时，则再次触发查询页面
+            onShowGridMatrix($(this).attr("value"));
+        }
+    });
 }

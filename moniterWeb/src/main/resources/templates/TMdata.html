@@ -7,9 +7,11 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
 	<!-- VENDOR CSS -->
+	<link rel="stylesheet" type="text/css" href="js/calendar/css/style.css"/>
 	<link rel="stylesheet" th:href="@{assets/vendor/bootstrap/css/bootstrap.min.css}"/>
 	<link rel="stylesheet" th:href="@{assets/vendor/font-awesome/css/font-awesome.min.css}"/>
 	<link rel="stylesheet" th:href="@{assets/vendor/linearicons/style.css}"/>
+
 	<!-- MAIN CSS -->
 	<link rel="stylesheet" th:href="@{assets/css/main.css}"/>
 	<!-- ICONS -->
@@ -208,6 +210,11 @@
 		<div class="main" id="main">
 			<!-- MAIN CONTENT -->
 			<div class="main-content">
+
+				<div class='panel'>
+					<iframe id='iframe' src='/site_chart_view?data_logo=TM_RSURF_1h'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 800px;'  frameborder='0'></iframe>
+				</div>
+
 				<div class="container-fluid">
 					<div class="panel">
 						<div class="panel-heading">
@@ -233,10 +240,16 @@
 							</div>
 
 						</div>
+
 						<div class="panel-body">
+
+
+
 							<div id="customMap" width="100%"  border="0"  style="padding: 0px; width: 100%; height: 600px;">
-							</div>
 						</div>
+
+					</div>
+
 						<div class="panel-body">
 							<div id="grid" width="100%"  border="0"  style="padding: 0px; width: 100%; height: 400px;">
 								lkjslkdjfflskdjf
@@ -250,6 +263,7 @@
 		<!-- END MAIN -->
 	</div>
 	<!-- END WRAPPER -->
+
 
 	<script type="text/javascript">
         !function(){
