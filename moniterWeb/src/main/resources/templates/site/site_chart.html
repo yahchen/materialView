@@ -18,27 +18,24 @@
 <!-- WRAPPER -->
 <div>
 	<!-- MAIN --><br/>
-	<div class="panel-heading" >
-		<h3 class="panel-title" id="h3Text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;折线图</h3>
-	</div><br/>
 	<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<strong>开始时间：</strong> <input class="inline laydate-icon" placeholder="请输入日期" id="start" style="width:100px; margin-right:10px;"></input>&nbsp;
-		<strong>结束时间：</strong> <input class="inline laydate-icon" placeholder="请输入日期" id="end" style="width:100px;"></input>&nbsp;
-	    <strong>统计时区：</strong>
-		<select id="provSelect"  style="height:21px;">
-			<option value="0">--请选择--</option>
-			<option value="1">近一周</option>
-			<option value="2">近两周</option>
-			<option value="3">近三周</option>
-			<option value="4">近一个月</option>
-		</select>&nbsp;
-		<button style="width:68px;height:21px" onclick="onSelect()" >查询</button>&nbsp;
+		<strong>结束时间：</strong> <input class="inline laydate-icon" placeholder="请输入日期" id="end" style="width:100px;"></input>&nbsp;&nbsp;
+		<!--  <strong>统计时区：</strong>
+      <select id="provSelect"  style="height:21px;">
+              <option value="0">请选择</option>
+              <option value="1">近一周</option>
+              <option value="2">近两周</option>
+              <option value="3">近三周</option>
+              <option value="4">近一个月</option>
+          </select>-->&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<button style="width:68px;height:21px" onclick="onSelect()" >查询</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<span id="message" style="color:red;"></span>
-<div><br/>
-	<!-- MAIN CONTENT -->
-	<div id="main1" style="height:500px"></div>
-	<!-- END MAIN CONTENT -->
-</div>
+		<div><br/><br/>
+			<!-- MAIN CONTENT -->
+			<div id="main1" style="height:500px"></div>
+			<!-- END MAIN CONTENT -->
+		</div>
     </div>
 <!-- END MAIN -->
 </div>
@@ -105,8 +102,8 @@ selectChartData=function () {
                 option = {
                     title : [{//标题组件
                         left:'left',
-                        text: '观测到的站点数目折线图',//主标题
-                        subtext: '观测到的站点数目（个）'//子标题
+                        text: '站点数折线图',//主标题
+                        subtext: '观测到的站点数（个）'//子标题
                     },{
                         top: '55%',
                         left: 'left',

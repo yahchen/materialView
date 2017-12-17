@@ -236,17 +236,14 @@ function findMaterialName() {//资料或探测器下拉框选项
 <div>
 	<!-- MAIN -->
 	<br/>
-	<div class="panel-heading" >
-		<h3 class="panel-title" id="h3Text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户行为记录</h3>
-	</div><br/>
 
 	<div>
 		<ul>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<strong>开始时间：</strong> <input class="inline laydate-icon" placeholder="请输入日期" id="start" style="width:100px; margin-right:10px;"></input>
-			<strong>结束时间：</strong> <input class="inline laydate-icon" placeholder="请输入日期" id="end" style="width:100px;"></input>
+			<strong>开始时间:</strong> <input class="inline laydate-icon" placeholder="请输入日期" id="start" style="width:100px; margin-right:10px;"></input>
+			<strong>结束时间:</strong> <input class="inline laydate-icon" placeholder="请输入日期" id="end" style="width:100px;"></input>
 			&nbsp;
-			<strong>资料类型：</strong>
+			<strong>资料类型:</strong>
 			<select id="materialType"  style="height:21px;">
 				<option value="1">站点资料</option>
 				<option value="2">格点资料</option>
@@ -254,7 +251,7 @@ function findMaterialName() {//资料或探测器下拉框选项
 				<option value="4">卫星资料</option>
 			</select>
 			&nbsp;
-			<strong id="materialName1">资料名称：</strong>
+			<strong id="materialName1">资料名称:</strong>
 			<select id="materialName"  style="height:21px;">
 				<option value="0" style="text-align: center">--请选择--</option>
 			</select>
@@ -269,11 +266,11 @@ function findMaterialName() {//资料或探测器下拉框选项
                 <option value="1">请选择资料类型</option>
 			</select>
 			&nbsp;&nbsp;-->
-			<strong id="satelliteName1" hidden="hidden">卫星名称：</strong>
+			<strong id="satelliteName1" hidden="hidden">卫星名称:</strong>
 			<select id="satelliteName"  style="height:21px;" hidden="hidden">
 				<option value="0"  style="text-align: center">--请选择--</option>
 			</select>&nbsp;
-			<strong>耗时：</strong>
+			<strong>耗时:</strong>
 			<select id="timeConsume"  style="height:21px;">
 				<option value="0">全部</option>
 				<option value="1">&lt;=1s</option>
@@ -282,12 +279,12 @@ function findMaterialName() {//资料或探测器下拉框选项
 				<option value="4">&gt;5s</option>
 			</select>
 			&nbsp;
-			<strong>成功/失败：</strong>
+			<strong>成功/失败:</strong>
 			<select id="succFail"  style="height:21px;">
 				<option value="0">全部</option>
 				<option value="1">成功</option>
 				<option value="-1">失败</option>
-			</select>&nbsp;
+			</select>&nbsp;&nbsp;&nbsp;
 			<button style="width:68px;height:21px" onclick="pageCallback(0)" >查询</button>&nbsp;&nbsp;
 			<td>
 				<span id="message" style="color:red;"></span>
