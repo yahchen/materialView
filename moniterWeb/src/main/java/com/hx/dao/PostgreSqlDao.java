@@ -82,54 +82,59 @@ public class PostgreSqlDao {
     // 根据时间,构建卫星文件名
     public List<Map<String,Object>> getSatelliteFileTimes(String table,  List<Map<String,Object>> listTime){
 
-        String satelliteFileName = null;
-        if("AMSUA_NOAA15".equals(table)){
-            satelliteFileName = "SATE_L1_MUS_ATOVS_MWB_S1C_GLB-N15-AMSUA-045KM-BAWX-";
-        }else if("AMSUA_NOAA18".equals(table)){
-            satelliteFileName = "SATE_L1_MUS_ATOVS_MWB_S1C_GLB-N18-AMSUA-045KM-BAWX-";
-        }else if("AMSUA_NOAA19_BAWX" == table){
-            satelliteFileName = "SATE_L1_MUS_ATOVS_MWB_S1C_GLB-N19-AMSUA-045KM-BAWX-";
-        }else if("AMSUA_NOAA19_EUMP" == table){
-            satelliteFileName = "SATE_L1_MUS_ATOVS_MWB_S1C_GLB-N19-AMSUA-045KM-EUMP-PROC-";
-        }else if("AMSUA_NOAA19_EUMS" == table){
-            satelliteFileName = "SATE_L1_MUS_ATOVS_MWB_S1C_GLB-N19-AMSUA-045KM-EUMS-EUMS-EATH-PROC-";
-        }else if("AMSUA_MTB_EUMP" == table){
-            satelliteFileName = "SATE_L1_MUS_ATOVS_MWB_S1C_GLB-MTB-AMSUA-045KM-EUMP-PROC-";
-        }else if("AMSUA_MTB_EUMS" == table){
-            satelliteFileName = "SATE_L1_MUS_ATOVS_MWB_S1C_GLB-MTB-AMSUA-045KM-EUMS-EUMS-EEDM-PROC-";
-        }else if("AMSUA_MTA_EUMC" == table){
-            satelliteFileName = "SATE_L1_MUS_ATOVS_MWB_S1C_GLB-MTA-AMSUA-045KM-EUMC-PROC-";
-        }else if("AMSUA_MTA_EUMS" == table){
-            satelliteFileName = "SATE_L1_MUS_ATOVS_MWB_S1C_GLB-MTA-AMSUA-045KM-EUMS-EUMS-EMAS-PROC-";
-        }else if("AMSUB_NOAA15" == table){
-            satelliteFileName = "SATE_L1_MUS_ATOVS_MWB_S1C_GLB-N15-AMSUB-015KM-BAWX-";
-        }else if("MHS_NOAA18" == table){
-            satelliteFileName = "SATE_L1_MUS_ATOVS_MWB_S1C_GLB-N18-MHS-015KM-BAWX-";
-        }else if("MHS_NOAA19" == table){
-            satelliteFileName = "SATE_L1_MUS_ATOVS_MWB_S1C_GLB-N19-MHS-015KM-BAWX-";
-        }else if("MHS_MTB" == table){
-            satelliteFileName = "SATE_L1_MUS_ATOVS_MWB_S1C_GLB-MTA-MHS-015KM-EUMC-PROC-";
-        }else if("MHS_MTA" == table){
-            satelliteFileName = "SATE_L1_MUS_ATOVS_MWB_S1C_GLB-MTB-MHS-015KM-EUMP-PROC-";
-        }else if("IASI_MTA" == table){
-            satelliteFileName = "SATE_L1_MTA_IASI_MWB_RED_GLB-EUMP-";
-        }else if("IASI_MTB" == table){
-            satelliteFileName = "";     //添加文件名称
-        }else if("GNSS_MTB" == table){
-            satelliteFileName = "SATE_L2_MUS_MUTDS_NUL_GNSS_GLB-MTB-EKMI-";
-        }else if("GNSS_MTA" == table){
-            satelliteFileName = "SATE_L2_MUS_MUTDS_NUL_GNSS_GLB-MTA-EKMI-";
-        }else if("GNSS_TDMX" == table){
-            satelliteFileName = "SATE_L2_MUS_MUTDS_NUL_GNSS_GLB-TDMX-EDZW-";
-        }else if("GNSS_TASR" == table){
-            satelliteFileName = "SATE_L2_MUS_MUTDS_NUL_GNSS_GLB-TSAR-EDZW-";
-        }else if("ASCAT_MTA" == table){
-            satelliteFileName = "SATE_L1_MTA_ASCAT_MWB_S1C_GLB-025KM-GLB-EHDB-";
-        }else if("ASCAT_MTB" == table){
-            satelliteFileName = "";
-        }else{
-            // 添加新的内容
+        String satelliteFileName = "";
 
+        // 判断该表中是否有某天的数据，如果有size>0,没有的时候size=0
+        if(listTime.size()>0){
+
+            if("AMSUA_NOAA15".equals(table)){
+                satelliteFileName = "SATE_L1_MUS_ATOVS_MWB_S1C_GLB-N15-AMSUA-045KM-BAWX-";
+            }else if("AMSUA_NOAA18".equals(table)){
+                satelliteFileName = "SATE_L1_MUS_ATOVS_MWB_S1C_GLB-N18-AMSUA-045KM-BAWX-";
+            }else if("AMSUA_NOAA19_BAWX".equals(table)){
+               satelliteFileName = "SATE_L1_MUS_ATOVS_MWB_S1C_GLB-N19-AMSUA-045KM-BAWX-";
+            }else if("AMSUA_NOAA19_EUMP".equals(table)){
+                satelliteFileName = "SATE_L1_MUS_ATOVS_MWB_S1C_GLB-N19-AMSUA-045KM-EUMP-PROC-";
+            }else if("AMSUA_NOAA19_EUMS".equals(table)){
+                satelliteFileName = "SATE_L1_MUS_ATOVS_MWB_S1C_GLB-N19-AMSUA-045KM-EUMS-EUMS-EATH-PROC-";
+            }else if("AMSUA_MTB_EUMP".equals(table)){
+                satelliteFileName = "SATE_L1_MUS_ATOVS_MWB_S1C_GLB-MTB-AMSUA-045KM-EUMP-PROC-";
+            }else if("AMSUA_MTB_EUMS".equals(table)){
+                satelliteFileName = "SATE_L1_MUS_ATOVS_MWB_S1C_GLB-MTB-AMSUA-045KM-EUMS-EUMS-EEDM-PROC-";
+            }else if("AMSUA_MTA_EUMC".equals(table)){
+                satelliteFileName = "SATE_L1_MUS_ATOVS_MWB_S1C_GLB-MTA-AMSUA-045KM-EUMC-PROC-";
+            }else if("AMSUA_MTA_EUMS".equals(table)){
+                satelliteFileName = "SATE_L1_MUS_ATOVS_MWB_S1C_GLB-MTA-AMSUA-045KM-EUMS-EUMS-EMAS-PROC-";
+            }else if("AMSUB_NOAA15".equals(table)){
+                satelliteFileName = "SATE_L1_MUS_ATOVS_MWB_S1C_GLB-N15-AMSUB-015KM-BAWX-";
+            }else if("MHS_NOAA18".equals(table)){
+                satelliteFileName = "SATE_L1_MUS_ATOVS_MWB_S1C_GLB-N18-MHS-015KM-BAWX-";
+            }else if("MHS_NOAA19".equals(table)){
+                satelliteFileName = "SATE_L1_MUS_ATOVS_MWB_S1C_GLB-N19-MHS-015KM-BAWX-";
+            }else if("MHS_MTB".equals(table)){
+                satelliteFileName = "SATE_L1_MUS_ATOVS_MWB_S1C_GLB-MTA-MHS-015KM-EUMC-PROC-";
+            }else if("MHS_MTA".equals(table)){
+                satelliteFileName = "SATE_L1_MUS_ATOVS_MWB_S1C_GLB-MTB-MHS-015KM-EUMP-PROC-";
+            }else if("IASI_MTA".equals(table)){
+                satelliteFileName = "SATE_L1_MTA_IASI_MWB_RED_GLB-EUMP-";
+            }else if("IASI_MTB".equals(table)){
+                satelliteFileName = "";     //添加文件名称
+            }else if("GNSS_MTB".equals(table)){
+                satelliteFileName = "SATE_L2_MUS_MUTDS_NUL_GNSS_GLB-MTB-EKMI-";
+            }else if("GNSS_MTA".equals(table)){
+                satelliteFileName = "SATE_L2_MUS_MUTDS_NUL_GNSS_GLB-MTA-EKMI-";
+            }else if("GNSS_TDMX".equals(table)){
+                satelliteFileName = "SATE_L2_MUS_MUTDS_NUL_GNSS_GLB-TDMX-EDZW-";
+            }else if("GNSS_TASR".equals(table)){
+                satelliteFileName = "SATE_L2_MUS_MUTDS_NUL_GNSS_GLB-TSAR-EDZW-";
+            }else if("ASCAT_MTA".equals(table)){
+                satelliteFileName = "SATE_L1_MTA_ASCAT_MWB_S1C_GLB-025KM-GLB-EHDB-";
+            }else if("ASCAT_MTB".equals(table)){
+                satelliteFileName = "";
+            }else{
+                // 添加新的内容
+                satelliteFileName = "";
+            }
         }
 
         // 根据时间构建卫星文件名
