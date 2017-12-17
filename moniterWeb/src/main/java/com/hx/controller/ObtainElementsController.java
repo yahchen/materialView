@@ -23,6 +23,16 @@ public class ObtainElementsController {
     @Autowired
     private BinMapDataService binMapDataService;
 
+    @RequestMapping("/track_map_view")//对应url
+    public String trackMapView() {//参数可以选择性添加，不加也无所谓。如果添加后，框架会帮助自动注入。
+        return "trackmap/track_map";
+    }
+
+    @RequestMapping("/distribution_curve_view")//对应url
+    public String distributionCurveView() {//参数可以选择性添加，不加也无所谓。如果添加后，框架会帮助自动注入。
+        return "distributionCurve/distribution_curve";
+    }
+
     @RequestMapping("/getElements")//对应url
     @ResponseBody
     public List<Map<String, Object>> elements(HttpServletRequest request) {//参数可以选择性添加，不加也无所谓。如果添加后，框架会帮助自动注入。
