@@ -16,8 +16,8 @@ public class BinMapDataService {
     @Autowired
     private PostgreSqlDao postgreSqlDao;
 
-    public List<Map<String,Object>> queryBinMapData(String table, Timestamp startTime, String qualiteType){
-        return postgreSqlDao.queryBinMapData(table,startTime,qualiteType);
+    public List<Map<String,Object>> queryBinMapData(String table, Timestamp startTime,String neLat,String neLon,String swLat,String swLon,String prs){
+        return postgreSqlDao.queryBinMapData(table,startTime,neLat,neLon,swLat,swLon,prs);
     }
 
     public List<Map<String,Object>> queryBinQualiteTypeData(String table, String dataType){

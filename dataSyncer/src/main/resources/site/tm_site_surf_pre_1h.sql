@@ -8,7 +8,9 @@ CREATE TABLE public.tm_site_surf_pre_1h
     lat double precision,
     lon double precision,
     pre_1h double precision,
-    s_d_id bigint
+    s_d_id bigint,
+    id bigint not null,
+    CONSTRAINT tm_site_surf_pre_1h_pkey PRIMARY KEY (id)
 )
 WITH (
     OIDS = FALSE

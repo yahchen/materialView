@@ -91,6 +91,9 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>com.hx.MoniterWebApplication</mainClass>
+				</configuration>
 				<dependencies>
 					<dependency>
 						<groupId>org.springframework</groupId>

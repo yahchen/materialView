@@ -21,8 +21,8 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "site_data_head")
 public class SiteDataHeadDo {
-    @javax.persistence.Id
-    @Column(name="s_d_id", unique=true, nullable=false, insertable=true, updatable=false, precision=20, scale=0)
+    @javax.persistence.Id//": "主键",
+    @Column(name = "s_d_id")
     private long s_d_id;
     @Column(name = "data_logo",nullable=false)
     private String data_logo;//": "RSURF_CH",    -----资料标示
@@ -64,12 +64,6 @@ public class SiteDataHeadDo {
     private int data_type;//": "1",  ----资料类型 1:站点 2:格点 3:文件（资料本身）
     @Column(name = "site_type",nullable=true)
     private int site_type;//": "1",  ----站点类型 1:区域(中国)站点 2:全球站点（资料本身）
-    @Column(name = "elements",nullable=true)
-    private String elements;
-    @Column(name = "validTime",nullable=true)
-    private String validTime;
-    @Column(name = "fcstLevel",nullable=true)
-    private String fcstLevel;
 
     public long getS_d_id() {
         return s_d_id;
@@ -237,30 +231,6 @@ public class SiteDataHeadDo {
 
     public void setSite_type(int site_type) {
         this.site_type = site_type;
-    }
-
-    public String getElements() {
-        return elements;
-    }
-
-    public void setElements(String elements) {
-        this.elements = elements;
-    }
-
-    public String getValidTime() {
-        return validTime;
-    }
-
-    public void setValidTime(String validTime) {
-        this.validTime = validTime;
-    }
-
-    public String getFcstLevel() {
-        return fcstLevel;
-    }
-
-    public void setFcstLevel(String fcstLevel) {
-        this.fcstLevel = fcstLevel;
     }
 }
 

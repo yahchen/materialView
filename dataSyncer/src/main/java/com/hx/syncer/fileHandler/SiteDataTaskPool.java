@@ -1,8 +1,10 @@
 package com.hx.syncer.fileHandler;
 
 import com.hx.syncer.bean.GmSiteSurfGlDo;
+import com.hx.syncer.bean.GmSiteTempGlDo;
 import com.hx.syncer.bean.SiteDataHeadDo;
 import com.hx.syncer.dao.GmSiteSurfGlDao;
+import com.hx.syncer.dao.GmSiteTempGlDao;
 import com.hx.syncer.service.GridDataHeadService;
 import com.hx.syncer.service.SiteDataHeadService;
 import com.hx.syncer.util.PropertiesReflectUtil;
@@ -30,11 +32,12 @@ public class SiteDataTaskPool{
     @Autowired
     private SiteDataHeadService siteDataHeadService;
     @Autowired
-    private GmSiteSurfGlDao gmSiteSurfGlDao;
+    private GmSiteTempGlDao gmSiteTempGlDao;
     @Autowired
     private PropertiesReflectUtil propertiesReflectUtil;
 
     private AtomicLong atomId = new AtomicLong(1);
+    private AtomicLong siteAtomId = new AtomicLong(1);
     private AtomicLong atomSid = new AtomicLong(100);
 
 
@@ -42,8 +45,6 @@ public class SiteDataTaskPool{
     public void asyncGmSiteSurfGlData(Path path) {
         try {
             SiteDataHeadDo siteDataHeadDo = new SiteDataHeadDo();
-            List<GmSiteSurfGlDo> gmSiteSurfGlDoList = new ArrayList<>();
-            GmSiteSurfGlDo gmSiteSurfGlDo = null;
             Pattern pattern = Pattern.compile("\\{|\\}");
             List<String> attrList = new ArrayList<>();
             atomSid.incrementAndGet();
@@ -51,14 +52,14 @@ public class SiteDataTaskPool{
             String str = null;
             int i = 0;
             while ((str = reader.readLine()) != null) {
-                String[] kv = str.split(":");
+                String[] kv = str.split(":",2);
                 if(str.trim().equals("") || 2 != kv.length || pattern.matcher(str).find())
                     continue;
                 if(kv[0].contains("elements_value")){
-                    String[] rows = kv[1].replace("\"","").trim().split(";");
-                    for(String row:rows){
-                        asyncSaveSiteSurfData(row,attrList);
-                    }
+//                    String[] rows = kv[1].replace("\"","").trim().split(";");
+//                    for(String row:rows){
+//                        asyncSaveSiteSurfData(row,attrList);
+//                    }
                     continue;
                 }
                 if(kv[0].contains("element")){
@@ -68,13 +69,13 @@ public class SiteDataTaskPool{
                     }
                 }else {
                     String name = kv[0].replace("\"","").trim();
-                    String value = kv[1].replace("\"","").trim();
+                    String value = kv[1].replace("\"","").replace(",","").trim();
                     propertiesReflectUtil.autowiredProperty(siteDataHeadDo,siteDataHeadDo.getClass(),name,value);
                 }
             }
-            reader.close();
             siteDataHeadDo.setS_d_id(atomSid.get());
             siteDataHeadService.saveOne(siteDataHeadDo);
+            reader.close();
         }catch (Exception e){
             System.out.println(e);
         }
@@ -83,12 +84,12 @@ public class SiteDataTaskPool{
     @Async
     public void asyncSaveSiteSurfData(String row,List<String> attrList){
         String[] vs = row.split(",");
-        GmSiteSurfGlDo gmSiteSurfGlDo = new GmSiteSurfGlDo();
+        GmSiteTempGlDo gmSiteTempGlDo = new GmSiteTempGlDo();
         for(int k=0;k<vs.length;k++){
-            propertiesReflectUtil.autowiredProperty(gmSiteSurfGlDo,gmSiteSurfGlDo.getClass(),attrList.get(k),vs[k]);
+            propertiesReflectUtil.autowiredProperty(gmSiteTempGlDo,gmSiteTempGlDo.getClass(),attrList.get(k),vs[k]);
         }
-        gmSiteSurfGlDo.setId(atomId.incrementAndGet());
-        gmSiteSurfGlDo.setS_d_id(atomSid.get());
-        gmSiteSurfGlDao.save(gmSiteSurfGlDo);
+        gmSiteTempGlDo.setId(atomId.incrementAndGet());
+        gmSiteTempGlDo.setS_d_id(atomSid.get());
+        gmSiteTempGlDao.save(gmSiteTempGlDo);
     }
 }

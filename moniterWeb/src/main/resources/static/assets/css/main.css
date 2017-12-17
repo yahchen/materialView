@@ -262,8 +262,6 @@ html.fullscreen-bg #wrapper {
     top: 22px;
     right: 16px; }
 
-.navbar-nav > li > a {
-  padding: 28px 20px; }
   .navbar-nav > li > a > i {
     font-size: 22px;
     margin-right: 2px;
@@ -658,8 +656,8 @@ fieldset[disabled] .btn {
   .panel .panel-heading,
   .panel .panel-body,
   .panel .panel-footer {
-    padding-left: 25px;
-    padding-right: 25px; }
+    padding-left: 2px;
+    padding-right: 2px; }
   .panel .panel-heading {
     padding-top: 20px;
     padding-bottom: 20px;

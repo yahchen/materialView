@@ -1,35 +1,78 @@
 package com.hx.syncer.bean;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 /**
  * Created by yahchen on 2017/10/31.
  */
+@Entity
+@Table(name = "gm_site_temp_gl")
 public class GmSiteTempGlDo {
+    @javax.persistence.Id
+    @Column(name="id", unique=true, nullable=false, insertable=true, updatable=false, precision=20, scale=0)
+    private long id;
+    @Column(name = "station_id_d",nullable=false)
     private float station_id_d ;
+    @Column(name = "lat",nullable=false)
     private float lat ;
+    @Column(name = "lon",nullable=false)
     private float lon ;
+    @Column(name = "alti",nullable=false)
     private float alti ;
+    @Column(name = "day",nullable=false)
     private float day ;
+    @Column(name = "hour",nullable=false)
     private float hour ;
+    @Column(name = "min",nullable=false)
     private float min ;
+    @Column(name = "prs_hwc",nullable=false)
     private float prs_hwc ;
+    @Column(name = "evss",nullable=false)
     private float evss ;
+    @Column(name = "gph",nullable=false)
     private float gph ;
+    @Column(name = "tem",nullable=false)
     private float tem ;
+    @Column(name = "dpt",nullable=false)
     private float dpt ;
+    @Column(name = "win_d",nullable=false)
     private float win_d ;
+    @Column(name = "win_s",nullable=false)
     private float win_s ;
+    @Column(name = "time_dev_wq",nullable=false)
     private float time_dev_wq ;
+    @Column(name = "lat_dev",nullable=false)
     private float lat_dev ;
+    @Column(name = "lon_dev",nullable=false)
     private float lon_dev ;
+    @Column(name = "q_prs_hwc",nullable=false)
     private float q_prs_hwc ;
+    @Column(name = "q_gph",nullable=false)
     private float q_gph ;
+    @Column(name = "q_tem",nullable=false)
     private float q_tem ;
+    @Column(name = "q_dpt",nullable=false)
     private float q_dpt ;
+    @Column(name = "q_win_d",nullable=false)
     private float q_win_d ;
+    @Column(name = "q_win_s",nullable=false)
     private float q_win_s ;
+    @Column(name = "q_lat_dev",nullable=false)
     private float q_lat_dev ;
+    @Column(name = "q_lon_dev",nullable=false)
     private float q_lon_dev ;
+    @Column(name = "s_d_id",nullable=false)
     private long s_d_id ;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public float getStation_id_d() {
         return station_id_d;

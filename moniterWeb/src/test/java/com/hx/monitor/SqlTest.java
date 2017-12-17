@@ -52,64 +52,62 @@ public class SqlTest {
     @Autowired
     @Qualifier("behaviorRecordDaoImpl")
     private BehaviorRecordDao behaviorRecordDao;
+
     @Test
-    public void testSql(){
-        Assert.notNull(template,"template is null");
+    public void testSql() {
+        Assert.notNull(template, "template is null");
         List resutl = template.queryForList("select * from public.materia;");
-        resutl.forEach(e-> System.out.println("hahah:" + e.toString()));
+        resutl.forEach(e -> System.out.println("hahah:" + e.toString()));
         Assert.notNull(resutl);
     }
 
     @Test
-    public void testGridDataDao(){
+    public void testGridDataDao() {
         List resutl = template.queryForList("select * from public.grid_data_head;");
         System.out.println(resutl.size());
     }
 
-    @Test
-    public void testGm(){
-        List<Map<String,Object>> res = postgreSqlDao.queryBinMapData("gm_site_surf_gl",null,"");
-        assert res == null;
-    }
+
     @Test
     public void testGridDataDaoImpl() throws ParseException {
 
-        String startTime ="2017-10-13 00:00:00";
+        String startTime = "2017-10-13 00:00:00";
         System.out.println("---------------");
-        String endTime =("2017-10-13 23:59:59");
-        List<Map<String, Object>> gridDataHead = gridMatrixDao.findMatrixByTimeElement(startTime,endTime,"GRID_ECMWF_U");
-        Map<String, Object> gridDataHeads =  gridDataHead.get(0);
+        String endTime = ("2017-10-13 23:59:59");
+        List<Map<String, Object>> gridDataHead = gridMatrixDao.findMatrixByTimeElement(startTime, endTime, "GRID_ECMWF_U");
+        Map<String, Object> gridDataHeads = gridDataHead.get(0);
         System.out.println(gridDataHeads.get("data_code"));
     }
+
     @Test
-    public void testSiteChartDao(){
-        String startTime ="2017-10-01 00:00:00";
-        String endTime =("2017-10-20 23:59:59");
-        List resutl = siteChartService.findSiteChartByTimeElement(startTime,endTime,"GM_RSURF_GL");
+    public void testSiteChartDao() {
+        String startTime = "2017-10-01 00:00:00";
+        String endTime = ("2017-10-20 23:59:59");
+        List resutl = siteChartService.findSiteChartByTimeElement(startTime, endTime, "GM_RSURF_GL");
         System.out.println(resutl.size());
     }
 
     @Test
-    public void testFindSateFileSelectdByTimeElement(){
-        String startTime ="2017-11-01 00:00:00";
-        String endTime =("2017-11-20 23:59:59");
-        List resutl = fileChartDao.findSateFileSelectdByTimeElement(startTime,endTime,"GM_RATVC_ATOVS");
+    public void testFindSateFileSelectdByTimeElement() {
+        String startTime = "2017-11-01 00:00:00";
+        String endTime = ("2017-11-20 23:59:59");
+        List resutl = fileChartDao.findSateFileSelectdByTimeElement(startTime, endTime, "GM_RATVC_ATOVS");
         System.out.println(resutl.size());
     }
 
     @Test
-    public void testFindSateFileChartByTimeElement(){
-        String startTime ="2017-11-01 00:00:00";
-        String endTime =("2017-11-20 23:59:59");
-        List resutl = fileChartDao.findSateFileChartByTimeElement(startTime,endTime,"GM_RATVC_ATOVS","N15-AMSUA-BAWX");
+    public void testFindSateFileChartByTimeElement() {
+        String startTime = "2017-11-01 00:00:00";
+        String endTime = ("2017-11-20 23:59:59");
+        List resutl = fileChartDao.findSateFileChartByTimeElement(startTime, endTime, "GM_RATVC_ATOVS", "N15-AMSUA-BAWX");
         System.out.println(resutl.size());
     }
 
     @Test
-    public void testBehaviorRecord(){
-        String startTime ="2017-10-01 00:00:00";
-        String endTime =("2017-11-20 23:59:59");
-        BehaviorRecordParam behaviorRecordParam=new BehaviorRecordParam();
+    public void testBehaviorRecord() {
+        String startTime = "2017-10-01 00:00:00";
+        String endTime = ("2017-11-20 23:59:59");
+        BehaviorRecordParam behaviorRecordParam = new BehaviorRecordParam();
         behaviorRecordParam.setStartTime(startTime);
         behaviorRecordParam.setEndTime(endTime);
         behaviorRecordParam.setMaterialType("3");
