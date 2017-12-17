@@ -59,6 +59,7 @@ $(function(){
             }
         });
     };
-    $('a.bin_map').click(binMapListener);
+    $('a.bin_map').click(getSatelliteTimeRangElements);
+
 
 });

@@ -15,6 +15,7 @@
 	<!-- ICONS -->
 	<link rel="apple-touch-icon" sizes="76x76" th:href="@{assets/img/apple-icon.png}"/>
 	<link rel="icon" type="image/png" sizes="96x96" th:href="@{assets/img/favicon.png}"/>
+	<link th:href="@{css/jquery.combobox.css}" rel="stylesheet" />
 
 	<style type="text/css">body,html{width:100%;height:100%;margin:0;font-family:"Microsoft YaHei"}#customMap{width:100%;height:400px}input,b,p{margin-left:5px;font-size:14px}</style>
 
@@ -26,6 +27,22 @@
 	<script th:src="@{assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js}"></script>
 	<script th:src="@{js/vis-common.js}"></script>
 	<script th:src="@{js/gm_data.js}"></script>
+	<script th:src="@{js/laydate.js}"></script>
+	<script type="text/javascript" src="js/laydate.js"></script>
+
+	<style type="text/css">
+		*{margin:0;padding:0;list-style:none;}
+		html{background-color:#E3E3E3; font-size:14px; color:#000; font-family:'微软雅黑'}
+		h2{line-height:30px; font-size:20px;}
+		a,a:hover{ text-decoration:none;}
+		pre{font-family:'微软雅黑'}
+		.box{width:970px; padding:10px 20px; background-color:#fff; margin:10px auto;}
+		.box a{padding-right:20px;}
+		.binSatelliteMapChoice{margin:25px 0;}
+		h3{margin:10px 0;}
+		.layinput{height: 22px;line-height: 22px;width: 150px;margin: 0;}
+	</style>
+
 </head>
 
 <body>
@@ -167,27 +184,128 @@
 			<!-- MAIN CONTENT -->
 			<div class="main-content">
 				<div class="container-fluid">
-					<h3 class="page-title">Elements</h3>
 					<div class="panel">
 						<div class="panel-heading">
+							<div class="binMapChoice" hidden="hidden">
+								<ul class="nav navbar-nav navbar-left">
+									<li class="" >
+										<strong>日期:</strong> <input class="inline laydate-icon" placeholder="请输入日期" id="start"  style="width:200px; margin-right:10px;"/>
+									</li>
+									<li>
+										<strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;资料类别:&nbsp;</strong>
+										<select class="" id="dataType" name="dataType" onclick="">
+											<option value="0">AMSUA_NOAA15</option>
+										</select>
+									</li>
+									<li>
+										<strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;质控码:&nbsp;</strong>
+										<select class="" id="queryTime">
+											<option value="0">气压</option>
+											<option value="1">测站高度</option>
+										</select>
+									</li>
+								</ul>
+							</div>
+							<div class="binSatelliteMapChoice" hidden="hidden">
+								<ul class="nav navbar-nav navbar-left">
+									<li class="" >
+										<strong>日期:</strong> <input class="inline laydate-icon" placeholder="请输入日期" id="querySatelliteDate"  style="width:200px; margin-right:10px;"/>
+									</li>
+
+									<!--	<li>
+                                            <strong>开始时间：</strong> <input placeholder="请输入日期" class="laydate-icon" id="start2" />
+                                        </li>-->
+
+                                        <li>
+                                            <strong>&nbsp;&nbsp;&nbsp;&nbsp;卫星平台:&nbsp;</strong>
+                                            <select class="" id="satelliteType" name="dataType" onclick="">
+                                            </select>
+                                        </li>
+                                        <!--
+                                        <li>
+                                            <strong>&nbsp;&nbsp;&nbsp;&nbsp;卫星平台:&nbsp;</strong>
+                                            <select class="" id="satelliteType" name="dataType" onclick="">
+                                                <option value="0">请选择卫星</option>
+                                                <option value="AMSUA_NOAA15">AMSUA_NOAA15</option>
+                                                <option value="AMSUA_NOAA18">AMSUA_NOAA18</option>
+                                                <option value="AMSUA_NOAA19_BAWX">AMSUA_NOAA19_BAWX</option>
+                                                <option value="AMSUA_NOAA19_EUMP">AMSUA_NOAA19_EUMP</option>
+                                                <option value="AMSUA_NOAA19_EUMS">AMSUA_NOAA19_EUMS</option>
+                                                <option value="AMSUA_MP01(MTB)_EUMP">AMSUA_MP01(MTB)_EUMP</option>
+                                                <option value="AMSUA_MP01(MTB)_EUMS">AMSUA_MP01(MTB)_EUMS</option>
+                                                <option value="AMSUA_MP02(MTA)_EUMC">AMSUA_MP02(MTA)_EUMC</option>
+                                                <option value="AMSUA_MP02(MTA)_EUMS">AMSUA_MP02(MTA)_EUMS</option>
+                                                <option value="AMSUB_NOAA15">AMSUB_NOAA15</option>
+                                                <option value="MHS_NOAA18">MHS_NOAA18</option>
+                                                <option value="MHS_NOAA19">MHS_NOAA19</option>
+                                                <option value="MHS_MP02(MTA)">MHS_MP02(MTA)</option>
+                                                <option value="MHS_MP01(MTB)">MHS_MP01(MTB)</option>
+                                            </select>
+                                            <select class="" id="satelliteType_IASI" name="dataType" onclick="" hidden="hidden">
+                                                <option value="0">请选择卫星</option>
+                                                <option value="IASI_MTA(METOP-A)">IASI_MTA(METOP-A)</option>
+                                            </select>
+                                        </li>-->
+									<li>
+										<strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;卫星时次:&nbsp;</strong>
+										<!--<p>
+											<input type="text" name="combo" class="combo" id="combo" />
+										</p>-->
+										<select class="" id="querySatelliteTime" style=" min-width: 150px;max-width: 380px ;">
+											<option value="0" >请选择卫星时次</option>
+										</select>
+									</li>
+									<li>
+										<button onclick="SatelliteQuery()"><strong>	&nbsp;&nbsp;&nbsp;&nbsp;查询</strong></button>
+									</li>
+								</ul>
+
+							</div>
+
 						</div>
 						<div class="panel-body">
-							<div id="customMap" width="100%"  border="0"  style="padding: 0px; width: 100%; height: 600px;">
+							<div id="customMap"  hidden="hidden" width="100%"  border="0"  style="padding: 0px; width: 100%; height: 600px;">
+							</div>
+							<div id="satelliteMap"   hidden="hidden" width="100%"  border="0"  style="padding: 0px; width: 100%; height: 600px;">
 							</div>
 						</div>
 						<div class="panel-body">
 							<div id="grid" width="100%"  border="0"  style="padding: 0px; width: 100%; height: 400px;">
+								lkjslkdjfflskdjf
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 			<!-- END MAIN CONTENT -->
+
 		</div>
 		<!-- END MAIN -->
 	</div>
 	<!-- END WRAPPER -->
 
+	<script type="text/javascript">
+        !function(){
+            laydate.skin('/skins/molv');//切换皮肤，请查看skins下面皮肤库
+            //laydate({elem: '#start2'});//绑定元素
+        }();
+
+        //日期范围限制
+        var querySatelliteDate = {
+            elem: '#querySatelliteDate',
+            format: 'YYYY-MM-DD',
+            //min: laydate.now(), //设定最小日期为当前日期
+            min: '1900-01-01', //设定最小日期为当前日期
+            max: '2099-00-01', //最大日期
+            istime: true,
+            istoday: true,
+            choose: function(datas){
+                end.min = datas;        //开始日选好后，重置结束日的最小日期
+                end.start = datas      //将结束日的初始值设定为开始日
+            }
+        };
+        laydate(querySatelliteDate);
+	</script>
 
 </body>
 </html>

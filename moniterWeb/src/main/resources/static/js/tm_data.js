@@ -19,6 +19,7 @@ $(function(){
         //$('a.bin_map').click(pullSelectVal());
     });
 
+
    toGridMatrixWendu01=function (){
           $("#main").empty();
           $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>格点资料>欧洲中心格点场资料>欧洲中心数值预报产品-低分辨率-全球-温度>矩阵图</h3><div class='panel'><iframe id='iframe' src='/grid_matrix_view?data_logo=TM_GRID_ECMWF_T'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 550px;'  frameborder='0'></iframe></div></div></div>");
