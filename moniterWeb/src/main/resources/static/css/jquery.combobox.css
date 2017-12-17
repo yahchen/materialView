@@ -1,0 +1,10 @@
+/******* modify at your own risk *********/
+.combobox { position:relative; display:inline; }
+.combobox input { padding:0; margin:0 20px 0 0; }
+.combobox .button { position: absolute; padding:0; margin:0; }
+.combobox .select { margin:0; padding:0; border:solid 1px #ccc; border-width: 1px 1px 0; position: absolute; display:none; }
+.combobox .select li { list-style-type: none; border: solid 1px #ccc; border-width: 0 0 1px; cursor:pointer;  }
+
+/******* modify this to custom the appearance of the suggestions *******/
+.combobox .select li {color:black; background-color:white;}
+.combobox .select li.selected { color: white; background-color:black; }

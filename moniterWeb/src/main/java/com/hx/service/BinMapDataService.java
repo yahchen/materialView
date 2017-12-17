@@ -23,4 +23,12 @@ public class BinMapDataService {
     public List<Map<String,Object>> queryBinQualiteTypeData(String table, String dataType){
         return postgreSqlDao.queryBinQualiteTypeData(table,dataType);
     }
+
+    public List<Map<String,Object>> querySatelliteTimeRangeBinMapData(String table,  String querySatelliteDate){
+        return postgreSqlDao.querySatelliteTimeRangeBinMapData(table,querySatelliteDate);
+    }
+    public List<Map<String,Object>> querySatelliteBinMapData(String table, Timestamp stDate, String querySatelliteTime){
+        return postgreSqlDao.querySatelliteBinMapData(table, stDate, querySatelliteTime);
+    }
+
 }
