@@ -48,7 +48,7 @@ $(function () {
 
     toGridChartHWGD = function () {
         $("#main").empty();
-        $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>站点资料>海温格点>美国海温格点>折线图</h3><div class='panel'><iframe id='iframe' src='/site_chart_view?data_logo=GM_GRID_KWBC_GL'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 800px;'  frameborder='0'></iframe></div></div></div>");
+        $("#main").append("<div class='main-content'><div class='container-fluid'><h3 class='page-title'>站点资料>海温格点>美国海温格点>折线图</h3><div class='panel'><iframe id='iframe' src='/grid_chart_view?data_logo=GM_GRID_KWBC_GL'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 800px;'  frameborder='0'></iframe></div></div></div>");
 
     }
 
