@@ -3,14 +3,16 @@ package com.hx.controller;
 import com.hx.service.BinMapDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.thymeleaf.util.MapUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Timestamp;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -27,6 +29,8 @@ public class ObtainElementsController {
     public String trackMapView() {//参数可以选择性添加，不加也无所谓。如果添加后，框架会帮助自动注入。
         return "trackmap/track_map";
     }
+
+
 
     @RequestMapping("/distribution_curve_view")//对应url
     public String distributionCurveView() {//参数可以选择性添加，不加也无所谓。如果添加后，框架会帮助自动注入。
@@ -45,6 +49,7 @@ public class ObtainElementsController {
         String swLon = request.getParameter("swLon");
         String swLat = request.getParameter("swLat");
         String prs = request.getParameter("prs");
+        String sdid = request.getParameter("sdid");
         if (!StringUtils.isEmpty(startTime)) {
             if (!startTime.contains(":")) {
                 startTime += " 00:00:00.000";
@@ -53,11 +58,40 @@ public class ObtainElementsController {
 
 
         Timestamp time = Timestamp.valueOf(StringUtils.isEmpty(startTime) ? System.currentTimeMillis() + "" : startTime);
+
         String table = convertDataType2Table(dataType);
         if (StringUtils.isEmpty(table))
             return null;
-        List<Map<String, Object>> resList = binMapDataService.queryBinMapData(table, time, neLat, neLon, swLat, swLon, prs);
+        List<Map<String, Object>> resList = binMapDataService.queryBinMapData(table, time, neLat, neLon, swLat, swLon, prs,sdid);
         return resList;
+    }
+    @RequestMapping("getTimeHours")
+    @ResponseBody
+    public Map<String,String> getTimeHours(HttpServletRequest request){
+        String dataLogo = request.getParameter("dataType");
+        String startTime = request.getParameter("startTime");
+        Timestamp start,end;
+        if(!StringUtils.isEmpty(startTime)){
+            start = Timestamp.valueOf(startTime + " 00:00:00");
+            end = Timestamp.valueOf(startTime + " 23:59:59");
+        }else {
+            start = Timestamp.valueOf(new Date().toString());
+            end = Timestamp.valueOf(addDays(start,1).toString());
+        }
+        return convertDbRes2TimeHours(binMapDataService.queryTimeHousr(dataLogo,start,end));
+    }
+
+    private Map<String,String> convertDbRes2TimeHours(List<Map<String, Object>> resData) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        if(CollectionUtils.isEmpty(resData))
+            return Collections.EMPTY_MAP;
+        Map<String,String> timeHoursMap = new HashMap<>();
+        for(Map<String,Object> tableLine:resData){
+            Timestamp dataTime = (Timestamp)tableLine.get("data_time");
+            String sdid = tableLine.get("s_d_id").toString();
+            timeHoursMap.put(sdid,sdf.format(dataTime));
+        }
+        return timeHoursMap;
     }
 
     @RequestMapping("/getQualiteTypes")
@@ -176,5 +210,21 @@ public class ObtainElementsController {
             return dataType.toLowerCase().replace("m_r", "m_site_");
         }
         return null;//test
+    }
+
+    private Timestamp convertStr2TimeStamp(String startTime){
+        if (!StringUtils.isEmpty(startTime)) {
+            if (!startTime.contains(":")) {
+                startTime += " 00:00:00.000";
+            }
+        }
+        return Timestamp.valueOf(StringUtils.isEmpty(startTime) ? System.currentTimeMillis() + "" : startTime);
+    }
+
+    public static Date addDays(Date date, int addedDays) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(5, addedDays);
+        return cal.getTime();
     }
 }

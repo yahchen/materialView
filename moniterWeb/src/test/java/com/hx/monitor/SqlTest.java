@@ -12,10 +12,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.Assert;
+import org.springframework.util.CollectionUtils;
 
+import java.sql.Timestamp;
 import java.text.ParseException;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by wangyaohui on 2017/6/2.
@@ -115,5 +117,27 @@ public class SqlTest {
         behaviorRecordParam.setPageSize(5);
         Map map = behaviorRecordDao.findRecordsByPage(behaviorRecordParam);
         System.out.println(map.get("total"));
+    }
+
+    @Test
+    public void testTimehours(){
+        Timestamp start = Timestamp.valueOf("2017-09-18 00:00:00");
+        Timestamp end = Timestamp.valueOf("2017-10-18 23:59:59");
+
+        Map map = convertDbRes2TimeHours(postgreSqlDao.queryTimeHours("GM_RSURF_GL",start,end));
+        assert map != null;
+    }
+
+    private Map<String,String> convertDbRes2TimeHours(List<Map<String, Object>> resData) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        if(CollectionUtils.isEmpty(resData))
+            return Collections.EMPTY_MAP;
+        Map<String,String> timeHoursMap = new HashMap<>();
+        for(Map<String,Object> tableLine:resData){
+            Timestamp dataTime = (Timestamp)tableLine.get("data_time");
+            String sdid = tableLine.get("s_d_id").toString();
+            timeHoursMap.put(sdid,sdf.format(dataTime));
+        }
+        return timeHoursMap;
     }
 }
