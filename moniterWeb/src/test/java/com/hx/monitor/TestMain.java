@@ -2,6 +2,9 @@ package com.hx.monitor;
 
 import org.thymeleaf.util.StringUtils;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+
 /**
  * Created by hp on 2017/10/30.
  */
@@ -9,9 +12,11 @@ public class TestMain {
 
     public static void main(String [] args){
         //System.out.println(SexEnum.getSexEnumByCode("M"));
+        Timestamp start = new Timestamp(System.currentTimeMillis());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 
         String s="1987年08月32日 33时";
-        System.out.println(s.substring(0,11));
+        System.out.println(sdf.format(start));
         System.out.println(SexEnum.getSexEnumByCode("M"));
     }
 }

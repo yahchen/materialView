@@ -6,81 +6,72 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
-	<link rel="stylesheet" type="text/css" href="js/calendar/css/style.css"/>
-	<link rel="stylesheet" type="text/css" href="assets/css/tooltipster.css"/>
-	<link rel="stylesheet" type="text/css" href="assets/css/style2.css"/>
-	<script type="text/javascript" src="assets/js/jquery-1.7.2.min.js"></script>
-	<script type="text/javascript" src="js/jquery-2.0.0.min.js"></script>
-	<script type="text/javascript" src="js/jquery.tooltipster.js"></script>
-	<script type="text/javascript" src="js/calendar/laydate.js"></script>
-	<script type="text/javascript" src="js/script.js"></script>
+	<link rel="stylesheet" type="text/css" th:href="@{js/calendar/css/style.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{assets/css/tooltipster.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{assets/css/style2.css}"/>
+	<script type="text/javascript" src="http://api.tianditu.com/api?v=4.0"></script>
+	<script th:src="@{http://lbs.tianditu.com/api/js4.0/opensource/data/points-sample-data.js}"></script>
+	<script type="text/javascript" th:src="@{assets/js/jquery-1.7.2.min.js}"></script>
+	<script type="text/javascript" th:src="@{js/jquery-2.0.0.min.js}"></script>
+	<script type="text/javascript" th:src="@{js/jquery.tooltipster.js}"></script>
+	<script type="text/javascript" th:src="@{js/calendar/laydate.js}"></script>
+	<script type="text/javascript" th:src="@{js/script.js}"></script>
+	<script type="text/javascript" th:src="@{js/distributionCurve.js}"></script>
 
 </head>
 
 <body>
 <!--<div class="box">-->
-	<ul class="select">
-
-		<div class="startTime2">
-			<ul class="inline">
-				<strong>资料时间：</strong> <input placeholder="请输入日期" class="laydate-icon" id="start2"/>
-				&nbsp;<span id="message" style="color: red;font-size: 12px;"></span>
+		<div class="binmapchoice">
+			<ul class="nav navbar-nav navbar-left">
+				<!--<li class="">-->
+				<!--<strong>资料时间：</strong> <input placeholder="请输入日期" class="laydate-icon" id="start2"/>-->
+				<!--&nbsp;<span id="message" style="color: red;font-size: 12px;"></span>-->
+				<!--</li>-->
+				<br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<strong>日期:</strong> <input class="inline laydate-icon" placeholder="请输入日期" id="start"/>
+					<strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;资料类别:</strong>
+					<select id="dataType" class="" name="dataType" disabled="true">
+					</select>
+					<strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;要素类别:</strong>
+					<select id="qualiteType" class="" name="qualiteType" disabled="true">
+					</select>
+					<strong class="airPress" hidden="true">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;气压:</strong>
+					<select id="prs" class="airPress" name="prs" hidden="true">
+						<option value="0">无</option>
+						<option value="200">200</option>
+						<option value="500">500</option>
+						<option value="850">850</option>
+					</select>
+				<strong class="timeHour">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;时间批次:</strong>
+				<select id="timeHour" class="timeHour">
+				</select>
+					<strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
+				<button id="binMapQuery">&nbsp;&nbsp;&nbsp;&nbsp;查询&nbsp;&nbsp;&nbsp;&nbsp;</button>
 			</ul>
 		</div>
-	</ul>
 
-	<!--   选择项目      -->
-	<ul class="select">
-		<li class="select-list">
-			<dl id="selectParent">
-				<dt>格点：</dt>
-				<dd id="ec00" class="select-ee selected"><a href="#">美国海温格点</a></dd>
-			</dl>
-		</li>
-		<li class="select-list">
-			<dl id="selectChildren1" >
-				<dt>要素：</dt>
-				<dd  id="wendu01" value="TM_GRID_ECMWF_T" class="selected"><a href="#" >海温格点</a></dd>
-			</dl>
-
-			<dl id="selectChildren2" hidden="hidden">
-				<dt>要素：</dt>
-				<dd id="jiangshui02" value="TM_GRID_JAPAN_PRE" class="select-jjj selected"><a href="#">降水</a></dd>
-				<dd id="wendu02" value="TM_GRID_JAPAN_T"><a href="#" >温度</a></dd>
-				<dd id="gaodu02" value="TM_GRID_JAPAN_H"><a href="#">位势高度</a></dd>
-				<dd id="ufeng02" value="TM_GRID_JAPAN_U"><a href="#">U风</a></dd>
-				<dd id="vfeng02" value="TM_GRID_JAPAN_V"><a href="#">V风</a></dd>
-			</dl>
-
-		</li>
-
-	</ul>
-
-	<div id="page_data" >
-
-	</div>
+<div id="bin_map_dc" width="100%"  border="0"  style="padding: 0px; width: 100%; height: 600px;">
+</div>
 <!--</div>-->
 
 <script type="text/javascript">
-!function(){
+	!function(){
     //日期
-    var start2 = {
-        elem: '#start2',
-        //format: 'YYYY-MM-DD',
+    var start = {
+        elem: '#start',
+        format: 'YYYY-MM-DD',
         min: '1900-01-01', //设定最小日期为当前日期
         max: '2099-00-01', //最大日期
-        istime: true,
-        istoday: false,
+        istime: false,
+        istoday: true,
         choose: function(datas){
-            $("dd.selected:visible").each(function () {
-                   if($(this).attr("value")!=null){//不为空时，则再次触发查询页面
-                       onShowGridMatrix($(this).attr("value"));
-				   }
-            });
+			timeHourChange();
         }
     };
 	laydate.skin('molv');//切换皮肤，请查看skins下面皮肤库
-	laydate(start2);//绑定元素
+	laydate(start);//绑定元素
 }();
 </script>
 </body>

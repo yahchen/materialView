@@ -25,6 +25,17 @@ ALTER TABLE public.type_and_element_mapping
 ﻿INSERT INTO public.type_and_element_mapping(
 	data_logo_type,data_logo_type_comment,element_type,element_type_comment,quality_code,quality_code_comment, id)
 	VALUES
+	 ('GM_RSING_GL', '飞机探测资料', 'Flight_Stat','飞机飞行详细状态', '','', 85),
+  ('GM_RSING_GL', '飞机探测资料', 'Flight_Heigh','飞行高度(气压高度)', 'Q_Flight_Heigh','飞行高度(气压高度)质控码', 86),
+  ('GM_RSING_GL', '飞机探测资料', 'TEM','温度/气温', 'Q_TEM','温度/气温质控码', 87),
+  ('GM_RSING_GL', '飞机探测资料', 'WIN_D','平均风向', 'Q_WIN_D','平均风向质控码', 88),
+  ('GM_RSING_GL', '飞机探测资料', 'WIN_S','平均风速', 'Q_WIN_S','平均风速质控码', 89),
+
+  ('RM_RSING_GL', '飞机探测资料', 'Flight_Stat','飞机飞行详细状态', '','', 90),
+  ('RM_RSING_GL', '飞机探测资料', 'Flight_Heigh','飞行高度(气压高度)', 'Q_Flight_Heigh','飞行高度(气压高度)质控码', 91),
+  ('RM_RSING_GL', '飞机探测资料', 'TEM','温度/气温', 'Q_TEM','温度/气温质控码', 92),
+  ('RM_RSING_GL', '飞机探测资料', 'WIN_D','平均风向', 'Q_WIN_D','平均风向质控码', 93),
+  ('RM_RSING_GL', '飞机探测资料', 'WIN_S','平均风速', 'Q_WIN_S','平均风速质控码', 94),
 	('GM_RSURF_GL', '地面常规观测（含船舶、浮标）资料',  'PRS_Sea','海平面气压', 'Q_PRS_Sea','海平面气压质控码', 1),
     ('GM_RSURF_GL', '地面常规观测（含船舶、浮标）资料', 'TEM', '温度/气温', 'Q_TEM','温度/气温质控码', 2),
     ('GM_RSURF_GL', '地面常规观测（含船舶、浮标）资料', 'DPT','露点温度', 'Q_DPT','露点温度质控码', 3),
