@@ -9,7 +9,8 @@ CREATE TABLE public.tm_site_surf_pre_3h
     lon double precision,
     pre_3h double precision,
     s_d_id bigint,
-        id bigint not null,
+    id bigint not null,
+
     CONSTRAINT tm_site_surf_pre_3h_pkey PRIMARY KEY (id)
 )
 WITH (

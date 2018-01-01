@@ -28,8 +28,8 @@ CREATE TABLE public.grid_data_head
     elements character varying(255),
     validTime character varying(255),
     fcstLevel character varying(255),
-    CONSTRAINT grid_data_head_pkey PRIMARY KEY (g_d_id)
-
+    id bigint not null,
+    CONSTRAINT grid_data_head_pkey PRIMARY KEY (id)
 )
 WITH (
     OIDS = FALSE

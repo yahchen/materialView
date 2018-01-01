@@ -49,16 +49,15 @@ ALTER TABLE public.type_and_element_mapping
 
 	('GM_RTEMP_GL', '高空探测资料', 'Alti','测站高度', '','', 19),
 	('GM_RTEMP_GL', '高空探测资料', 'PRS_HWC','', 'Q_PRS_HWC','', 20),
-    ('GM_RTEMP_GL', '高空探测资料', 'EVSS', '', '','', 21),
-    ('GM_RTEMP_GL', '高空探测资料', 'GPH','位势高度', 'Q_GPH','位势高度质控码', 22),
-    ('GM_RTEMP_GL', '高空探测资料', 'TEM','温度/气温', 'Q_TEM','温度/气温质控码', 23),
+  ('GM_RTEMP_GL', '高空探测资料', 'EVSS', '', '','', 21),
+  ('GM_RTEMP_GL', '高空探测资料', 'GPH','位势高度', 'Q_GPH','位势高度质控码', 22),
+  ('GM_RTEMP_GL', '高空探测资料', 'TEM','温度/气温', 'Q_TEM','温度/气温质控码', 23),
 	('GM_RTEMP_GL', '高空探测资料', 'DPT','露点温度', 'Q_DPT','露点温度质控码', 24),
 	('GM_RTEMP_GL', '高空探测资料', 'WIN_D','平均风向', 'Q_WIN_D','平均风向质控码', 25),
 	('GM_RTEMP_GL', '高空探测资料', 'WIN_S','平均风速', 'Q_WIN_S','平均风速质控码', 26),
 	('GM_RTEMP_GL', '高空探测资料', 'Time_Dev_WQ','时间偏差', '','', 27),
 	('GM_RTEMP_GL', '高空探测资料', 'Lat_Dev','纬度偏差', 'Q_Lat_Dev','纬度偏差质控码', 28),
 	('GM_RTEMP_GL', '高空探测资料', 'Lon_Dev','经度偏差', 'Q_Lon_Dev','经度偏差质控码', 29),
-
 
 
 	('GM_GRID_KWBC_GL', '美国海温格点', 'TEF2','测站高度', '','', 30),
@@ -101,9 +100,9 @@ ALTER TABLE public.type_and_element_mapping
 	('RM_RSURF_GL', '地面常规观测（含船舶、浮标）资料', 'PRS','气压', 'Q_PRS','气压质控码', 63),
 	('RM_RSURF_CH', '国内自动站地面气象资料', 'Alti','测站高度', '','', 64),
 	('RM_RSURF_CH', '国内自动站地面气象资料',  'PRS_Sea','海平面气压', 'Q_PRS_Sea','海平面气压质控码',65),
-    ('RM_RSURF_CH', '国内自动站地面气象资料', 'TEM', '温度/气温', 'Q_TEM','温度/气温质控码', 66),
-    ('RM_RSURF_CH', '国内自动站地面气象资料', 'DPT','露点温度', 'Q_DPT','露点温度质控码', 67),
-    ('RM_RSURF_CH', '国内自动站地面气象资料', 'WIN_D_INST','瞬时风向', 'Q_WIN_D_INST','瞬时风向质控码', 68),
+  ('RM_RSURF_CH', '国内自动站地面气象资料', 'TEM', '温度/气温', 'Q_TEM','温度/气温质控码', 66),
+  ('RM_RSURF_CH', '国内自动站地面气象资料', 'DPT','露点温度', 'Q_DPT','露点温度质控码', 67),
+  ('RM_RSURF_CH', '国内自动站地面气象资料', 'WIN_D_INST','瞬时风向', 'Q_WIN_D_INST','瞬时风向质控码', 68),
 	('RM_RSURF_CH', '国内自动站地面气象资料', 'WIN_S_INST','瞬时风速', 'Q_WIN_S_INST','瞬时风速质控码', 69),
 	('RM_RSURF_CH', '国内自动站地面气象资料', 'PRE_1h','过去1小时降水量', 'Q_PRE_1h','过去1小时降水量质控码', 70),
 	('RM_RSURF_CH', '国内自动站地面气象资料', 'PRE_6h','过去6小时降水量', 'Q_PRE_6h','过去6小时降水量质控码', 71),
@@ -111,9 +110,9 @@ ALTER TABLE public.type_and_element_mapping
 	('RM_RSURF_CH', '国内自动站地面气象资料', 'PRS','气压', 'Q_PRS','气压质控码', 73),
 	('RM_RTEMP_GL', '高空探测资料', 'Alti','测站高度', '','', 74),
 	('RM_RTEMP_GL', '高空探测资料', 'PRS_HWC','', 'Q_PRS_HWC','', 75),
-    ('RM_RTEMP_GL', '高空探测资料', 'EVSS', '', '','', 76),
-    ('RM_RTEMP_GL', '高空探测资料', 'GPH','位势高度', 'Q_GPH','位势高度质控码', 77),
-    ('RM_RTEMP_GL', '高空探测资料', 'TEM','温度/气温', 'Q_TEM','温度/气温质控码', 78),
+  ('RM_RTEMP_GL', '高空探测资料', 'EVSS', '', '','', 76),
+  ('RM_RTEMP_GL', '高空探测资料', 'GPH','位势高度', 'Q_GPH','位势高度质控码', 77),
+  ('RM_RTEMP_GL', '高空探测资料', 'TEM','温度/气温', 'Q_TEM','温度/气温质控码', 78),
 	('RM_RTEMP_GL', '高空探测资料', 'DPT','露点温度', 'Q_DPT','露点温度质控码', 79),
 	('RM_RTEMP_GL', '高空探测资料', 'WIN_D','平均风向', 'Q_WIN_D','平均风向质控码', 80),
 	('RM_RTEMP_GL', '高空探测资料', 'WIN_S','平均风速', 'Q_WIN_S','平均风速质控码', 81),
@@ -123,5 +122,14 @@ ALTER TABLE public.type_and_element_mapping
 
 
 
+  ('GM_RSING_GL', '飞机探测资料', 'Flight_Stat','飞机飞行详细状态', '','', 85),
+  ('GM_RSING_GL', '飞机探测资料', 'Flight_Heigh','飞行高度(气压高度)', 'Q_Flight_Heigh','飞行高度(气压高度)质控码', 86),
+  ('GM_RSING_GL', '飞机探测资料', 'TEM','温度/气温', 'Q_TEM','温度/气温质控码', 87),
+  ('GM_RSING_GL', '飞机探测资料', 'WIN_D','平均风向', 'Q_WIN_D','平均风向质控码', 88),
+  ('GM_RSING_GL', '飞机探测资料', 'WIN_S','平均风速', 'Q_WIN_S','平均风速质控码', 89),
 
-
+  ('RM_RSING_GL', '飞机探测资料', 'Flight_Stat','飞机飞行详细状态', '','', 90),
+  ('RM_RSING_GL', '飞机探测资料', 'Flight_Heigh','飞行高度(气压高度)', 'Q_Flight_Heigh','飞行高度(气压高度)质控码', 91),
+  ('RM_RSING_GL', '飞机探测资料', 'TEM','温度/气温', 'Q_TEM','温度/气温质控码', 92),
+  ('RM_RSING_GL', '飞机探测资料', 'WIN_D','平均风向', 'Q_WIN_D','平均风向质控码', 93),
+  ('RM_RSING_GL', '飞机探测资料', 'WIN_S','平均风速', 'Q_WIN_S','平均风速质控码', 94),

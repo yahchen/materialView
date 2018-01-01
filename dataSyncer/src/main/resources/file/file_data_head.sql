@@ -18,6 +18,8 @@ CREATE TABLE "public"."file_data_head" (
 "mode_type" int4,
 "return_abnormal_info" character varying(255) COLLATE pg_catalog."default",
 "data_time" timestamp without time zone,
-CONSTRAINT file_data_head_pkey PRIMARY KEY (s_d_id)
+ id bigint not null,
+  CONSTRAINT file_data_head_pkey PRIMARY KEY (id)
+
 )
 WITH (OIDS=FALSE);
