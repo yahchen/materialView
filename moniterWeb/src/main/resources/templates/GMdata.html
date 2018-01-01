@@ -157,7 +157,7 @@
 							<div id="subPages100" class="collapse ">
 								<ul class="nav">
 									<li><a href='#' onclick='toSiteChartDMCG()' class=""><i class="lnr lnr-chart-bars"></i>折线图</a></li>
-									<li><a href="#" class="bin_map" id="1" name="GM_RSURF_GL"><i class="lnr lnr-list"></i>分布图</a></li>
+									<li><a href="#" onclick="toDistributionCurveDMCG()" class="" id="1" name=""><i class="lnr lnr-list"></i>分布图</a></li>
 								</ul>
 							</div>
 						</li>
@@ -170,7 +170,7 @@
 							<div id="subPages101" class="collapse ">
 								<ul class="nav">
 									<li><a href='#' onclick='toSiteChartGNZDZ()' class=""><i class="lnr lnr-chart-bars"></i>折线图</a></li>
-									<li><a href="#" class="bin_map" name="GM_RSURF_CH" id="2"><i class="lnr lnr-list"></i>分布图</a></li>
+									<li><a href="#" onclick="toGroudAutoSateFileBinMap()" class="" name="" id="2"><i class="lnr lnr-list"></i>分布图</a></li>
 								</ul>
 							</div>
 						</li>
@@ -194,48 +194,8 @@
 					<div class="panel">
 						<div class="panel-heading">
 							<div id="bin_map_div" hidden="hidden">
-								<div class="binMapChoice">
-									<ul class="nav navbar-nav navbar-left">
-										<li class="" >
-											<div style="margin-bottom:20px">
-												<strong>日期:</strong> <input class="inline laydate-icon" placeholder="请输入日期" id="start" style="height: 31px;width:120px;padding: 5px;"/>
-											</div>
-										</li>
-										<li>
-											<strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;资料类别:</strong>
-											<select id="dataType" class="" name="dataType" disabled="true">
-												<option value="0">无</option>
-											</select>
-										</li>
-										<li>
-											<strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;要素类别:</strong>
-											<select id="qualiteType" class="" name="qualiteType" disabled="true">
-												<option value="0">无</option>
-											</select>
-										</li>
-										<li>
-											<strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;气压:</strong>
-											<select id="prs" class="" name="prs">
-												<option value="0">无</option>
-												<option value="200">200</option>
-												<option value="500">500</option>
-												<option value="850">850</option>
-											</select>
-										</li>
-										<li>
-											<strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
-										</li>
-										<li>
-											<div style="margin-bottom:20px">
-												<a href="#" id="binMapQuery" class="" style="height: 31px;width:120px;padding: 5px;">查询</a>
-											</div>
-										</li>
-									</ul>
-								</div>
 								<br/>
 								<br/>
-								<div id="customMap" width="100%"  border="0"  style="width: 100%; height: 700px;padding-top: 2px;padding-bottom: 2px">
-								</div>
 							</div>
 							<div id="bin_satellite_map_div" hidden="hidden">
 								<div class="binSatelliteMapChoice">
