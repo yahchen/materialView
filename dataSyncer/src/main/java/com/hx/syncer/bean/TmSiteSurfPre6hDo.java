@@ -1,14 +1,29 @@
 package com.hx.syncer.bean;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 /**
  * Created by yahchen on 2017/10/31.
  */
-public class TmSiteSurfPre6h {
-        private float station_id_d;
-        private float lat ;
-        private float lon ;
-        private float pre_6h ;
-        private long s_d_id ;
+@Entity
+@Table(name = "tm_site_surf_pre_6h")
+public class TmSiteSurfPre6hDo {
+    @Column(name = "station_id_d",nullable=false)
+    private float station_id_d;
+    @Column(name = "lat",nullable=true)
+    private float lat ;
+    @Column(name = "lon",nullable=true)
+    private float lon ;
+    @Column(name = "pre_6h",nullable=true)
+    private float pre_6h ;
+    @Column(name = "s_d_id",nullable=true)
+    private long s_d_id ;
+
+    @javax.persistence.Id
+    @Column(name="id", unique=true, nullable=false, insertable=true, updatable=false, precision=20, scale=0)
+    private long id ;
 
         public float getStation_id_d() {
             return station_id_d;
@@ -49,4 +64,12 @@ public class TmSiteSurfPre6h {
         public void setS_d_id(long s_d_id) {
             this.s_d_id = s_d_id;
         }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 }
