@@ -15,55 +15,55 @@ public class GmSiteTempGlDo {
     private long id;
     @Column(name = "station_id_d",nullable=false)
     private float station_id_d ;
-    @Column(name = "lat",nullable=false)
+    @Column(name = "lat",nullable=true)
     private float lat ;
-    @Column(name = "lon",nullable=false)
+    @Column(name = "lon",nullable=true)
     private float lon ;
-    @Column(name = "alti",nullable=false)
+    @Column(name = "alti",nullable=true)
     private float alti ;
-    @Column(name = "day",nullable=false)
+    @Column(name = "day",nullable=true)
     private float day ;
-    @Column(name = "hour",nullable=false)
+    @Column(name = "hour",nullable=true)
     private float hour ;
-    @Column(name = "min",nullable=false)
+    @Column(name = "min",nullable=true)
     private float min ;
-    @Column(name = "prs_hwc",nullable=false)
+    @Column(name = "prs_hwc",nullable=true)
     private float prs_hwc ;
-    @Column(name = "evss",nullable=false)
+    @Column(name = "evss",nullable=true)
     private float evss ;
-    @Column(name = "gph",nullable=false)
+    @Column(name = "gph",nullable=true)
     private float gph ;
-    @Column(name = "tem",nullable=false)
+    @Column(name = "tem",nullable=true)
     private float tem ;
-    @Column(name = "dpt",nullable=false)
+    @Column(name = "dpt",nullable=true)
     private float dpt ;
-    @Column(name = "win_d",nullable=false)
+    @Column(name = "win_d",nullable=true)
     private float win_d ;
-    @Column(name = "win_s",nullable=false)
+    @Column(name = "win_s",nullable=true)
     private float win_s ;
-    @Column(name = "time_dev_wq",nullable=false)
+    @Column(name = "time_dev_wq",nullable=true)
     private float time_dev_wq ;
-    @Column(name = "lat_dev",nullable=false)
+    @Column(name = "lat_dev",nullable=true)
     private float lat_dev ;
-    @Column(name = "lon_dev",nullable=false)
+    @Column(name = "lon_dev",nullable=true)
     private float lon_dev ;
-    @Column(name = "q_prs_hwc",nullable=false)
+    @Column(name = "q_prs_hwc",nullable=true)
     private float q_prs_hwc ;
-    @Column(name = "q_gph",nullable=false)
+    @Column(name = "q_gph",nullable=true)
     private float q_gph ;
-    @Column(name = "q_tem",nullable=false)
+    @Column(name = "q_tem",nullable=true)
     private float q_tem ;
-    @Column(name = "q_dpt",nullable=false)
+    @Column(name = "q_dpt",nullable=true)
     private float q_dpt ;
-    @Column(name = "q_win_d",nullable=false)
+    @Column(name = "q_win_d",nullable=true)
     private float q_win_d ;
-    @Column(name = "q_win_s",nullable=false)
+    @Column(name = "q_win_s",nullable=true)
     private float q_win_s ;
-    @Column(name = "q_lat_dev",nullable=false)
+    @Column(name = "q_lat_dev",nullable=true)
     private float q_lat_dev ;
-    @Column(name = "q_lon_dev",nullable=false)
+    @Column(name = "q_lon_dev",nullable=true)
     private float q_lon_dev ;
-    @Column(name = "s_d_id",nullable=false)
+    @Column(name = "s_d_id",nullable=true)
     private long s_d_id ;
 
     public long getId() {
@@ -281,4 +281,5 @@ public class GmSiteTempGlDo {
     public void setS_d_id(long s_d_id) {
         this.s_d_id = s_d_id;
     }
+
 }

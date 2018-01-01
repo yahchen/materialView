@@ -12,8 +12,8 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "grid_data_head")
 public class GridDataHeadDo {
-    @javax.persistence.Id
-    @Column(name="g_d_id", unique=true, nullable=false, insertable=true, updatable=false, precision=20, scale=0)
+
+    @Column(name="g_d_id",nullable=false)
     private long g_d_id;
     @Column(name = "data_logo",nullable=false)
     private String data_logo;//": "RSURF_CH",    -----资料标示
@@ -36,15 +36,15 @@ public class GridDataHeadDo {
     @Column(name = "data_end_time",nullable=true)
     private Timestamp data_end_time;//": "2017-07-17 03:00:00",    -----资料结束时间
     @Column(name = "gridfile_num_max",nullable=true)
-    private long gridfileNumMax;
+    private int gridfileNumMax;
     @Column(name = "gridfile_state",nullable=true)
     private String gridfile_state;
     @Column(name = "longitude_latitude_scope",nullable=true)
     private String longitude_latitude_scope;//": "73.33,135.05:3.51,53.33",   ----资料的经纬度范围
-    @Column(name = "data_num",nullable=true)
-    private String data_num;//": "364526",   -----一次任务得到的资料站台数（预处理前的资料行数,即一行一个站的记录）
     @Column(name = "sys_conn_state",nullable=true)
     private String sys_conn_state;//": "0",  ------cimiss接口连接状态 0表示成功连接服务器
+    @Column(name = "data_num",nullable=true)
+    private String data_num;//": "364526",   -----一次任务得到的资料站台数（预处理前的资料行数,即一行一个站的记录）
     @Column(name = "return_abnormal_info",nullable=true)
     private String return_abnormal_info;//": "0:Query Succeed",   -----调用接口后 返回码和返回码信息
     @Column(name = "user_id",nullable=true)
@@ -61,6 +61,10 @@ public class GridDataHeadDo {
     private String validTime;
     @Column(name = "fcstLevel",nullable=true)
     private String fcstLevel;
+
+    @javax.persistence.Id//": "主键",
+    @Column(name="id", unique=true, nullable=false, insertable=true, updatable=false, precision=20, scale=0)
+    private long id;
 
     public long getG_d_id() {
         return g_d_id;
@@ -154,7 +158,7 @@ public class GridDataHeadDo {
         return gridfileNumMax;
     }
 
-    public void setGridfileNumMax(long gridfileNumMax) {
+    public void setGridfileNumMax(int gridfileNumMax) {
         this.gridfileNumMax = gridfileNumMax;
     }
 
@@ -252,5 +256,13 @@ public class GridDataHeadDo {
 
     public void setFcstLevel(String fcstLevel) {
         this.fcstLevel = fcstLevel;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

@@ -12,59 +12,59 @@ import javax.persistence.Table;
 public class GmSiteSurfGlDo {
     @Column(name = "station_id_d",nullable=false)
     private float station_id_d;
-    @Column(name = "lat",nullable=false)
+    @Column(name = "lat",nullable=true)
     private float lat ;
-    @Column(name = "lon",nullable=false)
+    @Column(name = "lon",nullable=true)
     private float lon ;
-    @Column(name = "alti",nullable=false)
+    @Column(name = "alti",nullable=true)
     private float alti ;
-    @Column(name = "station_type",nullable=false)
+    @Column(name = "station_type",nullable=true)
     private float station_type ;
-    @Column(name = "day",nullable=false)
+    @Column(name = "day",nullable=true)
     private float day ;
-    @Column(name = "hour",nullable=false)
+    @Column(name = "hour",nullable=true)
     private float hour ;
-    @Column(name = "min",nullable=false)
+    @Column(name = "min",nullable=true)
     private float min ;
-    @Column(name = "prs_sea",nullable=false)
+    @Column(name = "prs_sea",nullable=true)
     private float prs_sea ;
-    @Column(name = "tem",nullable=false)
+    @Column(name = "tem",nullable=true)
     private float tem ;
-    @Column(name = "prs",nullable=false)
+    @Column(name = "prs",nullable=true)
     private float prs ;
-    @Column(name = "dpt",nullable=false)
+    @Column(name = "dpt",nullable=true)
     private float dpt ;
-    @Column(name = "win_d",nullable=false)
+    @Column(name = "win_d",nullable=true)
     private float win_d ;
-    @Column(name = "win_s",nullable=false)
+    @Column(name = "win_s",nullable=true)
     private float win_s ;
-    @Column(name = "pre_1h",nullable=false)
+    @Column(name = "pre_1h",nullable=true)
     private float pre_1h ;
-    @Column(name = "pre_6h",nullable=false)
+    @Column(name = "pre_6h",nullable=true)
     private float pre_6h ;
-    @Column(name = "pre_24h",nullable=false)
+    @Column(name = "pre_24h",nullable=true)
     private float pre_24h ;
-    @Column(name = "q_prs",nullable=false)
+    @Column(name = "q_prs",nullable=true)
     private float q_prs ;
-    @Column(name = "q_prs_sea",nullable=false)
+    @Column(name = "q_prs_sea",nullable=true)
     private float q_prs_sea ;
-    @Column(name = "q_win_d",nullable=false)
+    @Column(name = "q_win_d",nullable=true)
     private float q_win_d ;
-    @Column(name = "q_win_s",nullable=false)
+    @Column(name = "q_win_s",nullable=true)
     private float q_win_s ;
-    @Column(name = "q_tem",nullable=false)
+    @Column(name = "q_tem",nullable=true)
     private float q_tem ;
-    @Column(name = "q_dpt",nullable=false)
+    @Column(name = "q_dpt",nullable=true)
     private float q_dpt ;
-    @Column(name = "q_pre_1h",nullable=false)
+    @Column(name = "q_pre_1h",nullable=true)
     private float q_pre_1h ;
-    @Column(name = "q_pre_6h",nullable=false)
+    @Column(name = "q_pre_6h",nullable=true)
     private float q_pre_6h ;
-    @Column(name = "q_pre_24h",nullable=false)
+    @Column(name = "q_pre_24h",nullable=true)
     private float q_pre_24h ;
-    @Column(name = "station_id_c",nullable=false)
+    @Column(name = "station_id_c",nullable=true)
     private float station_id_c ;
-    @Column(name = "s_d_id",nullable=false)
+    @Column(name = "s_d_id",nullable=true)
     private long s_d_id;
 
     public long getId() {
@@ -302,4 +302,5 @@ public class GmSiteSurfGlDo {
     public void setS_d_id(long s_d_id) {
         this.s_d_id = s_d_id;
     }
+
 }
