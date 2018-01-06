@@ -16,8 +16,8 @@ CREATE TABLE "AMSUA_MTA_EUMC"
   obs_bt5 integer,
   file_name_time timestamp without time zone,
   surface_height double precision,
-  f_d_id double precision,
-  id bigint NOT NULL,
+  s_f_id SERIAL,
+  id SERIAL,
   CONSTRAINT amsua_mta_eumc PRIMARY KEY (id )
 )
 WITH (

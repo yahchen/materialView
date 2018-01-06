@@ -1,5 +1,5 @@
 CREATE TABLE "public"."file_data_head" (
-"s_d_id" bigint NOT NULL,
+"s_d_id" SERIAL,
 "data_logo" character varying(255) COLLATE pg_catalog."default" NOT NULL,
 "data_name" character varying(255) COLLATE pg_catalog."default",
 "data_code" character varying(255) COLLATE pg_catalog."default",
@@ -18,7 +18,7 @@ CREATE TABLE "public"."file_data_head" (
 "mode_type" int4,
 "return_abnormal_info" character varying(255) COLLATE pg_catalog."default",
 "data_time" timestamp without time zone,
- id bigint not null,
+ id SERIAL,
   CONSTRAINT file_data_head_pkey PRIMARY KEY (id)
 
 )

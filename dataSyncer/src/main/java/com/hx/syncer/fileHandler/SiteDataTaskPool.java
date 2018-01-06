@@ -36,10 +36,6 @@ public class SiteDataTaskPool{
     @Autowired
     private PropertiesReflectUtil propertiesReflectUtil;
 
-    private AtomicLong atomId = new AtomicLong(1);
-    private AtomicLong siteAtomId = new AtomicLong(1);
-    private AtomicLong atomSid = new AtomicLong(100);
-
 
     @Async
     public void asyncGmSiteSurfGlData(Path path) {
@@ -47,19 +43,18 @@ public class SiteDataTaskPool{
             SiteDataHeadDo siteDataHeadDo = new SiteDataHeadDo();
             Pattern pattern = Pattern.compile("\\{|\\}");
             List<String> attrList = new ArrayList<>();
-            atomSid.incrementAndGet();
             BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8);
             String str = null;
-            int i = 0;
             while ((str = reader.readLine()) != null) {
                 String[] kv = str.split(":",2);
                 if(str.trim().equals("") || 2 != kv.length || pattern.matcher(str).find())
                     continue;
                 if(kv[0].contains("elements_value")){
-//                    String[] rows = kv[1].replace("\"","").trim().split(";");
-//                    for(String row:rows){
-//                        asyncSaveSiteSurfData(row,attrList);
-//                    }
+                    SiteDataHeadDo dbRes = siteDataHeadService.saveOne(siteDataHeadDo);
+                    String[] rows = kv[1].replace("\"","").trim().split(";");
+                    for(String row:rows){
+                        asyncSaveSiteSurfData(row,attrList,dbRes.getS_d_id());
+                    }
                     continue;
                 }
                 if(kv[0].contains("element")){
@@ -73,8 +68,6 @@ public class SiteDataTaskPool{
                     propertiesReflectUtil.autowiredProperty(siteDataHeadDo,siteDataHeadDo.getClass(),name,value);
                 }
             }
-            siteDataHeadDo.setS_d_id(atomSid.get());
-            siteDataHeadService.saveOne(siteDataHeadDo);
             reader.close();
         }catch (Exception e){
             System.out.println(e);
@@ -82,14 +75,13 @@ public class SiteDataTaskPool{
     }
 
     @Async
-    public void asyncSaveSiteSurfData(String row,List<String> attrList){
+    public void asyncSaveSiteSurfData(String row,List<String> attrList,long s_f_id){
         String[] vs = row.split(",");
         GmSiteTempGlDo gmSiteTempGlDo = new GmSiteTempGlDo();
+        gmSiteTempGlDo.setS_d_id(s_f_id);
         for(int k=0;k<vs.length;k++){
             propertiesReflectUtil.autowiredProperty(gmSiteTempGlDo,gmSiteTempGlDo.getClass(),attrList.get(k),vs[k]);
         }
-        gmSiteTempGlDo.setId(atomId.incrementAndGet());
-        gmSiteTempGlDo.setS_d_id(atomSid.get());
         gmSiteTempGlDao.save(gmSiteTempGlDo);
     }
 }

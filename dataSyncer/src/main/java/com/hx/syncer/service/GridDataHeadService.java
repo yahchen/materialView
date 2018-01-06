@@ -15,21 +15,19 @@ public class GridDataHeadService implements DaoServiceImpl<GridDataHeadDo>{
     @Autowired
     private GridDataHeadDao GridDataHeadDao;
     @Override
-    public boolean save(Iterable<GridDataHeadDo> entities) {
+    public Iterable<GridDataHeadDo> save(Iterable<GridDataHeadDo> entities) {
         if(null != entities && entities.iterator().hasNext()){
-            GridDataHeadDao.save(entities);
-            return true;
+            return GridDataHeadDao.save(entities);
         }
-        return false;
+        return null;
     }
 
     @Override
-    public boolean saveOne(GridDataHeadDo entity) {
+    public GridDataHeadDo saveOne(GridDataHeadDo entity) {
         if(null != entity){
-            GridDataHeadDao.save(entity);
-            return true;
+            return GridDataHeadDao.save(entity);
         }
-        return false;
+        return null;
     }
 
     @Override

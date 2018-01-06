@@ -1,8 +1,6 @@
 package com.hx.syncer.bean;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
@@ -35,10 +33,11 @@ public class AmsuaMtaEumsDo {
     private Timestamp file_name_time ;
     @Column(name = "surface_height",nullable=true)
     private float surface_height ;
-    @Column(name = "f_d_id",nullable=true)
-    private float f_d_id ;
+    @Column(name = "s_f_id",nullable=false)
+    private long s_f_id;
 
     @javax.persistence.Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id", unique=true, nullable=false, insertable=true, updatable=false, precision=20, scale=0)
     private long id ;
 
@@ -138,12 +137,12 @@ public class AmsuaMtaEumsDo {
         this.surface_height = surface_height;
     }
 
-    public float getF_d_id() {
-        return f_d_id;
+    public long getS_f_id() {
+        return s_f_id;
     }
 
-    public void setF_d_id(float f_d_id) {
-        this.f_d_id = f_d_id;
+    public void setS_f_id(long s_f_id) {
+        this.s_f_id = s_f_id;
     }
 
     public long getId() {
