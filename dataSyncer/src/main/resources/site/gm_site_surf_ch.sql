@@ -30,8 +30,8 @@ CREATE TABLE public.gm_site_surf_ch
     q_pre_6h double precision,
     q_pre_24h double precision,
     station_id_c double precision,
-    s_d_id bigint,
-    id bigint not null,
+    s_d_id SERIAL,
+    id SERIAL,
     CONSTRAINT gm_site_surf_ch_pkey PRIMARY KEY (id)
 )
 WITH (

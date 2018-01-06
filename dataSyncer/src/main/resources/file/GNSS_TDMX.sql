@@ -18,8 +18,8 @@ CREATE TABLE "GNSS_TDMX"
   obs_bt5 integer,
   file_name_time timestamp without time zone,
   surface_height double precision,
-  f_d_id double precision,
-  id bigint NOT NULL,
+  s_f_id SERIAL,
+  id SERIAL,
   CONSTRAINT gnss_tdmx PRIMARY KEY (id )
 )
 WITH (

@@ -1,6 +1,6 @@
 CREATE TABLE public.satellite_file_data_head
 (
-    s_f_id bigint NOT NULL,
+    s_f_id SERIAL,
     data_logo character varying(255) COLLATE pg_catalog."default" NOT NULL,
     data_name character varying(255) COLLATE pg_catalog."default",
     data_code character varying(255) COLLATE pg_catalog."default",
@@ -22,7 +22,7 @@ CREATE TABLE public.satellite_file_data_head
     mode_type integer,
     sate_name character varying(255) COLLATE pg_catalog."default",
     sate_file_num character varying(255) COLLATE pg_catalog."default",
-    id bigint not null,
+    id SERIAL,
     CONSTRAINT satellite_file_data_head_pkey PRIMARY KEY (id)
 )
 WITH (
