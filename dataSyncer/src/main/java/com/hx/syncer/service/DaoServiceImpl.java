@@ -9,9 +9,9 @@ import java.util.List;
  */
 @Service
 public interface DaoServiceImpl<T extends Object> {
-    boolean save(Iterable<T> entities);
+    Iterable<T> save(Iterable<T> entities);
 
-    boolean saveOne(T one);
+    T saveOne(T one);
 
     List<T> findAll();
 }

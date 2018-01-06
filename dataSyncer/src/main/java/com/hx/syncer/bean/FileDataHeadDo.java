@@ -1,8 +1,6 @@
 package com.hx.syncer.bean;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
@@ -12,9 +10,10 @@ import java.sql.Timestamp;
 @Table(name = "file_data_head")
 public class FileDataHeadDo {
 
-    @Column(name="s_d_id", nullable=false)
+    @Column(name="s_d_id", nullable=true)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long s_d_id;
-    @Column(name = "data_logo" ,nullable=false)
+    @Column(name = "data_logo" ,nullable=true)
     private String data_logo ;
     @Column(name = "data_name" ,nullable=true)
     private String data_name ;
@@ -52,7 +51,8 @@ public class FileDataHeadDo {
     private Timestamp data_time ;
 
     @javax.persistence.Id
-    @Column(name="id",   unique=true, nullable=false, insertable=true, updatable=false, precision=20, scale=0)
+    @Column(name="id",unique=true, nullable=true, updatable=false, precision=20, scale=0)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     public long getS_d_id() {

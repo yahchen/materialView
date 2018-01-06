@@ -4,7 +4,7 @@
 
 CREATE TABLE public.grid_data_head
 (
-    g_d_id bigint NOT NULL,
+    g_d_id SERIAL,
     data_logo character varying(255) COLLATE pg_catalog."default" NOT NULL,
     data_name character varying(255) COLLATE pg_catalog."default",
     data_code character varying(255) COLLATE pg_catalog."default",
@@ -28,7 +28,7 @@ CREATE TABLE public.grid_data_head
     elements character varying(255),
     validTime character varying(255),
     fcstLevel character varying(255),
-    id bigint not null,
+    id SERIAL,
     CONSTRAINT grid_data_head_pkey PRIMARY KEY (id)
 )
 WITH (

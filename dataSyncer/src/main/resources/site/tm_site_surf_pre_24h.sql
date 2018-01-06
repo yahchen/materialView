@@ -8,8 +8,8 @@ CREATE TABLE public.tm_site_surf_pre_24h
     lat double precision,
     lon double precision,
     pre_24h double precision,
-    s_d_id bigint,
-    id bigint not null,
+    s_d_id SERIAL,
+    id SERIAL,
     CONSTRAINT tm_site_surf_pre_24h_pkey PRIMARY KEY (id)
 )
 WITH (

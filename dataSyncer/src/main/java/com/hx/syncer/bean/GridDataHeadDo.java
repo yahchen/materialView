@@ -13,11 +13,12 @@ import java.sql.Timestamp;
 @Table(name = "grid_data_head")
 public class GridDataHeadDo {
 
-    @Column(name="g_d_id",nullable=false)
+    @Column(name="g_d_id",nullable=true)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long g_d_id;
-    @Column(name = "data_logo",nullable=false)
+    @Column(name = "data_logo",nullable=true)
     private String data_logo;//": "RSURF_CH",    -----资料标示
-    @Column(name = "data_code",nullable=false)
+    @Column(name = "data_code",nullable=true)
     private String data_code;//": "SURF_CHN_MUL_HOR",   -----接口参数 资料代码  类似身份证号
     @Column(name = "data_name",nullable=true)
     private String data_name;//": "中国地面逐小时资料",  ------资料名  类似身份证人名
@@ -63,7 +64,8 @@ public class GridDataHeadDo {
     private String fcstLevel;
 
     @javax.persistence.Id//": "主键",
-    @Column(name="id", unique=true, nullable=false, insertable=true, updatable=false, precision=20, scale=0)
+    @Column(name="id", unique=true, nullable=true, insertable=true, updatable=false, precision=20, scale=0)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     public long getG_d_id() {

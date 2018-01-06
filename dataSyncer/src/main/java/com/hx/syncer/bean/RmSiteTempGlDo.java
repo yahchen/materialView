@@ -1,8 +1,6 @@
 package com.hx.syncer.bean;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by yahchen on 2017/10/31.
@@ -14,7 +12,7 @@ public class RmSiteTempGlDo {
     private float station_id_d;
     @Column(name = "lat",nullable=true)
     private float lat ;
-    @Column(name = "lat",nullable=true)
+    @Column(name = "lon",nullable=true)
     private float lon ;
     @Column(name = "alti",nullable=true)
     private float alti ;
@@ -64,6 +62,7 @@ public class RmSiteTempGlDo {
     private long s_d_id;
 
     @javax.persistence.Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id", unique=true, nullable=false, insertable=true, updatable=false, precision=20, scale=0)
     private long id;
 

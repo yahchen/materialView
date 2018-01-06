@@ -19,8 +19,8 @@ CREATE TABLE public.rm_site_sing_gl
     q_tem double precision,
     q_win_d double precision,
     q_win_s double precision,
-    s_d_id bigint not null,
-    id bigint not null,
+    s_d_id SERIAL,
+    id SERIAL,
     CONSTRAINT rm_site_sing_gl_pkey PRIMARY KEY (id)
 )
 WITH (

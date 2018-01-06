@@ -1,8 +1,6 @@
 package com.hx.syncer.bean;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by yahchen on 2017/10/31.
@@ -22,6 +20,7 @@ public class TmSiteSurfPre6hDo {
     private long s_d_id ;
 
     @javax.persistence.Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id", unique=true, nullable=false, insertable=true, updatable=false, precision=20, scale=0)
     private long id ;
 

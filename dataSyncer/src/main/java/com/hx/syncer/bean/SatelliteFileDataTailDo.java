@@ -1,8 +1,6 @@
 package com.hx.syncer.bean;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
@@ -12,25 +10,17 @@ import java.sql.Timestamp;
 @Table(name = "satellite_file_data_tail")
 public class SatelliteFileDataTailDo {
 
-    @Column(name="s_f_t_id",nullable=false)
-    private long s_f_t_id;
-    @Column(name = "s_f_id" ,nullable=false)
+    @Column(name = "s_f_id" ,nullable=true)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long s_f_id ;
     @Column(name = "sate_file_name" ,nullable=true)
     private String sate_file_name ;
 
     @javax.persistence.Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id", unique=true, nullable=false, insertable=true, updatable=false, precision=20, scale=0)
     private long id;
 
-
-    public long getS_f_t_id() {
-        return s_f_t_id;
-    }
-
-    public void setS_f_t_id(long s_f_t_id) {
-        this.s_f_t_id = s_f_t_id;
-    }
 
     public long getS_f_id() {
         return s_f_id;
