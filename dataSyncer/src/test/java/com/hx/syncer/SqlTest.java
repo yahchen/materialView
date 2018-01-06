@@ -38,7 +38,7 @@ public class SqlTest {
         entity.setData_time(ts);
         entity.setFcstLevel("sds");
         entity.setFile_path("sdsd");
-        entity.setG_d_id(3);
+        //entity.setG_d_id(3);
         entity.setGridfile_state("");
         entity.setGridfileNumMax(121);
         entity.setLongitude_latitude_scope("");
@@ -51,7 +51,8 @@ public class SqlTest {
         entity.setSystem_name("sdds");
         entity.setSite_type(2);
         entity.setSys_conn_state("sd");
-        Object resutl = gridDataHeadDao.save(entity);
+        GridDataHeadDo resutl = gridDataHeadDao.save(entity);
+        System.out.println("id:--------"+resutl.getId());
         Assert.notNull(resutl);
     }
 

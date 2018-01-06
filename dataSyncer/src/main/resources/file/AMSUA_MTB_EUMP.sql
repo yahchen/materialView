@@ -16,8 +16,8 @@ CREATE TABLE "AMSUA_MTB_EUMP"
   obs_bt5 integer,
   file_name_time timestamp without time zone,
   surface_height double precision,
-  f_d_id double precision,
-  id bigint NOT NULL,
+  s_f_id SERIAL,
+  id SERIAL,
   CONSTRAINT amsua_mtb_eump PRIMARY KEY (id )
 )
 WITH (

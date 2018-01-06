@@ -15,21 +15,19 @@ public class SiteDataHeadService implements DaoServiceImpl<SiteDataHeadDo>{
     @Autowired
     private SiteDataHeadDao siteDataHeadDao;
     @Override
-    public boolean save(Iterable<SiteDataHeadDo> entities) {
+    public Iterable<SiteDataHeadDo> save(Iterable<SiteDataHeadDo> entities) {
         if(null != entities && entities.iterator().hasNext()){
-            siteDataHeadDao.save(entities);
-            return true;
+            return siteDataHeadDao.save(entities);
         }
-        return false;
+        return null;
     }
 
     @Override
-    public boolean saveOne(SiteDataHeadDo entity) {
+    public SiteDataHeadDo saveOne(SiteDataHeadDo entity) {
         if(null != entity){
-            siteDataHeadDao.save(entity);
-            return true;
+            return siteDataHeadDao.save(entity);
         }
-        return false;
+        return null;
     }
 
     @Override
