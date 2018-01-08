@@ -184,6 +184,7 @@ selectChartData=function () {
             };
             // 为echarts对象加载数据
             myChart.setOption(option);
+            window.onresize=myChart.resize;
             $("#message").html(json.jsonMessage);
         },
         error:function(){
