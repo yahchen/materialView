@@ -8,7 +8,7 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name = "file_data_head")
-public class FileDataHeadDo {
+public class FileDataHeadDo{
 
     @Column(name="s_d_id", nullable=true)
     @GeneratedValue(strategy = GenerationType.AUTO)

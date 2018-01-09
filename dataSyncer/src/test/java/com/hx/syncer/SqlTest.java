@@ -3,6 +3,7 @@ package com.hx.syncer;
 import com.hx.syncer.bean.GridDataHeadDo;
 import com.hx.syncer.dao.GridDataHeadDao;
 import com.hx.syncer.service.GridDataHeadService;
+import com.hx.syncer.util.DbUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,13 @@ import java.util.List;
 public class SqlTest {
     @Autowired
     private GridDataHeadDao gridDataHeadDao;
+    @Autowired
+    private DbUtils dbUtils;
+
+    @Test
+    public void testBeanName() throws Exception{
+        dbUtils.getTableBeanClassName("RSURF_PRE_3h");
+    }
 
     @Test
     public void testSql(){
