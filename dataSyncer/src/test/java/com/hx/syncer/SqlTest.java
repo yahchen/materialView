@@ -49,7 +49,7 @@ public class SqlTest {
         entity.setValidTime("sds");
         entity.setUser_id("sd");
         entity.setSystem_name("sdds");
-        entity.setSite_type(2);
+        entity.setMode_type(2);
         entity.setSys_conn_state("sd");
         GridDataHeadDo resutl = gridDataHeadDao.save(entity);
         System.out.println("id:--------"+resutl.getId());
