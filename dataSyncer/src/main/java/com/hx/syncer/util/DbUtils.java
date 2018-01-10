@@ -4,6 +4,8 @@ import com.hx.syncer.bean.FileDataHeadDo;
 import com.hx.syncer.bean.GridDataHeadDo;
 import com.hx.syncer.bean.SiteDataHeadDo;
 import com.hx.syncer.dao.BaseRepository;
+import com.hx.syncer.dao.GridDataHeadDao;
+import com.hx.syncer.dao.SiteDataHeadDao;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -21,12 +23,8 @@ public class DbUtils implements ApplicationContextAware {
      */
     private ApplicationContext applicationContext;
 
-    private static final int SITEHEAD = 1;
-    private static final int GRIDHEAD = 2;
-    private static final int FILEHEAD = 3;
 
-
-    public BaseRepository getTableDaoObj(String logo){
+    public BaseRepository getTableEleDaoObj(String logo){
         if(StringUtils.isEmpty(logo))
             return null;
         String[] sameFactors = logo.split("_");
@@ -49,7 +47,7 @@ public class DbUtils implements ApplicationContextAware {
         return null == className?null:(BaseRepository)applicationContext.getBean(className);
     }
 
-    public Object getTableBeanClassName(String logo) throws Exception{
+    public Object getTableEleBeanClassName(String logo) throws Exception{
         if(StringUtils.isEmpty(logo))
             return logo;
         String[] sameFactors = logo.split("_");
@@ -82,18 +80,38 @@ public class DbUtils implements ApplicationContextAware {
             return null;
         Object tableHeadObj = null;
         switch (Integer.valueOf(dataTypeValue)){
-            case SITEHEAD:
+            case DataSyncerConstants.SITEHEAD:
                 tableHeadObj = new SiteDataHeadDo();
                 break;
-            case GRIDHEAD:
+            case DataSyncerConstants.GRIDHEAD:
                 tableHeadObj = new GridDataHeadDo();
                 break;
-            case FILEHEAD:
+            case DataSyncerConstants.FILEHEAD:
                 tableHeadObj = new FileDataHeadDo();
                 break;
             default:
                 break;
         }
         return tableHeadObj;
+    }
+
+    public BaseRepository getTableHeadDao(String dataTypeValue) {
+        if(StringUtils.isEmpty(dataTypeValue))
+            return null;
+        BaseRepository tableHeadDao = null;
+        switch (Integer.valueOf(dataTypeValue)){
+            case DataSyncerConstants.SITEHEAD:
+                tableHeadDao = (BaseRepository)applicationContext.getBean("siteDataHeadDao");
+                break;
+            case DataSyncerConstants.GRIDHEAD:
+                tableHeadDao = (BaseRepository)applicationContext.getBean("gridDataHeadDao");
+                break;
+            case DataSyncerConstants.FILEHEAD:
+                tableHeadDao = (BaseRepository)applicationContext.getBean("fileDataHeadDao");
+                break;
+            default:
+                break;
+        }
+        return tableHeadDao;
     }
 }

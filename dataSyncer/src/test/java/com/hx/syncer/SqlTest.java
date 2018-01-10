@@ -27,7 +27,7 @@ public class SqlTest {
 
     @Test
     public void testBeanName() throws Exception{
-        dbUtils.getTableBeanClassName("RSURF_PRE_3h");
+        dbUtils.getTableEleBeanClassName("RSURF_PRE_3h");
     }
 
     @Test
@@ -35,11 +35,11 @@ public class SqlTest {
         Assert.notNull(gridDataHeadDao,"template is null");
         GridDataHeadDo entity = new GridDataHeadDo();
         Timestamp ts = new Timestamp(System.currentTimeMillis());
-        entity.setData_code("232332");
+        entity.setData_code("232------------332");
         entity.setData_end_time(ts);
-        entity.setData_logo("rese");
-        entity.setData_name("sdfsds");
-        entity.setData_num("sdfsd");
+        entity.setData_logo("ressdfsdf--------------e");
+        entity.setData_name("sd------------------fsds");
+        entity.setData_num("sd-----------------fsd");
         entity.setData_start_time(ts);
         entity.setData_type(1);
         entity.setElements("");
@@ -59,6 +59,7 @@ public class SqlTest {
         entity.setSystem_name("sdds");
         entity.setSite_type(2);
         entity.setSys_conn_state("sd");
+        entity.setId(3);
         GridDataHeadDo resutl = gridDataHeadDao.save(entity);
         System.out.println("id:--------"+resutl.getId());
         Assert.notNull(resutl);
