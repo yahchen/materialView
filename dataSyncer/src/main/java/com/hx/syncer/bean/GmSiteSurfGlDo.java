@@ -74,7 +74,7 @@ public class GmSiteSurfGlDo {
     }
 
     @javax.persistence.Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id", unique=true, nullable=false, insertable=true, updatable=false, precision=20, scale=0)
     private long id;
 

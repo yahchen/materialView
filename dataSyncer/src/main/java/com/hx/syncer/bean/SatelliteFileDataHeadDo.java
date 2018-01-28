@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 public class SatelliteFileDataHeadDo {
 
     @Column(name="s_f_id",  nullable=false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long s_f_id;
     @Column(name = "data_logo" ,nullable=true)
     private String data_logo ;
@@ -58,7 +58,7 @@ public class SatelliteFileDataHeadDo {
 
     @javax.persistence.Id
     @Column(name="id", unique=true, nullable=false, insertable=true, updatable=false, precision=20, scale=0)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
 

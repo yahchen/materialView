@@ -37,7 +37,7 @@ public class AmsuaMtbEumpDo {
     private long s_f_id;
 
     @javax.persistence.Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id", unique=true, nullable=true, insertable=true, updatable=false, precision=20, scale=0)
     private long id ;
 
