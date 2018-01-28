@@ -22,7 +22,7 @@ public class SateDataBinFileService {
     private PropertiesReflectUtil propertiesReflectUtil;
     @Autowired
     private DbUtils dbUtils;
-    public void readFileToBean(String tableName,String sfId,Path satePath) {
+    public void readAndSaveFileBin(String tableName,String sfId,Path satePath) {
         BaseRepository baseRepository = dbUtils.getTableEleDaoObj(tableName);
         try(InputStream in = new FileInputStream(satePath.toFile())) {
             // 一次读多个字节
@@ -32,10 +32,18 @@ public class SateDataBinFileService {
             int iPos = 1 ;              // 用于读取atovs数据中的一条数据的下标值（为1-56）
             // 读入多个字节到字节数组中，byteread为一次读入的字节数
             List<Object> sateBinBeanList = new ArrayList<>();
-            StringBuffer dateSb = new StringBuffer();
+            StringBuffer dateSb = null;
+            boolean isNeedCreate = true;
+            Object sateBean = null;
+            int wait_count = 0;
             while ((byteread = in.read(tempbytes)) != -1) {
-                Object sateBean = dbUtils.getTableEleBeanClassName(tableName);
-                propertiesReflectUtil.autowiredProperty(sateBean,sateBean.getClass(),"s_f_id",sfId);
+                if(isNeedCreate) {
+                    wait_count++;
+                    sateBean = dbUtils.getTableEleBeanClassName(tableName);
+                    propertiesReflectUtil.autowiredProperty(sateBean, sateBean.getClass(), "f_d_id", sfId);
+                    dateSb = new StringBuffer();
+                    isNeedCreate = false;
+                }
                 int value = byteArrayToInt(tempbytes);
                 if( 1 == iPos){
                     propertiesReflectUtil.autowiredProperty(sateBean,sateBean.getClass(),"sat_id",value+"");
@@ -89,9 +97,16 @@ public class SateDataBinFileService {
                     dateSb = new StringBuffer();
                     sateBinBeanList.add(sateBean);
                     iPos = 1;
+                    isNeedCreate = true;
+                    if(wait_count == 2000){
+                        baseRepository.save(sateBinBeanList);
+                        sateBinBeanList = new ArrayList<>();
+                        wait_count = 0;
+                    }
                 }
             }
-            baseRepository.save(sateBinBeanList);
+            if(!sateBinBeanList.isEmpty())
+                baseRepository.save(sateBinBeanList);
         } catch (Exception e1) {
             e1.printStackTrace();
         }

@@ -1,5 +1,7 @@
 package com.hx.syncer.fileHandler;
 
+import com.hx.syncer.util.DataSyncerConstants;
+
 import java.nio.file.FileVisitResult;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
@@ -22,8 +24,8 @@ public class SateDataFileVistor extends SimpleFileVisitor<Path> {
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs){
         String fileName = file.getFileName().toString().toLowerCase();
         if(fileName.endsWith(".bin")){
-            filterFileNameList.forEach(fn->{
-                if(fn.contains(fileName)) {
+            DataSyncerConstants.FILTERFILENAMEMAP.keySet().forEach(fliterName->{
+                if(fileName.contains(fliterName.toLowerCase())) {
                     result.add(file);
                 }
             });

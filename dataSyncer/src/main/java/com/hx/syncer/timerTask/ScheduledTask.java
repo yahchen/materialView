@@ -30,7 +30,7 @@ public class ScheduledTask {
 
     //第一次延迟10秒执行，当执行完后1小时再执行
     @Scheduled(initialDelay = 5000, fixedDelay = 3600000)
-    public void syncGmSurfGl() {
+    public void syncData() {
         try {
             //遍历文件夹下面的文件
             List<Path> result = new LinkedList<Path>();

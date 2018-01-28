@@ -33,9 +33,11 @@ public class DbUtils implements ApplicationContextAware {
         String className = null;
         for(String name:beanNames){
             int curSimilarityValue = 0;
-            if(name.contains("Dao")){
-                for(String factor:sameFactors){
-                    if(name.contains(factor))
+            if(name.endsWith("Dao") && name.startsWith((logo.charAt(0) + "").toLowerCase())){
+                char[] lowLogo = logo.toLowerCase().toCharArray();
+                String lowBeanName = name.toLowerCase();
+                for(char factor:lowLogo){
+                    if(lowBeanName.contains(factor+""))
                         curSimilarityValue++;
                 }
                 if(maxSimilarityValue < curSimilarityValue){
@@ -50,23 +52,25 @@ public class DbUtils implements ApplicationContextAware {
     public Object getTableEleBeanClassName(String logo) throws Exception{
         if(StringUtils.isEmpty(logo))
             return logo;
-        String[] sameFactors = logo.split("_");
         String[] beanNames = applicationContext.getBeanDefinitionNames();
         int maxSimilarityValue = 0;
         String className = null;
         for(String name:beanNames){
             int curSimilarityValue = 0;
-            if(name.contains("Dao")){
-                for(String factor:sameFactors){
-                    if(name.contains(factor))
+            if(name.endsWith("Dao") && name.startsWith((logo.charAt(0) + "").toLowerCase())){
+                char[] lowLogo = logo.toLowerCase().toCharArray();
+                String lowBeanName = name.toLowerCase();
+                for(char factor:lowLogo){
+                    if(lowBeanName.contains(factor+""))
                         curSimilarityValue++;
                 }
                 if(maxSimilarityValue < curSimilarityValue){
                     maxSimilarityValue = curSimilarityValue;
-                    className = "com.hx.syncer."+name.replace("Dao","Do");
+                    className = name.replace("Dao","Do");
                 }
             }
         }
+        className = "com.hx.syncer.bean." + className.substring(0,1).toUpperCase() + className.substring(1);
         return null == className?null:Class.forName(className).newInstance();
     }
 

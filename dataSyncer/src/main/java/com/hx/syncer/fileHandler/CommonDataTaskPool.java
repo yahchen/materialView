@@ -1,24 +1,13 @@
 package com.hx.syncer.fileHandler;
 
-import com.hx.syncer.bean.GmSiteSurfGlDo;
-import com.hx.syncer.bean.GmSiteTempGlDo;
-import com.hx.syncer.bean.SiteDataHeadDo;
-import com.hx.syncer.dao.BaseRepository;
-import com.hx.syncer.dao.GmSiteSurfGlDao;
-import com.hx.syncer.dao.GmSiteTempGlDao;
-import com.hx.syncer.service.GridDataHeadService;
 import com.hx.syncer.service.SateDataBinFileService;
-import com.hx.syncer.service.SiteDataHeadService;
 import com.hx.syncer.util.DataSyncerConstants;
 import com.hx.syncer.util.DbUtils;
 import com.hx.syncer.util.PropertiesReflectUtil;
-import jdk.nashorn.internal.runtime.GlobalConstants;
-import org.hibernate.engine.internal.JoinSequence;
-import org.hibernate.mapping.Join;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -27,7 +16,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicLong;
 import java.util.regex.Pattern;
 
 /**
@@ -41,12 +29,13 @@ public class CommonDataTaskPool{
     private SateDataBinFileService sateDataBinFileService;
     @Autowired
     private DbUtils dbUtils;
+    @Value("${spring.inbound.path}")
+    private String inBoundFilePath;
 
 
     @Async
     public void asyncSaveCommonDbData(Path path) {
         try {
-            BaseRepository baseRepository = null;
             Object dataHeadEntity = null;
             Pattern pattern = Pattern.compile("\\{|\\}");
             List<String> attrList = new ArrayList<>();
@@ -58,13 +47,14 @@ public class CommonDataTaskPool{
                 String[] kv = str.split(":",2);
                 if(str.trim().equals("") || 2 != kv.length || pattern.matcher(str).find())
                     continue;
-                if(kv[0].contains("elements_value")){
-                    dataHeadEntity = baseRepository.save(dataHeadEntity);
-                    String sdidV = propertiesReflectUtil.getFiledValue(dataHeadEntity,"s_d_id");
-                    String dataLogoV = kvMap.get("data_logo");
-                    String[] rows = kv[1].replace("\"","").trim().split(";");
-                    for(String row:rows){
-                        asyncSaveElementData(row,attrList,sdidV,dataLogoV);
+                if(kv[0].contains("elements_value")){//站点数据入库
+                    if(null != dataHeadEntity){
+                        String sdidV = propertiesReflectUtil.getFiledValue(dataHeadEntity,"id");
+                        String dataLogoV = kvMap.get("data_logo");
+                        String[] rows = kv[1].replace("\"","").trim().split(";");
+                        for(String row:rows){
+                            asyncSaveElementData(row,attrList,sdidV,dataLogoV);
+                        }
                     }
                     continue;
                 }
@@ -73,41 +63,47 @@ public class CommonDataTaskPool{
                     for(int j = 0;j<attrs.length;j++){
                         attrList.add(attrs[j]);
                     }
-                }if(kv[0].contains("file_name")){
-                    String dataType = kvMap.get("data_type");
-                    if(!StringUtils.isEmpty(dataType) && Integer.valueOf(dataType) == DataSyncerConstants.FILEHEAD){
-                        dataHeadEntity = dbUtils.getTableHeadDao(dataType).save(dataHeadEntity);
-                    }
-                    String[] attrs = kv[1].replace("\"","").replace("{","").replace("}","").trim().split(",");
+                }
+                if(kv[0].contains("file_name"))
+                    continue;
+                if(kv[0].contains("-") && kv[1].contains(".BIN")){//卫星数据入库
+                    String[] attrs = kv[1].replace("\"","").replace("{","").replace("}","").trim().split(";");
                     for(String fkv:attrs){
-                        String[] fnPair = fkv.split(":");
-                        if(fnPair[0].contains("count"))
-                            continue;
-                        String[] fnList = fnPair[1].split(";");
-                        Collections.addAll(fileNameList,fnList);
+                        fileNameList.add(fkv);
                     }
-                    asyncSaveSateElementData(kvMap.get("file_path"),fileNameList,propertiesReflectUtil.getFiledValue(dataHeadEntity,"s_f_id"));
                 }else {
                     String name = kv[0].replace("\"","").trim();
                     String value = kv[1].replace("\"","").replace(",","").trim();
-                    if(name.contains("data_type"))
+                    if(name.contains("data_type")) {
                         dataHeadEntity = dbUtils.getTableHeadObj(value);
+                        if(dataHeadEntity != null){
+                            Iterator<Map.Entry<String,String>> iterator = kvMap.entrySet().iterator();
+                            while (iterator.hasNext()){
+                                Map.Entry<String,String> entry = iterator.next();
+                                propertiesReflectUtil.autowiredProperty(dataHeadEntity,dataHeadEntity.getClass(),entry.getKey(),entry.getValue());
+                            }
+                            dataHeadEntity = dbUtils.getTableHeadDao(value).save(dataHeadEntity);//表头数据入库
+                        }
+                    }
                     kvMap.put(name,value);
                 }
             }
-            Iterator<Map.Entry<String,String>> iterator = kvMap.entrySet().iterator();
-            while (iterator.hasNext()){
-                Map.Entry<String,String> entry = iterator.next();
-                propertiesReflectUtil.autowiredProperty(dataHeadEntity,dataHeadEntity.getClass(),entry.getKey(),entry.getValue());
+            if(null != dataHeadEntity && !fileNameList.isEmpty()){
+                asyncSaveSateElementData(kvMap.get("file_path"),fileNameList,propertiesReflectUtil.getFiledValue(dataHeadEntity,"id"));
             }
-            if(dataHeadEntity != null && !StringUtils.isEmpty(kvMap.get("data_type")))
-                dbUtils.getTableHeadDao(kvMap.get("data_type")).save(dataHeadEntity);
             reader.close();
         }catch (Exception e){
             System.out.println(e);
         }
     }
 
+    /**
+     * 站点数据入库
+     * @param row
+     * @param attrList
+     * @param s_f_id
+     * @param logo
+     */
     @Async
     public void asyncSaveElementData(String row,List<String> attrList,String s_f_id,String logo){
         try{
@@ -122,11 +118,19 @@ public class CommonDataTaskPool{
 
         }
     }
+
+    /**
+     * 卫星数据文件扫描
+     * @param path
+     * @param fnList
+     * @param sfId
+     */
     @Async
     public void asyncSaveSateElementData(String path,List<String> fnList,String sfId) {
         List<Path> result = new LinkedList<Path>();
         try {
-            Files.walkFileTree(Paths.get(path),new SateDataFileVistor(result,fnList));
+            String sateFilePath = path.startsWith(".")?inBoundFilePath + path.replace(".",""):path;
+            Files.walkFileTree(Paths.get(sateFilePath),new SateDataFileVistor(result,fnList));
             for(Path satePath:result){
                 asyncSaveSateBinFile(satePath,sfId);
             }
@@ -134,12 +138,17 @@ public class CommonDataTaskPool{
             e.printStackTrace();
         }
     }
+
+    /**
+     * 卫星数据入库
+     * @param satePath
+     * @param sfId
+     */
     @Async
     private void asyncSaveSateBinFile(Path satePath,String sfId) {
-        DataSyncerConstants.fNameMap.forEach((k,v)->{
-            if(satePath.toString().contains(k)){
-                sateDataBinFileService.readFileToBean(v,sfId,satePath);
-                return;
+        DataSyncerConstants.FILTERFILENAMEMAP.forEach((fnameLogo,tableName)->{
+            if(satePath.toString().contains(fnameLogo)){
+                sateDataBinFileService.readAndSaveFileBin(tableName,sfId,satePath);
             }
         });
     }

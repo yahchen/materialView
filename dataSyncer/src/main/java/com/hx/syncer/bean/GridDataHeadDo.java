@@ -12,9 +12,8 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "grid_data_head")
 public class GridDataHeadDo {
-
     @Column(name="g_d_id",nullable=true)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long g_d_id;
     @Column(name = "data_logo",nullable=true)
     private String data_logo;//": "RSURF_CH",    -----资料标示
@@ -65,7 +64,7 @@ public class GridDataHeadDo {
 
     @javax.persistence.Id//": "主键",
     @Column(name="id", unique=true, nullable=true, insertable=true, updatable=false, precision=20, scale=0)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     public long getG_d_id() {

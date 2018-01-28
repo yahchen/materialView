@@ -11,13 +11,13 @@ import java.sql.Timestamp;
 public class SatelliteFileDataTailDo {
 
     @Column(name = "s_f_id" ,nullable=true)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long s_f_id ;
     @Column(name = "sate_file_name" ,nullable=true)
     private String sate_file_name ;
 
     @javax.persistence.Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id", unique=true, nullable=false, insertable=true, updatable=false, precision=20, scale=0)
     private long id;
 
