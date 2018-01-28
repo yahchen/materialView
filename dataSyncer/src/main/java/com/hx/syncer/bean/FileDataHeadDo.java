@@ -8,10 +8,10 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name = "file_data_head")
-public class FileDataHeadDo {
+public class FileDataHeadDo{
 
     @Column(name="s_d_id", nullable=true)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long s_d_id;
     @Column(name = "data_logo" ,nullable=true)
     private String data_logo ;
@@ -52,7 +52,7 @@ public class FileDataHeadDo {
 
     @javax.persistence.Id
     @Column(name="id",unique=true, nullable=true, updatable=false, precision=20, scale=0)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     public long getS_d_id() {
