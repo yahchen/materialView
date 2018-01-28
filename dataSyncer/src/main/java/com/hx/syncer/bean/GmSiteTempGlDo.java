@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Table(name = "gm_site_temp_gl")
 public class GmSiteTempGlDo {
     @javax.persistence.Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id", unique=true, nullable=false, insertable=true, updatable=false, precision=20, scale=0)
     private long id;
     @Column(name = "station_id_d",nullable=false)

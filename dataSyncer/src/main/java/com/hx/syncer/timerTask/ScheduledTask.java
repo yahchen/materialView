@@ -1,7 +1,7 @@
 package com.hx.syncer.timerTask;
 
-import com.hx.syncer.fileHandler.SiteDataFileVistor;
-import com.hx.syncer.fileHandler.SiteDataTaskPool;
+import com.hx.syncer.fileHandler.CommonDataFileVistor;
+import com.hx.syncer.fileHandler.CommonDataTaskPool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
@@ -26,18 +26,17 @@ public class ScheduledTask {
     private String inBoundFilePath;
 
     @Autowired
-    private SiteDataTaskPool siteDataTaskPool;
+    private CommonDataTaskPool commonDataTaskPool;
 
     //第一次延迟10秒执行，当执行完后1小时再执行
     @Scheduled(initialDelay = 5000, fixedDelay = 3600000)
-    public void syncGmSurfGl() {
+    public void syncData() {
         try {
             //遍历文件夹下面的文件
             List<Path> result = new LinkedList<Path>();
-            Pattern p = Pattern.compile("temp_gl*");//test 阶段romove gm
-            Files.walkFileTree(Paths.get(inBoundFilePath),new SiteDataFileVistor(result,p));
+            Files.walkFileTree(Paths.get(inBoundFilePath),new CommonDataFileVistor(result));
             for(Path path:result){
-                siteDataTaskPool.asyncGmSiteSurfGlData(path);
+                commonDataTaskPool.asyncSaveCommonDbData(path);
             }
         } catch (IOException e) {
             e.printStackTrace();

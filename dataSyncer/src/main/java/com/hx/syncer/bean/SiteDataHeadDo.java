@@ -23,7 +23,7 @@ import java.sql.Timestamp;
 public class SiteDataHeadDo {
 
     @Column(name = "s_d_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long s_d_id;
     @Column(name = "data_logo",nullable=false)
     private String data_logo;//": "RSURF_CH",    -----资料标示
@@ -47,7 +47,7 @@ public class SiteDataHeadDo {
     private Timestamp data_end_time;//": "2017-07-17 03:00:00",    -----资料结束时间
 
     @javax.persistence.Id//": "主键",
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id", unique=true, nullable=false, insertable=true, updatable=false, precision=20, scale=0)
     private long id;
 

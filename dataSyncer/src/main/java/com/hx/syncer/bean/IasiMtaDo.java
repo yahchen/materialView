@@ -38,7 +38,7 @@ public class IasiMtaDo {
 
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id", unique=true, nullable=false, insertable=true, updatable=false, precision=20, scale=0)
+    @Column(name="id", unique=true, nullable=true, insertable=true, updatable=false, precision=20, scale=0)
     private long id ;
 
     public int getSat_id() {

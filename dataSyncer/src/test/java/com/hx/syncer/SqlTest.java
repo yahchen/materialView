@@ -3,6 +3,7 @@ package com.hx.syncer;
 import com.hx.syncer.bean.GridDataHeadDo;
 import com.hx.syncer.dao.GridDataHeadDao;
 import com.hx.syncer.service.GridDataHeadService;
+import com.hx.syncer.util.DbUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,17 +22,24 @@ import java.util.List;
 public class SqlTest {
     @Autowired
     private GridDataHeadDao gridDataHeadDao;
+    @Autowired
+    private DbUtils dbUtils;
+
+    @Test
+    public void testBeanName() throws Exception{
+        dbUtils.getTableEleBeanClassName("RSURF_PRE_3h");
+    }
 
     @Test
     public void testSql(){
         Assert.notNull(gridDataHeadDao,"template is null");
         GridDataHeadDo entity = new GridDataHeadDo();
         Timestamp ts = new Timestamp(System.currentTimeMillis());
-        entity.setData_code("232332");
+        entity.setData_code("232------------332");
         entity.setData_end_time(ts);
-        entity.setData_logo("rese");
-        entity.setData_name("sdfsds");
-        entity.setData_num("sdfsd");
+        entity.setData_logo("ressdfsdf--------------e");
+        entity.setData_name("sd------------------fsds");
+        entity.setData_num("sd-----------------fsd");
         entity.setData_start_time(ts);
         entity.setData_type(1);
         entity.setElements("");
@@ -51,6 +59,7 @@ public class SqlTest {
         entity.setSystem_name("sdds");
         entity.setMode_type(2);
         entity.setSys_conn_state("sd");
+        entity.setId(3);
         GridDataHeadDo resutl = gridDataHeadDao.save(entity);
         System.out.println("id:--------"+resutl.getId());
         Assert.notNull(resutl);

@@ -53,4 +53,21 @@ public class PropertiesReflectUtil {
         }
 
     }
+
+    public String getFiledValue(Object o,String k){
+        if (StringUtils.isEmpty(k))
+            return null;
+        Method[] ms = o.getClass().getMethods();
+        try {
+            for (Method m : ms) {
+                String mName = m.getName().toLowerCase();
+                if (mName.startsWith("get") && mName.endsWith(k.toLowerCase())) {
+                    return m.invoke(o).toString();
+                }
+            }
+        } catch (Exception e) {
+
+        }
+        return null;
+    }
 }
