@@ -36,6 +36,7 @@ public class SateDataBinFileService {
             boolean isNeedCreate = true;
             Object sateBean = null;
             int wait_count = 0;
+            String[] fnWithTime = satePath.toString().split("\\.|-");
             while ((byteread = in.read(tempbytes)) != -1) {
                 if(isNeedCreate) {
                     wait_count++;
@@ -112,7 +113,8 @@ public class SateDataBinFileService {
                 // 扫描到一组数据后，添加到ArrayList列表中
                 if ( (21+n) == iPos){
                     //propertiesReflectUtil.autowiredProperty(sateBean,sateBean.getClass(),"file_name_time",dateSb.toString());
-					 propertiesReflectUtil.autowiredProperty(sateBean,sateBean.getClass(),"scan_time",dateSb.toString());
+                    propertiesReflectUtil.autowiredProperty(sateBean, sateBean.getClass(), "file_name_time", fnWithTime[fnWithTime.length-3] + fnWithTime[fnWithTime.length-2]);
+                    propertiesReflectUtil.autowiredProperty(sateBean,sateBean.getClass(),"scan_time",dateSb.toString());
                     dateSb = new StringBuffer();
                     sateBinBeanList.add(sateBean);
                     iPos = 1;

@@ -18,9 +18,11 @@ import java.util.regex.Pattern;
 public class StaticTest {
     private static SimpleDateFormat ss = new SimpleDateFormat("yyyyMMddHHmm");
     public static void main(String[] args) throws Exception{
-        String s = "201711091100";
-        System.out.println(Timestamp.valueOf(ss.parse(s).toLocaleString()));
-        String sss = "sdfs:sdfs:sdfsd:sddfs";
-        System.out.println(sss.split(":",2)[1]);
+        String fn = "SATE_L1_MUS_ATOVS_MWB_S1C_GLB-MTA-AMSUA-045KM-EUMC-PROC-20171029-210126.BIN";
+        String[] fnt = fn.split("\\.|-");
+        System.out.println(fnt[fnt.length-2]);
+        for(String f:fnt){
+            System.out.println(f);
+        }
     }
 }

@@ -92,6 +92,7 @@ public class CommonDataTaskPool{
                 asyncSaveSateElementData(kvMap.get("file_path"),fileNameList,propertiesReflectUtil.getFiledValue(dataHeadEntity,"id"));
             }
             reader.close();
+            Files.delete(path);//删除文件
         }catch (Exception e){
             System.out.println(e);
         }
@@ -145,7 +146,7 @@ public class CommonDataTaskPool{
      * @param sfId
      */
     @Async
-    private void asyncSaveSateBinFile(Path satePath,String sfId) {
+    public void asyncSaveSateBinFile(Path satePath,String sfId) {
         DataSyncerConstants.FILTERFILENAMEMAP.forEach((fnameLogo,tableName)->{
             if(satePath.toString().contains(fnameLogo)){
                 sateDataBinFileService.readAndSaveFileBin(tableName,sfId,satePath);
