@@ -2,6 +2,7 @@ package com.hx.syncer.util;
 
 import com.hx.syncer.bean.FileDataHeadDo;
 import com.hx.syncer.bean.GridDataHeadDo;
+import com.hx.syncer.bean.SatelliteFileDataHeadDo;
 import com.hx.syncer.bean.SiteDataHeadDo;
 import com.hx.syncer.dao.BaseRepository;
 import com.hx.syncer.dao.GridDataHeadDao;
@@ -93,6 +94,9 @@ public class DbUtils implements ApplicationContextAware {
             case DataSyncerConstants.FILEHEAD:
                 tableHeadObj = new FileDataHeadDo();
                 break;
+            case DataSyncerConstants.SATEFILEHEAD:
+                tableHeadObj = new SatelliteFileDataHeadDo();
+                break;
             default:
                 break;
         }
@@ -112,6 +116,9 @@ public class DbUtils implements ApplicationContextAware {
                 break;
             case DataSyncerConstants.FILEHEAD:
                 tableHeadDao = (BaseRepository)applicationContext.getBean("fileDataHeadDao");
+                break;
+            case DataSyncerConstants.SATEFILEHEAD:
+                tableHeadDao = (BaseRepository)applicationContext.getBean("satelliteFileDataHeadDao");
                 break;
             default:
                 break;

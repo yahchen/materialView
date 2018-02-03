@@ -3,12 +3,14 @@ package com.hx.syncer.service;
 import com.hx.syncer.dao.BaseRepository;
 import com.hx.syncer.util.DbUtils;
 import com.hx.syncer.util.PropertiesReflectUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +39,10 @@ public class SateDataBinFileService {
             Object sateBean = null;
             int wait_count = 0;
             String[] fnWithTime = satePath.toString().split("\\.|-");
+            String fnTime = fnWithTime[fnWithTime.length-3] + fnWithTime[fnWithTime.length-2];
+            if(StringUtils.isEmpty(fnTime)){
+                System.out.println(satePath.toString());
+            }
             while ((byteread = in.read(tempbytes)) != -1) {
                 if(isNeedCreate) {
                     wait_count++;
@@ -113,9 +119,8 @@ public class SateDataBinFileService {
                 // 扫描到一组数据后，添加到ArrayList列表中
                 if ( (21+n) == iPos){
                     //propertiesReflectUtil.autowiredProperty(sateBean,sateBean.getClass(),"file_name_time",dateSb.toString());
-                    propertiesReflectUtil.autowiredProperty(sateBean, sateBean.getClass(), "file_name_time", fnWithTime[fnWithTime.length-3] + fnWithTime[fnWithTime.length-2]);
+                    propertiesReflectUtil.autowiredProperty(sateBean, sateBean.getClass(), "file_name_time", fnTime);
                     propertiesReflectUtil.autowiredProperty(sateBean,sateBean.getClass(),"scan_time",dateSb.toString());
-                    dateSb = new StringBuffer();
                     sateBinBeanList.add(sateBean);
                     iPos = 1;
                     isNeedCreate = true;
@@ -128,6 +133,7 @@ public class SateDataBinFileService {
             }
             if(!sateBinBeanList.isEmpty())
                 baseRepository.save(sateBinBeanList);
+            Files.delete(satePath);
         } catch (Exception e1) {
             e1.printStackTrace();
         }

@@ -40,7 +40,13 @@ public class PropertiesReflectUtil {
                         } else {
                             v = System.currentTimeMillis() + "";
                         }
+                        if(StringUtils.isEmpty(v)){
+                            System.out.println("v is null");
+                        }
                         Timestamp vd = Timestamp.valueOf(v);
+                        if(vd == null){
+                            System.out.println("vd is null");
+                        }
                         m.invoke(o, vd);
                     } else {
                         m.invoke(o, v);
