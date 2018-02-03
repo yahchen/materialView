@@ -3,16 +3,18 @@ package com.hx.syncer.service;
 import com.hx.syncer.dao.BaseRepository;
 import com.hx.syncer.util.DbUtils;
 import com.hx.syncer.util.PropertiesReflectUtil;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -41,8 +43,17 @@ public class SateDataBinFileService {
             String[] fnWithTime = satePath.toString().split("\\.|-");
             String fnTime = fnWithTime[fnWithTime.length-3] + fnWithTime[fnWithTime.length-2];
             if(StringUtils.isEmpty(fnTime)){
-                System.out.println(satePath.toString());
+                System.out.println("----------------------"+satePath.toString()+"---------------------------------------");
             }
+            String f_time = fnWithTime[fnWithTime.length-3] + fnWithTime[fnWithTime.length-2];
+
+            SimpleDateFormat ff = new SimpleDateFormat("yyyyMMddHHmmss");
+            Date currentTime = ff.parse(f_time);
+
+            SimpleDateFormat fo = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String dateString = fo.format(currentTime);
+            f_time = dateString;
+
             while ((byteread = in.read(tempbytes)) != -1) {
                 if(isNeedCreate) {
                     wait_count++;
@@ -84,14 +95,19 @@ public class SateDataBinFileService {
                     propertiesReflectUtil.autowiredProperty(sateBean,sateBean.getClass(),"scan_fov",value+"");
                 }else if(5 == iPos){//year
                     dateSb.append(value);
+                    dateSb.append("-");
                 }else if(6 == iPos){//mon
                     dateSb.append(value);
+                    dateSb.append("-");
                 }else if(7 == iPos){//day
                     dateSb.append(value);
+                    dateSb.append(" ");
                 }else if(8 == iPos){//hour
                     dateSb.append(value);
+                    dateSb.append(":");
                 }else if(9 == iPos){//min
                     dateSb.append(value);
+                    dateSb.append(":");
                 }else if(10 == iPos){//sec
                     dateSb.append(value);
                 }else if(11 == iPos){
@@ -119,9 +135,10 @@ public class SateDataBinFileService {
                 // 扫描到一组数据后，添加到ArrayList列表中
                 if ( (21+n) == iPos){
                     //propertiesReflectUtil.autowiredProperty(sateBean,sateBean.getClass(),"file_name_time",dateSb.toString());
-                    propertiesReflectUtil.autowiredProperty(sateBean, sateBean.getClass(), "file_name_time", fnTime);
+                    propertiesReflectUtil.autowiredProperty(sateBean, sateBean.getClass(), "file_name_time", f_time);
                     propertiesReflectUtil.autowiredProperty(sateBean,sateBean.getClass(),"scan_time",dateSb.toString());
                     sateBinBeanList.add(sateBean);
+                    //dateSb = new StringBuffer();
                     iPos = 1;
                     isNeedCreate = true;
                     if(wait_count == 2000){
