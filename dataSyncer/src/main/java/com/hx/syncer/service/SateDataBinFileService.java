@@ -29,7 +29,7 @@ public class SateDataBinFileService {
             byte[] tempbytes = new byte[4];
             int byteread = 0;
             int X =0 ,n = 0;            //
-            int iPos = 1 ;              // 用于读取atovs数据中的一条数据的下标值（为1-56）
+            int iPos = 1 ;              // 用于读取atovs数据中的一条数据的下标值（为1-86）
             // 读入多个字节到字节数组中，byteread为一次读入的字节数
             List<Object> sateBinBeanList = new ArrayList<>();
             StringBuffer dateSb = null;
@@ -49,10 +49,28 @@ public class SateDataBinFileService {
                     propertiesReflectUtil.autowiredProperty(sateBean,sateBean.getClass(),"sat_id",value+"");
                 }else if(2 == iPos){
                     propertiesReflectUtil.autowiredProperty(sateBean,sateBean.getClass(),"instrument_id",value+"");
-                    if(11 == value){      //	AMSU-B/MHS：X=25，n=5
-                        X = 25;
-                        n = 5;
-                    }
+                    
+					// 探测仪器代号（如：5=HIRS；10=AMSU-A；11=AMSU-B）
+            		if(5 == value){             //	HIRS：X=40，n=20
+            			X = 40;
+            			n = 20;
+            		}else if(10 == value){      //	AMSU-A：X=35, n=15
+            			X = 35;
+            			n = 15;
+            		}else if(11 == value){      //	AMSU-B/MHS：X=25，n=5
+            			X = 25;
+            			n = 5;
+            		}else if(12 == value){      //	AMSU-B/MHS：X=25，n=5
+            			X = 25;
+            			n = 5;
+            		}else if(221 == value){      //	IASI：X=25；通道数n=8471 但是实际为502
+            			X = 25;
+            			n = 502;
+            		}else{                      //	AMSU-B/MHS：X=25，n=10
+            			X = 25;
+            			n = 10;
+            		}
+
                 }else if(3 == iPos){
                     propertiesReflectUtil.autowiredProperty(sateBean,sateBean.getClass(),"scan_line",value+"");
                 }else if(4 == iPos){
@@ -93,7 +111,8 @@ public class SateDataBinFileService {
                 iPos ++;
                 // 扫描到一组数据后，添加到ArrayList列表中
                 if ( (21+n) == iPos){
-                    propertiesReflectUtil.autowiredProperty(sateBean,sateBean.getClass(),"file_name_time",dateSb.toString());
+                    //propertiesReflectUtil.autowiredProperty(sateBean,sateBean.getClass(),"file_name_time",dateSb.toString());
+					 propertiesReflectUtil.autowiredProperty(sateBean,sateBean.getClass(),"scan_time",dateSb.toString());
                     dateSb = new StringBuffer();
                     sateBinBeanList.add(sateBean);
                     iPos = 1;
