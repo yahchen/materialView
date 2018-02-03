@@ -42,9 +42,6 @@ public class SateDataBinFileService {
             int wait_count = 0;
             String[] fnWithTime = satePath.toString().split("\\.|-");
             String fnTime = fnWithTime[fnWithTime.length-3] + fnWithTime[fnWithTime.length-2];
-            if(StringUtils.isEmpty(fnTime)){
-                System.out.println("----------------------"+satePath.toString()+"---------------------------------------");
-            }
             String f_time = fnWithTime[fnWithTime.length-3] + fnWithTime[fnWithTime.length-2];
 
             SimpleDateFormat ff = new SimpleDateFormat("yyyyMMddHHmmss");
@@ -150,9 +147,13 @@ public class SateDataBinFileService {
             }
             if(!sateBinBeanList.isEmpty())
                 baseRepository.save(sateBinBeanList);
-            Files.delete(satePath);
         } catch (Exception e1) {
             e1.printStackTrace();
+        }
+        try{
+            Files.delete(satePath);
+        }catch (Exception e){
+            System.out.println(e);
         }
     }
     // byte 数组与 int 的相互转换

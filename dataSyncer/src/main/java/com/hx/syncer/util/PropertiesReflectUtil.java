@@ -36,14 +36,7 @@ public class PropertiesReflectUtil {
                         int vi = StringUtils.isEmpty(v) ? 0 : Integer.valueOf(v);
                         m.invoke(o, vi);
                     } else if (type.equalsIgnoreCase("Timestamp")) {
-
-
                         if (!StringUtils.isEmpty(v)) {
-
-                            //if (!v.contains(":")) {   //不包含“：”的时间
-                            //    v = format1.parse(v).toLocaleString();
-                           // }
-
                             if (!v.contains(":")) {   //不包含“：”的时间
                                 SimpleDateFormat ff = new SimpleDateFormat("yyyyMMddHHmm");
                                 Date currentTime = ff.parse(v);
@@ -57,15 +50,7 @@ public class PropertiesReflectUtil {
                         } else {
                             v = System.currentTimeMillis() + "";
                         }
-
-                        if(StringUtils.isEmpty(v)){
-                            System.out.println("v is null");
-                        }
-
                         Timestamp vd = Timestamp.valueOf(v);
-                        if(vd == null){
-                            System.out.println("vd is null");
-                        }
                         m.invoke(o, vd);
                     } else {
                         m.invoke(o, v);
