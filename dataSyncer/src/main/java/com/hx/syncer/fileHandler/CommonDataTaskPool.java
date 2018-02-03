@@ -64,9 +64,12 @@ public class CommonDataTaskPool{
                         attrList.add(attrs[j]);
                     }
                 }
-                if(kv[0].contains("file_name"))
+                if(kv[0].contains("file_name")) {
                     continue;
+                }
                 if(kv[0].contains("-") && kv[1].contains(".BIN")){//卫星数据入库
+                    String sateName = kv[0].replace("\"","").replace("{","").replace("}","").trim();
+                    kvMap.put("sate_name",sateName);
                     String[] attrs = kv[1].replace("\"","").replace("{","").replace("}","").trim().split(";");
                     for(String fkv:attrs){
                         fileNameList.add(fkv);
@@ -74,7 +77,8 @@ public class CommonDataTaskPool{
                 }else {
                     String name = kv[0].replace("\"","").trim();
                     String value = kv[1].replace("\"","").replace(",","").trim();
-                    if(name.contains("data_type")) {
+                    kvMap.put(name,value);
+                    if(name.contains("data_type") && Integer.valueOf(value) != DataSyncerConstants.SATEFILEHEAD) {
                         dataHeadEntity = dbUtils.getTableHeadObj(value);
                         if(dataHeadEntity != null){
                             Iterator<Map.Entry<String,String>> iterator = kvMap.entrySet().iterator();
@@ -85,7 +89,17 @@ public class CommonDataTaskPool{
                             dataHeadEntity = dbUtils.getTableHeadDao(value).save(dataHeadEntity);//表头数据入库
                         }
                     }
-                    kvMap.put(name,value);
+                    if(name.contains("-count") && Integer.valueOf(kvMap.get("data_type")) == DataSyncerConstants.SATEFILEHEAD){
+                        dataHeadEntity = dbUtils.getTableHeadObj(kvMap.get("data_type"));
+                        if(dataHeadEntity != null){
+                            Iterator<Map.Entry<String,String>> iterator = kvMap.entrySet().iterator();
+                            while (iterator.hasNext()){
+                                Map.Entry<String,String> entry = iterator.next();
+                                propertiesReflectUtil.autowiredProperty(dataHeadEntity,dataHeadEntity.getClass(),entry.getKey(),entry.getValue());
+                            }
+                            dataHeadEntity = dbUtils.getTableHeadDao(value).save(dataHeadEntity);//表头数据入库
+                        }
+                    }
                 }
             }
             if(null != dataHeadEntity && !fileNameList.isEmpty()){
