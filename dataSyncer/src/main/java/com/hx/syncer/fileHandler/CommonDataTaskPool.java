@@ -76,11 +76,16 @@ public class CommonDataTaskPool{
                     }
                 }else {
                     String name = kv[0].replace("\"","").trim();
-                    String value = kv[1].replace("\"","").replace(",","").trim();
+                    String value = null;
+                    if(name.contains("validTime") || name.contains("fcstLevel") || name.contains("longitude_latitude_scope") || name.contains("gridfile_state")){
+                        value = kv[1].replace("\"", "").trim();
+                    }else {
+                        value = kv[1].replace("\"", "").replace(",", "").trim();
+                    }
                     if(name.contains("return_abnormal_info")){
-                        generateAndPutGridPropertyValue("return_abnormal_info",value,kvMap);
+                        generateAndPutGridPropertyValue("return_abnormal_info",value,kvMap,"#");
                     }else if(name.contains("gridfile_state")){
-                        generateAndPutGridPropertyValue("gridfile_state",value,kvMap);
+                        generateAndPutGridPropertyValue("gridfile_state",value,kvMap,";");
                     }else{
                         kvMap.put(name,value);
                     }
@@ -174,9 +179,9 @@ public class CommonDataTaskPool{
         });
     }
 
-    public void generateAndPutGridPropertyValue(String speciaKey,String currentValue,Map<String,String> kvMap){
+    public void generateAndPutGridPropertyValue(String speciaKey,String currentValue,Map<String,String> kvMap,String splitSymbol){
         if(kvMap.containsKey(speciaKey)){
-            kvMap.put(speciaKey,kvMap.get(speciaKey) + ";" + currentValue);
+            kvMap.put(speciaKey,kvMap.get(speciaKey) + splitSymbol + currentValue);
         }else {
             kvMap.put(speciaKey,currentValue);
         }
