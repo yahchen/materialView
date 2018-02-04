@@ -185,7 +185,7 @@ selectChartData=function(){//前后端交互函数  逻辑判断
         };
         // 为echarts对象加载数据
         myChart.setOption(option);
-
+        window.onresize=myChart.resize;
     }
 </script>
 

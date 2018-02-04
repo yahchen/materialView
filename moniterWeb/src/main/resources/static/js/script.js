@@ -92,9 +92,9 @@ onShowGridMatrix=function(aPara){//显示矩阵图
 			 		   $.each(obj, function(key, value){
 			 			   var labelStr="<span  style='display:block;font-size:20px;text-align:center'>"+value+"</span>";
 			 			   if(value.fileState==-1){
-			 				  labelStr="<label  class='tooltip'  id='Id12' title='"+value.fileInfo+"' style= 'display:block;width:25px;height:45px;background-color: #EE1111;margin-right:'><span class='tooltip'  id='id19' style='font-size:40px;'>&times;</span></label>";
+			 				  labelStr="<label  class='tooltip'  id='Id12' title='"+value.fileInfo+"' style= 'display:block;width:25px;height:30px;background-color: #EE1111;margin-right:'><span class='tooltip'  id='id19' style='font-size:40px;'>&times;</span></label>";
 			 			   } else if(value.fileState==1){
-			 				  labelStr="<label  style= 'display:block;width:25px;height:45px;background-color: #1AE61A;margin-right:'><span  style='font-size:40px;''>&radic;</span></label>";
+			 				  labelStr="<label  style= 'display:block;width:25px;height:30px;background-color: #1AE61A;margin-right:'><span  style='font-size:40px;''>&radic;</span></label>";
 			 			   }
 			 			  s+="<td align='center'>"+labelStr+"</td>";
 			 		   });
