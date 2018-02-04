@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -49,11 +50,11 @@ public class CommonDataTaskPool{
                     continue;
                 if(kv[0].contains("elements_value")){//站点数据入库
                     if(null != dataHeadEntity){
-                        String sdidV = propertiesReflectUtil.getFiledValue(dataHeadEntity,"id");
+                        String outId = propertiesReflectUtil.getFiledValue(dataHeadEntity,"id");
                         String dataLogoV = kvMap.get("data_logo");
                         String[] rows = kv[1].replace("\"","").trim().split(";");
                         for(String row:rows){
-                            asyncSaveElementData(row,attrList,sdidV,dataLogoV);
+                            asyncSaveElementData(row,attrList,outId,dataLogoV,kvMap.get("data_type"));
                         }
                     }
                     continue;
@@ -64,34 +65,73 @@ public class CommonDataTaskPool{
                         attrList.add(attrs[j]);
                     }
                 }
-                if(kv[0].contains("file_name"))
+                if(kv[0].contains("file_name")) {
                     continue;
+                }
                 if(kv[0].contains("-") && kv[1].contains(".BIN")){//卫星数据入库
+                    String sateName = kv[0].replace("\"","").replace("{","").replace("}","").trim();
+                    kvMap.put("sate_name",sateName);
                     String[] attrs = kv[1].replace("\"","").replace("{","").replace("}","").trim().split(";");
                     for(String fkv:attrs){
                         fileNameList.add(fkv);
                     }
                 }else {
                     String name = kv[0].replace("\"","").trim();
-                    String value = kv[1].replace("\"","").replace(",","").trim();
-                    if(name.contains("data_type")) {
-                        dataHeadEntity = dbUtils.getTableHeadObj(value);
+                    boolean isSyncSplitRecord = name.contains("-count") && Integer.valueOf(kvMap.get("data_type")) == DataSyncerConstants.SATEFILEHEAD;
+                    if(isSyncSplitRecord){
+                        name = "sate_file_num";
+                    }
+                    String value = null;
+                    if(name.contains("validTime") || name.contains("fcstLevel") || name.contains("longitude_latitude_scope") || name.contains("gridfile_state")){
+                        value = kv[1].replace("\"", "").trim();
+                        if(value.equals(","))
+                            value = "";
+                        else{
+                            int dotIndex = value.lastIndexOf(",");
+                            if(!StringUtils.isEmpty(value) && dotIndex > 0) {
+                                value = value.substring(0, dotIndex);
+                            }
+                        }
+                    }else {
+                        value = kv[1].replace("\"", "").replace(",", "").trim();
+                    }
+                    if(name.contains("return_abnormal_info")){
+                        generateAndPutGridPropertyValue("return_abnormal_info",value,kvMap,"#");
+                    }else if(name.contains("gridfile_state")){
+                        generateAndPutGridPropertyValue("gridfile_state",value,kvMap,";");
+                    }else{
+                        kvMap.put(name,value);
+                    }
+                    if(name.contains("mode_type") && kvMap.containsKey("data_type") && Integer.valueOf(kvMap.get("data_type")) != DataSyncerConstants.SATEFILEHEAD) {
+                        dataHeadEntity = dbUtils.getTableHeadObj(kvMap.get("data_type"));
                         if(dataHeadEntity != null){
                             Iterator<Map.Entry<String,String>> iterator = kvMap.entrySet().iterator();
                             while (iterator.hasNext()){
                                 Map.Entry<String,String> entry = iterator.next();
                                 propertiesReflectUtil.autowiredProperty(dataHeadEntity,dataHeadEntity.getClass(),entry.getKey(),entry.getValue());
                             }
-                            dataHeadEntity = dbUtils.getTableHeadDao(value).save(dataHeadEntity);//表头数据入库
+                            dataHeadEntity = dbUtils.getTableHeadDao(kvMap.get("data_type")).save(dataHeadEntity);//表头数据入库
                         }
                     }
-                    kvMap.put(name,value);
+                    if(isSyncSplitRecord){
+                        dataHeadEntity = dbUtils.getTableHeadObj(kvMap.get("data_type"));
+                        if(dataHeadEntity != null){
+                            Iterator<Map.Entry<String,String>> iterator = kvMap.entrySet().iterator();
+                            while (iterator.hasNext()){
+                                Map.Entry<String,String> entry = iterator.next();
+                                propertiesReflectUtil.autowiredProperty(dataHeadEntity,dataHeadEntity.getClass(),entry.getKey(),entry.getValue());
+                            }
+                            dataHeadEntity = dbUtils.getTableHeadDao(kvMap.get("data_type")).save(dataHeadEntity);//表头数据入库
+                        }
+                        if(null != dataHeadEntity && !fileNameList.isEmpty()){
+                            asyncSaveSateElementData(kvMap.get("file_path"),fileNameList,propertiesReflectUtil.getFiledValue(dataHeadEntity,"id"));
+                            fileNameList = new ArrayList<>();
+                        }
+                    }
                 }
             }
-            if(null != dataHeadEntity && !fileNameList.isEmpty()){
-                asyncSaveSateElementData(kvMap.get("file_path"),fileNameList,propertiesReflectUtil.getFiledValue(dataHeadEntity,"id"));
-            }
             reader.close();
+            Files.delete(path);//删除文件
         }catch (Exception e){
             System.out.println(e);
         }
@@ -101,15 +141,15 @@ public class CommonDataTaskPool{
      * 站点数据入库
      * @param row
      * @param attrList
-     * @param s_f_id
+     * @param outId
      * @param logo
      */
     @Async
-    public void asyncSaveElementData(String row,List<String> attrList,String s_f_id,String logo){
+    public void asyncSaveElementData(String row,List<String> attrList,String outId,String logo,String dataType){
         try{
             String[] vs = row.split(",");
             Object tableBeanObj = dbUtils.getTableEleBeanClassName(logo);
-            propertiesReflectUtil.autowiredProperty(tableBeanObj,tableBeanObj.getClass(),"s_f_id",s_f_id);
+            propertiesReflectUtil.autowiredProperty(tableBeanObj,tableBeanObj.getClass(),dbUtils.getOutIdName(dataType),outId);
             for(int k=0;k<vs.length;k++){
                 propertiesReflectUtil.autowiredProperty(tableBeanObj,tableBeanObj.getClass(),attrList.get(k),vs[k]);
             }
@@ -145,11 +185,19 @@ public class CommonDataTaskPool{
      * @param sfId
      */
     @Async
-    private void asyncSaveSateBinFile(Path satePath,String sfId) {
+    public void asyncSaveSateBinFile(Path satePath,String sfId) {
         DataSyncerConstants.FILTERFILENAMEMAP.forEach((fnameLogo,tableName)->{
             if(satePath.toString().contains(fnameLogo)){
                 sateDataBinFileService.readAndSaveFileBin(tableName,sfId,satePath);
             }
         });
+    }
+
+    public void generateAndPutGridPropertyValue(String speciaKey,String currentValue,Map<String,String> kvMap,String splitSymbol){
+        if(kvMap.containsKey(speciaKey)){
+            kvMap.put(speciaKey,kvMap.get(speciaKey) + splitSymbol + currentValue);
+        }else {
+            kvMap.put(speciaKey,currentValue);
+        }
     }
 }

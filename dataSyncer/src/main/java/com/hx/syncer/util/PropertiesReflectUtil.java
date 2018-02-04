@@ -6,13 +6,16 @@ import org.springframework.util.StringUtils;
 import java.lang.reflect.Method;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by yahchen on 2017/11/5.
  */
 @Service
 public class PropertiesReflectUtil {
-    private static SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmm");
+    //private static SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmm");
+
+    private SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmm");
 
     public void autowiredProperty(Object o, Class cls, String k, String v) {
         if (StringUtils.isEmpty(k) || StringUtils.isEmpty(v))
@@ -32,11 +35,21 @@ public class PropertiesReflectUtil {
                     } else if (type.equalsIgnoreCase("int")) {
                         int vi = StringUtils.isEmpty(v) ? 0 : Integer.valueOf(v);
                         m.invoke(o, vi);
-                    } else if (type.equalsIgnoreCase("Timestamp")) {
+                    } else if(type.equalsIgnoreCase("double")){
+                        double vi = StringUtils.isEmpty(v) ? 0 : Double.valueOf(v);
+                        m.invoke(o, vi);
+                    }else if (type.equalsIgnoreCase("Timestamp")) {
                         if (!StringUtils.isEmpty(v)) {
-                            if (!v.contains(":")) {
-                                v = format.parse(v).toLocaleString();
+                            if (!v.contains(":")) {   //不包含“：”的时间
+                                SimpleDateFormat ff = new SimpleDateFormat("yyyyMMddHHmm");
+                                Date currentTime = ff.parse(v);
+
+                                SimpleDateFormat fo = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                String dateString = fo.format(currentTime);
+                                v = dateString;
+
                             }
+
                         } else {
                             v = System.currentTimeMillis() + "";
                         }
@@ -49,7 +62,7 @@ public class PropertiesReflectUtil {
                 }
             }
         } catch (Exception e) {
-
+            System.out.println("Exception"+ e);
         }
 
     }

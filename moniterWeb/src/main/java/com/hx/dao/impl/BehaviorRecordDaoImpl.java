@@ -39,7 +39,7 @@ public class BehaviorRecordDaoImpl implements BehaviorRecordDao {
             String sSQL= "select * from " + tableStr +sqlWhere + " limit "+ behaviorRecordParam.getPageSize() + " offset " + startIndex +";";
             String sSQLCount="select * from " + tableStr + sqlWhere;
             String dateTimeStr=" ";
-            System.out.println(sSQL);
+            //System.out.println(sSQL);
             dataHeadList =  template.queryForList( sSQL );
             for(Map<String, Object> list:dataHeadList){
                 int a= list.get("return_abnormal_info").toString().indexOf("-1");

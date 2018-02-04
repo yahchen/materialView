@@ -87,14 +87,16 @@ public class PostgreSqlDao {
     public List<Map<String,Object>> querySatelliteTimeRangeBinMapData(String table, String querySatelliteDate){
 
         Map para = new HashMap();
-        String sql = "select distinct file_name_time from \"" + table;
+        //String sql = "select distinct file_name_time from \"" + table;
+        String sql = "select distinct file_name_time from " + table;
         if(!querySatelliteDate.equals("null")){
 
             Timestamp startTime = new Timestamp(System.currentTimeMillis());
             Timestamp endTime = new Timestamp(System.currentTimeMillis());
             startTime = Timestamp.valueOf(querySatelliteDate + " 00:00:00");
             endTime = Timestamp.valueOf(querySatelliteDate + " 23:59:59");
-            sql += "\" where file_name_time between :startTime and :endTime";
+            //sql += "\" where file_name_time between :startTime and :endTime";
+            sql += " where file_name_time between :startTime and :endTime";
             para.put("startTime", startTime);
             para.put("endTime", endTime);
         }
@@ -185,13 +187,12 @@ public class PostgreSqlDao {
      */
     public List<Map<String,Object>> querySatelliteBinMapData(String table,Timestamp stDate, String querySatelliteTime){
         Map para = new HashMap();
-        String sql = "select obs_lat,obs_lon from \""  + table;
-       // String sql = "select distinct file_name_time from \"" + table;
+        //String sql = "select obs_lat,obs_lon from \""  + table;
+        String sql = "select obs_lat,obs_lon from "  + table;
         if(!stDate.equals("null")){
-           // DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-           // sql += "\" where file_name_time == :stDate;";
-           // para.put("stDate", stDate);
-           sql += "\" where file_name_time = \'" +stDate + "\';";
+
+          // sql += "\" where file_name_time = \'" +stDate + "\';";
+            sql += " where file_name_time = \'" +stDate + "\';";
         }
            // sql += "\" where file_name_time between :startTime and :endTime";
            // para.put("startTime", stDate);

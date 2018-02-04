@@ -9,10 +9,6 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "file_data_head")
 public class FileDataHeadDo{
-
-    @Column(name="s_d_id", nullable=true)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long s_d_id;
     @Column(name = "data_logo" ,nullable=true)
     private String data_logo ;
     @Column(name = "data_name" ,nullable=true)
@@ -54,14 +50,6 @@ public class FileDataHeadDo{
     @Column(name="id",unique=true, nullable=true, updatable=false, precision=20, scale=0)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
-    public long getS_d_id() {
-        return s_d_id;
-    }
-
-    public void setS_d_id(long s_d_id) {
-        this.s_d_id = s_d_id;
-    }
 
     public String getData_logo() {
         return data_logo;

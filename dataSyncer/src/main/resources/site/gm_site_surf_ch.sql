@@ -29,7 +29,7 @@ CREATE TABLE public.gm_site_surf_ch
     q_pre_1h double precision,
     q_pre_6h double precision,
     q_pre_24h double precision,
-    station_id_c double precision,
+    station_id_c character varying(255) COLLATE pg_catalog."default",
     s_d_id SERIAL,
     id SERIAL,
     CONSTRAINT gm_site_surf_ch_pkey PRIMARY KEY (id)

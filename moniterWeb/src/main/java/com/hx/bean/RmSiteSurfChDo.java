@@ -29,7 +29,7 @@ public class RmSiteSurfChDo {
     private float q_pre_1h ;
     private float  q_pre_6h ;
     private float q_pre_24h ;
-    private float station_id_c ;
+    private String station_id_c ;
     private long s_d_id ;
 
     public float getStation_id_d() {
@@ -232,11 +232,11 @@ public class RmSiteSurfChDo {
         this.q_pre_24h = q_pre_24h;
     }
 
-    public float getStation_id_c() {
+    public String getStation_id_c() {
         return station_id_c;
     }
 
-    public void setStation_id_c(float station_id_c) {
+    public void setStation_id_c(String station_id_c) {
         this.station_id_c = station_id_c;
     }
 
