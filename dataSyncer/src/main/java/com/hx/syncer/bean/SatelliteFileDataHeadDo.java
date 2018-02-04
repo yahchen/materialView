@@ -10,9 +10,6 @@ import java.sql.Timestamp;
 @Table(name = "satellite_file_data_head")
 public class SatelliteFileDataHeadDo {
 
-    @Column(name="s_f_id",  nullable=false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long s_f_id;
     @Column(name = "data_logo" ,nullable=true)
     private String data_logo ;
     @Column(name = "data_name" ,nullable=true)
@@ -60,15 +57,6 @@ public class SatelliteFileDataHeadDo {
     @Column(name="id", unique=true, nullable=false, insertable=true, updatable=false, precision=20, scale=0)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
-
-    public long getS_f_id() {
-        return s_f_id;
-    }
-
-    public void setS_f_id(long s_f_id) {
-        this.s_f_id = s_f_id;
-    }
 
     public String getData_logo() {
         return data_logo;

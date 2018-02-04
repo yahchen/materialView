@@ -77,6 +77,10 @@ public class CommonDataTaskPool{
                     }
                 }else {
                     String name = kv[0].replace("\"","").trim();
+                    boolean isSyncSplitRecord = name.contains("-count") && Integer.valueOf(kvMap.get("data_type")) == DataSyncerConstants.SATEFILEHEAD;
+                    if(isSyncSplitRecord){
+                        name = "sate_file_num";
+                    }
                     String value = null;
                     if(name.contains("validTime") || name.contains("fcstLevel") || name.contains("longitude_latitude_scope") || name.contains("gridfile_state")){
                         value = kv[1].replace("\"", "").trim();
@@ -109,7 +113,7 @@ public class CommonDataTaskPool{
                             dataHeadEntity = dbUtils.getTableHeadDao(kvMap.get("data_type")).save(dataHeadEntity);//表头数据入库
                         }
                     }
-                    if(name.contains("-count") && Integer.valueOf(kvMap.get("data_type")) == DataSyncerConstants.SATEFILEHEAD){
+                    if(isSyncSplitRecord){
                         dataHeadEntity = dbUtils.getTableHeadObj(kvMap.get("data_type"));
                         if(dataHeadEntity != null){
                             Iterator<Map.Entry<String,String>> iterator = kvMap.entrySet().iterator();

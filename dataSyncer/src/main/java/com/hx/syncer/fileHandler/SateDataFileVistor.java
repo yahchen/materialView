@@ -25,9 +25,13 @@ public class SateDataFileVistor extends SimpleFileVisitor<Path> {
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs){
         String fileName = file.getFileName().toString().toLowerCase();
         if(fileName.endsWith(".bin")){
-            DataSyncerConstants.FILTERFILENAMEMAP.keySet().forEach(fliterName->{
-                if(fileName.contains(fliterName.toLowerCase())) {
-                    result.add(file);
+            filterFileNameList.forEach(scannerName->{
+                if(fileName.contains(scannerName.toLowerCase())) {
+                    DataSyncerConstants.FILTERFILENAMEMAP.keySet().forEach(fliterName->{
+                        if(fileName.contains(fliterName.toLowerCase())) {
+                            result.add(file);
+                        }
+                    });
                 }
             });
         }
