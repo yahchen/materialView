@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -79,6 +80,10 @@ public class CommonDataTaskPool{
                     String value = null;
                     if(name.contains("validTime") || name.contains("fcstLevel") || name.contains("longitude_latitude_scope") || name.contains("gridfile_state")){
                         value = kv[1].replace("\"", "").trim();
+                        int dotIndex = value.lastIndexOf(",");
+                        if(!StringUtils.isEmpty(value) && dotIndex > 0) {
+                            value = value.substring(0, dotIndex);
+                        }
                     }else {
                         value = kv[1].replace("\"", "").replace(",", "").trim();
                     }
