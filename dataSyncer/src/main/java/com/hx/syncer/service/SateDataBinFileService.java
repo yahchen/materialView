@@ -55,7 +55,7 @@ public class SateDataBinFileService {
                 if(isNeedCreate) {
                     wait_count++;
                     sateBean = dbUtils.getTableEleBeanClassName(tableName);
-                    propertiesReflectUtil.autowiredProperty(sateBean, sateBean.getClass(), "f_d_id", sfId);
+                    propertiesReflectUtil.autowiredProperty(sateBean, sateBean.getClass(), "s_f_id", sfId);
                     dateSb = new StringBuffer();
                     isNeedCreate = false;
                 }

@@ -33,8 +33,8 @@ public class MhsNoaa18Do {
     private Timestamp file_name_time ;
     @Column(name = "surface_height",nullable=true)
     private float surface_height ;
-    @Column(name = "f_d_id",nullable=true)
-    private float f_d_id ;
+    @Column(name = "s_f_id",nullable=true)
+    private float s_f_id ;
 
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -137,12 +137,12 @@ public class MhsNoaa18Do {
         this.surface_height = surface_height;
     }
 
-    public float getF_d_id() {
-        return f_d_id;
+    public float getS_f_id() {
+        return s_f_id;
     }
 
-    public void setF_d_id(float f_d_id) {
-        this.f_d_id = f_d_id;
+    public void setS_f_id(float s_f_id) {
+        this.s_f_id = s_f_id;
     }
 
     public long getId() {
