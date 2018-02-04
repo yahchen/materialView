@@ -54,7 +54,7 @@ public class GridMaterialViewController {
             Map<String, Object> gridDataHeadMap=gridDataHeadList.get(0);
             String[] mGridArray=gridDataHeadMap.get("gridfile_state").toString().split(";");//文件状态 3个，每个为：1,1,1,1,1,1,1,1,-1,-1,-1; 1,1,1,1,1,1,1,1,-1,-1,-1; 1,1,1,1,1,1,1,1,1,1,1
             String [] gridFileInfos=gridDataHeadMap.get("return_abnormal_info").toString().split("#");//文件提示信息
-            String[] validTimes=gridDataHeadMap.get("validtime").toString().split(",");//时效 200,500,850
+            String[] validTimes=gridDataHeadMap.get("valid_time").toString().split(",");//时效 200,500,850
 
             List jsonList=new ArrayList<>();
             Map jsonItemHead=new TreeMap<>();
@@ -68,7 +68,7 @@ public class GridMaterialViewController {
             }
             jsonList.add(jsonItemHead);
 
-            String[] fcstLevels=gridDataHeadMap.get("fcstlevel").toString().split(",");//层次
+            String[] fcstLevels=gridDataHeadMap.get("fcst_level").toString().split(",");//层次
 
             for(int i=0;i<mGridArray.length;i++){
                 Map jsonItemMap=new TreeMap<>();

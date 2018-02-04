@@ -32,6 +32,8 @@ $(function () {
     $("#satelliteType").change(binSatelliteTimeRangeMapListener);
 
     function binSatelliteTimeRangeMapListener() {
+
+
         $("#bin_map_div").hide();
         $("#bin_satellite_map_div").show();
         if ($("#satelliteType").val() == 0) {
@@ -103,7 +105,7 @@ $(function () {
                 for (var i in data) {
                     var point = new T.Circle(new T.LngLat(data[i].obs_lon, data[i].obs_lat), 1, {
                         color: "#00FF66",
-                        weight: 6,
+                        weight: 3.5,
                         opacity: 1,
                         fillColor: "#00FF66",
                         fillOpacity: 0,
@@ -118,7 +120,7 @@ $(function () {
                         + "</div>";
                     point.addEventListener("click", function (e) {
                         var pointInner = e.lnglat;
-                        var infoWin = new T.InfoWindow(sContent, {offset: new T.Point(0, -9)}); // 创建信息窗口对象
+                        var infoWin = new T.InfoWindow(sContent, {offset: new T.Point(0, -3)}); // 创建信息窗口对象
                         map.openInfoWindow(infoWin, pointInner); //开启信息窗口
                     });// 将标注添加到地图中
                 }
@@ -141,7 +143,7 @@ $(function () {
 // 初始化卫星轨道图 的选项控件 和 轨道地图
 function binSatelliteMapListener(data_logo) {
 
-    alert( getQueryString("data_logo"));
+    //alert( getQueryString("data_logo"));
 
     //  var SateType = event.target.getAttribute("name");
 
@@ -206,11 +208,15 @@ function binSatelliteMapListener(data_logo) {
 
 
 // 初始化时间控件为昨天
-getYesDay_Sate = function () {
+getYesDay_Sate=function () {
     var nowdate = new Date();
     var y = nowdate.getFullYear();
-    var m = nowdate.getMonth() + 1;
-    var d = nowdate.getDate() - 1;
-    var formatnowdate = y + '-' + m + '-' + d;
+    var m = nowdate.getMonth()+1;
+    var d = nowdate.getDate()-1;
+    var formatnowdate = y+'-'+fix(m,2)+'-'+fix(d,2);
     $("#querySatelliteDate").val(formatnowdate);
-};
+}
+//fix(m,2)  m不足两位 前面补0
+function fix(num, length) {
+    return ('' + num).length < length ? ((new Array(length + 1)).join('0') + num).slice(-length) : '' + num;
+}

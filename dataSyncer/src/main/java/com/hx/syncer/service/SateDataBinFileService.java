@@ -108,19 +108,19 @@ public class SateDataBinFileService {
                 }else if(10 == iPos){//sec
                     dateSb.append(value);
                 }else if(11 == iPos){
-                    propertiesReflectUtil.autowiredProperty(sateBean,sateBean.getClass(),"obs_lat",value/100+"");
+                    propertiesReflectUtil.autowiredProperty(sateBean,sateBean.getClass(),"obs_lat",(float)value/100+"");
                 }else if(12 == iPos){
-                    propertiesReflectUtil.autowiredProperty(sateBean,sateBean.getClass(),"obs_lon",value/100+"");
+                    propertiesReflectUtil.autowiredProperty(sateBean,sateBean.getClass(),"obs_lon",(float)value/100+"");
                 }else if(13 == iPos){
                     propertiesReflectUtil.autowiredProperty(sateBean,sateBean.getClass(),"surface_mark",value+"");
                 }else if(14 == iPos){
                     propertiesReflectUtil.autowiredProperty(sateBean,sateBean.getClass(),"fsurface_height",value+"");
                 }else if(15 == iPos){
-                    propertiesReflectUtil.autowiredProperty(sateBean,sateBean.getClass(),"fLocal_zenith",value/100+"");
+                    propertiesReflectUtil.autowiredProperty(sateBean,sateBean.getClass(),"fLocal_zenith",(float)value/100+"");
                 }else if(16 == iPos){
-                    propertiesReflectUtil.autowiredProperty(sateBean,sateBean.getClass(),"local_azimuth",value/100+"");
+                    propertiesReflectUtil.autowiredProperty(sateBean,sateBean.getClass(),"local_azimuth",(float)value/100+"");
                 }else if(17 == iPos){
-                    propertiesReflectUtil.autowiredProperty(sateBean,sateBean.getClass(),"solar_zenith",value/100+"");
+                    propertiesReflectUtil.autowiredProperty(sateBean,sateBean.getClass(),"solar_zenith",(float)value/100+"");
                 }else if(18 == iPos){
                     propertiesReflectUtil.autowiredProperty(sateBean,sateBean.getClass(),"solar_azimuth",value+"");
                 }else if(19 == iPos){
