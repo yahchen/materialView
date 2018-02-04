@@ -59,7 +59,7 @@ public class RmSiteSurfChDo {
     @Column(name = "q_pre_24h",nullable=true)
     private float q_pre_24h ;
     @Column(name = "station_id_c",nullable=true)
-    private float station_id_c ;
+    private String station_id_c ;
     @Column(name = "s_d_id",nullable=true)
     private long s_d_id ;
 
@@ -269,11 +269,11 @@ public class RmSiteSurfChDo {
         this.q_pre_24h = q_pre_24h;
     }
 
-    public float getStation_id_c() {
+    public String getStation_id_c() {
         return station_id_c;
     }
 
-    public void setStation_id_c(float station_id_c) {
+    public void setStation_id_c(String station_id_c) {
         this.station_id_c = station_id_c;
     }
 

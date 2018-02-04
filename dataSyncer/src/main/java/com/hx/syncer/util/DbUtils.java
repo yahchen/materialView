@@ -125,4 +125,27 @@ public class DbUtils implements ApplicationContextAware {
         }
         return tableHeadDao;
     }
+
+    public String getOutIdName(String dataType) {
+        if(StringUtils.isEmpty(dataType))
+            return null;
+        String outIdName = null;
+        switch (Integer.valueOf(dataType)){
+            case DataSyncerConstants.SITEHEAD:
+                outIdName = "s_d_id";
+                break;
+            case DataSyncerConstants.GRIDHEAD:
+                outIdName = "";
+                break;
+            case DataSyncerConstants.FILEHEAD:
+                outIdName = "";
+                break;
+            case DataSyncerConstants.SATEFILEHEAD:
+                outIdName = "s_f_id";
+                break;
+            default:
+                break;
+        }
+        return outIdName;
+    }
 }

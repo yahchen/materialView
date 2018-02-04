@@ -69,8 +69,8 @@ public class SiteDataHeadDo {
     private String system_name;//": "Numerical Weather Prediction Center of CMA(global)",   -----系统用户名，即可以以此区分不同模式类型，例如区域模式和全球模式 （人为规定）
     @Column(name = "data_type",nullable=true)
     private int data_type;//": "1",  ----资料类型 1:站点 2:格点 3:文件（资料本身）
-    @Column(name = "site_type",nullable=true)
-    private int site_type;//": "1",  ----站点类型 1:区域(中国)站点 2:全球站点（资料本身）
+    @Column(name = "mode_type",nullable=true)
+    private int mode_type;//": "1",  ----站点类型 1:区域(中国)站点 2:全球站点（资料本身）
     @Column(name = "return_abnormal_info",nullable=true)
     private String return_abnormal_info;//": "0:Query Succeed",   -----调用接口后 返回码和返回码信息
 
@@ -235,12 +235,12 @@ public class SiteDataHeadDo {
         this.data_type = data_type;
     }
 
-    public int getSite_type() {
-        return site_type;
+    public int getMode_type() {
+        return mode_type;
     }
 
-    public void setSite_type(int site_type) {
-        this.site_type = site_type;
+    public void setMode_type(int mode_type) {
+        this.mode_type = mode_type;
     }
 
     public long getId() {

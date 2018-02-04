@@ -35,7 +35,10 @@ public class PropertiesReflectUtil {
                     } else if (type.equalsIgnoreCase("int")) {
                         int vi = StringUtils.isEmpty(v) ? 0 : Integer.valueOf(v);
                         m.invoke(o, vi);
-                    } else if (type.equalsIgnoreCase("Timestamp")) {
+                    } else if(type.equalsIgnoreCase("double")){
+                        double vi = StringUtils.isEmpty(v) ? 0 : Double.valueOf(v);
+                        m.invoke(o, vi);
+                    }else if (type.equalsIgnoreCase("Timestamp")) {
                         if (!StringUtils.isEmpty(v)) {
                             if (!v.contains(":")) {   //不包含“：”的时间
                                 SimpleDateFormat ff = new SimpleDateFormat("yyyyMMddHHmm");

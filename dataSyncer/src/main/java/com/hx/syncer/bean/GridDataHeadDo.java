@@ -12,9 +12,6 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "grid_data_head")
 public class GridDataHeadDo {
-    @Column(name="g_d_id",nullable=true)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long g_d_id;
     @Column(name = "data_logo",nullable=true)
     private String data_logo;//": "RSURF_CH",    -----资料标示
     @Column(name = "data_code",nullable=true)
@@ -36,7 +33,7 @@ public class GridDataHeadDo {
     @Column(name = "data_end_time",nullable=true)
     private Timestamp data_end_time;//": "2017-07-17 03:00:00",    -----资料结束时间
     @Column(name = "gridfile_num_max",nullable=true)
-    private int gridfileNumMax;
+    private int gridfile_num_max;
     @Column(name = "gridfile_state",nullable=true)
     private String gridfile_state;
     @Column(name = "longitude_latitude_scope",nullable=true)
@@ -53,8 +50,8 @@ public class GridDataHeadDo {
     private String system_name;//": "Numerical Weather Prediction Center of CMA(global)",   -----系统用户名，即可以以此区分不同模式类型，例如区域模式和全球模式 （人为规定）
     @Column(name = "data_type",nullable=true)
     private int data_type;//": "1",  ----资料类型 1:站点 2:格点 3:文件（资料本身）
-    @Column(name = "site_type",nullable=true)
-    private int site_type;//": "1",  ----站点类型 1:区域(中国)站点 2:全球站点（资料本身）
+    @Column(name = "mode_type",nullable=true)
+    private int mode_type;//": "1",  ----站点类型 1:区域(中国)站点 2:全球站点（资料本身）
     @Column(name = "elements",nullable=true)
     private String elements;
     @Column(name = "validTime",nullable=true)
@@ -66,14 +63,6 @@ public class GridDataHeadDo {
     @Column(name="id", unique=true, nullable=true, insertable=true, updatable=false, precision=20, scale=0)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
-    public long getG_d_id() {
-        return g_d_id;
-    }
-
-    public void setG_d_id(long g_d_id) {
-        this.g_d_id = g_d_id;
-    }
 
     public String getData_logo() {
         return data_logo;
@@ -155,12 +144,12 @@ public class GridDataHeadDo {
         this.data_end_time = data_end_time;
     }
 
-    public long getGridfileNumMax() {
-        return gridfileNumMax;
+    public int getGridfile_num_max() {
+        return gridfile_num_max;
     }
 
-    public void setGridfileNumMax(int gridfileNumMax) {
-        this.gridfileNumMax = gridfileNumMax;
+    public void setGridfile_num_max(int gridfile_num_max) {
+        this.gridfile_num_max = gridfile_num_max;
     }
 
     public String getGridfile_state() {
@@ -227,12 +216,12 @@ public class GridDataHeadDo {
         this.data_type = data_type;
     }
 
-    public int getSite_type() {
-        return site_type;
+    public int getMode_type() {
+        return mode_type;
     }
 
-    public void setSite_type(int site_type) {
-        this.site_type = site_type;
+    public void setMode_type(int mode_type) {
+        this.mode_type = mode_type;
     }
 
     public String getElements() {

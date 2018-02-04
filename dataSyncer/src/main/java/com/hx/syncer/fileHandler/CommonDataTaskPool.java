@@ -49,11 +49,11 @@ public class CommonDataTaskPool{
                     continue;
                 if(kv[0].contains("elements_value")){//站点数据入库
                     if(null != dataHeadEntity){
-                        String sdidV = propertiesReflectUtil.getFiledValue(dataHeadEntity,"id");
+                        String outId = propertiesReflectUtil.getFiledValue(dataHeadEntity,"id");
                         String dataLogoV = kvMap.get("data_logo");
                         String[] rows = kv[1].replace("\"","").trim().split(";");
                         for(String row:rows){
-                            asyncSaveElementData(row,attrList,sdidV,dataLogoV);
+                            asyncSaveElementData(row,attrList,outId,dataLogoV,kvMap.get("data_type"));
                         }
                     }
                     continue;
@@ -77,16 +77,22 @@ public class CommonDataTaskPool{
                 }else {
                     String name = kv[0].replace("\"","").trim();
                     String value = kv[1].replace("\"","").replace(",","").trim();
-                    kvMap.put(name,value);
-                    if(name.contains("data_type") && Integer.valueOf(value) != DataSyncerConstants.SATEFILEHEAD) {
-                        dataHeadEntity = dbUtils.getTableHeadObj(value);
+                    if(name.contains("return_abnormal_info")){
+                        generateAndPutGridPropertyValue("return_abnormal_info",value,kvMap);
+                    }else if(name.contains("gridfile_state")){
+                        generateAndPutGridPropertyValue("gridfile_state",value,kvMap);
+                    }else{
+                        kvMap.put(name,value);
+                    }
+                    if(name.contains("mode_type") && kvMap.containsKey("data_type") && Integer.valueOf(kvMap.get("data_type")) != DataSyncerConstants.SATEFILEHEAD) {
+                        dataHeadEntity = dbUtils.getTableHeadObj(kvMap.get("data_type"));
                         if(dataHeadEntity != null){
                             Iterator<Map.Entry<String,String>> iterator = kvMap.entrySet().iterator();
                             while (iterator.hasNext()){
                                 Map.Entry<String,String> entry = iterator.next();
                                 propertiesReflectUtil.autowiredProperty(dataHeadEntity,dataHeadEntity.getClass(),entry.getKey(),entry.getValue());
                             }
-                            dataHeadEntity = dbUtils.getTableHeadDao(value).save(dataHeadEntity);//表头数据入库
+                            dataHeadEntity = dbUtils.getTableHeadDao(kvMap.get("data_type")).save(dataHeadEntity);//表头数据入库
                         }
                     }
                     if(name.contains("-count") && Integer.valueOf(kvMap.get("data_type")) == DataSyncerConstants.SATEFILEHEAD){
@@ -97,7 +103,7 @@ public class CommonDataTaskPool{
                                 Map.Entry<String,String> entry = iterator.next();
                                 propertiesReflectUtil.autowiredProperty(dataHeadEntity,dataHeadEntity.getClass(),entry.getKey(),entry.getValue());
                             }
-                            dataHeadEntity = dbUtils.getTableHeadDao(value).save(dataHeadEntity);//表头数据入库
+                            dataHeadEntity = dbUtils.getTableHeadDao(kvMap.get("data_type")).save(dataHeadEntity);//表头数据入库
                         }
                     }
                 }
@@ -116,15 +122,15 @@ public class CommonDataTaskPool{
      * 站点数据入库
      * @param row
      * @param attrList
-     * @param s_f_id
+     * @param outId
      * @param logo
      */
     @Async
-    public void asyncSaveElementData(String row,List<String> attrList,String s_f_id,String logo){
+    public void asyncSaveElementData(String row,List<String> attrList,String outId,String logo,String dataType){
         try{
             String[] vs = row.split(",");
             Object tableBeanObj = dbUtils.getTableEleBeanClassName(logo);
-            propertiesReflectUtil.autowiredProperty(tableBeanObj,tableBeanObj.getClass(),"s_f_id",s_f_id);
+            propertiesReflectUtil.autowiredProperty(tableBeanObj,tableBeanObj.getClass(),dbUtils.getOutIdName(dataType),outId);
             for(int k=0;k<vs.length;k++){
                 propertiesReflectUtil.autowiredProperty(tableBeanObj,tableBeanObj.getClass(),attrList.get(k),vs[k]);
             }
@@ -166,5 +172,13 @@ public class CommonDataTaskPool{
                 sateDataBinFileService.readAndSaveFileBin(tableName,sfId,satePath);
             }
         });
+    }
+
+    public void generateAndPutGridPropertyValue(String speciaKey,String currentValue,Map<String,String> kvMap){
+        if(kvMap.containsKey(speciaKey)){
+            kvMap.put(speciaKey,kvMap.get(speciaKey) + ";" + currentValue);
+        }else {
+            kvMap.put(speciaKey,currentValue);
+        }
     }
 }
