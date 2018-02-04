@@ -21,10 +21,6 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "site_data_head")
 public class SiteDataHeadDo {
-
-    @Column(name = "s_d_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long s_d_id;
     @Column(name = "data_logo",nullable=false)
     private String data_logo;//": "RSURF_CH",    -----资料标示
     @Column(name = "data_name",nullable=true)
@@ -73,15 +69,6 @@ public class SiteDataHeadDo {
     private int mode_type;//": "1",  ----站点类型 1:区域(中国)站点 2:全球站点（资料本身）
     @Column(name = "return_abnormal_info",nullable=true)
     private String return_abnormal_info;//": "0:Query Succeed",   -----调用接口后 返回码和返回码信息
-
-
-    public long getS_d_id() {
-        return s_d_id;
-    }
-
-    public void setS_d_id(long s_d_id) {
-        this.s_d_id = s_d_id;
-    }
 
     public String getData_logo() {
         return data_logo;
