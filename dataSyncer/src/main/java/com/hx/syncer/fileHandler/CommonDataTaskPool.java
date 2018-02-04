@@ -80,9 +80,13 @@ public class CommonDataTaskPool{
                     String value = null;
                     if(name.contains("validTime") || name.contains("fcstLevel") || name.contains("longitude_latitude_scope") || name.contains("gridfile_state")){
                         value = kv[1].replace("\"", "").trim();
-                        int dotIndex = value.lastIndexOf(",");
-                        if(!StringUtils.isEmpty(value) && dotIndex > 0) {
-                            value = value.substring(0, dotIndex);
+                        if(value.equals(","))
+                            value = "";
+                        else{
+                            int dotIndex = value.lastIndexOf(",");
+                            if(!StringUtils.isEmpty(value) && dotIndex > 0) {
+                                value = value.substring(0, dotIndex);
+                            }
                         }
                     }else {
                         value = kv[1].replace("\"", "").replace(",", "").trim();
