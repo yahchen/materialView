@@ -4,7 +4,6 @@
 
 CREATE TABLE public.grid_data_head
 (
-    g_d_id SERIAL,
     data_logo character varying(255) COLLATE pg_catalog."default" NOT NULL,
     data_name character varying(255) COLLATE pg_catalog."default",
     data_code character varying(255) COLLATE pg_catalog."default",

@@ -26,7 +26,7 @@ public class MateriaMeta {
     private long user_id;
     private String system_name;
     private int data_type;
-    private int site_type;
+    private int mode_type;
     private int material_type;
     private String resource_path;
 
@@ -158,12 +158,12 @@ public class MateriaMeta {
         this.data_type = data_type;
     }
 
-    public int getSite_type() {
-        return site_type;
+    public int getMode_type() {
+        return mode_type;
     }
 
-    public void setSite_type(int site_type) {
-        this.site_type = site_type;
+    public void setMode_type(int mode_type) {
+        this.mode_type = mode_type;
     }
 
     public int getMaterial_type() {

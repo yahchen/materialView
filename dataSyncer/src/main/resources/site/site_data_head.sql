@@ -22,7 +22,6 @@ CREATE TABLE public.site_data_head
     data_type integer,
     mode_type integer,
     return_abnormal_info character varying(255) COLLATE pg_catalog."default",
-    s_d_id SERIAL,
     id SERIAL,
     CONSTRAINT site_data_head_pkey PRIMARY KEY (id)
     )

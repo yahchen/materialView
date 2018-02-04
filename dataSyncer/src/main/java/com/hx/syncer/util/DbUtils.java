@@ -2,6 +2,7 @@ package com.hx.syncer.util;
 
 import com.hx.syncer.bean.FileDataHeadDo;
 import com.hx.syncer.bean.GridDataHeadDo;
+import com.hx.syncer.bean.SatelliteFileDataHeadDo;
 import com.hx.syncer.bean.SiteDataHeadDo;
 import com.hx.syncer.dao.BaseRepository;
 import com.hx.syncer.dao.GridDataHeadDao;
@@ -93,6 +94,9 @@ public class DbUtils implements ApplicationContextAware {
             case DataSyncerConstants.FILEHEAD:
                 tableHeadObj = new FileDataHeadDo();
                 break;
+            case DataSyncerConstants.SATEFILEHEAD:
+                tableHeadObj = new SatelliteFileDataHeadDo();
+                break;
             default:
                 break;
         }
@@ -113,9 +117,35 @@ public class DbUtils implements ApplicationContextAware {
             case DataSyncerConstants.FILEHEAD:
                 tableHeadDao = (BaseRepository)applicationContext.getBean("fileDataHeadDao");
                 break;
+            case DataSyncerConstants.SATEFILEHEAD:
+                tableHeadDao = (BaseRepository)applicationContext.getBean("satelliteFileDataHeadDao");
+                break;
             default:
                 break;
         }
         return tableHeadDao;
+    }
+
+    public String getOutIdName(String dataType) {
+        if(StringUtils.isEmpty(dataType))
+            return null;
+        String outIdName = null;
+        switch (Integer.valueOf(dataType)){
+            case DataSyncerConstants.SITEHEAD:
+                outIdName = "s_d_id";
+                break;
+            case DataSyncerConstants.GRIDHEAD:
+                outIdName = "";
+                break;
+            case DataSyncerConstants.FILEHEAD:
+                outIdName = "";
+                break;
+            case DataSyncerConstants.SATEFILEHEAD:
+                outIdName = "s_f_id";
+                break;
+            default:
+                break;
+        }
+        return outIdName;
     }
 }

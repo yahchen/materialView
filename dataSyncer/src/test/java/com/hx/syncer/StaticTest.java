@@ -1,26 +1,18 @@
 package com.hx.syncer;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.TreeSet;
-import java.util.regex.Pattern;
-
 /**
  * Created by yahchen on 2017/11/7.
  */
 public class StaticTest {
-    private static SimpleDateFormat ss = new SimpleDateFormat("yyyyMMddHHmm");
     public static void main(String[] args) throws Exception{
-        String s = "201711091100";
-        System.out.println(Timestamp.valueOf(ss.parse(s).toLocaleString()));
-        String sss = "sdfs:sdfs:sdfsd:sddfs";
-        System.out.println(sss.split(":",2)[1]);
+        String value = "\"1,3,4\",";
+        System.out.println(value.substring(0, value.lastIndexOf(",")));
+//        String st = "20171029210253;20171029210126;20171029222534;20171029210350;20171029210124;20171029220252;20171029210351;20171029212300;20171029212300;20171029211600;20171029000000;20171029211100;20171029210119;20171030011415;20171029211100;20171201014611";
+//        String[] tt = st.split(";");
+//        for(String t:tt){
+//            Date date = DateUtils.parseDate(t, "");
+//            Timestamp ts = Timestamp.valueOf(date.toString());
+//            System.out.println(ts.toString());
+//        }
     }
 }

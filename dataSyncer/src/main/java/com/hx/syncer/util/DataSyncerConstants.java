@@ -9,6 +9,7 @@ public class DataSyncerConstants {
     public static final int SITEHEAD = 1;
     public static final int GRIDHEAD = 2;
     public static final int FILEHEAD = 3;
+    public static final int SATEFILEHEAD = 4;
     public static final Map<String,String> FILTERFILENAMEMAP = new HashMap();
 
     static {

@@ -38,14 +38,14 @@ ALTER TABLE public."AMSUA_NOAA15"
 
 
 INSERT INTO public."AMSUA_NOAA15"(
-	sat_id, instrument_id, scan_time, obs_lat, obs_lon, obs_bt1, obs_bt2, obs_bt3, obs_bt4, obs_bt5, file_name_time, surface_height, f_d_id)
+	sat_id, instrument_id, scan_time, obs_lat, obs_lon, obs_bt1, obs_bt2, obs_bt3, obs_bt4, obs_bt5, file_name_time, surface_height, s_f_id)
 	VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
 
 
 INSERT INTO "AMSUA_NOAA15"(
             sat_id, instrument_id, scan_time, obs_lat, obs_lon, obs_bt1,
             obs_bt2, obs_bt3, obs_bt4, obs_bt5, file_name_time, surface_height,
-            f_d_id,id)
+            s_f_id,id)
     VALUES (15, 10, '2017-10-29 23:16:01', 44, 55, null,
             null, null, null, null, null, null,
             null,57);
