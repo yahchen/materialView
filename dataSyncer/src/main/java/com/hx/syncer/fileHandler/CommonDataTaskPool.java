@@ -123,11 +123,12 @@ public class CommonDataTaskPool{
                             }
                             dataHeadEntity = dbUtils.getTableHeadDao(kvMap.get("data_type")).save(dataHeadEntity);//表头数据入库
                         }
+                        if(null != dataHeadEntity && !fileNameList.isEmpty()){
+                            asyncSaveSateElementData(kvMap.get("file_path"),fileNameList,propertiesReflectUtil.getFiledValue(dataHeadEntity,"id"));
+                            fileNameList = new ArrayList<>();
+                        }
                     }
                 }
-            }
-            if(null != dataHeadEntity && !fileNameList.isEmpty()){
-                asyncSaveSateElementData(kvMap.get("file_path"),fileNameList,propertiesReflectUtil.getFiledValue(dataHeadEntity,"id"));
             }
             reader.close();
             Files.delete(path);//删除文件
