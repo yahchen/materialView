@@ -214,7 +214,7 @@ public class PostgreSqlDao {
         para.put("startTime",startTime);
         para.put("endTime",endTime);
 
-        String sql = "select * from site_data_head where data_time BETWEEN :startTime and :endTime AND data_logo = :dataLogo";
+        String sql = "select id,data_time from site_data_head where data_time BETWEEN :startTime and :endTime AND data_logo = :dataLogo";
         return namedTemplate.queryForList(sql,para);
     }
 
