@@ -32,7 +32,7 @@ public class PostgreSqlDao {
     @Qualifier("namedJdbcTemplate")
     private NamedParameterJdbcTemplate namedTemplate;
 
-    public List<Map<String, Object>> queryBinMapData(String table, Timestamp startTime, String neLat, String neLon, String swLat, String swLon, String prs,String sdid) {
+    public List<Map<String, Object>> queryBinMapData(String table, String neLat, String neLon, String swLat, String swLon, String prs,String sdid) {
         Map<String, Object> params = new HashMap<>();
         String sql = "SELECT * FROM " + table + " WHERE s_d_id = :sdid AND lat > :swLat AND lat < :neLat AND lon > :swLon AND lon < :neLon ";
         if (!StringUtils.isEmpty(prs)) {
@@ -214,7 +214,7 @@ public class PostgreSqlDao {
         para.put("startTime",startTime);
         para.put("endTime",endTime);
 
-        String sql = "select * from site_data_head where data_time BETWEEN :startTime and :endTime AND data_logo = :dataLogo";
+        String sql = "select id,data_time from site_data_head where data_time BETWEEN :startTime and :endTime AND data_logo = :dataLogo";
         return namedTemplate.queryForList(sql,para);
     }
 

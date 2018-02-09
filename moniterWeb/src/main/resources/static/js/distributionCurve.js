@@ -9,15 +9,13 @@ $(function () {
     var dataTypeSel = $("#dataType");
     dataTypeSel.append(options);
     dataTypeSel.attr("disabled", false);
+    var qualiteTypeValueArray = new Array();  //定义数组
     dataTypeChange();
     var zoom = 4;
     //初始化地图对象
     $("#bin_map_dc").html("");
-    map = new T.Map('bin_map_dc');
-    //设置显示地图的中心点和级别
-    map.centerAndZoom(new T.LngLat(116.40969, 39.90940), zoom);
-
     $('#binMapQuery').click(binMapListener);
+
     function dataTypeChange() {
         var dataType = $("#dataType option:selected").val();
         if (dataType == "无")
@@ -32,12 +30,16 @@ $(function () {
             dataType: "json",
             success: function (data) {
                 var options = "<option value=''>无</option>";
+                options += "<option value='all'>all</option>";
                 for (i in data) {
                     var qc = data[i].quality_code_comment
                     if (qc == "")
                         qc = data[i].quality_code
                     if (qc == "")
                         continue
+                    if(data[i].quality_code!=''){
+                        qualiteTypeValueArray.push(data[i].quality_code);  //添加到数组中
+                    }
                     options += "<option value=" + data[i].quality_code + ">" + qc + "</option>"
                 }
                 $("#qualiteType").html("");
@@ -52,10 +54,12 @@ $(function () {
         if (qualiteType == undefined || qualiteType == "" || qualiteType == "无")
             return
         var prs = $("#prs option:selected").val();
-        var startTime = $("#start").val();
         if (qualiteType == undefined || qualiteType == "")
             return
         var sdid = $("#timeHour option:selected").val();
+        map = new T.Map('bin_map_dc');
+        //设置显示地图的中心点和级别
+        map.centerAndZoom(new T.LngLat(116.40969, 39.90940), zoom);
         map.removeEventListener("moveend", MapMoveend);
         map.addEventListener("moveend", MapMoveend);
         var llb = map.getBounds();
@@ -67,7 +71,6 @@ $(function () {
             data: {
                 dataType: dataType,
                 qualiteType: qualiteType,
-                startTime: startTime,
                 sdid: sdid,
                 neLon: llb.getNorthEast().getLng(),
                 neLat: llb.getNorthEast().getLat(),
@@ -81,8 +84,18 @@ $(function () {
                 var qt = qualiteType.toLocaleLowerCase();
                 for (var ki in data) {
                     var binMap = data[ki];
-                    if ((binMap[qt] == 0 || binMap[qt] == 3 || binMap[qt] == 4))
+                    if(qt == 'all'){
                         dotColor = "#00FF66";
+                        for(var qtv in qualiteTypeValueArray){
+                            if(binMap[qtv] != 0 && binMap[qtv] != 3 && binMap[qtv] != 4) {
+                                dotColor = "#999999";
+                                break;
+                            }
+                        }
+                    }
+                    else if(binMap[qt] == 0 || binMap[qt] == 3 || binMap[qt] == 4){
+                        dotColor = "#00FF66";
+                    }
                     var point = new T.Circle(new T.LngLat(binMap['lon'], binMap['lat']), 1, {
                         color: dotColor,
                         weight: 15,
@@ -117,7 +130,6 @@ $(function () {
         var qualiteType = $("#qualiteType option:selected").val();
         if (qualiteType == undefined || qualiteType == "")
             return
-        var startTime = $("#start").val();
         var prs = $("#prs option:selected").val();
         //让所有点在视野范围内
         var llb = map.getBounds();
@@ -133,7 +145,6 @@ $(function () {
             data: {
                 dataType: dataType,
                 qualiteType: qualiteType,
-                startTime: startTime,
                 sdid: sdid,
                 neLon: llb.getNorthEast().getLng(),
                 neLat: llb.getNorthEast().getLat(),
@@ -147,11 +158,21 @@ $(function () {
                 var qt = qualiteType.toLocaleLowerCase();
                 for (var ki in data) {
                     var binMap = data[ki];
-                    if ((binMap[qt] == 0 || binMap[qt] == 3 || binMap[qt] == 4))
+                    if(qt == 'all'){
                         dotColor = "#00FF66";
+                        for(var qtv in qualiteTypeValueArray){
+                            if(binMap[qtv] != 0 && binMap[qtv] != 3 && binMap[qtv] != 4) {
+                                dotColor = "#999999";
+                                break;
+                            }
+                        }
+                    }
+                    else if(binMap[qt] == 0 || binMap[qt] == 3 || binMap[qt] == 4){
+                        dotColor = "#00FF66";
+                    }
                     var point = new T.Circle(new T.LngLat(binMap['lon'], binMap['lat']), 1, {
                         color: dotColor,
-                        weight: 15,
+                        weight: 3.5,
                         opacity: 1,
                         fillColor: dotColor,
                         fillOpacity: 0,
