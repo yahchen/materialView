@@ -43,26 +43,17 @@ public class ObtainElementsController {
         // todo add mode kv
 
         String dataType = request.getParameter("dataType");
-        String startTime = request.getParameter("startTime");
         String neLon = request.getParameter("neLon");
         String neLat = request.getParameter("neLat");
         String swLon = request.getParameter("swLon");
         String swLat = request.getParameter("swLat");
         String prs = request.getParameter("prs");
         String sdid = request.getParameter("sdid");
-        if (!StringUtils.isEmpty(startTime)) {
-            if (!startTime.contains(":")) {
-                startTime += " 00:00:00.000";
-            }
-        }
-
-
-        Timestamp time = Timestamp.valueOf(StringUtils.isEmpty(startTime) ? System.currentTimeMillis() + "" : startTime);
 
         String table = convertDataType2Table(dataType);
         if (StringUtils.isEmpty(table))
             return null;
-        List<Map<String, Object>> resList = binMapDataService.queryBinMapData(table, time, neLat, neLon, swLat, swLon, prs,sdid);
+        List<Map<String, Object>> resList = binMapDataService.queryBinMapData(table, neLat, neLon, swLat, swLon, prs,sdid);
         return resList;
     }
     @RequestMapping("getTimeHours")
@@ -78,7 +69,7 @@ public class ObtainElementsController {
             start = Timestamp.valueOf(new Date().toString());
             end = Timestamp.valueOf(addDays(start,1).toString());
         }
-        return convertDbRes2TimeHours(binMapDataService.queryTimeHousr(dataLogo,start,end));
+        return convertDbRes2TimeHours(binMapDataService.queryTimeHousr(dataLogo.replaceAll("M_R","M_"),start,end));
     }
 
     private Map<String,String> convertDbRes2TimeHours(List<Map<String, Object>> resData) {
@@ -88,8 +79,11 @@ public class ObtainElementsController {
         Map<String,String> timeHoursMap = new HashMap<>();
         for(Map<String,Object> tableLine:resData){
             Timestamp dataTime = (Timestamp)tableLine.get("data_time");
-            String sdid = tableLine.get("s_d_id").toString();
-            timeHoursMap.put(sdid,sdf.format(dataTime));
+            if(dataTime == null)
+                continue;
+            String sdid = tableLine.get("id").toString();
+            int hour = dataTime.getHours();
+            timeHoursMap.put(sdid,hour<=9?"0"+hour:hour+"");
         }
         return timeHoursMap;
     }
