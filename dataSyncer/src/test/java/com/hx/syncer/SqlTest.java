@@ -46,9 +46,7 @@ public class SqlTest {
         entity.setData_time(ts);
         entity.setFcstLevel("sds");
         entity.setFile_path("sdsd");
-        //entity.setG_d_id(3);
         entity.setGridfile_state("");
-        entity.setGridfileNumMax(121);
         entity.setLongitude_latitude_scope("");
         entity.setRetrieve_end_time(ts);
         entity.setRetrieve_process_time(32323);
