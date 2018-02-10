@@ -12,6 +12,10 @@ public class DataSyncerConstants {
     public static final int SATEFILEHEAD = 4;
     public static final Map<String,String> FILTERFILENAMEMAP = new HashMap();
 
+    public static final Map<String,String> SITE_DATA_DAO_NAMES = new HashMap<>();
+    public static final Map<String,String> SITE_DATA_DO_NAMES = new HashMap<>();
+
+
     static {
         FILTERFILENAMEMAP.put("SATE_L1_MUS_ATOVS_MWB_S1C_GLB-N15-AMSUA-045KM-BAWX-","AMSUA_NOAA15");
         FILTERFILENAMEMAP.put("SATE_L1_MUS_ATOVS_MWB_S1C_GLB-N18-AMSUA-045KM-BAWX-","AMSUA_NOAA18");
@@ -33,5 +37,39 @@ public class DataSyncerConstants {
         FILTERFILENAMEMAP.put("SATE_L2_MUS_MUTDS_NUL_GNSS_GLB-TDMX-EDZW-","GNSS_TDMX");
         FILTERFILENAMEMAP.put("SATE_L2_MUS_MUTDS_NUL_GNSS_GLB-TSAR-EDZW-","GNSS_TASR");
         FILTERFILENAMEMAP.put("SATE_L1_MTA_ASCAT_MWB_S1C_GLB-025KM-GLB-EHDB-","ASCAT_MTA");
+
+        SITE_DATA_DAO_NAMES.put("GM_RSURF_CH","gmSiteSurfChDao");
+        SITE_DATA_DAO_NAMES.put("GM_RTEMP_GL","gmSiteTempGlDao");
+        SITE_DATA_DAO_NAMES.put("GM_RSURF_GL","gmSiteSurfGlDao");
+
+
+        SITE_DATA_DAO_NAMES.put("RM_RSURF_CH","rmSiteSurfChDao");
+        SITE_DATA_DAO_NAMES.put("RM_RTEMP_GL","rmSiteTempGlDao");
+        SITE_DATA_DAO_NAMES.put("RM_RSURF_GL","rmSiteSurfGlDao");
+
+        SITE_DATA_DAO_NAMES.put("TM_RSURF_1h","tmSiteSurf1hDao");
+        SITE_DATA_DAO_NAMES.put("TM_RSURF_PRE_1h","tmSiteSurfPre1hDao");
+        SITE_DATA_DAO_NAMES.put("TM_RSURF_PRE_3h","tmSiteSurfPre3hDao");
+        SITE_DATA_DAO_NAMES.put("TM_RSURF_PRE_6h","tmSiteSurfPre6hDao");
+        SITE_DATA_DAO_NAMES.put("TM_RSURF_PRE_12h","tmSiteSurfPre12hDao");
+        SITE_DATA_DAO_NAMES.put("TM_RSURF_PRE_24h","tmSiteSurfPre24hDao");
+
+
+        SITE_DATA_DO_NAMES.put("GM_RSURF_CH","GmSiteSurfChDo");
+        SITE_DATA_DO_NAMES.put("GM_RTEMP_GL","GmSiteTempGlDo");
+        SITE_DATA_DO_NAMES.put("GM_RSURF_GL","GmSiteSurfGlDo");
+
+
+        SITE_DATA_DO_NAMES.put("RM_RSURF_CH","RmSiteSurfChDo");
+        SITE_DATA_DO_NAMES.put("RM_RTEMP_GL","RmSiteTempGlDo");
+        SITE_DATA_DO_NAMES.put("RM_RSURF_GL","RmSiteSurfGlDo");
+
+        SITE_DATA_DO_NAMES.put("TM_RSURF_1h","TmSiteSurf1hDo");
+        SITE_DATA_DO_NAMES.put("TM_RSURF_PRE_1h","TmSiteSurfPre1hDo");
+        SITE_DATA_DO_NAMES.put("TM_RSURF_PRE_3h","TmSiteSurfPre3hDo");
+        SITE_DATA_DO_NAMES.put("TM_RSURF_PRE_6h","TmSiteSurfPre6hDo");
+        SITE_DATA_DO_NAMES.put("TM_RSURF_PRE_12h","TmSiteSurfPre12hDo");
+        SITE_DATA_DO_NAMES.put("TM_RSURF_PRE_24h","TmSiteSurfPre24hDo");
+
     }
 }

@@ -24,7 +24,19 @@ public class DbUtils implements ApplicationContextAware {
      */
     private ApplicationContext applicationContext;
 
+    public BaseRepository getSiteEleDaoObj(String logo){
+        if(StringUtils.isEmpty(logo))
+            return null;
+        String className = DataSyncerConstants.SITE_DATA_DAO_NAMES.get(logo);
+        return (BaseRepository)applicationContext.getBean(className);
+    }
 
+    public Object getSiteEleDoObj(String logo) throws Exception{
+        if(StringUtils.isEmpty(logo))
+            return null;
+        String className = "com.hx.syncer.bean." + DataSyncerConstants.SITE_DATA_DO_NAMES.get(logo);
+        return null == className?null:Class.forName(className).newInstance();
+    }
     public BaseRepository getTableEleDaoObj(String logo){
         if(StringUtils.isEmpty(logo))
             return null;
@@ -36,10 +48,12 @@ public class DbUtils implements ApplicationContextAware {
             int curSimilarityValue = 0;
             if(name.endsWith("Dao") && name.startsWith((logo.charAt(0) + "").toLowerCase())){
                 char[] lowLogo = logo.toLowerCase().toCharArray();
-                String lowBeanName = name.toLowerCase();
+                String lowBeanName = name.replaceFirst("Dao","").toLowerCase();
                 for(char factor:lowLogo){
-                    if(lowBeanName.contains(factor+""))
+                    if(lowBeanName.contains(factor+"")) {
+                        lowBeanName = lowBeanName.replaceFirst(factor+"","");
                         curSimilarityValue++;
+                    }
                 }
                 if(maxSimilarityValue < curSimilarityValue){
                     maxSimilarityValue = curSimilarityValue;
@@ -60,10 +74,12 @@ public class DbUtils implements ApplicationContextAware {
             int curSimilarityValue = 0;
             if(name.endsWith("Dao") && name.startsWith((logo.charAt(0) + "").toLowerCase())){
                 char[] lowLogo = logo.toLowerCase().toCharArray();
-                String lowBeanName = name.toLowerCase();
+                String lowBeanName = name.replaceFirst("Dao","").toLowerCase();
                 for(char factor:lowLogo){
-                    if(lowBeanName.contains(factor+""))
+                    if(lowBeanName.contains(factor+"")) {
+                        lowBeanName = lowBeanName.replaceFirst(factor+"","");
                         curSimilarityValue++;
+                    }
                 }
                 if(maxSimilarityValue < curSimilarityValue){
                     maxSimilarityValue = curSimilarityValue;
@@ -148,4 +164,5 @@ public class DbUtils implements ApplicationContextAware {
         }
         return outIdName;
     }
+
 }
