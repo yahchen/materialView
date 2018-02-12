@@ -6,7 +6,7 @@ import java.util.Date;
  * Created by hp on 2017/10/31.
  */
 public class SiteDataHead {
-    private long  sDId;
+    private long sDId;
     private String dataLogo;
     private String dadaName;
     private String dataCode;
@@ -16,15 +16,15 @@ public class SiteDataHead {
     private Date dataTime;
     private String filePath;
     private Date dataStartTime;
-    private  Date dataEndTime;
-    private  String longitudeLatitudeScope;
+    private Date dataEndTime;
+    private String longitudeLatitudeScope;
     private String sysConnState;
     private long dataNum;
     private String userId;
-    private  String systemName;
-    private  Integer dataType;
-    private  Integer siteType;
-    private  String returnAbnormalInfo;
+    private String systemName;
+    private Integer dataType;
+    private Integer siteType;
+    private String returnAbnormalInfo;
 
     public long getsDId() {
         return sDId;

@@ -9,6 +9,7 @@ import java.util.Map;
 public interface SiteChartService {
     /**
      * 查询折线图数据
+     *
      * @param startTime
      * @param endTime
      * @param queryElment

@@ -8,46 +8,46 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name = "file_data_head")
-public class FileDataHeadDo{
-    @Column(name = "data_logo" ,nullable=true)
-    private String data_logo ;
-    @Column(name = "data_name" ,nullable=true)
-    private String data_name ;
-    @Column(name = "data_code" ,nullable=true)
-    private String data_code ;
-    @Column(name = "retrieve_start_time" ,nullable=true)
-    private Timestamp retrieve_start_time ;
-    @Column(name = "retrieve_end_time" ,nullable=true)
-    private Timestamp retrieve_end_time ;
-    @Column(name = "retrieve_process_time" ,nullable=true)
-    private float retrieve_process_time ;
-    @Column(name = "file_path" ,nullable=true)
-    private String file_path ;
-    @Column(name = "data_start_time" ,nullable=true)
-    private Timestamp data_start_time ;
-    @Column(name = "data_end_time" ,nullable=true)
-    private Timestamp data_end_time ;
-    @Column(name = "longitude_latitude_scope" ,nullable=true)
-    private String longitude_latitude_scope ;
-    @Column(name = "sys_conn_state" ,nullable=true)
-    private String sys_conn_state ;
-    @Column(name = "data_num" ,nullable=true)
-    private String data_num ;
-    @Column(name = "user_id" ,nullable=true)
-    private String user_id ;
-    @Column(name = "system_name" ,nullable=true)
-    private String system_name ;
-    @Column(name = "data_type" ,nullable=true)
-    private int data_type ;
-    @Column(name = "mode_type" ,nullable=true)
-    private int mode_type ;
-    @Column(name = "return_abnormal_info" ,nullable=true)
-    private String return_abnormal_info ;
-    @Column(name = "data_time" ,nullable=true)
-    private Timestamp data_time ;
+public class FileDataHeadDo {
+    @Column(name = "data_logo", nullable = true)
+    private String data_logo;
+    @Column(name = "data_name", nullable = true)
+    private String data_name;
+    @Column(name = "data_code", nullable = true)
+    private String data_code;
+    @Column(name = "retrieve_start_time", nullable = true)
+    private Timestamp retrieve_start_time;
+    @Column(name = "retrieve_end_time", nullable = true)
+    private Timestamp retrieve_end_time;
+    @Column(name = "retrieve_process_time", nullable = true)
+    private float retrieve_process_time;
+    @Column(name = "file_path", nullable = true)
+    private String file_path;
+    @Column(name = "data_start_time", nullable = true)
+    private Timestamp data_start_time;
+    @Column(name = "data_end_time", nullable = true)
+    private Timestamp data_end_time;
+    @Column(name = "longitude_latitude_scope", nullable = true)
+    private String longitude_latitude_scope;
+    @Column(name = "sys_conn_state", nullable = true)
+    private String sys_conn_state;
+    @Column(name = "data_num", nullable = true)
+    private String data_num;
+    @Column(name = "user_id", nullable = true)
+    private String user_id;
+    @Column(name = "system_name", nullable = true)
+    private String system_name;
+    @Column(name = "data_type", nullable = true)
+    private int data_type;
+    @Column(name = "mode_type", nullable = true)
+    private int mode_type;
+    @Column(name = "return_abnormal_info", nullable = true)
+    private String return_abnormal_info;
+    @Column(name = "data_time", nullable = true)
+    private Timestamp data_time;
 
     @javax.persistence.Id
-    @Column(name="id",unique=true, nullable=true, updatable=false, precision=20, scale=0)
+    @Column(name = "id", unique = true, nullable = true, updatable = false, precision = 20, scale = 0)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 

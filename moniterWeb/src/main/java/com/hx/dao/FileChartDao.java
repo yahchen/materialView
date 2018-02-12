@@ -10,6 +10,7 @@ public interface FileChartDao {
 
     /**
      * 查询卫星文件下拉框中数据
+     *
      * @param startTime
      * @param endTime
      * @param queryElment
@@ -19,6 +20,7 @@ public interface FileChartDao {
 
     /**
      * 查询卫星文件数和相应时间
+     *
      * @param startTime
      * @param endTime
      * @param queryElment
@@ -27,7 +29,8 @@ public interface FileChartDao {
     public List<Map<String, Object>> findSateFileChartByTimeElement(String startTime, String endTime, String queryElment, String sateFileName);
 
     /**
-     *  查询文件数和相应时间
+     * 查询文件数和相应时间
+     *
      * @param startTime
      * @param endTime
      * @param queryElment

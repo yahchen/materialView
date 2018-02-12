@@ -8,7 +8,7 @@ $(function () {
         $("#navId").append(eval(pn));
         $('a.bin_map').click(binMapListener);
         $('#binMapQuery').click(binMapListener);
-      //  $('span.bin_satellite_map').click(binSatelliteMapListener);
+        //  $('span.bin_satellite_map').click(binSatelliteMapListener);
         //$("#dataType").attr("disabled",true);
     });
 
@@ -22,10 +22,7 @@ $(function () {
     //让所有点在视野范围内
 
 
-
     binSatelliteMapListener(data_logo);
-
-
 
 
     // 触发该事件（选择卫星平台，相应的更新卫星时次）
@@ -84,8 +81,8 @@ $(function () {
 
     // 查询（按钮）触发查询卫星轨道图事件
     SatelliteQuery = function () {
-       // $("#bin_map_div").hide();
-       // $("#bin_satellite_map_div").show();
+        // $("#bin_map_div").hide();
+        // $("#bin_satellite_map_div").show();
         var queryCond = {
             "querySatelliteDate": $("#querySatelliteDate").val(),
             "satelliteType": $("#satelliteType").val(),
@@ -129,13 +126,6 @@ $(function () {
     };
 
 });
-
-
-
-
-
-
-
 
 
 //----------Satellite map----------
@@ -203,17 +193,16 @@ function binSatelliteMapListener(data_logo) {
     getYesDay_Sate();
 
 
-
 };
 
 
 // 初始化时间控件为昨天
-getYesDay_Sate=function () {
+getYesDay_Sate = function () {
     var nowdate = new Date();
     var y = nowdate.getFullYear();
-    var m = nowdate.getMonth()+1;
-    var d = nowdate.getDate()-1;
-    var formatnowdate = y+'-'+fix(m,2)+'-'+fix(d,2);
+    var m = nowdate.getMonth() + 1;
+    var d = nowdate.getDate() - 1;
+    var formatnowdate = y + '-' + fix(m, 2) + '-' + fix(d, 2);
     $("#querySatelliteDate").val(formatnowdate);
 }
 //fix(m,2)  m不足两位 前面补0

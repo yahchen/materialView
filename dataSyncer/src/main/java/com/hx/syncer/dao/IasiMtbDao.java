@@ -5,5 +5,5 @@ import com.hx.syncer.bean.IasiMtbDo;
 /**
  * Created by yahchen on 2018/1/28.
  */
-public interface IasiMtbDao extends BaseRepository<IasiMtbDo,Long> {
+public interface IasiMtbDao extends BaseRepository<IasiMtbDo, Long> {
 }

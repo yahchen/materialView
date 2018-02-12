@@ -8,37 +8,37 @@ import javax.persistence.*;
 @Entity
 @Table(name = "tm_site_surf_1h")
 public class TmSiteSurf1hDo {
-    @Column(name = "station_id_d",nullable=false)
-    private float station_id_d ;
-    @Column(name = "lat",nullable=true)
-    private float lat ;
-    @Column(name = "lon",nullable=true)
-    private float lon ;
-    @Column(name = "alti",nullable=true)
-    private float alti ;
-    @Column(name = "tem",nullable=true)
-    private float tem ;
-    @Column(name = "prs",nullable=true)
-    private float prs ;
-    @Column(name = "dpt",nullable=true)
-    private float dpt ;
-    @Column(name = "win_d_inst",nullable=true)
-    private float win_d_inst ;
-    @Column(name = "win_s_inst",nullable=true)
-    private float win_s_inst ;
-    @Column(name = "pre_1h",nullable=true)
-    private float pre_1h ;
-    @Column(name = "tem_max",nullable=true)
-    private float tem_max ;
-    @Column(name = "tem_min",nullable=true)
-    private float tem_min ;
-    @Column(name = "s_d_id",nullable=true)
-    private long s_d_id ;
+    @Column(name = "station_id_d", nullable = false)
+    private float station_id_d;
+    @Column(name = "lat", nullable = true)
+    private float lat;
+    @Column(name = "lon", nullable = true)
+    private float lon;
+    @Column(name = "alti", nullable = true)
+    private float alti;
+    @Column(name = "tem", nullable = true)
+    private float tem;
+    @Column(name = "prs", nullable = true)
+    private float prs;
+    @Column(name = "dpt", nullable = true)
+    private float dpt;
+    @Column(name = "win_d_inst", nullable = true)
+    private float win_d_inst;
+    @Column(name = "win_s_inst", nullable = true)
+    private float win_s_inst;
+    @Column(name = "pre_1h", nullable = true)
+    private float pre_1h;
+    @Column(name = "tem_max", nullable = true)
+    private float tem_max;
+    @Column(name = "tem_min", nullable = true)
+    private float tem_min;
+    @Column(name = "s_d_id", nullable = true)
+    private long s_d_id;
 
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id", unique=true, nullable=false, insertable=true, updatable=false, precision=20, scale=0)
-    private long id ;
+    @Column(name = "id", unique = true, nullable = false, insertable = true, updatable = false, precision = 20, scale = 0)
+    private long id;
 
     public float getStation_id_d() {
         return station_id_d;

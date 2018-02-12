@@ -1,7 +1,6 @@
 package com.hx.syncer.bean;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 
 /**
  * Created by yahchen on 2017/10/31.
@@ -10,15 +9,15 @@ import java.sql.Timestamp;
 @Table(name = "satellite_file_data_tail")
 public class SatelliteFileDataTailDo {
 
-    @Column(name = "s_f_id" ,nullable=true)
+    @Column(name = "s_f_id", nullable = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long s_f_id ;
-    @Column(name = "sate_file_name" ,nullable=true)
-    private String sate_file_name ;
+    private long s_f_id;
+    @Column(name = "sate_file_name", nullable = true)
+    private String sate_file_name;
 
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id", unique=true, nullable=false, insertable=true, updatable=false, precision=20, scale=0)
+    @Column(name = "id", unique = true, nullable = false, insertable = true, updatable = false, precision = 20, scale = 0)
     private long id;
 
 

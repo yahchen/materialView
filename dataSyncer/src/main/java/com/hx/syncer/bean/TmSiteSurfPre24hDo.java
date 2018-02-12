@@ -8,21 +8,21 @@ import javax.persistence.*;
 @Entity
 @Table(name = "tm_site_surf_pre_24h")
 public class TmSiteSurfPre24hDo {
-    @Column(name = "station_id_d",nullable=false)
+    @Column(name = "station_id_d", nullable = false)
     private float station_id_d;
-    @Column(name = "lat",nullable=true)
-    private float lat ;
-    @Column(name = "lon",nullable=true)
-    private float lon ;
-    @Column(name = "pre_24h",nullable=true)
-    private float pre_24h ;
-    @Column(name = "s_d_id",nullable=true)
-    private long s_d_id ;
+    @Column(name = "lat", nullable = true)
+    private float lat;
+    @Column(name = "lon", nullable = true)
+    private float lon;
+    @Column(name = "pre_24h", nullable = true)
+    private float pre_24h;
+    @Column(name = "s_d_id", nullable = true)
+    private long s_d_id;
 
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id", unique=true, nullable=false, insertable=true, updatable=false, precision=20, scale=0)
-    private long id ;
+    @Column(name = "id", unique = true, nullable = false, insertable = true, updatable = false, precision = 20, scale = 0)
+    private long id;
 
     public float getStation_id_d() {
         return station_id_d;

@@ -8,62 +8,62 @@ import javax.persistence.*;
 @Entity
 @Table(name = "rm_site_temp_gl")
 public class RmSiteTempGlDo {
-    @Column(name = "station_id_d",nullable=false)
+    @Column(name = "station_id_d", nullable = false)
     private float station_id_d;
-    @Column(name = "lat",nullable=true)
-    private float lat ;
-    @Column(name = "lon",nullable=true)
-    private float lon ;
-    @Column(name = "alti",nullable=true)
-    private float alti ;
-    @Column(name = "day",nullable=true)
-    private float day ;
-    @Column(name = "hour",nullable=true)
-    private float hour ;
-    @Column(name = "min",nullable=true)
-    private float min ;
-    @Column(name = "prs_hwc",nullable=true)
-    private float prs_hwc ;
-    @Column(name = "evss",nullable=true)
-    private float evss ;
-    @Column(name = "gph",nullable=true)
-    private float gph ;
-    @Column(name = "tem",nullable=true)
-    private float tem ;
-    @Column(name = "dpt",nullable=true)
-    private float dpt ;
-    @Column(name = "win_d",nullable=true)
-    private float win_d ;
-    @Column(name = "win_s",nullable=true)
-    private float win_s ;
-    @Column(name = "time_dev_wq",nullable=true)
-    private float time_dev_wq ;
-    @Column(name = "lat_dev",nullable=true)
-    private float lat_dev ;
-    @Column(name = "lon_dev",nullable=true)
-    private float lon_dev ;
-    @Column(name = "q_prs_hwc",nullable=true)
-    private float q_prs_hwc ;
-    @Column(name = "q_gph",nullable=true)
-    private float q_gph ;
-    @Column(name = "q_tem",nullable=true)
-    private float q_tem ;
-    @Column(name = "q_dpt",nullable=true)
-    private float q_dpt ;
-    @Column(name = "q_win_d",nullable=true)
-    private float q_win_d ;
-    @Column(name = "q_win_s",nullable=true)
-    private float q_win_s ;
-    @Column(name = "q_lat_dev",nullable=true)
-    private float q_lat_dev ;
-    @Column(name = "q_lon_dev",nullable=true)
-    private float q_lon_dev ;
-    @Column(name = "s_d_id",nullable=true)
+    @Column(name = "lat", nullable = true)
+    private float lat;
+    @Column(name = "lon", nullable = true)
+    private float lon;
+    @Column(name = "alti", nullable = true)
+    private float alti;
+    @Column(name = "day", nullable = true)
+    private float day;
+    @Column(name = "hour", nullable = true)
+    private float hour;
+    @Column(name = "min", nullable = true)
+    private float min;
+    @Column(name = "prs_hwc", nullable = true)
+    private float prs_hwc;
+    @Column(name = "evss", nullable = true)
+    private float evss;
+    @Column(name = "gph", nullable = true)
+    private float gph;
+    @Column(name = "tem", nullable = true)
+    private float tem;
+    @Column(name = "dpt", nullable = true)
+    private float dpt;
+    @Column(name = "win_d", nullable = true)
+    private float win_d;
+    @Column(name = "win_s", nullable = true)
+    private float win_s;
+    @Column(name = "time_dev_wq", nullable = true)
+    private float time_dev_wq;
+    @Column(name = "lat_dev", nullable = true)
+    private float lat_dev;
+    @Column(name = "lon_dev", nullable = true)
+    private float lon_dev;
+    @Column(name = "q_prs_hwc", nullable = true)
+    private float q_prs_hwc;
+    @Column(name = "q_gph", nullable = true)
+    private float q_gph;
+    @Column(name = "q_tem", nullable = true)
+    private float q_tem;
+    @Column(name = "q_dpt", nullable = true)
+    private float q_dpt;
+    @Column(name = "q_win_d", nullable = true)
+    private float q_win_d;
+    @Column(name = "q_win_s", nullable = true)
+    private float q_win_s;
+    @Column(name = "q_lat_dev", nullable = true)
+    private float q_lat_dev;
+    @Column(name = "q_lon_dev", nullable = true)
+    private float q_lon_dev;
+    @Column(name = "s_d_id", nullable = true)
     private long s_d_id;
 
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id", unique=true, nullable=false, insertable=true, updatable=false, precision=20, scale=0)
+    @Column(name = "id", unique = true, nullable = false, insertable = true, updatable = false, precision = 20, scale = 0)
     private long id;
 
     public float getStation_id_d() {

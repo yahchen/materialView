@@ -5,22 +5,6 @@ import org.thymeleaf.util.StringUtils;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
-/**
- * Created by hp on 2017/10/30.
- */
-public class TestMain {
-
-    public static void main(String [] args){
-        //System.out.println(SexEnum.getSexEnumByCode("M"));
-        Timestamp start = new Timestamp(System.currentTimeMillis());
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-
-        String s="1987年08月32日 33时";
-        System.out.println(sdf.format(start));
-        System.out.println(SexEnum.getSexEnumByCode("M"));
-    }
-}
-
 enum SexEnum {
     MAN("M", "男"),
     WOMAN("F", "女");
@@ -31,6 +15,15 @@ enum SexEnum {
     SexEnum(String code, String desc) {
         this.code = code;
         this.desc = desc;
+    }
+
+    public static String getSexEnumByCode(String code) {
+        for (SexEnum sexEnum : SexEnum.values()) {
+            if (StringUtils.equals(code, sexEnum.getCode())) {
+                return sexEnum.getDesc();
+            }
+        }
+        return null;
     }
 
     public String getCode() {
@@ -48,14 +41,21 @@ enum SexEnum {
     public void setDesc(String desc) {
         this.desc = desc;
     }
+}
 
-    public static String getSexEnumByCode(String code){
-        for(SexEnum sexEnum : SexEnum.values()){
-            if(StringUtils.equals(code, sexEnum.getCode())){
-                return sexEnum.getDesc();
-            }
-        }
-        return null;
+/**
+ * Created by hp on 2017/10/30.
+ */
+public class TestMain {
+
+    public static void main(String[] args) {
+        //System.out.println(SexEnum.getSexEnumByCode("M"));
+        Timestamp start = new Timestamp(System.currentTimeMillis());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+
+        String s = "1987年08月32日 33时";
+        System.out.println(sdf.format(start));
+        System.out.println(SexEnum.getSexEnumByCode("M"));
     }
 }
 

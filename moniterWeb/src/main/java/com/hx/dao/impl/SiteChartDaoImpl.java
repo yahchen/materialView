@@ -1,6 +1,5 @@
 package com.hx.dao.impl;
 
-import com.hx.dao.GridMatrixDao;
 import com.hx.dao.SiteChartDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -22,9 +21,9 @@ public class SiteChartDaoImpl implements SiteChartDao {
 
 
     @Override
-    public List<Map<String, Object>> findSiteChartByTimeElement(String startTime, String endTime,  String queryElment) {
-        String sSQL = "select * from public.site_data_head sd where sd.data_time>='"+startTime+"' and sd.data_time<'"+endTime+"' and sd.data_logo = '"+queryElment+"' order by sd.data_time;";
-        List<Map<String, Object>> siteDataHeadList =  template.queryForList( sSQL);
+    public List<Map<String, Object>> findSiteChartByTimeElement(String startTime, String endTime, String queryElment) {
+        String sSQL = "select * from public.site_data_head sd where sd.data_time>='" + startTime + "' and sd.data_time<'" + endTime + "' and sd.data_logo = '" + queryElment + "' order by sd.data_time;";
+        List<Map<String, Object>> siteDataHeadList = template.queryForList(sSQL);
         return siteDataHeadList;
     }
 }

@@ -4,11 +4,11 @@ package com.hx.bean;
  * Created by yahchen on 2017/10/31.
  */
 public class TmSiteSurfPre1h {
-    private float station_id_d ;
-    private float lat ;
-    private float lon ;
-    private float pre_1h ;
-    private long s_d_id ;
+    private float station_id_d;
+    private float lat;
+    private float lon;
+    private float pre_1h;
+    private long s_d_id;
 
     public float getStation_id_d() {
         return station_id_d;

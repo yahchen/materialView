@@ -2,277 +2,356 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<title></title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
-	<!-- VENDOR CSS -->
-	<link rel="stylesheet" th:href="@{assets/vendor/bootstrap/css/bootstrap.min.css}"/>
-	<link rel="stylesheet" th:href="@{assets/vendor/font-awesome/css/font-awesome.min.css}"/>
-	<link rel="stylesheet" th:href="@{assets/vendor/linearicons/style.css}"/>
-	<!-- MAIN CSS -->
-	<link rel="stylesheet" th:href="@{assets/css/main.css}"/>
-	<!-- ICONS -->
-	<link rel="apple-touch-icon" sizes="76x76" th:href="@{assets/img/apple-icon.png}"/>
-	<link rel="icon" type="image/png" sizes="96x96" th:href="@{assets/img/favicon.png}"/>
-	<link th:href="@{css/jquery.combobox.css}" rel="stylesheet" />
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <!-- VENDOR CSS -->
+    <link rel="stylesheet" th:href="@{assets/vendor/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{assets/vendor/font-awesome/css/font-awesome.min.css}"/>
+    <link rel="stylesheet" th:href="@{assets/vendor/linearicons/style.css}"/>
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" th:href="@{assets/css/main.css}"/>
+    <!-- ICONS -->
+    <link rel="apple-touch-icon" sizes="76x76" th:href="@{assets/img/apple-icon.png}"/>
+    <link rel="icon" type="image/png" sizes="96x96" th:href="@{assets/img/favicon.png}"/>
+    <link th:href="@{css/jquery.combobox.css}" rel="stylesheet"/>
 
-	<link rel="stylesheet" th:href="@{themes/default/easyui.css}"/>
-	<link rel="stylesheet" th:href="@{themes/icon.css}"/>
-	<script th:src="@{js/jquery.min.js}"></script>
-	<script th:src="@{js/jquery.easyui.min.js}"></script>
+    <link rel="stylesheet" th:href="@{themes/default/easyui.css}"/>
+    <link rel="stylesheet" th:href="@{themes/icon.css}"/>
+    <script th:src="@{js/jquery.min.js}"></script>
+    <script th:src="@{js/jquery.easyui.min.js}"></script>
 
 
-	<style type="text/css">body,html{width:100%;height:100%;margin:0;font-family:"Microsoft YaHei"}#customMap{width:100%;height:400px}input,b,p{margin-left:5px;font-size:14px}</style>
-	<style>
-		.button {
-			background-color: #4CAF50; /* Green */
-			border: none;
-			color: white;
-			padding: 15px 32px;
-			text-align: center;
-			text-decoration: none;
-			display: inline-block;
-			font-size: 16px;
-		}
-	</style>
-	<!-- Javascript -->
-	<script type="text/javascript" src="http://api.tianditu.com/api?v=4.0"></script>
-	<script th:src="@{http://lbs.tianditu.com/api/js4.0/opensource/data/points-sample-data.js}"></script>
-	<script th:src="@{assets/vendor/bootstrap/js/bootstrap.min.js}"></script>
-	<script th:src="@{assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js}"></script>
-	<script th:src="@{js/vis-common.js}"></script>
-	<script th:src="@{js/gm_data.js}"></script>
-	<script th:src="@{js/laydate.js}"></script>
-	<script type="text/javascript" src="js/laydate.js"></script>
+    <style type="text/css">body, html {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        font-family: "Microsoft YaHei"
+    }
 
-	<style type="text/css">
-		*{margin:0;padding:0;list-style:none;}
-		html{background-color:#E3E3E3; font-size:14px; color:#000; font-family:'微软雅黑'}
-		h2{line-height:30px; font-size:20px;}
-		a,a:hover{ text-decoration:none;}
-		pre{font-family:'微软雅黑'}
-		.box{width:970px; padding:10px 20px; background-color:#fff; margin:10px auto;}
-		.box a{padding-right:20px;}
-		.binMapChoice{margin:25px 0;}
-		h3{margin:10px 0;}
-		.layinput{height: 22px;line-height: 22px;width: 150px;margin: 0;}
-		.binSatelliteMapChoice{margin:25px 0;}
-		h3{margin:10px 0;}
-		.layinput{height: 22px;line-height: 22px;width: 150px;margin: 0;}
-	</style>
+    #customMap {
+        width: 100%;
+        height: 400px
+    }
+
+    input, b, p {
+        margin-left: 5px;
+        font-size: 14px
+    }</style>
+    <style>
+        .button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+        }
+    </style>
+    <!-- Javascript -->
+    <script type="text/javascript" src="http://api.tianditu.com/api?v=4.0"></script>
+    <script th:src="@{http://lbs.tianditu.com/api/js4.0/opensource/data/points-sample-data.js}"></script>
+    <script th:src="@{assets/vendor/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js}"></script>
+    <script th:src="@{js/vis-common.js}"></script>
+    <script th:src="@{js/gm_data.js}"></script>
+    <script th:src="@{js/laydate.js}"></script>
+    <script type="text/javascript" src="js/laydate.js"></script>
+
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        html {
+            background-color: #E3E3E3;
+            font-size: 14px;
+            color: #000;
+            font-family: '微软雅黑'
+        }
+
+        h2 {
+            line-height: 30px;
+            font-size: 20px;
+        }
+
+        a, a:hover {
+            text-decoration: none;
+        }
+
+        pre {
+            font-family: '微软雅黑'
+        }
+
+        .box {
+            width: 970px;
+            padding: 10px 20px;
+            background-color: #fff;
+            margin: 10px auto;
+        }
+
+        .box a {
+            padding-right: 20px;
+        }
+
+        .binMapChoice {
+            margin: 25px 0;
+        }
+
+        h3 {
+            margin: 10px 0;
+        }
+
+        .layinput {
+            height: 22px;
+            line-height: 22px;
+            width: 150px;
+            margin: 0;
+        }
+
+        .binSatelliteMapChoice {
+            margin: 25px 0;
+        }
+
+        h3 {
+            margin: 10px 0;
+        }
+
+        .layinput {
+            height: 22px;
+            line-height: 22px;
+            width: 150px;
+            margin: 0;
+        }
+    </style>
 
 </head>
 
 <body>
-	<!-- WRAPPER -->
-	<div id="wrapper">
-		<!-- NAVBAR -->
-		<nav class="navbar navbar-default navbar-fixed-top">
-			
-			<!--logo icon-->
-			<div class="brand">
-				<a href="index.html"><img th:src="@{/img/logo-dark-gm-bak3.png}" alt="VIS Logo" class="img-responsive logo"/></a>
-			</div>
-			<!--end logo icon-->
-			
-			<div class="container-fluid">
+<!-- WRAPPER -->
+<div id="wrapper">
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-default navbar-fixed-top">
 
-				<!--top button-->
-				<div class="navbar-btn">
-					<button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
-				</div>
-				<!--end top button-->
+        <!--logo icon-->
+        <div class="brand">
+            <a href="index.html"><img th:src="@{/img/logo-dark-gm-bak3.png}" alt="VIS Logo"
+                                      class="img-responsive logo"/></a>
+        </div>
+        <!--end logo icon-->
 
-				<!--top menu-->
-				<div id="navbar-menu">
-					<ul class="nav navbar-nav navbar-right">
-						<li>
-							<a th:href="@{./index.html}"><span>首页</span> </a>
-						</li>
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <div class="container-fluid">
 
-								<span>站点资料</span>
-								<i class="icon-submenu lnr lnr-chevron-down"></i></a>
-							<ul class="dropdown-menu">
-								<li><a href="#" class="tl_type" id="v10">地面资料</a></li>
-								<li><a href="#" class="tl_type" id="v11">高空资料</a></li>
-								<li><a href="#" class="tl_type" id="v12">其他资料</a></li>
-							</ul>
-						</li>
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <!--top button-->
+            <div class="navbar-btn">
+                <button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
+            </div>
+            <!--end top button-->
 
-								<span>格点资料</span>
-								<i class="icon-submenu lnr lnr-chevron-down"></i></a>
-							<ul class="dropdown-menu">
-								<li><a href="#" class="tl_type" id="v20">海温资料</a></li>
-							</ul>
-						</li>
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-								<span>文件资料</span>
-								<i class="icon-submenu lnr lnr-chevron-down"></i></a>
-							<ul class="dropdown-menu">
-								<li><a href="#" class="tl_type" id="v30">卫星资料</a></li>
-							</ul>
-						</li>
-						<li class="dropdown">
-							<a href="#" class="tl_type" onclick='toBehaviorRecord()' id="v40">用户日志</a>
-							<!--<ul class="dropdown-menu">
-								<li><a href="#" onclick="addLi(v30)"><span>卫星资料</span></a></li>
-							</ul>-->
-						</li>
-					</ul>
+            <!--top menu-->
+            <div id="navbar-menu">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a th:href="@{./index.html}"><span>首页</span> </a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 
-				</div>
-				<!--end top menu-->
+                            <span>站点资料</span>
+                            <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" class="tl_type" id="v10">地面资料</a></li>
+                            <li><a href="#" class="tl_type" id="v11">高空资料</a></li>
+                            <li><a href="#" class="tl_type" id="v12">其他资料</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 
-			</div>
-		</nav>
-		<!-- END NAVBAR -->
+                            <span>格点资料</span>
+                            <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" class="tl_type" id="v20">海温资料</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <span>文件资料</span>
+                            <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" class="tl_type" id="v30">卫星资料</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="tl_type" onclick='toBehaviorRecord()' id="v40">用户日志</a>
+                        <!--<ul class="dropdown-menu">
+                            <li><a href="#" onclick="addLi(v30)"><span>卫星资料</span></a></li>
+                        </ul>-->
+                    </li>
+                </ul>
 
-		<!-- LEFT SIDEBAR -->
-		<div id="sidebar-nav" class="sidebar">
-			<div class="sidebar-scroll">
-				<nav>
-					<ul class="nav" id="navId">
+            </div>
+            <!--end top menu-->
 
-						<li>
-							<a data-toggle="collapse"><i class='lnr lnr-earth'></i>
-								<span>站点资料</span>
-								<!--子图标标识-->
-								<i class="icon-submenu lnr lnr-chevron-left"></i>
-							</a>
-						</li>
-						<hr/>
+        </div>
+    </nav>
+    <!-- END NAVBAR -->
 
-						<li>
-							<a href="#subPages100" data-toggle="collapse" class="collapsed">
-								<span>地面常规观测（含船舶、浮标）资料</span>
-								<!--子图标标识-->
-								<i class="icon-submenu lnr lnr-chevron-left"></i>
-							</a>
-							<div id="subPages100" class="collapse ">
-								<ul class="nav">
-									<li><a href='#' onclick='toSiteChartDMCG()' class=""><i class="lnr lnr-chart-bars"></i>折线图</a></li>
-									<li><a href="#" onclick="toDistributionCurveDMCG()" class="" id="1" name=""><i class="lnr lnr-list"></i>分布图</a></li>
-								</ul>
-							</div>
-						</li>
-						<li>
-							<a href="#subPages101" data-toggle="collapse" class="collapsed">
-								<span>国内自动站地面气象资料</span>
-								<!--子图标标识-->
-								<i class="icon-submenu lnr lnr-chevron-left"></i>
-							</a>
-							<div id="subPages101" class="collapse ">
-								<ul class="nav">
-									<li><a href='#' onclick='toSiteChartGNZDZ()' class=""><i class="lnr lnr-chart-bars"></i>折线图</a></li>
-									<li><a href="#" onclick="toGroudAutoSateFileBinMap()" class="" name="" id="2"><i class="lnr lnr-list"></i>分布图</a></li>
-								</ul>
-							</div>
-						</li>
-					</ul>
-				</nav>
-			</div>
-		</div>
-		<!-- END LEFT SIDEBAR -->
+    <!-- LEFT SIDEBAR -->
+    <div id="sidebar-nav" class="sidebar">
+        <div class="sidebar-scroll">
+            <nav>
+                <ul class="nav" id="navId">
+
+                    <li>
+                        <a data-toggle="collapse"><i class='lnr lnr-earth'></i>
+                            <span>站点资料</span>
+                            <!--子图标标识-->
+                            <i class="icon-submenu lnr lnr-chevron-left"></i>
+                        </a>
+                    </li>
+                    <hr/>
+
+                    <li>
+                        <a href="#subPages100" data-toggle="collapse" class="collapsed">
+                            <span>地面常规观测（含船舶、浮标）资料</span>
+                            <!--子图标标识-->
+                            <i class="icon-submenu lnr lnr-chevron-left"></i>
+                        </a>
+                        <div id="subPages100" class="collapse ">
+                            <ul class="nav">
+                                <li><a href='#' onclick='toSiteChartDMCG()' class=""><i class="lnr lnr-chart-bars"></i>折线图</a>
+                                </li>
+                                <li><a href="#" onclick="toDistributionCurveDMCG()" class="" id="1" name=""><i
+                                        class="lnr lnr-list"></i>分布图</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#subPages101" data-toggle="collapse" class="collapsed">
+                            <span>国内自动站地面气象资料</span>
+                            <!--子图标标识-->
+                            <i class="icon-submenu lnr lnr-chevron-left"></i>
+                        </a>
+                        <div id="subPages101" class="collapse ">
+                            <ul class="nav">
+                                <li><a href='#' onclick='toSiteChartGNZDZ()' class=""><i class="lnr lnr-chart-bars"></i>折线图</a>
+                                </li>
+                                <li><a href="#" onclick="toGroudAutoSateFileBinMap()" class="" name="" id="2"><i
+                                        class="lnr lnr-list"></i>分布图</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <!-- END LEFT SIDEBAR -->
 
 
-		<!-- MAIN -->
-		<div class="main" id="main">
-			<!-- MAIN CONTENT -->
-			<div class="main-content">
-				<div class="container-fluid">
-					<h3 class='page-title'>站点资料>地面资料>常规地面观测（含船舶、浮标）资料>折线图</h3>
-					<div class='panel'>
-						<iframe id='iframe' src='/site_chart_view?data_logo=GM_RSURF_GL'  width='100%'  border='0'  style='padding: 0px; width: 100%; height: 800px;'  frameborder='0'></iframe>
-					</div>
+    <!-- MAIN -->
+    <div class="main" id="main">
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+            <div class="container-fluid">
+                <h3 class='page-title'>站点资料>地面资料>常规地面观测（含船舶、浮标）资料>折线图</h3>
+                <div class='panel'>
+                    <iframe id='iframe' src='/site_chart_view?data_logo=GM_RSURF_GL' width='100%' border='0'
+                            style='padding: 0px; width: 100%; height: 800px;' frameborder='0'></iframe>
+                </div>
 
-					<div class="panel">
-						<div class="panel-heading">
-							<div id="bin_map_div" hidden="hidden">
-								<br/>
-								<br/>
-							</div>
-							<div id="bin_satellite_map_div" hidden="hidden">
-								<div class="binSatelliteMapChoice">
-									<ul class="nav navbar-nav navbar-left">
-										<li class="" >
-											<strong>日期:</strong> <input class="inline laydate-icon" placeholder="请输入日期" id="querySatelliteDate"  style="width:200px; margin-right:10px;"/>
-										</li>
-										<li>
-											<strong>&nbsp;&nbsp;&nbsp;&nbsp;卫星平台:&nbsp;</strong>
-											<select class="" id="satelliteType" name="dataType" onclick="">
-											</select>
-										</li>
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div id="bin_map_div" hidden="hidden">
+                            <br/>
+                            <br/>
+                        </div>
+                        <div id="bin_satellite_map_div" hidden="hidden">
+                            <div class="binSatelliteMapChoice">
+                                <ul class="nav navbar-nav navbar-left">
+                                    <li class="">
+                                        <strong>日期:</strong> <input class="inline laydate-icon" placeholder="请输入日期"
+                                                                    id="querySatelliteDate"
+                                                                    style="width:200px; margin-right:10px;"/>
+                                    </li>
+                                    <li>
+                                        <strong>&nbsp;&nbsp;&nbsp;&nbsp;卫星平台:&nbsp;</strong>
+                                        <select class="" id="satelliteType" name="dataType" onclick="">
+                                        </select>
+                                    </li>
 
-										<li>
-											<strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;卫星时次:&nbsp;</strong>
-											<select class="" id="querySatelliteTime" style=" min-width: 150px;max-width: 380px ;">
-												<option value="0" >请选择卫星时次</option>
-											</select>
-										</li>
-										<li>
-											<button onclick="SatelliteQuery()"><strong>	&nbsp;&nbsp;&nbsp;&nbsp;查询</strong></button>
-										</li>
-									</ul>
+                                    <li>
+                                        <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;卫星时次:&nbsp;</strong>
+                                        <select class="" id="querySatelliteTime"
+                                                style=" min-width: 150px;max-width: 380px ;">
+                                            <option value="0">请选择卫星时次</option>
+                                        </select>
+                                    </li>
+                                    <li>
+                                        <button onclick="SatelliteQuery()"><strong>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;查询</strong></button>
+                                    </li>
+                                </ul>
 
-								</div>
-								<div id="satelliteMap"  width="100%"  border="0"  style="padding: 0px; width: 100%; height: 600px;">
-								</div>
-							</div>
-						</div>
+                            </div>
+                            <div id="satelliteMap" width="100%" border="0"
+                                 style="padding: 0px; width: 100%; height: 600px;">
+                            </div>
+                        </div>
+                    </div>
 
-					</div>
-				</div>
-			</div>
-			<!-- END MAIN CONTENT -->
+                </div>
+            </div>
+        </div>
+        <!-- END MAIN CONTENT -->
 
-		</div>
-		<!-- END MAIN -->
-	</div>
-	<!-- END WRAPPER -->
+    </div>
+    <!-- END MAIN -->
+</div>
+<!-- END WRAPPER -->
 
-	<script type="text/javascript">
-		!function(){
-			laydate.skin('/skins/molv');//切换皮肤，请查看skins下面皮肤库
-			//laydate({elem: '#start'});//绑定元素
-		}();
+<script type="text/javascript">
+    !function () {
+        laydate.skin('/skins/molv');//切换皮肤，请查看skins下面皮肤库
+        //laydate({elem: '#start'});//绑定元素
+    }();
 
-        //日期范围限制
-        var querySatelliteDate = {
-            elem: '#querySatelliteDate',
-            format: 'YYYY-MM-DD',
-            //min: laydate.now(), //设定最小日期为当前日期
-            min: '1900-01-01', //设定最小日期为当前日期
-            max: '2099-00-01', //最大日期
-            istime: true,
-            istoday: true,
-            choose: function(datas){
-                end.min = datas;        //开始日选好后，重置结束日的最小日期
-                end.start = datas      //将结束日的初始值设定为开始日
-            }
-        };
-        laydate(querySatelliteDate);
+    //日期范围限制
+    var querySatelliteDate = {
+        elem: '#querySatelliteDate',
+        format: 'YYYY-MM-DD',
+        //min: laydate.now(), //设定最小日期为当前日期
+        min: '1900-01-01', //设定最小日期为当前日期
+        max: '2099-00-01', //最大日期
+        istime: true,
+        istoday: true,
+        choose: function (datas) {
+            end.min = datas;        //开始日选好后，重置结束日的最小日期
+            end.start = datas      //将结束日的初始值设定为开始日
+        }
+    };
+    laydate(querySatelliteDate);
 
-		//日期范围限制
-		var start = {
-			elem: '#start',
-			format: 'YYYY-MM-DD hh:mm:ss',
-			//min: laydate.now(), //设定最小日期为当前日期
-			min: '1900-01-01 00:00:00', //设定最小日期为当前日期
-			max: '2099-00-01 00:00:00', //最大日期
-			istime: true,
-			istoday: false,
-			choose: function(datas){
-				end.min = datas; //开始日选好后，重置结束日的最小日期
-				end.start = datas //将结束日的初始值设定为开始日
-			}
-		};
-		laydate(start);
-	</script>
+    //日期范围限制
+    var start = {
+        elem: '#start',
+        format: 'YYYY-MM-DD hh:mm:ss',
+        //min: laydate.now(), //设定最小日期为当前日期
+        min: '1900-01-01 00:00:00', //设定最小日期为当前日期
+        max: '2099-00-01 00:00:00', //最大日期
+        istime: true,
+        istoday: false,
+        choose: function (datas) {
+            end.min = datas; //开始日选好后，重置结束日的最小日期
+            end.start = datas //将结束日的初始值设定为开始日
+        }
+    };
+    laydate(start);
+</script>
 </body>
 </html>

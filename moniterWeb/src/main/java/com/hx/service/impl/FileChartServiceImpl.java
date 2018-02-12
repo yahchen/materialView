@@ -22,16 +22,16 @@ public class FileChartServiceImpl implements FileChartService {
 
     @Override
     public List<Map<String, Object>> findSateFileSelectdByTimeElement(String startTime, String endTime, String queryElment) {
-        return fileChartDao.findSateFileSelectdByTimeElement(startTime,endTime,queryElment);
+        return fileChartDao.findSateFileSelectdByTimeElement(startTime, endTime, queryElment);
     }
 
     @Override
     public List<Map<String, Object>> findSateFileChartByTimeElement(String startTime, String endTime, String queryElment, String sateFileName) {
-        return fileChartDao.findSateFileChartByTimeElement(startTime,endTime,queryElment,sateFileName);
+        return fileChartDao.findSateFileChartByTimeElement(startTime, endTime, queryElment, sateFileName);
     }
 
     @Override
     public List<Map<String, Object>> findFileChartByTimeElement(String startTime, String endTime, String queryElment) {
-        return fileChartDao.findFileChartByTimeElement(startTime,endTime,queryElment);
+        return fileChartDao.findFileChartByTimeElement(startTime, endTime, queryElment);
     }
 }

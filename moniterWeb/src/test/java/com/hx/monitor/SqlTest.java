@@ -17,7 +17,10 @@ import org.springframework.util.CollectionUtils;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by wangyaohui on 2017/6/2.
@@ -120,23 +123,23 @@ public class SqlTest {
     }
 
     @Test
-    public void testTimehours(){
+    public void testTimehours() {
         Timestamp start = Timestamp.valueOf("2017-09-18 00:00:00");
         Timestamp end = Timestamp.valueOf("2017-10-18 23:59:59");
 
-        Map map = convertDbRes2TimeHours(postgreSqlDao.queryTimeHours("GM_RSURF_GL",start,end));
+        Map map = convertDbRes2TimeHours(postgreSqlDao.queryTimeHours("GM_RSURF_GL", start, end));
         assert map != null;
     }
 
-    private Map<String,String> convertDbRes2TimeHours(List<Map<String, Object>> resData) {
+    private Map<String, String> convertDbRes2TimeHours(List<Map<String, Object>> resData) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-        if(CollectionUtils.isEmpty(resData))
+        if (CollectionUtils.isEmpty(resData))
             return Collections.EMPTY_MAP;
-        Map<String,String> timeHoursMap = new HashMap<>();
-        for(Map<String,Object> tableLine:resData){
-            Timestamp dataTime = (Timestamp)tableLine.get("data_time");
+        Map<String, String> timeHoursMap = new HashMap<>();
+        for (Map<String, Object> tableLine : resData) {
+            Timestamp dataTime = (Timestamp) tableLine.get("data_time");
             String sdid = tableLine.get("s_d_id").toString();
-            timeHoursMap.put(sdid,sdf.format(dataTime));
+            timeHoursMap.put(sdid, sdf.format(dataTime));
         }
         return timeHoursMap;
     }

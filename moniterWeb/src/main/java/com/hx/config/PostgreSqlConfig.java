@@ -23,16 +23,16 @@ public class PostgreSqlConfig {
 
     /**
      * 数据库配置，读取applicatioin.properties中前缀为spring.datasource的配置
+     *
      * @return
      */
     @Bean(name = "postgresDb")
     @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource postgresDataSource() {
-        return  DataSourceBuilder.create().build();
+        return DataSourceBuilder.create().build();
     }
 
     /**
-     *
      * @param dsPostgres
      * @return
      */
@@ -42,7 +42,6 @@ public class PostgreSqlConfig {
     }
 
     /**
-     *
      * @param dsPostgres
      * @return
      */

@@ -11,12 +11,13 @@ import java.util.List;
  * Created by yahchen on 2017/11/4.
  */
 @Service
-public class SiteDataHeadService implements DaoServiceImpl<SiteDataHeadDo>{
+public class SiteDataHeadService implements DaoServiceImpl<SiteDataHeadDo> {
     @Autowired
     private SiteDataHeadDao siteDataHeadDao;
+
     @Override
     public Iterable<SiteDataHeadDo> save(Iterable<SiteDataHeadDo> entities) {
-        if(null != entities && entities.iterator().hasNext()){
+        if (null != entities && entities.iterator().hasNext()) {
             return siteDataHeadDao.save(entities);
         }
         return null;
@@ -24,7 +25,7 @@ public class SiteDataHeadService implements DaoServiceImpl<SiteDataHeadDo>{
 
     @Override
     public SiteDataHeadDo saveOne(SiteDataHeadDo entity) {
-        if(null != entity){
+        if (null != entity) {
             return siteDataHeadDao.save(entity);
         }
         return null;

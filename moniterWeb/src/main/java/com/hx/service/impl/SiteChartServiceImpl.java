@@ -21,6 +21,6 @@ public class SiteChartServiceImpl implements SiteChartService {
 
     @Override
     public List<Map<String, Object>> findSiteChartByTimeElement(String startTime, String endTime, String queryElment) {
-        return siteChartDao.findSiteChartByTimeElement(startTime,endTime,queryElment);
+        return siteChartDao.findSiteChartByTimeElement(startTime, endTime, queryElment);
     }
 }

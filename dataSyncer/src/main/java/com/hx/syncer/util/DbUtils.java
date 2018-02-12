@@ -5,8 +5,6 @@ import com.hx.syncer.bean.GridDataHeadDo;
 import com.hx.syncer.bean.SatelliteFileDataHeadDo;
 import com.hx.syncer.bean.SiteDataHeadDo;
 import com.hx.syncer.dao.BaseRepository;
-import com.hx.syncer.dao.GridDataHeadDao;
-import com.hx.syncer.dao.SiteDataHeadDao;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -24,71 +22,72 @@ public class DbUtils implements ApplicationContextAware {
      */
     private ApplicationContext applicationContext;
 
-    public BaseRepository getSiteEleDaoObj(String logo){
-        if(StringUtils.isEmpty(logo))
+    public BaseRepository getSiteEleDaoObj(String logo) {
+        if (StringUtils.isEmpty(logo))
             return null;
         String className = DataSyncerConstants.SITE_DATA_DAO_NAMES.get(logo);
-        return (BaseRepository)applicationContext.getBean(className);
+        return (BaseRepository) applicationContext.getBean(className);
     }
 
-    public Object getSiteEleDoObj(String logo) throws Exception{
-        if(StringUtils.isEmpty(logo))
+    public Object getSiteEleDoObj(String logo) throws Exception {
+        if (StringUtils.isEmpty(logo))
             return null;
         String className = "com.hx.syncer.bean." + DataSyncerConstants.SITE_DATA_DO_NAMES.get(logo);
-        return null == className?null:Class.forName(className).newInstance();
+        return null == className ? null : Class.forName(className).newInstance();
     }
-    public BaseRepository getTableEleDaoObj(String logo){
-        if(StringUtils.isEmpty(logo))
+
+    public BaseRepository getTableEleDaoObj(String logo) {
+        if (StringUtils.isEmpty(logo))
             return null;
         String[] sameFactors = logo.split("_");
         String[] beanNames = applicationContext.getBeanDefinitionNames();
         int maxSimilarityValue = 0;
         String className = null;
-        for(String name:beanNames){
+        for (String name : beanNames) {
             int curSimilarityValue = 0;
-            if(name.endsWith("Dao") && name.startsWith((logo.charAt(0) + "").toLowerCase())){
+            if (name.endsWith("Dao") && name.startsWith((logo.charAt(0) + "").toLowerCase())) {
                 char[] lowLogo = logo.toLowerCase().toCharArray();
-                String lowBeanName = name.replaceFirst("Dao","").toLowerCase();
-                for(char factor:lowLogo){
-                    if(lowBeanName.contains(factor+"")) {
-                        lowBeanName = lowBeanName.replaceFirst(factor+"","");
+                String lowBeanName = name.replaceFirst("Dao", "").toLowerCase();
+                for (char factor : lowLogo) {
+                    if (lowBeanName.contains(factor + "")) {
+                        lowBeanName = lowBeanName.replaceFirst(factor + "", "");
                         curSimilarityValue++;
                     }
                 }
-                if(maxSimilarityValue < curSimilarityValue){
+                if (maxSimilarityValue < curSimilarityValue) {
                     maxSimilarityValue = curSimilarityValue;
                     className = name;
                 }
             }
         }
-        return null == className?null:(BaseRepository)applicationContext.getBean(className);
+        return null == className ? null : (BaseRepository) applicationContext.getBean(className);
     }
 
-    public Object getTableEleBeanClassName(String logo) throws Exception{
-        if(StringUtils.isEmpty(logo))
+    public Object getTableEleBeanClassName(String logo) throws Exception {
+        if (StringUtils.isEmpty(logo))
             return logo;
         String[] beanNames = applicationContext.getBeanDefinitionNames();
         int maxSimilarityValue = 0;
         String className = null;
-        for(String name:beanNames){
+        for (String name : beanNames) {
             int curSimilarityValue = 0;
-            if(name.endsWith("Dao") && name.startsWith((logo.charAt(0) + "").toLowerCase())){
+            if (name.endsWith("Dao") && name.startsWith((logo.charAt(0) + "").toLowerCase())) {
                 char[] lowLogo = logo.toLowerCase().toCharArray();
-                String lowBeanName = name.replaceFirst("Dao","").toLowerCase();
-                for(char factor:lowLogo){
-                    if(lowBeanName.contains(factor+"")) {
-                        lowBeanName = lowBeanName.replaceFirst(factor+"","");
+                String lowBeanName = name.replaceFirst("Dao", "").toLowerCase();
+                for (char factor : lowLogo) {
+                    if (lowBeanName.contains(factor + "")) {
+                        lowBeanName = lowBeanName.replaceFirst(factor + "", "");
                         curSimilarityValue++;
                     }
                 }
-                if(maxSimilarityValue < curSimilarityValue){
+                if (maxSimilarityValue < curSimilarityValue) {
                     maxSimilarityValue = curSimilarityValue;
-                    className = name.replace("Dao","Do");
+                    className = name.replace("Dao", "Do");
                 }
             }
         }
-        className = "com.hx.syncer.bean." + className.substring(0,1).toUpperCase() + className.substring(1);
-        return null == className?null:Class.forName(className).newInstance();
+        className = "com.hx.syncer.bean." + className.substring(0, 1).toUpperCase() + className.substring(1);
+        return null == className ? null : Class.forName(className).newInstance();
     }
 
     @Override
@@ -97,10 +96,10 @@ public class DbUtils implements ApplicationContextAware {
     }
 
     public Object getTableHeadObj(String dataTypeValue) {
-        if(StringUtils.isEmpty(dataTypeValue))
+        if (StringUtils.isEmpty(dataTypeValue))
             return null;
         Object tableHeadObj = null;
-        switch (Integer.valueOf(dataTypeValue)){
+        switch (Integer.valueOf(dataTypeValue)) {
             case DataSyncerConstants.SITEHEAD:
                 tableHeadObj = new SiteDataHeadDo();
                 break;
@@ -120,21 +119,21 @@ public class DbUtils implements ApplicationContextAware {
     }
 
     public BaseRepository getTableHeadDao(String dataTypeValue) {
-        if(StringUtils.isEmpty(dataTypeValue))
+        if (StringUtils.isEmpty(dataTypeValue))
             return null;
         BaseRepository tableHeadDao = null;
-        switch (Integer.valueOf(dataTypeValue)){
+        switch (Integer.valueOf(dataTypeValue)) {
             case DataSyncerConstants.SITEHEAD:
-                tableHeadDao = (BaseRepository)applicationContext.getBean("siteDataHeadDao");
+                tableHeadDao = (BaseRepository) applicationContext.getBean("siteDataHeadDao");
                 break;
             case DataSyncerConstants.GRIDHEAD:
-                tableHeadDao = (BaseRepository)applicationContext.getBean("gridDataHeadDao");
+                tableHeadDao = (BaseRepository) applicationContext.getBean("gridDataHeadDao");
                 break;
             case DataSyncerConstants.FILEHEAD:
-                tableHeadDao = (BaseRepository)applicationContext.getBean("fileDataHeadDao");
+                tableHeadDao = (BaseRepository) applicationContext.getBean("fileDataHeadDao");
                 break;
             case DataSyncerConstants.SATEFILEHEAD:
-                tableHeadDao = (BaseRepository)applicationContext.getBean("satelliteFileDataHeadDao");
+                tableHeadDao = (BaseRepository) applicationContext.getBean("satelliteFileDataHeadDao");
                 break;
             default:
                 break;
@@ -143,10 +142,10 @@ public class DbUtils implements ApplicationContextAware {
     }
 
     public String getOutIdName(String dataType) {
-        if(StringUtils.isEmpty(dataType))
+        if (StringUtils.isEmpty(dataType))
             return null;
         String outIdName = null;
-        switch (Integer.valueOf(dataType)){
+        switch (Integer.valueOf(dataType)) {
             case DataSyncerConstants.SITEHEAD:
                 outIdName = "s_d_id";
                 break;

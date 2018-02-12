@@ -1,7 +1,7 @@
 $(function () {
     var map = null;
     var data_logo = getQueryString("data_logo");
-    if(data_logo != null && data_logo != "" && data_logo.indexOf("SURF") < 0)
+    if (data_logo != null && data_logo != "" && data_logo.indexOf("SURF") < 0)
         $(".airPress").show();
     else
         $(".airPress").hide();
@@ -37,7 +37,7 @@ $(function () {
                         qc = data[i].quality_code
                     if (qc == "")
                         continue
-                    if(data[i].quality_code!=''){
+                    if (data[i].quality_code != '') {
                         qualiteTypeValueArray.push(data[i].quality_code);  //添加到数组中
                     }
                     options += "<option value=" + data[i].quality_code + ">" + qc + "</option>"
@@ -84,16 +84,16 @@ $(function () {
                 var qt = qualiteType.toLocaleLowerCase();
                 for (var ki in data) {
                     var binMap = data[ki];
-                    if(qt == 'all'){
+                    if (qt == 'all') {
                         dotColor = "#00FF66";
-                        for(var qtv in qualiteTypeValueArray){
-                            if(binMap[qtv] != 0 && binMap[qtv] != 3 && binMap[qtv] != 4) {
+                        for (var qtv in qualiteTypeValueArray) {
+                            if (binMap[qtv] != 0 && binMap[qtv] != 3 && binMap[qtv] != 4) {
                                 dotColor = "#999999";
                                 break;
                             }
                         }
                     }
-                    else if(binMap[qt] == 0 || binMap[qt] == 3 || binMap[qt] == 4){
+                    else if (binMap[qt] == 0 || binMap[qt] == 3 || binMap[qt] == 4) {
                         dotColor = "#00FF66";
                     }
                     var point = new T.Circle(new T.LngLat(binMap['lon'], binMap['lat']), 1, {
@@ -158,16 +158,16 @@ $(function () {
                 var qt = qualiteType.toLocaleLowerCase();
                 for (var ki in data) {
                     var binMap = data[ki];
-                    if(qt == 'all'){
+                    if (qt == 'all') {
                         dotColor = "#00FF66";
-                        for(var qtv in qualiteTypeValueArray){
-                            if(binMap[qtv] != 0 && binMap[qtv] != 3 && binMap[qtv] != 4) {
+                        for (var qtv in qualiteTypeValueArray) {
+                            if (binMap[qtv] != 0 && binMap[qtv] != 3 && binMap[qtv] != 4) {
                                 dotColor = "#999999";
                                 break;
                             }
                         }
                     }
-                    else if(binMap[qt] == 0 || binMap[qt] == 3 || binMap[qt] == 4){
+                    else if (binMap[qt] == 0 || binMap[qt] == 3 || binMap[qt] == 4) {
                         dotColor = "#00FF66";
                     }
                     var point = new T.Circle(new T.LngLat(binMap['lon'], binMap['lat']), 1, {
@@ -216,9 +216,10 @@ function timeHourChange() {
         dataType: "json",
         success: function (data) {
             var options;
-            for(var key in data){
+            for (var key in data) {
                 options += "<option value=" + key + ">" + data[key] + "</option>"
-            };
+            }
+            ;
             $("#timeHour").html("");
             $("#timeHour").append(options);
             $("#timeHour").attr("disabled", false);

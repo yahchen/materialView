@@ -2,26 +2,28 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<title></title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
-	<link rel="stylesheet" type="text/css" href="js/calendar/css/style.css"/>
-	<link rel="stylesheet" th:href="@{assets/css/style2.css}"/>
-	<script type="text/javascript" src="assets/js/jquery-1.7.2.min.js"></script>
-	<script type="text/javascript" src="js/common_chart.js"></script>
-	<script type="text/javascript" src="js/calendar/laydate.js"></script>
-	<script type="text/javascript" src="echarts/echarts.js"></script>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <link rel="stylesheet" type="text/css" href="js/calendar/css/style.css"/>
+    <link rel="stylesheet" th:href="@{assets/css/style2.css}"/>
+    <script type="text/javascript" src="assets/js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="js/common_chart.js"></script>
+    <script type="text/javascript" src="js/calendar/laydate.js"></script>
+    <script type="text/javascript" src="echarts/echarts.js"></script>
 </head>
 
 <body>
 <!-- WRAPPER -->
 <div>
-	<!-- MAIN --><br/>
-	<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<strong>开始时间：</strong> <input class="inline laydate-icon" placeholder="请输入日期" id="start" style="width:100px; margin-right:10px;"></input>&nbsp;
-		<strong>结束时间：</strong> <input class="inline laydate-icon" placeholder="请输入日期" id="end" style="width:100px;"></input>&nbsp;&nbsp;
-		<!--  <strong>统计时区：</strong>
+    <!-- MAIN --><br/>
+    <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <strong>开始时间：</strong> <input class="inline laydate-icon" placeholder="请输入日期" id="start"
+                                      style="width:100px; margin-right:10px;"></input>&nbsp;
+        <strong>结束时间：</strong> <input class="inline laydate-icon" placeholder="请输入日期" id="end"
+                                      style="width:100px;"></input>&nbsp;&nbsp;
+        <!--  <strong>统计时区：</strong>
       <select id="provSelect"  style="height:21px;">
               <option value="0">请选择</option>
               <option value="1">近一周</option>
@@ -29,23 +31,24 @@
               <option value="3">近三周</option>
               <option value="4">近一个月</option>
           </select>-->&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<button style="width:68px;height:21px" onclick="onSelect()" >查询</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<span id="message" style="color:red;"></span>
-		<div><br/><br/>
-			<!-- MAIN CONTENT -->
-			<div id="main1" style="height:500px"></div>
-			<!-- END MAIN CONTENT -->
-		</div>
+        <button style="width:68px;height:21px" onclick="onSelect()">查询</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span id="message" style="color:red;"></span>
+        <div><br/><br/>
+            <!-- MAIN CONTENT -->
+            <div id="main1" style="height:500px"></div>
+            <!-- END MAIN CONTENT -->
+        </div>
     </div>
-<!-- END MAIN -->
+    <!-- END MAIN -->
 </div>
 <!-- END WRAPPER -->
 
 <script type="text/javascript">
 
-	$(document).ready(function(){
+    $(document).ready(function () {
 
-	    $("#provSelect").on('change',function () {//注册统计时区的选择事件
+        $("#provSelect").on('change', function () {//注册统计时区的选择事件
             $("#start").val("");
             $("#end").val("");
             $("#message").html("");
@@ -54,100 +57,100 @@
         initDate();
         //注册页面加载事件
         selectChartData();
-	});
+    });
 
-	onSelect=function(){
-        var a=$("#start").val() == "" || $("#start").val() == null;//有值为 false  无值为true
-        var b=$("#end").val() == "" || $("#end").val() == null;//空1  有值为 false  无值为true
-        var c=$("#provSelect").val() == "0";//0无值为true  有值为false  与日期的不一样
+    onSelect = function () {
+        var a = $("#start").val() == "" || $("#start").val() == null;//有值为 false  无值为true
+        var b = $("#end").val() == "" || $("#end").val() == null;//空1  有值为 false  无值为true
+        var c = $("#provSelect").val() == "0";//0无值为true  有值为false  与日期的不一样
         //alert(a);alert(b);alert(c);
         if (!c) {
             selectChartData();
-        } else if (a ) {
+        } else if (a) {
             $("#message").html("请选择开始时间！");
-        } else if(b) {
+        } else if (b) {
             $("#message").html("请选择结束时间！");
-        }else{
+        } else {
             //alert(444);
             selectChartData();
         }
 
-	}
+    }
 
-selectChartData=function () {
+    selectChartData = function () {
         //alert(getQueryString("data_logo"));
         var queryCond = {
-            "startTime":$( "#start" ).val(),
-            "endTime":$( "#end" ).val(),
-            "strZone" :$( "#provSelect" ).val(),
-            "dataLogo":getQueryString("data_logo")
+            "startTime": $("#start").val(),
+            "endTime": $("#end").val(),
+            "strZone": $("#provSelect").val(),
+            "dataLogo": getQueryString("data_logo")
         };
 
         $.ajax({
-            type:"GET",
-            dataType:"json",
-            cache:false,
-            url:"/findSiteChartByTimeElement",
-            data:queryCond,
-            beforeSend:function(){
+            type: "GET",
+            dataType: "json",
+            cache: false,
+            url: "/findSiteChartByTimeElement",
+            data: queryCond,
+            beforeSend: function () {
                 $("#message").html("正在查询数据，请稍后...");
                 return true;
             },
-            success:function(json){
+            success: function (json) {
                 //alert(json.jsonTime1);
                 //alert(json.jsonDay);
                 // 基于准备好的dom，初始化echarts图表
                 var myChart = echarts.init(document.getElementById('main1'));
 
                 option = {
-                    title : [{//标题组件
-                        left:'left',
+                    title: [{//标题组件
+                        left: 'left',
                         text: '站点数折线图',//主标题
                         subtext: '观测到的站点数（个）'//子标题
-                    },{
+                    }, {
                         top: '55%',
                         left: 'left',
                         text: '检索响应时间折线图',
                         subtext: '检索响应时间（s）'//子标题
                     }],
 
-                    tooltip : {//提示框组件
+                    tooltip: {//提示框组件
                         trigger: 'axis'   //触发类型，默认数据触发，可选为：’item’ | ‘axis’ ，提示框显示类型   item表示该条线的值，axis表示不同曲线中，在同一x值时候的所有y值
                     },
 
                     legend: {//图例逐渐
-                        data:['站点个数','响应时间'],
-                        left:'center'
+                        data: ['站点个数', '响应时间'],
+                        left: 'center'
                     },
 
                     toolbox: {// 右上角显示的工具条
-                        show : true,
-                        feature : {
-                            mark : {show: true},
-                            dataView : {show: true, readOnly: false},
-                            magicType : {show: true, type: ['line', 'bar']},
-                            restore : {show: true},
-                            saveAsImage : {show: true}
+                        show: true,
+                        feature: {
+                            mark: {show: true},
+                            dataView: {show: true, readOnly: false},
+                            magicType: {show: true, type: ['line', 'bar']},
+                            restore: {show: true},
+                            saveAsImage: {show: true}
                         }
                     },
-                    calculable : true,//是否启用拖拽重计算特性，默认关闭，
-                    xAxis : [//直角坐标系 grid 中的 x 轴
+                    calculable: true,//是否启用拖拽重计算特性，默认关闭，
+                    xAxis: [//直角坐标系 grid 中的 x 轴
                         {
-                            type : 'category',
-                            boundaryGap : false,
-                            data : json.jsonTime1
+                            type: 'category',
+                            boundaryGap: false,
+                            data: json.jsonTime1
 
-                        },{
+                        }, {
                             data: json.jsonTime1,
                             gridIndex: 1
                         }
                     ],
-                    yAxis : [//直角坐标系 grid 中的 y 轴  纵轴的值根据实际值自动变化的
+                    yAxis: [//直角坐标系 grid 中的 y 轴  纵轴的值根据实际值自动变化的
                         {
-                            axisLabel : {
+                            axisLabel: {
                                 formatter: '{value} 个'
                             }
-                        },{
+                        }, {
                             formatter: '{value}',
                             gridIndex: 1
                         }
@@ -157,26 +160,26 @@ selectChartData=function () {
                     }, {
                         top: '60%'
                     }],
-                    series : [// 系列列表
+                    series: [// 系列列表
                         {
-                            name:'站点个数',
-                            type:'line',
-                            data:json.jsonNum,
-                            markPoint : {//标记点  标记两个点
-                                data : [
-                                    {type : 'max', name: '最大值'},
-                                    {type : 'min', name: '最小值'}
+                            name: '站点个数',
+                            type: 'line',
+                            data: json.jsonNum,
+                            markPoint: {//标记点  标记两个点
+                                data: [
+                                    {type: 'max', name: '最大值'},
+                                    {type: 'min', name: '最小值'}
                                 ]
                             },
                         }
                         , {
-                            name:'响应时间',
+                            name: '响应时间',
                             type: 'line',
                             data: json.jsonProcessTime,
-                            markPoint : {//标记点  标记两个点
-                                data : [
-                                    {type : 'max', name: '最大值'},
-                                    {type : 'min', name: '最小值'}
+                            markPoint: {//标记点  标记两个点
+                                data: [
+                                    {type: 'max', name: '最大值'},
+                                    {type: 'min', name: '最小值'}
                                 ]
                             },
                             xAxisIndex: 1,
@@ -186,10 +189,10 @@ selectChartData=function () {
                 };
                 // 为echarts对象加载数据
                 myChart.setOption(option);
-				window.onresize=myChart.resize;
+                window.onresize = myChart.resize;
                 $("#message").html(json.jsonMessage);
             },
-            error:function(){
+            error: function () {
                 $("#message").html("查询数据失败，请重试！");
             }
         });
@@ -198,54 +201,54 @@ selectChartData=function () {
 </script>
 
 <script type="text/javascript">
-!function(){
-	laydate.skin('molv');//切换皮肤，请查看skins下面皮肤库
-	laydate({elem: '#start2'});//绑定元素
-}();
+    !function () {
+        laydate.skin('molv');//切换皮肤，请查看skins下面皮肤库
+        laydate({elem: '#start2'});//绑定元素
+    }();
 
 
-//日期范围限制
-var start = {
-    elem: '#start',
-    format: 'YYYY-MM-DD',
-    //min: laydate.now(), //设定最小日期为当前日期
-	min: '1900-01-01', //设定最小日期为当前日期
-    max: '2099-00-01', //最大日期
-    istime: true,
-    istoday: false,
-    choose: function(datas){
-         end.min = datas; //开始日选好后，重置结束日的最小日期
-         end.start = datas; //将结束日的初始值设定为开始日
-        if($( "#end" ).val()==""||$( "#end" ).val()==null){
-            $("#message").html("请选择结束时间！");
-            $( "#end" ).focus();
-        }else{
-            $("#message").html("");
+    //日期范围限制
+    var start = {
+        elem: '#start',
+        format: 'YYYY-MM-DD',
+        //min: laydate.now(), //设定最小日期为当前日期
+        min: '1900-01-01', //设定最小日期为当前日期
+        max: '2099-00-01', //最大日期
+        istime: true,
+        istoday: false,
+        choose: function (datas) {
+            end.min = datas; //开始日选好后，重置结束日的最小日期
+            end.start = datas; //将结束日的初始值设定为开始日
+            if ($("#end").val() == "" || $("#end").val() == null) {
+                $("#message").html("请选择结束时间！");
+                $("#end").focus();
+            } else {
+                $("#message").html("");
+            }
+            $("#provSelect").val(0);
         }
-        $("#provSelect").val(0);
-    }
-};
+    };
 
-var end = {
-    elem: '#end',
-    format: 'YYYY-MM-DD',
-	min: '1900-01-01', //设定最小日期为当前日期
-    max: '2099-01-01',
-    istime: true,
-    istoday: false,
-    choose: function(datas){
-        start.max = datas; //结束日选好后，充值开始日的最大日期
-        if($( "#start" ).val()==""||$( "#start").val()==null){
-            $("#message").html("请选择开始时间！");
-            $( "#start").focus();
-        }else{
-            $("#message").html("");
+    var end = {
+        elem: '#end',
+        format: 'YYYY-MM-DD',
+        min: '1900-01-01', //设定最小日期为当前日期
+        max: '2099-01-01',
+        istime: true,
+        istoday: false,
+        choose: function (datas) {
+            start.max = datas; //结束日选好后，充值开始日的最大日期
+            if ($("#start").val() == "" || $("#start").val() == null) {
+                $("#message").html("请选择开始时间！");
+                $("#start").focus();
+            } else {
+                $("#message").html("");
+            }
+            $("#provSelect").val(0);
         }
-        $("#provSelect").val(0);
-    }
-};
-laydate(start);
-laydate(end);
+    };
+    laydate(start);
+    laydate(end);
 </script>
 
 </body>

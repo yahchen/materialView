@@ -11,35 +11,35 @@ import java.sql.Timestamp;
 public class IasiMtbDo {
     @Column(name = "sat_id")
     private int sat_id;
-    @Column(name = "instrument_id",nullable=true)
-    private int instrument_id ;
-    @Column(name = "scan_time",nullable=true)
-    private Timestamp scan_time ;
-    @Column(name = "obs_lat",nullable=true)
-    private float obs_lat ;
-    @Column(name = "obs_lon",nullable=true)
-    private float obs_lon ;
-    @Column(name = "obs_bt1",nullable=true)
-    private int obs_bt1 ;
-    @Column(name = "obs_bt2",nullable=true)
-    private int obs_bt2 ;
-    @Column(name = "obs_bt3",nullable=true)
-    private int obs_bt3 ;
-    @Column(name = "obs_bt4",nullable=true)
-    private int obs_bt4 ;
-    @Column(name = "obs_bt5",nullable=true)
-    private int obs_bt5 ;
-    @Column(name = "file_name_time",nullable=true)
-    private Timestamp file_name_time ;
-    @Column(name = "surface_height",nullable=true)
-    private float surface_height ;
-    @Column(name = "s_f_id",nullable=true)
-    private float s_f_id ;
+    @Column(name = "instrument_id", nullable = true)
+    private int instrument_id;
+    @Column(name = "scan_time", nullable = true)
+    private Timestamp scan_time;
+    @Column(name = "obs_lat", nullable = true)
+    private float obs_lat;
+    @Column(name = "obs_lon", nullable = true)
+    private float obs_lon;
+    @Column(name = "obs_bt1", nullable = true)
+    private int obs_bt1;
+    @Column(name = "obs_bt2", nullable = true)
+    private int obs_bt2;
+    @Column(name = "obs_bt3", nullable = true)
+    private int obs_bt3;
+    @Column(name = "obs_bt4", nullable = true)
+    private int obs_bt4;
+    @Column(name = "obs_bt5", nullable = true)
+    private int obs_bt5;
+    @Column(name = "file_name_time", nullable = true)
+    private Timestamp file_name_time;
+    @Column(name = "surface_height", nullable = true)
+    private float surface_height;
+    @Column(name = "s_f_id", nullable = true)
+    private float s_f_id;
 
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id", unique=true, nullable=false, insertable=true, updatable=false, precision=20, scale=0)
-    private long id ;
+    @Column(name = "id", unique = true, nullable = false, insertable = true, updatable = false, precision = 20, scale = 0)
+    private long id;
 
     public int getSat_id() {
         return sat_id;

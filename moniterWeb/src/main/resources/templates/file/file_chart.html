@@ -2,26 +2,28 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<title></title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
-	<link rel="stylesheet" type="text/css" href="js/calendar/css/style.css"/>
-	<link rel="stylesheet" th:href="@{assets/css/style2.css}"/>
-	<script type="text/javascript" src="assets/js/jquery-1.7.2.min.js"></script>
-	<script type="text/javascript" src="js/common_chart.js"></script>
-	<script type="text/javascript" src="js/calendar/laydate.js"></script>
-	<script type="text/javascript" src="echarts/echarts.js"></script>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <link rel="stylesheet" type="text/css" href="js/calendar/css/style.css"/>
+    <link rel="stylesheet" th:href="@{assets/css/style2.css}"/>
+    <script type="text/javascript" src="assets/js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="js/common_chart.js"></script>
+    <script type="text/javascript" src="js/calendar/laydate.js"></script>
+    <script type="text/javascript" src="echarts/echarts.js"></script>
 </head>
 
 <body>
 <!-- WRAPPER -->
 <div>
-	<!-- MAIN --><br/>
-	<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<strong>开始时间：</strong> <input class="inline laydate-icon" placeholder="请输入日期" id="start" style="width:100px; margin-right:10px;"></input>&nbsp;
-		<strong>结束时间：</strong> <input class="inline laydate-icon" placeholder="请输入日期" id="end" style="width:100px;"></input>&nbsp;&nbsp;
-		<!--  <strong>统计时区：</strong>
+    <!-- MAIN --><br/>
+    <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <strong>开始时间：</strong> <input class="inline laydate-icon" placeholder="请输入日期" id="start"
+                                      style="width:100px; margin-right:10px;"></input>&nbsp;
+        <strong>结束时间：</strong> <input class="inline laydate-icon" placeholder="请输入日期" id="end"
+                                      style="width:100px;"></input>&nbsp;&nbsp;
+        <!--  <strong>统计时区：</strong>
       <select id="provSelect"  style="height:21px;">
               <option value="0">请选择</option>
               <option value="1">近一周</option>
@@ -29,39 +31,40 @@
               <option value="3">近三周</option>
               <option value="4">近一个月</option>
           </select>-->&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<button style="width:68px;height:21px" onclick="onSelect()" >查询</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<span id="message" style="color:red;"></span>
-		<div><br/><br/>
-			<!-- MAIN CONTENT -->
-			<div id="main1" style="height:500px"></div>
-			<!-- END MAIN CONTENT -->
-		</div>
-	</div>
-	<!-- END MAIN -->
+        <button style="width:68px;height:21px" onclick="onSelect()">查询</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span id="message" style="color:red;"></span>
+        <div><br/><br/>
+            <!-- MAIN CONTENT -->
+            <div id="main1" style="height:500px"></div>
+            <!-- END MAIN CONTENT -->
+        </div>
+    </div>
+    <!-- END MAIN -->
 </div>
 <!-- END WRAPPER -->
 
 <script type="text/javascript">
 
-    $(document).ready(function(){
+    $(document).ready(function () {
         initDate();//初始化日期控件，默认为当前时间的前一个月
         //注册页面加载事件
         selectChartData();
     });
 
-    function onSelect(){
-	    if($( "#start").val()==""||$( "#start").val()==null){
-            $( "#start").focus();
+    function onSelect() {
+        if ($("#start").val() == "" || $("#start").val() == null) {
+            $("#start").focus();
             $("#message").html("请选择开始时间！");
-		}else if($( "#end").val()==""||$( "#end").val()==null){
-            $( "#end").focus();
+        } else if ($("#end").val() == "" || $("#end").val() == null) {
+            $("#end").focus();
             $("#message").html("请选择结束时间！");
-		}else {
+        } else {
             selectChartData();
         }
     }
 
-selectChartData=function(){//前后端交互函数  逻辑判断
+    selectChartData = function () {//前后端交互函数  逻辑判断
         //alert(getQueryString("data_logo"));
         var queryCond = {
             "startTime": $("#start").val(),
@@ -81,19 +84,19 @@ selectChartData=function(){//前后端交互函数  逻辑判断
             },
             success: function (json) {
                 //if(json.jsonTotal=='0'){
-                 //   $("#main1").html('');
-				//}else{
-					makeChart(json);
-				//}
+                //   $("#main1").html('');
+                //}else{
+                makeChart(json);
+                //}
                 $("#message").html(json.jsonMessage);
             },
             error: function () {
                 $("#message").html("查询数据失败，请重试！");
             }
         });
-	}
+    }
 
-	makeChart=function (json) {//作图  一种功能
+    makeChart = function (json) {//作图  一种功能
         // 基于准备好的dom，初始化echarts图表
         var myChart = echarts.init(document.getElementById('main1'));
         option = {
@@ -185,57 +188,57 @@ selectChartData=function(){//前后端交互函数  逻辑判断
         };
         // 为echarts对象加载数据
         myChart.setOption(option);
-        window.onresize=myChart.resize;
+        window.onresize = myChart.resize;
     }
 </script>
 
 <script type="text/javascript">
-!function(){
-	laydate.skin('molv');//切换皮肤，请查看skins下面皮肤库
-	//laydate({elem: '#start2'});//绑定元素
-}();
+    !function () {
+        laydate.skin('molv');//切换皮肤，请查看skins下面皮肤库
+        //laydate({elem: '#start2'});//绑定元素
+    }();
 
 
-//日期范围限制
-var start = {
-    elem: '#start',
-    format: 'YYYY-MM-DD',
-    //min: laydate.now(), //设定最小日期为当前日期
-	min: '1900-01-01', //设定最小日期为当前日期
-    max: '2099-00-01', //最大日期
-    istime: true,
-    istoday: false,
-    choose: function(datas){
-         end.min = datas; //开始日选好后，重置结束日的最小日期
-         end.start = datas; //将结束日的初始值设定为开始日
-        if($( "#end" ).val()==""||$( "#end" ).val()==null){
-            $("#message").html("请选择结束时间！");
-            $( "#end" ).focus();
-        }else{
-            $("#message").html("");
+    //日期范围限制
+    var start = {
+        elem: '#start',
+        format: 'YYYY-MM-DD',
+        //min: laydate.now(), //设定最小日期为当前日期
+        min: '1900-01-01', //设定最小日期为当前日期
+        max: '2099-00-01', //最大日期
+        istime: true,
+        istoday: false,
+        choose: function (datas) {
+            end.min = datas; //开始日选好后，重置结束日的最小日期
+            end.start = datas; //将结束日的初始值设定为开始日
+            if ($("#end").val() == "" || $("#end").val() == null) {
+                $("#message").html("请选择结束时间！");
+                $("#end").focus();
+            } else {
+                $("#message").html("");
+            }
         }
-    }
-};
+    };
 
-var end = {
-    elem: '#end',
-    format: 'YYYY-MM-DD',
-	min: '1900-01-01', //设定最小日期为当前日期
-    max: '2099-01-01',
-    istime: true,
-    istoday: false,
-    choose: function(datas){
-        start.max = datas; //结束日选好后，充值开始日的最大日期
-        if($( "#start" ).val()==""||$( "#start").val()==null){
-            $("#message").html("请选择开始时间！");
-            $( "#start").focus();
-        }else{
-            $("#message").html("");
-		}
-    }
-};
-laydate(start);
-laydate(end);
+    var end = {
+        elem: '#end',
+        format: 'YYYY-MM-DD',
+        min: '1900-01-01', //设定最小日期为当前日期
+        max: '2099-01-01',
+        istime: true,
+        istoday: false,
+        choose: function (datas) {
+            start.max = datas; //结束日选好后，充值开始日的最大日期
+            if ($("#start").val() == "" || $("#start").val() == null) {
+                $("#message").html("请选择开始时间！");
+                $("#start").focus();
+            } else {
+                $("#message").html("");
+            }
+        }
+    };
+    laydate(start);
+    laydate(end);
 </script>
 
 </body>

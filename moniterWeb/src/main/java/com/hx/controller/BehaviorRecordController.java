@@ -21,15 +21,15 @@ public class BehaviorRecordController {
     private BehaviorRecordService behaviorRecordService;
 
     @RequestMapping("/behavior_record_view")//对应url
-    public String behaviorRecordView(){
-    return "behavior/behavior_record";
-  }
+    public String behaviorRecordView() {
+        return "behavior/behavior_record";
+    }
 
     @RequestMapping("/findRecordsByPage")//对应url
     @ResponseBody
-    public Map<String,Object> findRecordsByPage(HttpServletRequest request){
+    public Map<String, Object> findRecordsByPage(HttpServletRequest request) {
 
-        BehaviorRecordParam behaviorRecordParam=new BehaviorRecordParam();
+        BehaviorRecordParam behaviorRecordParam = new BehaviorRecordParam();
         behaviorRecordParam.setPageSize(Integer.parseInt(request.getParameter("pageSize")));
         behaviorRecordParam.setPageNo(Integer.parseInt(request.getParameter("pageNo")));
         behaviorRecordParam.setModeType(request.getParameter("modeType"));
@@ -42,16 +42,16 @@ public class BehaviorRecordController {
         behaviorRecordParam.setTimeConsume(request.getParameter("timeConsume"));
         behaviorRecordParam.setSuccFail(request.getParameter("succFail"));
 
-        Map<String,Object> map=behaviorRecordService.findRecordsByPage(behaviorRecordParam);
+        Map<String, Object> map = behaviorRecordService.findRecordsByPage(behaviorRecordParam);
 
         return map;
     }
 
     @RequestMapping("/findMaterialName")//对应url
     @ResponseBody
-    public Map<String,Object> findMaterialName(HttpServletRequest request){
+    public Map<String, Object> findMaterialName(HttpServletRequest request) {
 
-        BehaviorRecordParam behaviorRecordParam=new BehaviorRecordParam();
+        BehaviorRecordParam behaviorRecordParam = new BehaviorRecordParam();
         behaviorRecordParam.setModeType(request.getParameter("modeType"));
         behaviorRecordParam.setStartTime(request.getParameter("startTime"));
         behaviorRecordParam.setEndTime(request.getParameter("endTime"));
@@ -60,17 +60,17 @@ public class BehaviorRecordController {
         behaviorRecordParam.setTimeConsume(request.getParameter("timeConsume"));
         behaviorRecordParam.setSuccFail(request.getParameter("succFail"));
 
-        List list=behaviorRecordService.findMaterialName(behaviorRecordParam);
-        Map<String,Object> map=new HashMap<>();
-        map.put("list",list);
+        List list = behaviorRecordService.findMaterialName(behaviorRecordParam);
+        Map<String, Object> map = new HashMap<>();
+        map.put("list", list);
         return map;
     }
 
     @RequestMapping("/findSatelliteName")//对应url
     @ResponseBody
-    public Map<String,Object> findSatelliteName(HttpServletRequest request){
+    public Map<String, Object> findSatelliteName(HttpServletRequest request) {
 
-        BehaviorRecordParam behaviorRecordParam=new BehaviorRecordParam();
+        BehaviorRecordParam behaviorRecordParam = new BehaviorRecordParam();
         behaviorRecordParam.setModeType(request.getParameter("modeType"));
         behaviorRecordParam.setStartTime(request.getParameter("startTime"));
         behaviorRecordParam.setEndTime(request.getParameter("endTime"));
@@ -80,9 +80,9 @@ public class BehaviorRecordController {
         behaviorRecordParam.setTimeConsume(request.getParameter("timeConsume"));
         behaviorRecordParam.setSuccFail(request.getParameter("succFail"));
 
-        List list=behaviorRecordService.findSatelliteName(behaviorRecordParam);
-        Map<String,Object> map=new HashMap<>();
-        map.put("list",list);
+        List list = behaviorRecordService.findSatelliteName(behaviorRecordParam);
+        Map<String, Object> map = new HashMap<>();
+        map.put("list", list);
         return map;
     }
 

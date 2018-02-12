@@ -1,6 +1,5 @@
 package com.hx.bean;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,7 +27,7 @@ public class SiteDataOrigin {
     private String system_name;//": "Numerical Weather Prediction Center of CMA(global)",   -----系统用户名，即可以以此区分不同模式类型，例如区域模式和全球模式 （人为规定）
     private int data_type;//": "1",  ----资料类型 1:站点 2:格点 3:文件（资料本身）
     private int mode_type;//": "1",  ----站点类型 1:区域(中国)站点 2:全球站点（资料本身）
-    private Map<String,List> elements = new HashMap<>();
+    private Map<String, List> elements = new HashMap<>();
 
     public String getData_logo() {
         return data_logo;
@@ -174,11 +173,11 @@ public class SiteDataOrigin {
         this.mode_type = mode_type;
     }
 
-    public Map<String,List> getElements() {
+    public Map<String, List> getElements() {
         return elements;
     }
 
-    public void setElements(Map<String,List> elements) {
+    public void setElements(Map<String, List> elements) {
         this.elements = elements;
     }
 }
