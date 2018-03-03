@@ -4,19 +4,19 @@ package com.hx.bean;
  * Created by yahchen on 2017/10/31.
  */
 public class TmSiteSurf1h {
-    private float station_id_d ;
-    private float lat ;
-    private float lon ;
-    private float alti ;
-    private float tem ;
-    private float prs ;
-    private float dpt ;
-    private float win_d_inst ;
-    private float win_s_inst ;
-    private float pre_1h ;
-    private float tem_max ;
-    private float tem_min ;
-    private long s_d_id ;
+    private float station_id_d;
+    private float lat;
+    private float lon;
+    private float alti;
+    private float tem;
+    private float prs;
+    private float dpt;
+    private float win_d_inst;
+    private float win_s_inst;
+    private float pre_1h;
+    private float tem_max;
+    private float tem_min;
+    private long s_d_id;
 
     public float getStation_id_d() {
         return station_id_d;

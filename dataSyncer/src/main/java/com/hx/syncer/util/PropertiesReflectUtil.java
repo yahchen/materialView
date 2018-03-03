@@ -35,10 +35,10 @@ public class PropertiesReflectUtil {
                     } else if (type.equalsIgnoreCase("int")) {
                         int vi = StringUtils.isEmpty(v) ? 0 : Integer.valueOf(v);
                         m.invoke(o, vi);
-                    } else if(type.equalsIgnoreCase("double")){
+                    } else if (type.equalsIgnoreCase("double")) {
                         double vi = StringUtils.isEmpty(v) ? 0 : Double.valueOf(v);
                         m.invoke(o, vi);
-                    }else if (type.equalsIgnoreCase("Timestamp")) {
+                    } else if (type.equalsIgnoreCase("Timestamp")) {
                         if (!StringUtils.isEmpty(v)) {
                             if (!v.contains(":")) {   //不包含“：”的时间
                                 SimpleDateFormat ff = new SimpleDateFormat("yyyyMMddHHmm");
@@ -62,12 +62,12 @@ public class PropertiesReflectUtil {
                 }
             }
         } catch (Exception e) {
-            System.out.println("Exception"+ e);
+            System.out.println("Exception" + e);
         }
 
     }
 
-    public String getFiledValue(Object o,String k){
+    public String getFiledValue(Object o, String k) {
         if (StringUtils.isEmpty(k))
             return null;
         Method[] ms = o.getClass().getMethods();

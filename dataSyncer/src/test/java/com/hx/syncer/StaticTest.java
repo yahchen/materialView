@@ -1,12 +1,15 @@
 package com.hx.syncer;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * Created by yahchen on 2017/11/7.
  */
+@Slf4j
 public class StaticTest {
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         String value = "\"1,3,4\",";
-        System.out.println(value.substring(0, value.lastIndexOf(",")));
+        log.info("------------------" + 544444);
 //        String st = "20171029210253;20171029210126;20171029222534;20171029210350;20171029210124;20171029220252;20171029210351;20171029212300;20171029212300;20171029211600;20171029000000;20171029211100;20171029210119;20171030011415;20171029211100;20171201014611";
 //        String[] tt = st.split(";");
 //        for(String t:tt){

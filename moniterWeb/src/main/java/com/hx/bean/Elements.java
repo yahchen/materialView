@@ -8,7 +8,7 @@ import java.util.Map;
  */
 public class Elements {
     private int elementSize;
-    private Map<String,Object> elements = new HashMap<>();
+    private Map<String, Object> elements = new HashMap<>();
 
     public Map<String, Object> getElements() {
         return elements;
@@ -18,8 +18,8 @@ public class Elements {
         this.elements = elements;
     }
 
-    public void putAttri(String k,Object v){
-        this.elements.put(k,v);
+    public void putAttri(String k, Object v) {
+        this.elements.put(k, v);
         elementSize++;
     }
 }

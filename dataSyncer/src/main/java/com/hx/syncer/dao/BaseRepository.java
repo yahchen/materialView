@@ -11,7 +11,7 @@ import java.util.List;
  * Created by yahchen on 2017/11/5.
  */
 @NoRepositoryBean
-public interface BaseRepository<T,ID extends Serializable> extends JpaRepository<T,ID>,CrudRepository<T,ID> {
+public interface BaseRepository<T, ID extends Serializable> extends JpaRepository<T, ID>, CrudRepository<T, ID> {
     T getOne(long var1);
 
     List<T> findAll();

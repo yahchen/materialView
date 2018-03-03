@@ -2,7 +2,6 @@ package com.hx.syncer;
 
 import com.hx.syncer.bean.GridDataHeadDo;
 import com.hx.syncer.dao.GridDataHeadDao;
-import com.hx.syncer.service.GridDataHeadService;
 import com.hx.syncer.util.DbUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,13 +25,13 @@ public class SqlTest {
     private DbUtils dbUtils;
 
     @Test
-    public void testBeanName() throws Exception{
+    public void testBeanName() throws Exception {
         dbUtils.getTableEleBeanClassName("RSURF_PRE_3h");
     }
 
     @Test
-    public void testSql(){
-        Assert.notNull(gridDataHeadDao,"template is null");
+    public void testSql() {
+        Assert.notNull(gridDataHeadDao, "template is null");
         GridDataHeadDo entity = new GridDataHeadDo();
         Timestamp ts = new Timestamp(System.currentTimeMillis());
         entity.setData_code("232------------332");
@@ -59,12 +58,12 @@ public class SqlTest {
         entity.setSys_conn_state("sd");
         entity.setId(3);
         GridDataHeadDo resutl = gridDataHeadDao.save(entity);
-        System.out.println("id:--------"+resutl.getId());
+        System.out.println("id:--------" + resutl.getId());
         Assert.notNull(resutl);
     }
 
     @Test
-    public void query(){
+    public void query() {
         List<GridDataHeadDo> ress = gridDataHeadDao.findAll();
         Assert.notNull(ress);
     }

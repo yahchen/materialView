@@ -5,10 +5,10 @@ package com.hx.bean;
  */
 public class TmSiteSurfPre24h {
     private float station_id_d;
-    private float lat ;
-    private float lon ;
-    private float pre_24h ;
-    private long s_d_id ;
+    private float lat;
+    private float lon;
+    private float pre_24h;
+    private long s_d_id;
 
     public float getStation_id_d() {
         return station_id_d;

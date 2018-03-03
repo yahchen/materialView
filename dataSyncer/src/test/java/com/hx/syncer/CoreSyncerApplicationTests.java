@@ -11,11 +11,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class CoreSyncerApplicationTests {
 
-	@Test
-	public void contextLoads() {
-		SpelExpressionParser parser = new SpelExpressionParser();
-		boolean result = parser.parseExpression("false,true").getValue(boolean.class);
-		Assert.assertEquals(result, false);
-	}
+    @Test
+    public void contextLoads() {
+        SpelExpressionParser parser = new SpelExpressionParser();
+        boolean result = parser.parseExpression("false,true").getValue(boolean.class);
+        Assert.assertEquals(result, false);
+    }
 
 }

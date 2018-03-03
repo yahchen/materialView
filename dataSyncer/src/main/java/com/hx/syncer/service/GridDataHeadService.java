@@ -11,12 +11,13 @@ import java.util.List;
  * Created by yahchen on 2017/10/29.
  */
 @Service
-public class GridDataHeadService implements DaoServiceImpl<GridDataHeadDo>{
+public class GridDataHeadService implements DaoServiceImpl<GridDataHeadDo> {
     @Autowired
     private GridDataHeadDao GridDataHeadDao;
+
     @Override
     public Iterable<GridDataHeadDo> save(Iterable<GridDataHeadDo> entities) {
-        if(null != entities && entities.iterator().hasNext()){
+        if (null != entities && entities.iterator().hasNext()) {
             return GridDataHeadDao.save(entities);
         }
         return null;
@@ -24,7 +25,7 @@ public class GridDataHeadService implements DaoServiceImpl<GridDataHeadDo>{
 
     @Override
     public GridDataHeadDo saveOne(GridDataHeadDo entity) {
-        if(null != entity){
+        if (null != entity) {
             return GridDataHeadDao.save(entity);
         }
         return null;

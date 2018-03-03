@@ -8,29 +8,35 @@
 //--------------Script-------------
 // jQuery('.combo').combobox(['option1', 'option2', 'option3'], {imageUrl : '/images/dropdown.gif'});
 
-(function($) {
-    $.fn.combobox = function(data, config) {
+(function ($) {
+    $.fn.combobox = function (data, config) {
         //keyCode data from http://unixpapa.com/js/key.html
-        var keys = { up: 38, down: 40, enter: 13, tab: 9, esc: 27 };
+        var keys = {up: 38, down: 40, enter: 13, tab: 9, esc: 27};
         var initKey = 'combobox_initialized';
 
-        config = $.extend({ imageUrl: 'dropdown.gif' }, config);
+        config = $.extend({imageUrl: 'dropdown.gif'}, config);
 
-        $(this).each(function(i) {
+        $(this).each(function (i) {
             var textBox = $(this);
 
             //exit if already initialized
             if ($.data(this, initKey))
                 return;
             $.data(this, initKey, true);
-            
+
             //turn off browser auto complete feature for textbox
-            textBox.attr('autocomplete', 'off').focus(function() { show(''); }).blur(blur).keydown(keydown).keyup(keyup);
+            textBox.attr('autocomplete', 'off').focus(function () {
+                show('');
+            }).blur(blur).keydown(keydown).keyup(keyup);
 
             //set different zIndeces to TRY to fixe the ie bug. search "relative ie z-index bug" for more infomation
             var container = textBox.wrap('<div class="combobox" />').parent().css('zIndex', 1000 - i);
 
-            var button = $('<img class="button" src="' + config.imageUrl + '" />').appendTo(container).css({ top: 1, left: textBox.width(), height: textBox.height() + 3 }).click(function() {
+            var button = $('<img class="button" src="' + config.imageUrl + '" />').appendTo(container).css({
+                top: 1,
+                left: textBox.width(),
+                height: textBox.height() + 3
+            }).click(function () {
                 textBox.focus();
             });
 
@@ -52,7 +58,11 @@
                     }
                 }
                 html += '</ul>';
-                select = $(html).appendTo(container).css({ left: 0, top: textBox.height() + 3, width: textBox.width() + button.width() - 2 });
+                select = $(html).appendTo(container).css({
+                    left: 0,
+                    top: textBox.height() + 3,
+                    width: textBox.width() + button.width() - 2
+                });
                 //if there is jquery.bgiframe plugin, use it to fix ie6 select/z-index bug.
                 //search "z-index ie6 select bug" for more infomation
                 if (select.bgiframe)
@@ -61,7 +71,7 @@
                 //decide which option is currently selected
                 selIndex = 0;
                 var found = false;
-                var options = select.children('li').each(function(i) {
+                var options = select.children('li').each(function (i) {
                     if (found) return;
                     if ($(this).text() == oriValue) {
                         $(this).addClass('selected');
@@ -78,19 +88,19 @@
                     options.eq(0).addClass('selected');
 
                 //mouse hover to change the highlight option, clicking to select it
-                options.click(function() {
+                options.click(function () {
                     textBox.val($(this).text());
-                }).hover(function() {
-                    options.each(function() {
+                }).hover(function () {
+                        options.each(function () {
+                            $(this).removeClass('selected');
+                        });
+                        $(this).addClass('selected');
+                        selIndex = options.index(this);
+                    },
+                    function () {
                         $(this).removeClass('selected');
-                    });
-                    $(this).addClass('selected');
-                    selIndex = options.index(this);
-                },
-										function() {
-										    $(this).removeClass('selected');
-										}
-									);
+                    }
+                );
 
                 $(document).click(pageClick);
 
@@ -103,6 +113,7 @@
             }
 
             var selIndex;
+
             function keydown(evt) {
                 switch (evt.keyCode) {
                     case keys.esc:
@@ -141,7 +152,9 @@
 
                     var v = options.eq(selIndex);
                     if (v.size()) {
-                        options.each(function() { $(this).removeClass('selected') });
+                        options.each(function () {
+                            $(this).removeClass('selected')
+                        });
                         v.addClass('selected');
                     }
                 } else {
@@ -162,7 +175,9 @@
 
                     var v = options.eq(selIndex);
                     if (v.size()) {
-                        options.each(function() { $(this).removeClass('selected') });
+                        options.each(function () {
+                            $(this).removeClass('selected')
+                        });
                         v.addClass('selected');
                     }
                 } else {
@@ -182,6 +197,7 @@
             }
 
             var oldVal = '';
+
             function keyup(evt) {
                 var v = $(this).val();
                 if (v != oldVal) {
@@ -202,6 +218,7 @@
             }
 
             var hideTimeout;
+
             function blur() {
                 $(document).unbind('click', pageClick);
                 //if there's no setTimeout, when clicking option li,

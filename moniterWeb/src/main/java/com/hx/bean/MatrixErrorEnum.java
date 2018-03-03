@@ -7,8 +7,8 @@ import org.thymeleaf.util.StringUtils;
  */
 public enum MatrixErrorEnum {
 
-    SUCCESS("0","Call Succeed."),
-    NORECORD("-1","No data is retrieved. detail: Query Success,but no record is in database.");
+    SUCCESS("0", "Call Succeed."),
+    NORECORD("-1", "No data is retrieved. detail: Query Success,but no record is in database.");
 
     private String code;
     private String desc;
@@ -16,6 +16,15 @@ public enum MatrixErrorEnum {
     MatrixErrorEnum(String code, String desc) {
         this.code = code;
         this.desc = desc;
+    }
+
+    public static String getErrorEnumByCode(String code) {
+        for (MatrixErrorEnum errorEnum : MatrixErrorEnum.values()) {
+            if (StringUtils.equals(code, errorEnum.getCode())) {
+                return errorEnum.getDesc();
+            }
+        }
+        return "无此类型的错误";
     }
 
     public String getCode() {
@@ -32,14 +41,5 @@ public enum MatrixErrorEnum {
 
     public void setDesc(String desc) {
         this.desc = desc;
-    }
-
-    public static String getErrorEnumByCode(String code){
-        for(MatrixErrorEnum errorEnum : MatrixErrorEnum.values()){
-            if(StringUtils.equals(code, errorEnum.getCode())){
-                return errorEnum.getDesc();
-            }
-        }
-        return "无此类型的错误";
     }
 }

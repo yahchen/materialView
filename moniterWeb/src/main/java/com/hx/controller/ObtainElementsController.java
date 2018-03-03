@@ -1,13 +1,13 @@
 package com.hx.controller;
 
 import com.hx.service.BinMapDataService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.thymeleaf.util.MapUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Timestamp;
@@ -20,17 +20,23 @@ import java.util.regex.Pattern;
  * Created by yahchen on 2017/10/8.
  */
 @Controller
+@Slf4j
 public class ObtainElementsController {
 
     @Autowired
     private BinMapDataService binMapDataService;
 
+    public static Date addDays(Date date, int addedDays) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(5, addedDays);
+        return cal.getTime();
+    }
+
     @RequestMapping("/track_map_view")//对应url
     public String trackMapView() {//参数可以选择性添加，不加也无所谓。如果添加后，框架会帮助自动注入。
         return "trackmap/track_map";
     }
-
-
 
     @RequestMapping("/distribution_curve_view")//对应url
     public String distributionCurveView() {//参数可以选择性添加，不加也无所谓。如果添加后，框架会帮助自动注入。
@@ -51,39 +57,42 @@ public class ObtainElementsController {
         String sdid = request.getParameter("sdid");
 
         String table = convertDataType2Table(dataType);
-        if (StringUtils.isEmpty(table))
+        if (StringUtils.isEmpty(table)) {
+            log.info("table is empty,dataType:" + dataType);
             return null;
-        List<Map<String, Object>> resList = binMapDataService.queryBinMapData(table, neLat, neLon, swLat, swLon, prs,sdid);
+        }
+        List<Map<String, Object>> resList = binMapDataService.queryBinMapData(table, neLat, neLon, swLat, swLon, prs, sdid);
         return resList;
     }
+
     @RequestMapping("getTimeHours")
     @ResponseBody
-    public Map<String,String> getTimeHours(HttpServletRequest request){
+    public Map<String, String> getTimeHours(HttpServletRequest request) {
         String dataLogo = request.getParameter("dataType");
         String startTime = request.getParameter("startTime");
-        Timestamp start,end;
-        if(!StringUtils.isEmpty(startTime)){
+        Timestamp start, end;
+        if (!StringUtils.isEmpty(startTime)) {
             start = Timestamp.valueOf(startTime + " 00:00:00");
             end = Timestamp.valueOf(startTime + " 23:59:59");
-        }else {
+        } else {
             start = Timestamp.valueOf(new Date().toString());
-            end = Timestamp.valueOf(addDays(start,1).toString());
+            end = Timestamp.valueOf(addDays(start, 1).toString());
         }
-        return convertDbRes2TimeHours(binMapDataService.queryTimeHousr(dataLogo.replaceAll("M_R","M_"),start,end));
+        return convertDbRes2TimeHours(binMapDataService.queryTimeHousr(dataLogo, start, end));
     }
 
-    private Map<String,String> convertDbRes2TimeHours(List<Map<String, Object>> resData) {
+    private Map<String, String> convertDbRes2TimeHours(List<Map<String, Object>> resData) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-        if(CollectionUtils.isEmpty(resData))
+        if (CollectionUtils.isEmpty(resData))
             return Collections.EMPTY_MAP;
-        Map<String,String> timeHoursMap = new HashMap<>();
-        for(Map<String,Object> tableLine:resData){
-            Timestamp dataTime = (Timestamp)tableLine.get("data_time");
-            if(dataTime == null)
+        Map<String, String> timeHoursMap = new HashMap<>();
+        for (Map<String, Object> tableLine : resData) {
+            Timestamp dataTime = (Timestamp) tableLine.get("data_time");
+            if (dataTime == null)
                 continue;
             String sdid = tableLine.get("id").toString();
             int hour = dataTime.getHours();
-            timeHoursMap.put(sdid,hour<=9?"0"+hour:hour+"");
+            timeHoursMap.put(sdid, hour <= 9 ? "0" + hour : hour + "");
         }
         return timeHoursMap;
     }
@@ -94,7 +103,6 @@ public class ObtainElementsController {
         String dataType = request.getParameter("dataType");
         return binMapDataService.queryBinQualiteTypeData("type_and_element_mapping", dataType);
     }
-
 
     @RequestMapping("/getSatelliteTimeRangElements")//对应url
     @ResponseBody
@@ -111,7 +119,6 @@ public class ObtainElementsController {
 
         return binMapDataService.querySatelliteTimeRangeBinMapData(table, querySatelliteDate);
     }
-
 
     @RequestMapping("/getSatelliteElements")//对应url
     @ResponseBody
@@ -206,19 +213,12 @@ public class ObtainElementsController {
         return null;//test
     }
 
-    private Timestamp convertStr2TimeStamp(String startTime){
+    private Timestamp convertStr2TimeStamp(String startTime) {
         if (!StringUtils.isEmpty(startTime)) {
             if (!startTime.contains(":")) {
                 startTime += " 00:00:00.000";
             }
         }
         return Timestamp.valueOf(StringUtils.isEmpty(startTime) ? System.currentTimeMillis() + "" : startTime);
-    }
-
-    public static Date addDays(Date date, int addedDays) {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        cal.add(5, addedDays);
-        return cal.getTime();
     }
 }

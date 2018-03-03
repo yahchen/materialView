@@ -1,7 +1,6 @@
 package com.hx.dao.impl;
 
 import com.hx.dao.GridChartDao;
-import com.hx.dao.SiteChartDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -22,9 +21,9 @@ public class GridChartDaoImpl implements GridChartDao {
 
 
     @Override
-    public List<Map<String, Object>> findGridChartByTimeElement(String startTime, String endTime,  String queryElment) {
-        String sSQL = "select * from public.grid_data_head gd where gd.data_time>='"+startTime+"' and gd.data_time<'"+endTime+"' and gd.data_logo = '"+queryElment+"' order by gd.data_time;";
-        List<Map<String, Object>> gridDataHeadList =  template.queryForList( sSQL);
+    public List<Map<String, Object>> findGridChartByTimeElement(String startTime, String endTime, String queryElment) {
+        String sSQL = "select * from public.grid_data_head gd where gd.data_time>='" + startTime + "' and gd.data_time<'" + endTime + "' and gd.data_logo = '" + queryElment + "' order by gd.data_time;";
+        List<Map<String, Object>> gridDataHeadList = template.queryForList(sSQL);
         return gridDataHeadList;
     }
 }

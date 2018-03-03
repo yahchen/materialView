@@ -1,333 +1,345 @@
 * {
-	-webkit-transition: all 300ms;
-	-moz-transition: all 300ms;
-	-o-transition: all 300ms;
-	-ms-transition: all 300ms;
-	transition: all 300ms;
+    -webkit-transition: all 300ms;
+    -moz-transition: all 300ms;
+    -o-transition: all 300ms;
+    -ms-transition: all 300ms;
+    transition: all 300ms;
 }
 
 -------------------------------------
 Facebook
 -------------------------------------
-*/
+*
 
+/
 
 #facebook li {
-	display: block;
-	width: 50%;
-	font-weight: 400;
-	margin-bottom: 1em;
-	overflow: hidden;
-	padding-top: 1.4em;
-	padding-right: 2em;
-	box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	float: left;
-}
-#facebook span {
-	display: block;
-	border: 3px solid #325f83;  /*Button Border color and border size  - Techandall.com*/
-	border-radius: 100%;  /* you can change the border radius if you want a square button, example 10%   - Techandall.com*/
-	box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	width: 7em;
-	height: 7em;
-	background: #01457b; /*Button background color  - Techandall.com*/
-	color: #fff; /*Button font color  - Techandall.com*/
-	font-family:Arial, Helvetica, sans-serif;
-	font-size: 0.6em;
-	line-height: 1em;
-	font-weight: 700;
-	padding: 2.7em 0 0 0;
-	text-align: center;
-	margin: -1.4em 1em 0 0;
-	text-transform: uppercase;
-	float: left;
-}
-#facebook span:hover {
-	background: #fff !important;
-	color: #5d6365; /*Button hover colors  - Techandall.com*/
-	border: 3px solid #5d6365 !important;
-	cursor: pointer;
+    display: block;
+    width: 50%;
+    font-weight: 400;
+    margin-bottom: 1em;
+    overflow: hidden;
+    padding-top: 1.4em;
+    padding-right: 2em;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    float: left;
 }
 
+#facebook span {
+    display: block;
+    border: 3px solid #325f83; /*Button Border color and border size  - Techandall.com*/
+    border-radius: 100%; /* you can change the border radius if you want a square button, example 10%   - Techandall.com*/
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    width: 7em;
+    height: 7em;
+    background: #01457b; /*Button background color  - Techandall.com*/
+    color: #fff; /*Button font color  - Techandall.com*/
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.6em;
+    line-height: 1em;
+    font-weight: 700;
+    padding: 2.7em 0 0 0;
+    text-align: center;
+    margin: -1.4em 1em 0 0;
+    text-transform: uppercase;
+    float: left;
+}
+
+#facebook span:hover {
+    background: #fff !important;
+    color: #5d6365; /*Button hover colors  - Techandall.com*/
+    border: 3px solid #5d6365 !important;
+    cursor: pointer;
+}
 
 -------------------------------------
 Twitter
 -------------------------------------
-*/
+*
 
+/
 
 #twitter li {
-	display: block;
-	width: 50%;
-	font-weight: 400;
-	margin-bottom: 1em;
-	overflow: hidden;
-	padding-top: 1.4em;
-	padding-right: 2em;
-	box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	float: left;
+    display: block;
+    width: 50%;
+    font-weight: 400;
+    margin-bottom: 1em;
+    overflow: hidden;
+    padding-top: 1.4em;
+    padding-right: 2em;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    float: left;
 }
+
 #twitter span {
-	display: block;
-	border: 3px solid #1c68a5;
-	border-radius: 100%;
-	box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	width: 7em;
-	height: 7em;
-	background: #3186ca;
-	color: #fff;
-	font-family:Arial, Helvetica, sans-serif;
-	font-size: 0.6em;
-	line-height: 1em;
-	font-weight: 700;
-	padding: 2.7em 0 0 0;
-	text-align: center;
-	margin: -1.4em 1em 0 0;
-	text-transform: uppercase;
-	float: left;
+    display: block;
+    border: 3px solid #1c68a5;
+    border-radius: 100%;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    width: 7em;
+    height: 7em;
+    background: #3186ca;
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.6em;
+    line-height: 1em;
+    font-weight: 700;
+    padding: 2.7em 0 0 0;
+    text-align: center;
+    margin: -1.4em 1em 0 0;
+    text-transform: uppercase;
+    float: left;
 }
+
 #twitter span:hover {
-	background: #fff !important;
-	color: #5d6365;
-	border: 3px solid #5d6365 !important;
-	cursor: pointer;
+    background: #fff !important;
+    color: #5d6365;
+    border: 3px solid #5d6365 !important;
+    cursor: pointer;
 }
-
-
 
 -------------------------------------
 Google Plus
 -------------------------------------
-*/
+*
 
+/
 
 #google li {
-	display: block;
-	width: 50%;
-	font-weight: 400;
-	margin-bottom: 1em;
-	overflow: hidden;
-	padding-top: 1.4em;
-	padding-right: 2em;
-	box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	float: left;
-}
-#google span {
-	display: block;
-	border: 3px solid #c23a34;
-	border-radius: 100%;
-	box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	width: 7em;
-	height: 7em;
-	background: #f05851;
-	color: #fff;
-	font-family:Arial, Helvetica, sans-serif;
-	font-size: 0.6em;
-	line-height: 1em;
-	font-weight: 700;
-	padding: 2.7em 0 0 0;
-	text-align: center;
-	margin: -1.4em 1em 0 0;
-	text-transform: uppercase;
-	float: left;
-}
-#google span:hover {
-	background: #fff !important;
-	color: #5d6365;
-	border: 3px solid #5d6365 !important;
-	cursor: pointer;
+    display: block;
+    width: 50%;
+    font-weight: 400;
+    margin-bottom: 1em;
+    overflow: hidden;
+    padding-top: 1.4em;
+    padding-right: 2em;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    float: left;
 }
 
+#google span {
+    display: block;
+    border: 3px solid #c23a34;
+    border-radius: 100%;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    width: 7em;
+    height: 7em;
+    background: #f05851;
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.6em;
+    line-height: 1em;
+    font-weight: 700;
+    padding: 2.7em 0 0 0;
+    text-align: center;
+    margin: -1.4em 1em 0 0;
+    text-transform: uppercase;
+    float: left;
+}
+
+#google span:hover {
+    background: #fff !important;
+    color: #5d6365;
+    border: 3px solid #5d6365 !important;
+    cursor: pointer;
+}
 
 -------------------------------------
 RSS Feed
 -------------------------------------
-*/
+*
 
+/
 
 #rss li {
-	display: block;
-	width: 50%;
-	font-weight: 400;
-	margin-bottom: 1em;
-	overflow: hidden;
-	padding-top: 1.4em;
-	padding-right: 2em;
-	box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	float: left;
+    display: block;
+    width: 50%;
+    font-weight: 400;
+    margin-bottom: 1em;
+    overflow: hidden;
+    padding-top: 1.4em;
+    padding-right: 2em;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    float: left;
 }
+
 #rss span {
-	display: block;
-	border: 3px solid #f38134;
-	border-radius: 100%;
-	box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	width: 7em;
-	height: 7em;
-	background: #ff6600;
-	color: #fff;
-	font-family:Arial, Helvetica, sans-serif;
-	font-size: 0.6em;
-	line-height: 1em;
-	font-weight: 700;
-	padding: 2.7em 0 0 0;
-	text-align: center;
-	margin: -1.4em 1em 0 0;
-	text-transform: uppercase;
-	float: left;
+    display: block;
+    border: 3px solid #f38134;
+    border-radius: 100%;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    width: 7em;
+    height: 7em;
+    background: #ff6600;
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.6em;
+    line-height: 1em;
+    font-weight: 700;
+    padding: 2.7em 0 0 0;
+    text-align: center;
+    margin: -1.4em 1em 0 0;
+    text-transform: uppercase;
+    float: left;
 }
+
 #rss span:hover {
-	background: #fff !important;
-	color: #5d6365;
-	border: 3px solid #5d6365 !important;
-	cursor: pointer;
+    background: #fff !important;
+    color: #5d6365;
+    border: 3px solid #5d6365 !important;
+    cursor: pointer;
 }
-
-
 
 -------------------------------------
 Techandall
 -------------------------------------
-*/
+*
 
+/
 
 #tech li {
-	display: block;
-	width: 50%;
-	font-weight: 400;
-	margin-bottom: 1em;
-	overflow: hidden;
-	padding-top: 1.4em;
-	padding-right: 2em;
-	box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	float: left;
+    display: block;
+    width: 50%;
+    font-weight: 400;
+    margin-bottom: 1em;
+    overflow: hidden;
+    padding-top: 1.4em;
+    padding-right: 2em;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    float: left;
 }
+
 #tech span {
-	display: block;
-	border: 3px solid #66ecbe;
-	border-radius: 100%;
-	box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	width: 7em;
-	height: 7em;
-	background: #c0eede;
-	color: #406d5e;
-	font-family:Arial, Helvetica, sans-serif;
-	font-size: 0.6em;
-	line-height: 1em;
-	font-weight: 700;
-	padding: 2.7em 0 0 0;
-	text-align: center;
-	margin: -1.4em 1em 0 0;
-	text-transform: uppercase;
-	float: left;
+    display: block;
+    border: 3px solid #66ecbe;
+    border-radius: 100%;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    width: 7em;
+    height: 7em;
+    background: #c0eede;
+    color: #406d5e;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.6em;
+    line-height: 1em;
+    font-weight: 700;
+    padding: 2.7em 0 0 0;
+    text-align: center;
+    margin: -1.4em 1em 0 0;
+    text-transform: uppercase;
+    float: left;
 }
+
 #tech span:hover {
-	background: #fff !important;
-	color: #5d6365;
-	border: 3px solid #5d6365 !important;
-	cursor: pointer;
+    background: #fff !important;
+    color: #5d6365;
+    border: 3px solid #5d6365 !important;
+    cursor: pointer;
 }
-
-
 
 -------------------------------------
 dribbble
 -------------------------------------
-*/
+*
 
+/
 
 #dribbble li {
-	display: block;
-	width: 50%;
-	font-weight: 400;
-	margin-bottom: 1em;
-	overflow: hidden;
-	padding-top: 1.4em;
-	padding-right: 2em;
-	box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	float: left;
-}
-#dribbble span {
-	display: block;
-	border: 3px solid #f88db6;
-	border-radius: 100%;
-	box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	width: 7em;
-	height: 7em;
-	background: #ea4c89;
-	color: #fff;
-	font-family:Arial, Helvetica, sans-serif;
-	font-size: 0.6em;
-	line-height: 1em;
-	font-weight: 700;
-	padding: 2.7em 0 0 0;
-	text-align: center;
-	margin: -1.4em 1em 0 0;
-	text-transform: uppercase;
-	float: left;
-}
-#dribbble span:hover {
-	background: #fff !important;
-	color: #5d6365;
-	border: 3px solid #5d6365 !important;
-	cursor: pointer;
+    display: block;
+    width: 50%;
+    font-weight: 400;
+    margin-bottom: 1em;
+    overflow: hidden;
+    padding-top: 1.4em;
+    padding-right: 2em;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    float: left;
 }
 
+#dribbble span {
+    display: block;
+    border: 3px solid #f88db6;
+    border-radius: 100%;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    width: 7em;
+    height: 7em;
+    background: #ea4c89;
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.6em;
+    line-height: 1em;
+    font-weight: 700;
+    padding: 2.7em 0 0 0;
+    text-align: center;
+    margin: -1.4em 1em 0 0;
+    text-transform: uppercase;
+    float: left;
+}
+
+#dribbble span:hover {
+    background: #fff !important;
+    color: #5d6365;
+    border: 3px solid #5d6365 !important;
+    cursor: pointer;
+}
 
 -------------------------------------
 hx
 -------------------------------------
-*/
+*
 
+/
 
 #hx li {
-	display: block;
-	width: 50%;              /* ÉèÖÃÔªËØµÄ¿í¶È¡£*/
-	font-weight: 400;        /* ÉèÖÃÎÄ±¾µÄ´ÖÏ¸ */
-	margin-bottom: 1em;
-	overflow: hidden;        /* µ±ÄÚÈÝÒç³öÔªËØ¿òÊ±·¢ÉúµÄÊÂÇé£¬¸ÃÊôÐÔ¿ÉÒÔÈ·¶¨ÊÇ·ñÏÔÊ¾¹ö¶¯ÌõµÈÐÐÎª */
-	padding-top: 1.4em;       /*  ÉèÖÃÔªËØµÄÉÏÄÚ±ß¾à£¨¿Õ¼ä£©¡£*/
-	padding-right: 1.4em;      /*  ÉèÖÃÔªËØÓÒÄÚ±ß¾à£¨¿Õ°×£©¡£*/
-	box-sizing: border-box;   /* Firefox */
-	-moz-box-sizing: border-box;  /* Safari */
-	float: left;
+    display: block;
+    width: 50%; /* ï¿½ï¿½ï¿½ï¿½Ôªï¿½ØµÄ¿ï¿½È¡ï¿½*/
+    font-weight: 400; /* ï¿½ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½Ä´ï¿½Ï¸ */
+    margin-bottom: 1em;
+    overflow: hidden; /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½Ø¿ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é£¬ï¿½ï¿½ï¿½ï¿½ï¿½Ô¿ï¿½ï¿½ï¿½È·ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª */
+    padding-top: 1.4em; /*  ï¿½ï¿½ï¿½ï¿½Ôªï¿½Øµï¿½ï¿½ï¿½ï¿½Ú±ß¾à£¨ï¿½Õ¼ä£©ï¿½ï¿½*/
+    padding-right: 1.4em; /*  ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½ï¿½ï¿½ï¿½Ú±ß¾à£¨ï¿½Õ°×£ï¿½ï¿½ï¿½*/
+    box-sizing: border-box; /* Firefox */
+    -moz-box-sizing: border-box; /* Safari */
+    float: left;
 }
+
 #hx span {
-	display: block;
-	border: 3px solid #66ecbe;    /* ±ß¿ò´ÖÏ¸¡£*/
-	border-radius: 5%;            /* ÒÔ°Ù·Ö±È¶¨ÒåÔ²½ÇµÄÐÎ×´¡£*/
-	box-sizing: border-box;       /* Firefox */
-	-moz-box-sizing: border-box;  /* Safari */
-	width: 7em;                   /* ±ß¿ò¿í¶È¡£*/
-	height: 7em;                  /* ±ß¿ò¸ß¶È¡£*/
-	background: #c0eede;          /* ±ß¿òÄÚ±³¾°ÑÕÉ«¡£*/
-	color: #406d5e;               /* ±ß¿òÄÚ×ÖÌåÑÕÉ«¡£*/
-	font-family:"Î¢ÈíÑÅºÚ", "Microsoft Yahei", tahoma,arial,"Hiragino Sans GB";
-	font-size: 0.6em;             /* ÉèÖÃ×ÖÌåµÄ³ß´ç¡£*/
-	line-height: 1em;             /*ÉèÖÃÐÐ¼äµÄ¾àÀë£¨ÐÐ¸ß£©¡£*/
-	font-weight: 400;             /* ÉèÖÃÎÄ±¾µÄ´ÖÏ¸*/
-	padding: 2.7em 0 0 0;
-	text-align: center;         /* ¹æ¶¨ÔªËØÖÐµÄÎÄ±¾µÄË®Æ½¶ÔÆë·½Ê½*/
-	margin: -1.4em 1em 0 0;      /*ÉèÖÃËùÓÐÍâ±ß¾àÊôÐÔ*/
-	text-transform: uppercase;  /*¿ØÖÆÎÄ±¾µÄ´óÐ¡Ð´¡£*/
-	float: left;                /*¶¨ÒåÔªËØÔÚÄÄ¸ö·½Ïò¸¡¶¯*/
+    display: block;
+    border: 3px solid #66ecbe; /* ï¿½ß¿ï¿½ï¿½Ï¸ï¿½ï¿½*/
+    border-radius: 5%; /* ï¿½Ô°Ù·Ö±È¶ï¿½ï¿½ï¿½Ô²ï¿½Çµï¿½ï¿½ï¿½×´ï¿½ï¿½*/
+    box-sizing: border-box; /* Firefox */
+    -moz-box-sizing: border-box; /* Safari */
+    width: 7em; /* ï¿½ß¿ï¿½ï¿½È¡ï¿½*/
+    height: 7em; /* ï¿½ß¿ï¿½ß¶È¡ï¿½*/
+    background: #c0eede; /* ï¿½ß¿ï¿½ï¿½Ú±ï¿½ï¿½ï¿½ï¿½ï¿½É«ï¿½ï¿½*/
+    color: #406d5e; /* ï¿½ß¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É«ï¿½ï¿½*/
+    font-family: "Î¢ï¿½ï¿½ï¿½Åºï¿½", "Microsoft Yahei", tahoma, arial, "Hiragino Sans GB";
+    font-size: 0.6em; /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä³ß´ç¡£*/
+    line-height: 1em; /*ï¿½ï¿½ï¿½ï¿½ï¿½Ð¼ï¿½Ä¾ï¿½ï¿½ë£¨ï¿½Ð¸ß£ï¿½ï¿½ï¿½*/
+    font-weight: 400; /* ï¿½ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½Ä´ï¿½Ï¸*/
+    padding: 2.7em 0 0 0;
+    text-align: center; /* ï¿½æ¶¨Ôªï¿½ï¿½ï¿½Ðµï¿½ï¿½Ä±ï¿½ï¿½ï¿½Ë®Æ½ï¿½ï¿½ï¿½ë·½Ê½*/
+    margin: -1.4em 1em 0 0; /*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¾ï¿½ï¿½ï¿½ï¿½ï¿½*/
+    text-transform: uppercase; /*ï¿½ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½Ä´ï¿½Ð¡Ð´ï¿½ï¿½*/
+    float: left; /*ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½ï¿½ò¸¡¶ï¿½*/
 }
+
 #hx span:hover {
-	background: #fff !important;
-	color: #5d6365;
-	border: 3px solid #5d6365 !important;
-	cursor: pointer;
+    background: #fff !important;
+    color: #5d6365;
+    border: 3px solid #5d6365 !important;
+    cursor: pointer;
 }
 
 

@@ -4,32 +4,32 @@ package com.hx.bean;
  * Created by yahchen on 2017/10/31.
  */
 public class GmSiteTempGlDo {
-    private float station_id_d ;
-    private float lat ;
-    private float lon ;
-    private float alti ;
-    private float day ;
-    private float hour ;
-    private float min ;
-    private float prs_hwc ;
-    private float evss ;
-    private float gph ;
-    private float tem ;
-    private float dpt ;
-    private float win_d ;
-    private float win_s ;
-    private float time_dev_wq ;
-    private float lat_dev ;
-    private float lon_dev ;
-    private float q_prs_hwc ;
-    private float q_gph ;
-    private float q_tem ;
-    private float q_dpt ;
-    private float q_win_d ;
-    private float q_win_s ;
-    private float q_lat_dev ;
-    private float q_lon_dev ;
-    private long s_d_id ;
+    private float station_id_d;
+    private float lat;
+    private float lon;
+    private float alti;
+    private float day;
+    private float hour;
+    private float min;
+    private float prs_hwc;
+    private float evss;
+    private float gph;
+    private float tem;
+    private float dpt;
+    private float win_d;
+    private float win_s;
+    private float time_dev_wq;
+    private float lat_dev;
+    private float lon_dev;
+    private float q_prs_hwc;
+    private float q_gph;
+    private float q_tem;
+    private float q_dpt;
+    private float q_win_d;
+    private float q_win_s;
+    private float q_lat_dev;
+    private float q_lon_dev;
+    private long s_d_id;
 
     public float getStation_id_d() {
         return station_id_d;

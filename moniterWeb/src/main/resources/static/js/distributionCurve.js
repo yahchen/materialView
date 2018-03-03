@@ -1,7 +1,7 @@
 $(function () {
     var map = null;
     var data_logo = getQueryString("data_logo");
-    if(data_logo != null && data_logo != "" && data_logo.indexOf("SURF") < 0)
+    if (data_logo != null && data_logo != "" && data_logo.indexOf("SURF") < 0)
         $(".airPress").show();
     else
         $(".airPress").hide();
@@ -11,7 +11,7 @@ $(function () {
     dataTypeSel.attr("disabled", false);
     var qualiteTypeValueArray = new Array();  //定义数组
     dataTypeChange();
-    var zoom = 4;
+    var zoom = 2;
     //初始化地图对象
     $("#bin_map_dc").html("");
     $('#binMapQuery').click(binMapListener);
@@ -37,7 +37,7 @@ $(function () {
                         qc = data[i].quality_code
                     if (qc == "")
                         continue
-                    if(data[i].quality_code!=''){
+                    if (data[i].quality_code != '') {
                         qualiteTypeValueArray.push(data[i].quality_code);  //添加到数组中
                     }
                     options += "<option value=" + data[i].quality_code + ">" + qc + "</option>"
@@ -59,9 +59,12 @@ $(function () {
         var sdid = $("#timeHour option:selected").val();
         map = new T.Map('bin_map_dc');
         //设置显示地图的中心点和级别
-        map.centerAndZoom(new T.LngLat(116.40969, 39.90940), zoom);
+        map.centerAndZoom(new T.LngLat(50.40969, 58.90940), zoom);
         map.removeEventListener("moveend", MapMoveend);
         map.addEventListener("moveend", MapMoveend);
+
+        map.removeEventListener("zoomend", MapMoveend);
+        map.addEventListener("zoomend", MapMoveend);
         var llb = map.getBounds();
         //让所有点在视野范围内
         $.ajax({
@@ -80,25 +83,26 @@ $(function () {
             },
             dataType: "json",
             success: function (data) {
+                map.clearOverLays();  // 清除覆盖物(点)
                 var dotColor = "#999999";
                 var qt = qualiteType.toLocaleLowerCase();
                 for (var ki in data) {
                     var binMap = data[ki];
-                    if(qt == 'all'){
+                    if (qt == 'all') {
                         dotColor = "#00FF66";
-                        for(var qtv in qualiteTypeValueArray){
-                            if(binMap[qtv] != 0 && binMap[qtv] != 3 && binMap[qtv] != 4) {
+                        for (var qtv in qualiteTypeValueArray) {
+                            if (binMap[qtv] != 0 && binMap[qtv] != 3 && binMap[qtv] != 4) {
                                 dotColor = "#999999";
                                 break;
                             }
                         }
                     }
-                    else if(binMap[qt] == 0 || binMap[qt] == 3 || binMap[qt] == 4){
+                    else if (binMap[qt] == 0 || binMap[qt] == 3 || binMap[qt] == 4) {
                         dotColor = "#00FF66";
                     }
                     var point = new T.Circle(new T.LngLat(binMap['lon'], binMap['lat']), 1, {
                         color: dotColor,
-                        weight: 15,
+                        weight: 5,
                         opacity: 1,
                         fillColor: dotColor,
                         fillOpacity: 0,
@@ -133,11 +137,13 @@ $(function () {
         var prs = $("#prs option:selected").val();
         //让所有点在视野范围内
         var llb = map.getBounds();
-        var old_zoom = map.getZoom();
+        var currZm = map.getZoom();
+
         var sdid = $("#timeHour option:selected").val();
-        $("#bin_map_dc").html("");
-        map.removeEventListener("moveend", MapMoveend);
-        map.addEventListener("moveend", MapMoveend);
+        map.removeEventListener("zoomend", MapMoveend);
+        map.addEventListener("zoomend", MapMoveend);
+
+
         $.ajax({
             type: "post",
             async: true,
@@ -154,25 +160,33 @@ $(function () {
             },
             dataType: "json",
             success: function (data) {
+                map.clearOverLays();  // 清除覆盖物(点)
                 var dotColor = "#999999";
                 var qt = qualiteType.toLocaleLowerCase();
+                if(currZm >= 12){
+                    zoomW_T = 50;
+                }else if(currZm >= 6 && currZm < 12){
+                    zoomW_T = 15;
+                }else{
+                    zoomW_T = 3.5;
+                }
                 for (var ki in data) {
                     var binMap = data[ki];
-                    if(qt == 'all'){
+                    if (qt == 'all') {
                         dotColor = "#00FF66";
-                        for(var qtv in qualiteTypeValueArray){
-                            if(binMap[qtv] != 0 && binMap[qtv] != 3 && binMap[qtv] != 4) {
+                        for (var qtv in qualiteTypeValueArray) {
+                            if (binMap[qtv] != 0 && binMap[qtv] != 3 && binMap[qtv] != 4) {
                                 dotColor = "#999999";
                                 break;
                             }
                         }
                     }
-                    else if(binMap[qt] == 0 || binMap[qt] == 3 || binMap[qt] == 4){
+                    else if (binMap[qt] == 0 || binMap[qt] == 3 || binMap[qt] == 4) {
                         dotColor = "#00FF66";
                     }
                     var point = new T.Circle(new T.LngLat(binMap['lon'], binMap['lat']), 1, {
                         color: dotColor,
-                        weight: 3.5,
+                        weight: zoomW_T,
                         opacity: 1,
                         fillColor: dotColor,
                         fillOpacity: 0,
@@ -192,7 +206,7 @@ $(function () {
                         + "</div>";
                     point.addEventListener("click", function (e) {
                         var point1 = e.lnglat;
-                        var infoWin = new T.InfoWindow(sContent, {offset: new T.Point(0, -30)}); // 创建信息窗口对象
+                        var infoWin = new T.InfoWindow(sContent, {offset: new T.Point(0, -6)}); // 创建信息窗口对象
                         map.openInfoWindow(infoWin, point1); //开启信息窗口
                     });// 将标注添加到地图中
                 }
@@ -216,9 +230,10 @@ function timeHourChange() {
         dataType: "json",
         success: function (data) {
             var options;
-            for(var key in data){
+            for (var key in data) {
                 options += "<option value=" + key + ">" + data[key] + "</option>"
-            };
+            }
+            ;
             $("#timeHour").html("");
             $("#timeHour").append(options);
             $("#timeHour").attr("disabled", false);

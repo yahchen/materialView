@@ -1,91 +1,92 @@
 ﻿<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 
 <head>
-	<title></title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
-	<link rel="stylesheet" type="text/css" href="js/calendar/css/style.css"/>
-	<link rel="stylesheet" type="text/css" href="assets/css/tooltipster.css"/>
-	<link rel="stylesheet" type="text/css" href="assets/css/style2.css"/>
-	<script type="text/javascript" src="assets/js/jquery-1.7.2.min.js"></script>
-	<script type="text/javascript" src="js/jquery-2.0.0.min.js"></script>
-	<script type="text/javascript" src="js/jquery.tooltipster.js"></script>
-	<script type="text/javascript" src="js/calendar/laydate.js"></script>
-	<script type="text/javascript" src="js/script.js"></script>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <link rel="stylesheet" type="text/css" href="js/calendar/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="assets/css/tooltipster.css"/>
+    <link rel="stylesheet" type="text/css" href="assets/css/style2.css"/>
+    <script type="text/javascript" src="assets/js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery-2.0.0.min.js"></script>
+    <script type="text/javascript" src="js/jquery.tooltipster.js"></script>
+    <script type="text/javascript" src="js/calendar/laydate.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
 
 </head>
 
 <body>
 <!--<div class="box">-->
-	<ul class="select">
+<ul class="select">
 
-		<div class="startTime2">
-			<ul class="inline">
-				<strong>资料时间：</strong> <input placeholder="请输入日期" class="laydate-icon" id="start2"/>
-				&nbsp;&nbsp;&nbsp;&nbsp;<span id="message" style="color: red;font-size: 12px;"></span>
-			</ul>
-		</div>
-	</ul>
+    <div class="startTime2">
+        <ul class="inline">
+            <strong>资料时间：</strong> <input placeholder="请输入日期" class="laydate-icon" id="start2"/>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span id="message" style="color: red;font-size: 12px;"></span>
+        </ul>
+    </div>
+</ul>
 
-	<!--   选择项目      -->
-	<ul class="select">
-		<li class="select-list">
-			<dl id="selectParent">
-				<dt>格点：</dt>
-				<dd id="ec00" class="select-ee selected"><a href="javascript:void(0)">欧洲中心格点场资料</a></dd>
-				<dd id="japan00" class="select-jj "><a href="javascript:void(0)">日本格点场降水资料</a></dd>
-			</dl>
-		</li>
-		<li class="select-list">
-			<dl id="selectChildren1" >
-				<dt>要素：</dt>
-				<dd  id="wendu01" value="TM_GRID_ECMWF_T" class="selected"><a href="javascript:void(0)" >温度</a></dd>
-				<dd id="gaodu01" value="TM_GRID_ECMWF_H"><a href="javascript:void(0)">位势高度</a></dd>
-				<dd id="ufeng01" value="TM_GRID_ECMWF_U"><a href="javascript:void(0)">U风</a></dd>
-				<dd id="vfeng01" value="TM_GRID_ECMWF_V"><a href="javascript:void(0)">V风</a></dd>
-			</dl>
+<!--   选择项目      -->
+<ul class="select">
+    <li class="select-list">
+        <dl id="selectParent">
+            <dt>格点：</dt>
+            <dd id="ec00" class="select-ee selected"><a href="javascript:void(0)">欧洲中心格点场资料</a></dd>
+            <dd id="japan00" class="select-jj "><a href="javascript:void(0)">日本格点场降水资料</a></dd>
+        </dl>
+    </li>
+    <li class="select-list">
+        <dl id="selectChildren1">
+            <dt>要素：</dt>
+            <dd id="wendu01" value="TM_GRID_ECMWF_T" class="selected"><a href="javascript:void(0)">温度</a></dd>
+            <dd id="gaodu01" value="TM_GRID_ECMWF_H"><a href="javascript:void(0)">位势高度</a></dd>
+            <dd id="ufeng01" value="TM_GRID_ECMWF_U"><a href="javascript:void(0)">U风</a></dd>
+            <dd id="vfeng01" value="TM_GRID_ECMWF_V"><a href="javascript:void(0)">V风</a></dd>
+        </dl>
 
-			<dl id="selectChildren2" hidden="hidden">
-				<dt>要素：</dt>
-				<dd id="jiangshui02" value="TM_GRID_JAPAN_PRE" class="select-jjj selected"><a href="javascript:void(0)">降水</a></dd>
-				<dd id="wendu02" value="TM_GRID_JAPAN_T"><a href="javascript:void(0)" >温度</a></dd>
-				<dd id="gaodu02" value="TM_GRID_JAPAN_H"><a href="javascript:void(0)">位势高度</a></dd>
-				<dd id="ufeng02" value="TM_GRID_JAPAN_U"><a href="javascript:void(0)">U风</a></dd>
-				<dd id="vfeng02" value="TM_GRID_JAPAN_V"><a href="javascript:void(0)">V风</a></dd>
-			</dl>
+        <dl id="selectChildren2" hidden="hidden">
+            <dt>要素：</dt>
+            <dd id="jiangshui02" value="TM_GRID_JAPAN_PRE" class="select-jjj selected"><a
+                    href="javascript:void(0)">降水</a></dd>
+            <dd id="wendu02" value="TM_GRID_JAPAN_T"><a href="javascript:void(0)">温度</a></dd>
+            <dd id="gaodu02" value="TM_GRID_JAPAN_H"><a href="javascript:void(0)">位势高度</a></dd>
+            <dd id="ufeng02" value="TM_GRID_JAPAN_U"><a href="javascript:void(0)">U风</a></dd>
+            <dd id="vfeng02" value="TM_GRID_JAPAN_V"><a href="javascript:void(0)">V风</a></dd>
+        </dl>
 
-		</li>
+    </li>
 
-	</ul>
+</ul>
 
-	<div id="page_data" >
+<div id="page_data">
 
-	</div>
+</div>
 <!--</div>-->
 
 <script type="text/javascript">
-!function(){
-    //日期
-    var start2 = {
-        elem: '#start2',
-        //format: 'YYYY-MM-DD',
-        min: '1900-01-01', //设定最小日期为当前日期
-        max: '2099-00-01', //最大日期
-        istime: true,
-        istoday: false,
-        choose: function(datas){
-            $("dd.selected:visible").each(function () {
-                   if($(this).attr("value")!=null){//不为空时，则再次触发查询页面
-                       onShowGridMatrix($(this).attr("value"));
-				   }
-            });
-        }
-    };
-	laydate.skin('molv');//切换皮肤，请查看skins下面皮肤库
-	laydate(start2);//绑定元素
-}();
+    !function () {
+        //日期
+        var start2 = {
+            elem: '#start2',
+            //format: 'YYYY-MM-DD',
+            min: '1900-01-01', //设定最小日期为当前日期
+            max: '2099-00-01', //最大日期
+            istime: true,
+            istoday: false,
+            choose: function (datas) {
+                $("dd.selected:visible").each(function () {
+                    if ($(this).attr("value") != null) {//不为空时，则再次触发查询页面
+                        onShowGridMatrix($(this).attr("value"));
+                    }
+                });
+            }
+        };
+        laydate.skin('molv');//切换皮肤，请查看skins下面皮肤库
+        laydate(start2);//绑定元素
+    }();
 </script>
 </body>
 </html>
