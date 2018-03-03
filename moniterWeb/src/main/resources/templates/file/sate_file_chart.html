@@ -67,9 +67,10 @@
             success: function (json) {
                 //alert(json.sateFileSelectDataList);
                 //alert(json.jsonMessage);
+                $("#sateItems").empty();
+                $("#sateItems").append("<option >请选择卫星</option>");
                 if (json.jsonMessage == "" || json.jsonMessage == null) {
-                    $("#sateItems").empty();
-                    $("#sateItems").append("<option >请选择卫星</option>");
+
                     $.each(json.sateFileSelectDataList, function (index, obj) {
                         //alert(obj.sate_name);
                         $("#sateItems").append("<option value=" + obj.sate_name + ">" + obj.sate_name + "</option>");
