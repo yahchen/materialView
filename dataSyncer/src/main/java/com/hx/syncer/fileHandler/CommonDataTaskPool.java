@@ -140,6 +140,8 @@ public class CommonDataTaskPool {
                             Object matchDataHeadBean = dbUtils.getTableHeadObj(kvMap.get("data_type"));
                             propertiesReflectUtil.autowiredProperty(matchDataHeadBean,matchDataHeadBean.getClass(),"data_logo",kvMap.get("data_logo"));
                             propertiesReflectUtil.autowiredProperty(matchDataHeadBean,matchDataHeadBean.getClass(),"data_time",propertiesReflectUtil.getFiledValue(dataHeadEntity,"data_time"));
+                            if(!StringUtils.isEmpty(kvMap.get("data_type")) && Integer.parseInt(kvMap.get("data_type")) == DataSyncerConstants.SATEFILEHEAD)
+                                propertiesReflectUtil.autowiredProperty(matchDataHeadBean,matchDataHeadBean.getClass(),"data_name",propertiesReflectUtil.getFiledValue(dataHeadEntity,"data_name"));
                             Example<Object> example = Example.of(matchDataHeadBean,ExampleMatcher.matching()
                                     .withIgnorePaths(DataSyncerConstants.DATA_HEAD_TABLE_KEYS));
                             List<Object> repeatedRecords = dbUtils.getTableHeadDao(kvMap.get("data_type")).findAll(example);
