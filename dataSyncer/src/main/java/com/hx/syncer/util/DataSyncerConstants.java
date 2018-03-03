@@ -15,6 +15,7 @@ public class DataSyncerConstants {
 
     public static final Map<String, String> SITE_DATA_DAO_NAMES = new HashMap<>();
     public static final Map<String, String> SITE_DATA_DO_NAMES = new HashMap<>();
+    public static final String[] DATA_HEAD_TABLE_KEYS = {"data_name","data_code","retrieve_start_time","retrieve_end_time","retrieve_process_time","file_path","data_start_time","data_end_time","longitude_latitude_scope","sys_conn_state","data_num","user_id","system_name","data_type","mode_type","return_abnormal_info","id"};
 
 
     static {

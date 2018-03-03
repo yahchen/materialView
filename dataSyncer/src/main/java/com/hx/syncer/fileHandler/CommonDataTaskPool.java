@@ -7,8 +7,11 @@ import com.hx.syncer.util.PropertiesReflectUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import java.io.BufferedReader;
@@ -112,7 +115,18 @@ public class CommonDataTaskPool {
                                 Map.Entry<String, String> entry = iterator.next();
                                 propertiesReflectUtil.autowiredProperty(dataHeadEntity, dataHeadEntity.getClass(), entry.getKey(), entry.getValue());
                             }
-                            dataHeadEntity = dbUtils.getTableHeadDao(kvMap.get("data_type")).save(dataHeadEntity);//表头数据入库
+                            Object matchDataHeadBean = dbUtils.getTableHeadObj(kvMap.get("data_type"));
+                            propertiesReflectUtil.autowiredProperty(matchDataHeadBean,matchDataHeadBean.getClass(),"data_logo",kvMap.get("data_logo"));
+                            propertiesReflectUtil.autowiredProperty(matchDataHeadBean,matchDataHeadBean.getClass(),"data_time",propertiesReflectUtil.getFiledValue(dataHeadEntity,"data_time"));
+                            Example<Object> example = Example.of(matchDataHeadBean,ExampleMatcher.matching()
+                                    .withIgnorePaths(DataSyncerConstants.DATA_HEAD_TABLE_KEYS));
+                            List<Object> repeatedRecords = dbUtils.getTableHeadDao(kvMap.get("data_type")).findAll(example);
+                            if(CollectionUtils.isEmpty(repeatedRecords)){
+                                dataHeadEntity = dbUtils.getTableHeadDao(kvMap.get("data_type")).save(dataHeadEntity);//表头数据入库
+                            }else {
+                                log.info("exist reinsert json file:" + path + ",data_logo:" + kvMap.get("data_logo") + ",data_time:" + propertiesReflectUtil.getFiledValue(dataHeadEntity,"data_time"));
+                                return;
+                            }
                         }
                     }
                     if (isSyncSplitRecord) {
@@ -123,7 +137,18 @@ public class CommonDataTaskPool {
                                 Map.Entry<String, String> entry = iterator.next();
                                 propertiesReflectUtil.autowiredProperty(dataHeadEntity, dataHeadEntity.getClass(), entry.getKey(), entry.getValue());
                             }
-                            dataHeadEntity = dbUtils.getTableHeadDao(kvMap.get("data_type")).save(dataHeadEntity);//表头数据入库
+                            Object matchDataHeadBean = dbUtils.getTableHeadObj(kvMap.get("data_type"));
+                            propertiesReflectUtil.autowiredProperty(matchDataHeadBean,matchDataHeadBean.getClass(),"data_logo",kvMap.get("data_logo"));
+                            propertiesReflectUtil.autowiredProperty(matchDataHeadBean,matchDataHeadBean.getClass(),"data_time",propertiesReflectUtil.getFiledValue(dataHeadEntity,"data_time"));
+                            Example<Object> example = Example.of(matchDataHeadBean,ExampleMatcher.matching()
+                                    .withIgnorePaths(DataSyncerConstants.DATA_HEAD_TABLE_KEYS));
+                            List<Object> repeatedRecords = dbUtils.getTableHeadDao(kvMap.get("data_type")).findAll(example);
+                            if(CollectionUtils.isEmpty(repeatedRecords)){
+                                dataHeadEntity = dbUtils.getTableHeadDao(kvMap.get("data_type")).save(dataHeadEntity);//表头数据入库
+                            }else {
+                                log.info("exist reinsert json file:" + path + ",data_logo:" + kvMap.get("data_logo") + ",data_time:" + propertiesReflectUtil.getFiledValue(dataHeadEntity,"data_time"));
+                                return;
+                            }
                         }
                         if (null != dataHeadEntity && !fileNameList.isEmpty()) {
                             asyncSaveSateElementData(kvMap.get("file_path"), fileNameList, propertiesReflectUtil.getFiledValue(dataHeadEntity, "id"));
@@ -135,7 +160,7 @@ public class CommonDataTaskPool {
             reader.close();
             Files.delete(path);//删除文件
             String logo = kvMap.get("data_logo");
-            log.info("delete file:" + path + ",dataLogo:" + logo);
+            log.info("delete file:" + path + ",dataLogo:" + logo + ",data_time:" + kvMap.get("data_time"));
         } catch (Exception e) {
             log.error("error while handle file:" + path.toAbsolutePath(), e);
         }
