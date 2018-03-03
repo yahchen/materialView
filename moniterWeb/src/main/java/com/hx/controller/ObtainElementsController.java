@@ -78,7 +78,7 @@ public class ObtainElementsController {
             start = Timestamp.valueOf(new Date().toString());
             end = Timestamp.valueOf(addDays(start, 1).toString());
         }
-        return convertDbRes2TimeHours(binMapDataService.queryTimeHousr(dataLogo.replaceAll("M_R", "M_"), start, end));
+        return convertDbRes2TimeHours(binMapDataService.queryTimeHousr(dataLogo, start, end));
     }
 
     private Map<String, String> convertDbRes2TimeHours(List<Map<String, Object>> resData) {
