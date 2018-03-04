@@ -1,5 +1,6 @@
 package com.hx.syncer.util;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -12,6 +13,7 @@ import java.util.Date;
  * Created by yahchen on 2017/11/5.
  */
 @Service
+@Slf4j
 public class PropertiesReflectUtil {
     //private static SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmm");
 
@@ -62,7 +64,7 @@ public class PropertiesReflectUtil {
                 }
             }
         } catch (Exception e) {
-            System.out.println("Exception" + e);
+            log.info("autowrite error for bean filed,keyName:" + k + ",value:" + v,e);
         }
 
     }
@@ -79,7 +81,7 @@ public class PropertiesReflectUtil {
                 }
             }
         } catch (Exception e) {
-
+            log.info("PropertiesReflectUtil.getfiledValue error,keyName:" + k,e);
         }
         return null;
     }
