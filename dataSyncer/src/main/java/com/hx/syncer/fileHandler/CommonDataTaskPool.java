@@ -147,7 +147,7 @@ public class CommonDataTaskPool {
                             if(CollectionUtils.isEmpty(repeatedRecords)){
                                 dataHeadEntity = dbUtils.getTableHeadDao(kvMap.get("data_type")).save(dataHeadEntity);//表头数据入库
                             }else {
-                                log.info("the record is repeated..json_file:" + path + ",data_logo:" + kvMap.get("data_logo") + ",data_time:" + propertiesReflectUtil.getFiledValue(dataHeadEntity,"data_time"));
+                                log.info("the record is repeated..json_file:" + path + ",data_logo:" + kvMap.get("data_logo") + ",data_time:" + propertiesReflectUtil.getFiledValue(dataHeadEntity,"data_time") + ",sate_name:" + propertiesReflectUtil.getFiledValue(dataHeadEntity,"sate_name"));
                                 return;
                             }
                         }
