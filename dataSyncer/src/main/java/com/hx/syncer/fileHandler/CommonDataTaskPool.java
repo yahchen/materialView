@@ -124,12 +124,12 @@ public class CommonDataTaskPool {
                             if(CollectionUtils.isEmpty(repeatedRecords)){
                                 dataHeadEntity = dbUtils.getTableHeadDao(kvMap.get("data_type")).save(dataHeadEntity);//表头数据入库
                             }else {
-                                log.info("exist reinsert json file:" + path + ",data_logo:" + kvMap.get("data_logo") + ",data_time:" + propertiesReflectUtil.getFiledValue(dataHeadEntity,"data_time"));
+                                log.info("the record is repeated...json_file:" + path + ",data_logo:" + kvMap.get("data_logo") + ",data_time:" + propertiesReflectUtil.getFiledValue(dataHeadEntity,"data_time"));
                                 return;
                             }
                         }
                     }
-                    if (isSyncSplitRecord) {
+                    if (isSyncSplitRecord) {//卫星文件，按bin文件对应表类型入库
                         dataHeadEntity = dbUtils.getTableHeadObj(kvMap.get("data_type"));
                         if (dataHeadEntity != null) {
                             Iterator<Map.Entry<String, String>> iterator = kvMap.entrySet().iterator();
@@ -140,15 +140,14 @@ public class CommonDataTaskPool {
                             Object matchDataHeadBean = dbUtils.getTableHeadObj(kvMap.get("data_type"));
                             propertiesReflectUtil.autowiredProperty(matchDataHeadBean,matchDataHeadBean.getClass(),"data_logo",kvMap.get("data_logo"));
                             propertiesReflectUtil.autowiredProperty(matchDataHeadBean,matchDataHeadBean.getClass(),"data_time",propertiesReflectUtil.getFiledValue(dataHeadEntity,"data_time"));
-                            if(!StringUtils.isEmpty(kvMap.get("data_type")) && Integer.parseInt(kvMap.get("data_type")) == DataSyncerConstants.SATEFILEHEAD)
-                                propertiesReflectUtil.autowiredProperty(matchDataHeadBean,matchDataHeadBean.getClass(),"data_name",propertiesReflectUtil.getFiledValue(dataHeadEntity,"data_name"));
+                            propertiesReflectUtil.autowiredProperty(matchDataHeadBean,matchDataHeadBean.getClass(),"sate_name",propertiesReflectUtil.getFiledValue(dataHeadEntity,"sate_name"));
                             Example<Object> example = Example.of(matchDataHeadBean,ExampleMatcher.matching()
                                     .withIgnorePaths(DataSyncerConstants.DATA_HEAD_TABLE_KEYS));
                             List<Object> repeatedRecords = dbUtils.getTableHeadDao(kvMap.get("data_type")).findAll(example);
                             if(CollectionUtils.isEmpty(repeatedRecords)){
                                 dataHeadEntity = dbUtils.getTableHeadDao(kvMap.get("data_type")).save(dataHeadEntity);//表头数据入库
                             }else {
-                                log.info("exist reinsert json file:" + path + ",data_logo:" + kvMap.get("data_logo") + ",data_time:" + propertiesReflectUtil.getFiledValue(dataHeadEntity,"data_time"));
+                                log.info("the record is repeated..json_file:" + path + ",data_logo:" + kvMap.get("data_logo") + ",data_time:" + propertiesReflectUtil.getFiledValue(dataHeadEntity,"data_time"));
                                 return;
                             }
                         }

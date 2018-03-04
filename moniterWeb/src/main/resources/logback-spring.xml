@@ -16,7 +16,7 @@
         <append>true</append>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- daily rolling over -->
-            <FileNamePattern>info.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <FileNamePattern>${FILE_PATH}/info.%d{yyyy-MM-dd}.log</FileNamePattern>
             <!-- keep 30 days' log history -->
             <maxHistory>30</maxHistory>
         </rollingPolicy>
@@ -35,7 +35,7 @@
         <append>true</append>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- daily rolling over -->
-            <FileNamePattern>error.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <FileNamePattern>${FILE_PATH}/error.%d{yyyy-MM-dd}.log</FileNamePattern>
             <!-- keep 30 days' log history -->
             <maxHistory>30</maxHistory>
         </rollingPolicy>
