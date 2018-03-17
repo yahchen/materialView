@@ -40,7 +40,7 @@ public class ObtainElementsController {
 
     @RequestMapping("/distribution_curve_view")//对应url
     public String distributionCurveView() {//参数可以选择性添加，不加也无所谓。如果添加后，框架会帮助自动注入。
-        return "distributionCurve/distribution_curve";
+        return "distributioncurve/distribution_curve";
     }
 
     @RequestMapping("/getElements")//对应url

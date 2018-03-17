@@ -141,11 +141,10 @@ function binSatelliteMapListener(data_logo) {
         $("#satelliteType").empty();
         var sates = "<option value='0'>请选择卫星</option>";
         $("#satelliteType").append(sates);
-    } else if (data_logo == "GM_RSATE_IASI") {
+    } else if (data_logo == "GM_METOPA_IASI") {
         $("#satelliteType").empty();
         var sates = "<option value='0'>请选择卫星</option>" +
-            "<option value='IASI_MTA'>IASI_MTA(METOP-A)</option>" +
-            "<option value='IASI_MTB'>IASI_MTB(METOP-B)</option>";
+            "<option value='IASI_MTA'>IASI_MTA(METOP-A)</option>";
         $("#satelliteType").append(sates);
     } else if (data_logo == "GM_RATVC_ATOVS") {
         $("#satelliteType").empty();
