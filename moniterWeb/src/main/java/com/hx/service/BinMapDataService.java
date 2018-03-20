@@ -28,8 +28,14 @@ public class BinMapDataService {
         return postgreSqlDao.querySatelliteTimeRangeBinMapData(table, querySatelliteDate);
     }
 
+    // 备份 2018/03/20
     public List<Map<String, Object>> querySatelliteBinMapData(String table, Timestamp stDate, String querySatelliteTime) {
         return postgreSqlDao.querySatelliteBinMapData(table, stDate, querySatelliteTime);
+    }
+
+     // 最新完善 2018/03/20
+    public List<Map<String, Object>> querySatelliteBinMapData(String table, Timestamp startTime,Timestamp endTime, String querySatelliteTime) {
+        return postgreSqlDao.querySatelliteBinMapData(table, startTime,endTime, querySatelliteTime);
     }
 
     public List<Map<String, Object>> queryTimeHousr(String dataLogo, Timestamp start, Timestamp end) {

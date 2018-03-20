@@ -25,7 +25,7 @@ $(function () {
     binSatelliteMapListener(data_logo);
 
 
-    // 触发该事件（选择卫星平台，相应的更新卫星时次）
+    // 触发该事件（选择卫星名（平台），相应的更新卫星时次）
     $("#satelliteType").change(binSatelliteTimeRangeMapListener);
 
     function binSatelliteTimeRangeMapListener() {
@@ -100,12 +100,13 @@ $(function () {
                 var pointArray = new Array();
                 map.clearOverLays();  // 清除覆盖物(点)
                 for (var i in data) {
-                    var point = new T.Circle(new T.LngLat(data[i].obs_lon, data[i].obs_lat), 1, {
+                    var point = new T.Circle(new T.LngLat(data[i].obs_lon, data[i].obs_lat), 500, {
                         color: "#00FF66",
-                        weight: 3.5,
+                        weight: 4,
                         opacity: 1,
                         fillColor: "#00FF66",
-                        fillOpacity: 0,
+                        fillOpacity: 1,
+                        fillWight: 13,
                         lineStyle: "solid"
                     });
                     map.addOverLay(point);    //增加点
@@ -144,25 +145,25 @@ function binSatelliteMapListener(data_logo) {
     } else if (data_logo == "GM_METOPA_IASI") {
         $("#satelliteType").empty();
         var sates = "<option value='0'>请选择卫星</option>" +
-            "<option value='IASI_MTA'>IASI_MTA(METOP-A)</option>";
+            "<option value='IASI_MTA'>IASI-MTA(METOP-A)</option>";
         $("#satelliteType").append(sates);
     } else if (data_logo == "GM_RATVC_ATOVS") {
         $("#satelliteType").empty();
         var sates = "<option value='0'>请选择卫星</option>" +
-            "<option value='AMSUA_NOAA15'>AMSUA_NOAA15</option>" +
-            "<option value='AMSUA_NOAA18'>AMSUA_NOAA18</option>" +
-            "<option value='AMSUA_NOAA19_BAWX'>AMSUA_NOAA19_BAWX</option>" +
-            "<option value='AMSUA_NOAA19_EUMP'>AMSUA_NOAA19_EUMP</option>" +
-            "<option value='AMSUA_NOAA19_EUMS'>AMSUA_NOAA19_EUMS</option>" +
-            "<option value='AMSUA_MTB_EUMP'>AMSUA_MTB(MP01)_EUMP</option>" +
-            "<option value='AMSUA_MTB_EUMS'>AMSUA_MTB(MP01)_EUMS</option>" +
-            "<option value='AMSUA_MTA_EUMC'>AMSUA_MTA(MP02)_EUMC</option>" +
-            "<option value='AMSUA_MTA_EUMS'>AMSUA_MTA(MP02)_EUMS</option>" +
-            "<option value='AMSUB_NOAA15'>AMSUB_NOAA15</option>" +
-            "<option value='MHS_NOAA18'>MHS_NOAA18</option>" +
-            "<option value='MHS_NOAA19'>MHS_NOAA19</option>" +
-            "<option value='MHS_MTB'>MHS_MTB(MP01)</option>" +
-            "<option value='MHS_MTA'>MHS_MTA(MP02)</option>";
+            "<option value='AMSUA_NOAA15'>AMSUA-NOAA15</option>" +
+            "<option value='AMSUA_NOAA18'>AMSUA-NOAA18</option>" +
+            "<option value='AMSUA_NOAA19_BAWX'>AMSUA-NOAA19-BAWX</option>" +
+            "<option value='AMSUA_NOAA19_EUMP'>AMSUA-NOAA19-EUMP</option>" +
+            "<option value='AMSUA_NOAA19_EUMS'>AMSUA-NOAA19-EUMS</option>" +
+            "<option value='AMSUA_MTB_EUMP'>AMSUA-MTB(MP01)-EUMP</option>" +
+            "<option value='AMSUA_MTB_EUMS'>AMSUA-MTB(MP01)-EUMS</option>" +
+            "<option value='AMSUA_MTA_EUMC'>AMSUA-MTA(MP02)-EUMC</option>" +
+            "<option value='AMSUA_MTA_EUMS'>AMSUA-MTA(MP02)-EUMS</option>" +
+            "<option value='AMSUB_NOAA15'>AMSUB-NOAA15</option>" +
+            "<option value='MHS_NOAA18'>MHS-NOAA18</option>" +
+            "<option value='MHS_NOAA19'>MHS-NOAA19</option>" +
+            "<option value='MHS_MTB'>MHS-MTB(MP01)</option>" +
+            "<option value='MHS_MTA'>MHS-MTA(MP02)</option>";
         $("#satelliteType").append(sates);
 
     } else if (data_logo == "GM_RSATE_ASCAT") {
