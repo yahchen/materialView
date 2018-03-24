@@ -97,7 +97,13 @@ public class CommonDataTaskPool {
                                 value = value.substring(0, dotIndex);
                             }
                         }
-                    } else {
+                    } else if(name.equalsIgnoreCase("data_num")){
+                        int dotIndex = value.lastIndexOf(",");
+                        value = kv[1].replace("\"", "").trim();
+                        if (!StringUtils.isEmpty(value) && dotIndex > 0) {
+                            value = value.substring(0, dotIndex);
+                        }
+                    } else{
                         value = kv[1].replace("\"", "").replace(",", "").trim();
                     }
                     if (name.contains("return_abnormal_info")) {
