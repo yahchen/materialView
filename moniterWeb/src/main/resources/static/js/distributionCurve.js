@@ -86,29 +86,33 @@ $(function () {
             success: function (data) {
                 map.clearOverLays();  // 清除覆盖物(点)
                 map.centerAndZoom(new T.LngLat(50.40969, 58.90940), zoom);
-                var dotColor = "#000000";
+                var dotColor = "gray";
+                var strokeColor = "red";
                 var qt = qualiteType.toLocaleLowerCase();
                 for (var ki in data) {
                     var binMap = data[ki];
                     if (qt == 'all') {
                         dotColor = "#00FF66";
+                        strokeColor = "blue";
                         for (var qtv in qualiteTypeValueArray) {
                             if (binMap[qtv] != 0 && binMap[qtv] != 3 && binMap[qtv] != 4) {
-                                dotColor = "#000000";
+                                dotColor = "gray";
+                                strokeColor = "red";
                                 break;
                             }
                         }
                     }
                     else if (binMap[qt] == 0 || binMap[qt] == 3 || binMap[qt] == 4) {
                         dotColor = "#00FF66";
+                        strokeColor = "blue";
                     }
                     var point = new T.Circle(new T.LngLat(binMap['lon'], binMap['lat']), 5000, {
-                        strokeColor: "#000000",
-                        strokeWeight: 1,
-                        strokeOpacity: 1,
+                        color: strokeColor,
+                        weight: 2,
+                        opacity: 1,
                         fillColor: dotColor,
                         fillOpacity: 1,
-                        strokeStyle: "solid"
+                        lineStyle: "solid"
                     });
                     map.addOverLay(point);    //增加点
                     var prsv = binMap['prs'];
