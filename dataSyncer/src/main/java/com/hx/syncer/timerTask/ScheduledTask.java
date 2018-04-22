@@ -36,6 +36,11 @@ public class ScheduledTask {
             Files.walkFileTree(Paths.get(inBoundFilePath), new CommonDataFileVistor(result));
             for (Path path : result) {
                 commonDataTaskPool.asyncSaveCommonDbData(path);
+                try {
+                    Thread.sleep(2000);//在处理一个站点（格点等）文件及其数据文件时，睡2s，避免过多文件加载到内存，oom
+                }catch (Exception e){
+
+                }
             }
         } catch (Exception e) {
             log.error("sync data error", e);
