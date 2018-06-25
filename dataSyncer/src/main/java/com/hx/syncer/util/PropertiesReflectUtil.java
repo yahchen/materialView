@@ -76,7 +76,7 @@ public class PropertiesReflectUtil {
         try {
             for (Method m : ms) {
                 String mName = m.getName().toLowerCase();
-                if (mName.startsWith("get") && mName.endsWith(k.toLowerCase())) {
+                if (checkMname(mName,k) && mName.startsWith("get") && mName.endsWith(k.toLowerCase())) {
                     return m.invoke(o).toString();
                 }
             }
@@ -84,5 +84,14 @@ public class PropertiesReflectUtil {
             log.info("PropertiesReflectUtil.getfiledValue error,keyName:" + k,e);
         }
         return null;
+    }
+
+    private boolean checkMname(String mname,String coreName){
+        if(StringUtils.isEmpty(mname))
+            return false;
+        String checkMname = mname.replaceFirst("get","").replaceFirst(coreName,"");
+        if(checkMname.trim().length() <= 0)
+            return true;
+        return false;
     }
 }
