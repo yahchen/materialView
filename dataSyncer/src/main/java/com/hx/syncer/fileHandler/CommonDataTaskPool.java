@@ -98,10 +98,10 @@ public class CommonDataTaskPool {
                             }
                         }
                     } else if(name.equalsIgnoreCase("data_num")){
-                        if (!StringUtils.isEmpty(value)) {
-                            int dotIndex = value.lastIndexOf(",");
+                        if (!StringUtils.isEmpty(kv[1])) {
+                            int dotIndex = kv[1].lastIndexOf(",");
                             if(dotIndex > 0)
-                                value = kv[1].replace("\"", "").trim().substring(0, dotIndex);
+                                value = kv[1].substring(0, dotIndex).replace("\"", "").trim();
                         }else {
                             value = "0";
                         }
