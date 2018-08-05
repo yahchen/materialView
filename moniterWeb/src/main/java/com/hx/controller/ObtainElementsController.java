@@ -40,7 +40,7 @@ public class ObtainElementsController {
 
     @RequestMapping("/distribution_curve_view")//对应url
     public String distributionCurveView() {//参数可以选择性添加，不加也无所谓。如果添加后，框架会帮助自动注入。
-        return "distributionCurve/distribution_curve";
+        return "distributioncurve/distribution_curve";
     }
 
     @RequestMapping("/getElements")//对应url
@@ -104,6 +104,8 @@ public class ObtainElementsController {
         return binMapDataService.queryBinQualiteTypeData("type_and_element_mapping", dataType);
     }
 
+
+    // 修改完善 获取卫星时次  2018/03/20
     @RequestMapping("/getSatelliteTimeRangElements")//对应url
     @ResponseBody
     public List<Map<String, Object>> satelliteTimeRangElements(HttpServletRequest request) {//参数可以选择性添加，不加也无所谓。如果添加后，框架会帮助自动注入。
@@ -120,14 +122,13 @@ public class ObtainElementsController {
         return binMapDataService.querySatelliteTimeRangeBinMapData(table, querySatelliteDate);
     }
 
-    @RequestMapping("/getSatelliteElements")//对应url
+    @RequestMapping("/getSatelliteElements_bak")//对应url  备份
     @ResponseBody
-    public List<Map<String, Object>> satelliteElements(HttpServletRequest request) {//参数可以选择性添加，不加也无所谓。如果添加后，框架会帮助自动注入。
+    public List<Map<String, Object>> satelliteElements_bak(HttpServletRequest request) {//参数可以选择性添加，不加也无所谓。如果添加后，框架会帮助自动注入。
         // todo add mode kv
 
         String querySatelliteDate = request.getParameter("querySatelliteDate");
         String satelliteType = request.getParameter("satelliteType");
-
         String querySatelliteTime = request.getParameter("querySatelliteTime");
 
         // 将卫星时次querySatelliteTime中的时间提取出来
@@ -151,35 +152,68 @@ public class ObtainElementsController {
             String reg = "(\\d{4})(\\d{2})(\\d{2})(\\d{2})(\\d{2})(\\d{2})";
             strTime = strTime.replaceAll(reg, "$1-$2-$3 $4:$5:$6");
 
-
             // 根据时间构建卫星文件名
-            //  SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-            // stDate = Timestamp.valueOf(strTime);
-            // String ss = sdf.format(strTime);
             stDate = Timestamp.valueOf(strTime);
 
-
-            /*
-            for(int i=0;i<querySatelliteTime.length();i++){
-                if(querySatelliteTime.charAt(i)>=48 && querySatelliteTime.charAt(i)<=57){
-                    strTime+=querySatelliteTime.charAt(i);
-                }
-            }*/
         }
-
-        //long time = Long.valueOf(StringUtils.isEmpty(request.getParameter("querySatelliteDate"))?System.currentTimeMillis()+"":request.getParameter("querySatelliteDate"));
-
-        //long time = Long.valueOf(StringUtils.isEmpty(strTime)?System.currentTimeMillis()+"":strTime);
-        // Timestamp stDate = new Timestamp(time);
-
-        //String table = convertSatelliteDataType2Table(satelliteType);
-
-
         String table = satelliteType;
         if (StringUtils.isEmpty(table))
             return null;
         return binMapDataService.querySatelliteBinMapData(table, stDate, querySatelliteTime);
     }
+
+    // 最新完善 2018/03/20
+    @RequestMapping("/getSatelliteElements")//对应url
+    @ResponseBody
+    public List<Map<String, Object>> satelliteElements(HttpServletRequest request) {//参数可以选择性添加，不加也无所谓。如果添加后，框架会帮助自动注入。
+
+        String querySatelliteDate = request.getParameter("querySatelliteDate");
+        String satelliteType = request.getParameter("satelliteType");
+        String querySatelliteTime = request.getParameter("querySatelliteTime");
+
+        String yesterdayQuerySatelliteDate =null;
+        Date date1 = null;
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Timestamp startTime =  new Timestamp(System.currentTimeMillis());
+        Timestamp endTime =  new Timestamp(System.currentTimeMillis());
+        if (querySatelliteTime != null && !"".equals(querySatelliteTime)) {
+
+            // 判断该表中是否有某天的数据，如果有size>0,没有的时候size=0
+            try {
+                date1 = sdf1.parse(querySatelliteDate);
+                Calendar c = Calendar.getInstance();
+                c.setTime(date1);
+                c.add(Calendar.DAY_OF_MONTH, -1);// 今天-1天
+                Date date2 = c.getTime();
+                yesterdayQuerySatelliteDate =  sdf1.format(date2);
+
+                // 将卫星时次querySatelliteTime中的时间段提取出来
+                if(querySatelliteTime.equals("00时次")){
+                    startTime = Timestamp.valueOf(yesterdayQuerySatelliteDate + " 21:00:00");
+                    endTime =  Timestamp.valueOf(querySatelliteDate + " 02:59:59");
+                }else if(querySatelliteTime.equals("06时次")){
+                    startTime = Timestamp.valueOf(querySatelliteDate + " 03:00:00");
+                    endTime =  Timestamp.valueOf(querySatelliteDate + " 08:59:59");
+                }else if(querySatelliteTime.equals("12时次")){
+                    startTime = Timestamp.valueOf(querySatelliteDate + " 09:00:00");
+                    endTime =  Timestamp.valueOf(querySatelliteDate + " 14:59:59");
+                }else if(querySatelliteTime.equals("18时次")){
+                    startTime =  Timestamp.valueOf(querySatelliteDate + " 15:00:00");
+                    endTime =  Timestamp.valueOf(querySatelliteDate + " 20:59:59");
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+                e.printStackTrace();
+            }
+        }
+        String table = satelliteType;
+        if (StringUtils.isEmpty(table))
+            return null;
+        return binMapDataService.querySatelliteBinMapData(table, startTime,endTime, querySatelliteTime);
+    }
+
 
     private String convertSatelliteDataType2Table(String dataType) {
         if (!StringUtils.isEmpty(dataType)) {

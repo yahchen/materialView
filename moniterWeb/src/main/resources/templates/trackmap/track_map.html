@@ -34,7 +34,8 @@
     <script th:src="@{js/jquery.min.js}"></script>
     <script th:src="@{js/jquery.easyui.min.js}"></script>
 
-    <script type="text/javascript" src="http://api.tianditu.com/api?v=4.0"></script>
+    <!--<script type="text/javascript" src="http://api.tianditu.com/api?v=4.0"></script>-->
+    <script type="text/javascript" src="http://10.1.65.144/map/index.html?v=4.0"></script>
     <script th:src="@{http://lbs.tianditu.com/api/js4.0/opensource/data/points-sample-data.js}"></script>
 
 </head>
@@ -51,6 +52,7 @@
 
             <strong>&nbsp;&nbsp;&nbsp;&nbsp;卫星名:&nbsp;</strong>
             <select class="" id="satelliteType" name="dataType">
+                <option value="0">请选择卫星</option>
             </select>
 
             <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;卫星时次:&nbsp;</strong>

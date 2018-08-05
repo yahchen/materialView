@@ -13,8 +13,13 @@ $(function () {
     dataTypeChange();
     var zoom = 2;
     //初始化地图对象
-    $("#bin_map_dc").html("");
-    $('#binMapQuery').click(binMapListener);
+    $("#binMapDc").html("");
+    map = new T.Map('binMapDc');
+    map.centerAndZoom(new T.LngLat(50.40969, 58.90940), zoom);
+
+    function MapMoveend(e) {
+        map.center(new T.LngLat(e.target.getCenter().getLng(), e.target.getCenter().getLat()));
+    }
 
     function dataTypeChange() {
         var dataType = $("#dataType option:selected").val();
@@ -48,7 +53,7 @@ $(function () {
             }
         });
     };
-    function binMapListener() {
+    binMapListener = function () {
         var dataType = $("#dataType option:selected").val();
         var qualiteType = $("#qualiteType option:selected").val();
         if (qualiteType == undefined || qualiteType == "" || qualiteType == "无")
@@ -57,14 +62,10 @@ $(function () {
         if (qualiteType == undefined || qualiteType == "")
             return
         var sdid = $("#timeHour option:selected").val();
-        map = new T.Map('bin_map_dc');
         //设置显示地图的中心点和级别
-        map.centerAndZoom(new T.LngLat(50.40969, 58.90940), zoom);
-        map.removeEventListener("moveend", MapMoveend);
-        map.addEventListener("moveend", MapMoveend);
-
-        map.removeEventListener("zoomend", MapMoveend);
-        map.addEventListener("zoomend", MapMoveend);
+        //
+        // map.removeEventListener("zoomend", MapMoveend);
+        // map.addEventListener("zoomend", MapMoveend);
         var llb = map.getBounds();
         //让所有点在视野范围内
         $.ajax({
@@ -84,28 +85,33 @@ $(function () {
             dataType: "json",
             success: function (data) {
                 map.clearOverLays();  // 清除覆盖物(点)
-                var dotColor = "#999999";
+                map.centerAndZoom(new T.LngLat(50.40969, 58.90940), zoom);
+                var dotColor = "gray";
+                var strokeColor = "red";
                 var qt = qualiteType.toLocaleLowerCase();
                 for (var ki in data) {
                     var binMap = data[ki];
                     if (qt == 'all') {
                         dotColor = "#00FF66";
+                        strokeColor = "blue";
                         for (var qtv in qualiteTypeValueArray) {
                             if (binMap[qtv] != 0 && binMap[qtv] != 3 && binMap[qtv] != 4) {
-                                dotColor = "#999999";
+                                dotColor = "gray";
+                                strokeColor = "red";
                                 break;
                             }
                         }
                     }
                     else if (binMap[qt] == 0 || binMap[qt] == 3 || binMap[qt] == 4) {
                         dotColor = "#00FF66";
+                        strokeColor = "blue";
                     }
-                    var point = new T.Circle(new T.LngLat(binMap['lon'], binMap['lat']), 1, {
-                        color: dotColor,
-                        weight: 5,
+                    var point = new T.Circle(new T.LngLat(binMap['lon'], binMap['lat']), 5000, {
+                        color: strokeColor,
+                        weight: 2,
                         opacity: 1,
                         fillColor: dotColor,
-                        fillOpacity: 0,
+                        fillOpacity: 1,
                         lineStyle: "solid"
                     });
                     map.addOverLay(point);    //增加点
@@ -129,90 +135,6 @@ $(function () {
             }
         });
     };
-    function MapMoveend(e) {
-        var dataType = $("#dataType option:selected").val();
-        var qualiteType = $("#qualiteType option:selected").val();
-        if (qualiteType == undefined || qualiteType == "")
-            return
-        var prs = $("#prs option:selected").val();
-        //让所有点在视野范围内
-        var llb = map.getBounds();
-        var currZm = map.getZoom();
-
-        var sdid = $("#timeHour option:selected").val();
-        map.removeEventListener("zoomend", MapMoveend);
-        map.addEventListener("zoomend", MapMoveend);
-
-
-        $.ajax({
-            type: "post",
-            async: true,
-            url: "/getElements",
-            data: {
-                dataType: dataType,
-                qualiteType: qualiteType,
-                sdid: sdid,
-                neLon: llb.getNorthEast().getLng(),
-                neLat: llb.getNorthEast().getLat(),
-                swLon: llb.getSouthWest().getLng(),
-                swLat: llb.getSouthWest().getLat(),
-                prs: prs
-            },
-            dataType: "json",
-            success: function (data) {
-                map.clearOverLays();  // 清除覆盖物(点)
-                var dotColor = "#999999";
-                var qt = qualiteType.toLocaleLowerCase();
-                if(currZm >= 12){
-                    zoomW_T = 50;
-                }else if(currZm >= 6 && currZm < 12){
-                    zoomW_T = 15;
-                }else{
-                    zoomW_T = 3.5;
-                }
-                for (var ki in data) {
-                    var binMap = data[ki];
-                    if (qt == 'all') {
-                        dotColor = "#00FF66";
-                        for (var qtv in qualiteTypeValueArray) {
-                            if (binMap[qtv] != 0 && binMap[qtv] != 3 && binMap[qtv] != 4) {
-                                dotColor = "#999999";
-                                break;
-                            }
-                        }
-                    }
-                    else if (binMap[qt] == 0 || binMap[qt] == 3 || binMap[qt] == 4) {
-                        dotColor = "#00FF66";
-                    }
-                    var point = new T.Circle(new T.LngLat(binMap['lon'], binMap['lat']), 1, {
-                        color: dotColor,
-                        weight: zoomW_T,
-                        opacity: 1,
-                        fillColor: dotColor,
-                        fillOpacity: 0,
-                        lineStyle: "solid"
-                    });
-                    map.addOverLay(point);    //增加点
-                    var prsv = binMap['prs'];
-                    var prs_hwc = (prsv == undefined || prsv == "") ? binMap['prs_hwc'] : prsv;
-                    var sContent = "<div>"
-                        + "<ul>"
-                        + "<li>" + "<span>tem:</span>" + binMap['tem'] + "</li>"
-                        + "<li>" + "<span>prs:</span>" + prs_hwc + "</li>"
-                        + "<li>" + "<span>dpt:</span>" + binMap['dpt'] + "</li>"
-                        + "<li>" + "<span>q_tem:</span>" + binMap['q_tem'] + "</li>"
-                        + "<li>" + "<span>q_dpt:</span>" + binMap['q_dpt'] + "</li>"
-                        + "</ul>"
-                        + "</div>";
-                    point.addEventListener("click", function (e) {
-                        var point1 = e.lnglat;
-                        var infoWin = new T.InfoWindow(sContent, {offset: new T.Point(0, -6)}); // 创建信息窗口对象
-                        map.openInfoWindow(infoWin, point1); //开启信息窗口
-                    });// 将标注添加到地图中
-                }
-            }
-        });
-    }
 });
 function timeHourChange() {
     var dataType = $("#dataType option:selected").val();
